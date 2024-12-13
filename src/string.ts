@@ -1,13 +1,13 @@
 /**
  * @since 2.10.0
  */
-import * as E from './Eq'
-import * as M from './Monoid'
-import * as O from './Ord'
-import { isNonEmpty, ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import * as S from './Semigroup'
-import * as Sh from './Show'
+import * as E from './Eq.js'
+import * as M from './Monoid.js'
+import * as O from './Ord.js'
+import { isNonEmpty, ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import * as S from './Semigroup.js'
+import * as Sh from './Show.js'
 
 // -------------------------------------------------------------------------------------
 // instances

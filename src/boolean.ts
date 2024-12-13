@@ -1,14 +1,14 @@
 /**
  * @since 2.2.0
  */
-import * as BA from './BooleanAlgebra'
-import * as E from './Eq'
-import { LazyArg } from './function'
-import { Monoid } from './Monoid'
-import * as O from './Ord'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import * as S from './Show'
+import * as BA from './BooleanAlgebra.js'
+import * as E from './Eq.js'
+import { LazyArg } from './function.js'
+import { Monoid } from './Monoid.js'
+import * as O from './Ord.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import * as S from './Show.js'
 
 // -------------------------------------------------------------------------------------
 // refinements

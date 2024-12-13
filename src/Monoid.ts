@@ -32,12 +32,12 @@
  *
  * @since 2.0.0
  */
-import { Bounded } from './Bounded'
-import { Endomorphism, getMonoid as getEM } from './Endomorphism'
-import { getMonoid as getFM } from './function'
-import * as _ from './internal'
-import { ReadonlyRecord } from './ReadonlyRecord'
-import * as Se from './Semigroup'
+import { Bounded } from './Bounded.js'
+import { Endomorphism, getMonoid as getEM } from './Endomorphism.js'
+import { getMonoid as getFM } from './function.js'
+import * as _ from './internal.js'
+import { ReadonlyRecord } from './ReadonlyRecord.js'
+import * as Se from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

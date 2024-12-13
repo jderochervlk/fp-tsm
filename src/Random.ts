@@ -1,9 +1,9 @@
 /**
  * @since 2.0.0
  */
-import { pipe } from './function'
-import { IO, map } from './IO'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
+import { pipe } from './function.js'
+import { IO, map } from './IO.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 
 /**
  * Returns a random number between 0 (inclusive) and 1 (exclusive). This is a direct wrapper around JavaScript's

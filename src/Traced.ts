@@ -1,10 +1,10 @@
 /**
  * @since 2.0.0
  */
-import { Comonad2C } from './Comonad'
-import { pipe } from './function'
-import { flap as flap_, Functor2 } from './Functor'
-import { Monoid } from './Monoid'
+import { Comonad2C } from './Comonad.js'
+import { pipe } from './function.js'
+import { flap as flap_, Functor2 } from './Functor.js'
+import { Monoid } from './Monoid.js'
 
 // -------------------------------------------------------------------------------------
 // model

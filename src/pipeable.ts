@@ -1,7 +1,7 @@
 /**
  * @since 2.0.0
  */
-import { Alt, Alt1, Alt2, Alt2C, Alt3, Alt3C, Alt4 } from './Alt'
+import { Alt, Alt1, Alt2, Alt2C, Alt3, Alt3C, Alt4 } from './Alt.js'
 import {
   apFirst as apFirst_,
   Apply,
@@ -12,9 +12,9 @@ import {
   Apply3C,
   Apply4,
   apSecond as apSecond_
-} from './Apply'
-import { Bifunctor, Bifunctor2, Bifunctor2C, Bifunctor3, Bifunctor3C, Bifunctor4 } from './Bifunctor'
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, chainFirst as chainFirst_ } from './Chain'
+} from './Apply.js'
+import { Bifunctor, Bifunctor2, Bifunctor2C, Bifunctor3, Bifunctor3C, Bifunctor4 } from './Bifunctor.js'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, chainFirst as chainFirst_ } from './Chain.js'
 import {
   Compactable,
   Compactable1,
@@ -23,7 +23,7 @@ import {
   Compactable3,
   Compactable3C,
   Compactable4
-} from './Compactable'
+} from './Compactable.js'
 import {
   Contravariant,
   Contravariant1,
@@ -32,9 +32,9 @@ import {
   Contravariant3,
   Contravariant3C,
   Contravariant4
-} from './Contravariant'
-import { Either } from './Either'
-import { Extend, Extend1, Extend2, Extend2C, Extend3, Extend3C, Extend4 } from './Extend'
+} from './Contravariant.js'
+import { Either } from './Either.js'
+import { Extend, Extend1, Extend2, Extend2C, Extend3, Extend3C, Extend4 } from './Extend.js'
 import {
   Filterable,
   Filterable1,
@@ -43,7 +43,7 @@ import {
   Filterable3,
   Filterable3C,
   Filterable4
-} from './Filterable'
+} from './Filterable.js'
 import {
   FilterableWithIndex,
   FilterableWithIndex1,
@@ -54,8 +54,8 @@ import {
   FilterableWithIndex4,
   PredicateWithIndex,
   RefinementWithIndex
-} from './FilterableWithIndex'
-import { Foldable, Foldable1, Foldable2, Foldable2C, Foldable3, Foldable3C, Foldable4 } from './Foldable'
+} from './FilterableWithIndex.js'
+import { Foldable, Foldable1, Foldable2, Foldable2C, Foldable3, Foldable3C, Foldable4 } from './Foldable.js'
 import {
   FoldableWithIndex,
   FoldableWithIndex1,
@@ -64,9 +64,9 @@ import {
   FoldableWithIndex3,
   FoldableWithIndex3C,
   FoldableWithIndex4
-} from './FoldableWithIndex'
-import { identity, LazyArg, pipe as pipeFromFunctionModule } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor'
+} from './FoldableWithIndex.js'
+import { identity, LazyArg, pipe as pipeFromFunctionModule } from './function.js'
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor.js'
 import {
   FunctorWithIndex,
   FunctorWithIndex1,
@@ -75,8 +75,8 @@ import {
   FunctorWithIndex3,
   FunctorWithIndex3C,
   FunctorWithIndex4
-} from './FunctorWithIndex'
-import { HKT, HKT2, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+} from './FunctorWithIndex.js'
+import { HKT, HKT2, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
 import {
   MonadThrow,
   MonadThrow1,
@@ -85,12 +85,12 @@ import {
   MonadThrow3,
   MonadThrow3C,
   MonadThrow4
-} from './MonadThrow'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Predicate } from './Predicate'
-import { Profunctor, Profunctor2, Profunctor2C, Profunctor3, Profunctor3C, Profunctor4 } from './Profunctor'
-import { Refinement } from './Refinement'
+} from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { Option } from './Option.js'
+import { Predicate } from './Predicate.js'
+import { Profunctor, Profunctor2, Profunctor2C, Profunctor3, Profunctor3C, Profunctor4 } from './Profunctor.js'
+import { Refinement } from './Refinement.js'
 import {
   Semigroupoid,
   Semigroupoid2,
@@ -98,8 +98,8 @@ import {
   Semigroupoid3,
   Semigroupoid3C,
   Semigroupoid4
-} from './Semigroupoid'
-import { Separated } from './Separated'
+} from './Semigroupoid.js'
+import { Separated } from './Separated.js'
 
 // -------------------------------------------------------------------------------------
 // pipeable helpers

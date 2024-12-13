@@ -1,7 +1,7 @@
 /**
  * @since 2.0.0
  */
-import { Either } from './Either'
+import { Either } from './Either.js'
 import {
   Filterable,
   Filterable1,
@@ -10,7 +10,7 @@ import {
   Filterable3,
   Filterable3C,
   Filterable4
-} from './Filterable'
+} from './Filterable.js'
 import {
   FunctorWithIndex,
   FunctorWithIndex1,
@@ -19,10 +19,10 @@ import {
   FunctorWithIndex3,
   FunctorWithIndex3C,
   FunctorWithIndex4
-} from './FunctorWithIndex'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Option } from './Option'
-import { Separated } from './Separated'
+} from './FunctorWithIndex.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Option } from './Option.js'
+import { Separated } from './Separated.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -1,29 +1,29 @@
 /**
  * @since 2.13.0
  */
-import { Applicative2 } from './Applicative'
-import { apFirst as apFirst_, Apply2, apS as apS_, apSecond as apSecond_ } from './Apply'
-import * as chainable from './Chain'
-import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
+import { Applicative2 } from './Applicative.js'
+import { apFirst as apFirst_, Apply2, apS as apS_, apSecond as apSecond_ } from './Apply.js'
+import * as chainable from './Chain.js'
+import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
 import {
   ask as ask_,
   asks as asks_,
   FromReader2,
   fromReaderK as fromReaderK_,
   tapReader as tapReader_
-} from './FromReader'
-import { dual, flow, identity, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2 } from './Functor'
-import * as _ from './internal'
-import * as I from './IO'
-import { IO } from './IO'
-import { Monad2 } from './Monad'
-import { MonadIO2 } from './MonadIO'
-import { Pointed2 } from './Pointed'
-import * as R from './Reader'
-import { Reader } from './Reader'
-import * as RT from './ReaderT'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
+} from './FromReader.js'
+import { dual, flow, identity, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2 } from './Functor.js'
+import * as _ from './internal.js'
+import * as I from './IO.js'
+import { IO } from './IO.js'
+import { Monad2 } from './Monad.js'
+import { MonadIO2 } from './MonadIO.js'
+import { Pointed2 } from './Pointed.js'
+import * as R from './Reader.js'
+import { Reader } from './Reader.js'
+import * as RT from './ReaderT.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 
 /**
  * @category model

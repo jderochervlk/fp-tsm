@@ -5,15 +5,15 @@
  *
  * @since 2.0.0
  */
-import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3, Applicative3C } from './Applicative'
-import { Compactable, Compactable1, Compactable2, Compactable2C } from './Compactable'
-import { Either } from './Either'
-import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable'
-import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT'
-import * as _ from './internal'
-import { Option } from './Option'
-import { Separated } from './Separated'
-import { Traversable, Traversable1, Traversable2, Traversable2C, Traversable3 } from './Traversable'
+import { Applicative, Applicative1, Applicative2, Applicative2C, Applicative3, Applicative3C } from './Applicative.js'
+import { Compactable, Compactable1, Compactable2, Compactable2C } from './Compactable.js'
+import { Either } from './Either.js'
+import { Filterable, Filterable1, Filterable2, Filterable2C, Filterable3 } from './Filterable.js'
+import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT.js'
+import * as _ from './internal.js'
+import { Option } from './Option.js'
+import { Separated } from './Separated.js'
+import { Traversable, Traversable1, Traversable2, Traversable2C, Traversable3 } from './Traversable.js'
 
 // -------------------------------------------------------------------------------------
 // model

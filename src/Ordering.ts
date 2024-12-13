@@ -1,9 +1,9 @@
 /**
  * @since 2.0.0
  */
-import * as E from './Eq'
-import * as M from './Monoid'
-import * as S from './Semigroup'
+import * as E from './Eq.js'
+import * as M from './Monoid.js'
+import * as S from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

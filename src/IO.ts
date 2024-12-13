@@ -13,21 +13,21 @@
  *
  * @since 2.0.0
  */
-import { Applicative1, getApplicativeMonoid } from './Applicative'
-import { apFirst as apFirst_, Apply1, apS as apS_, apSecond as apSecond_, getApplySemigroup } from './Apply'
-import * as chainable from './Chain'
-import { ChainRec1 } from './ChainRec'
-import { FromIO1 } from './FromIO'
-import { constant, dual, identity } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor'
-import * as _ from './internal'
-import { Monad1 } from './Monad'
-import { MonadIO1 } from './MonadIO'
-import { Monoid } from './Monoid'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Pointed1 } from './Pointed'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Semigroup } from './Semigroup'
+import { Applicative1, getApplicativeMonoid } from './Applicative.js'
+import { apFirst as apFirst_, Apply1, apS as apS_, apSecond as apSecond_, getApplySemigroup } from './Apply.js'
+import * as chainable from './Chain.js'
+import { ChainRec1 } from './ChainRec.js'
+import { FromIO1 } from './FromIO.js'
+import { constant, dual, identity } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { Monad1 } from './Monad.js'
+import { MonadIO1 } from './MonadIO.js'
+import { Monoid } from './Monoid.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Pointed1 } from './Pointed.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

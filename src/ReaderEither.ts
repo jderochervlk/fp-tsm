@@ -1,8 +1,8 @@
 /**
  * @since 2.0.0
  */
-import { Alt3, Alt3C } from './Alt'
-import { Applicative3, Applicative3C, getApplicativeMonoid } from './Applicative'
+import { Alt3, Alt3C } from './Alt.js'
+import { Applicative3, Applicative3C, getApplicativeMonoid } from './Applicative.js'
 import {
   ap as ap_,
   apFirst as apFirst_,
@@ -10,19 +10,19 @@ import {
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import { Bifunctor3 } from './Bifunctor'
-import * as chainable from './Chain'
-import { compact as compact_, Compactable3C, separate as separate_ } from './Compactable'
-import * as E from './Either'
-import * as ET from './EitherT'
+} from './Apply.js'
+import { Bifunctor3 } from './Bifunctor.js'
+import * as chainable from './Chain.js'
+import { compact as compact_, Compactable3C, separate as separate_ } from './Compactable.js'
+import * as E from './Either.js'
+import * as ET from './EitherT.js'
 import {
   filter as filter_,
   Filterable3C,
   filterMap as filterMap_,
   partition as partition_,
   partitionMap as partitionMap_
-} from './Filterable'
+} from './Filterable.js'
 import {
   chainOptionK as chainOptionK_,
   filterOrElse as filterOrElse_,
@@ -32,27 +32,27 @@ import {
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_,
   tapEither as tapEither_
-} from './FromEither'
+} from './FromEither.js'
 import {
   ask as ask_,
   asks as asks_,
   FromReader3,
   fromReaderK as fromReaderK_,
   tapReader as tapReader_
-} from './FromReader'
-import { dual, flow, identity, LazyArg, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor3, let as let__ } from './Functor'
-import * as _ from './internal'
-import { Monad3, Monad3C } from './Monad'
-import { MonadThrow3, MonadThrow3C } from './MonadThrow'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Pointed3 } from './Pointed'
-import { Predicate } from './Predicate'
-import * as R from './Reader'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
+} from './FromReader.js'
+import { dual, flow, identity, LazyArg, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor3, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { Monad3, Monad3C } from './Monad.js'
+import { MonadThrow3, MonadThrow3C } from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { Option } from './Option.js'
+import { Pointed3 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import * as R from './Reader.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
 
 import Reader = R.Reader
 import Either = E.Either

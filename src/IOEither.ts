@@ -7,8 +7,8 @@
  *
  * @since 2.0.0
  */
-import { Alt2, Alt2C } from './Alt'
-import { Applicative2, Applicative2C, getApplicativeMonoid } from './Applicative'
+import { Alt2, Alt2C } from './Alt.js'
+import { Applicative2, Applicative2C, getApplicativeMonoid } from './Applicative.js'
 import {
   ap as ap_,
   apFirst as apFirst_,
@@ -16,19 +16,19 @@ import {
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import { Bifunctor2 } from './Bifunctor'
-import * as chainable from './Chain'
-import { compact as compact_, Compactable2C, separate as separate_ } from './Compactable'
-import * as E from './Either'
-import * as ET from './EitherT'
+} from './Apply.js'
+import { Bifunctor2 } from './Bifunctor.js'
+import * as chainable from './Chain.js'
+import { compact as compact_, Compactable2C, separate as separate_ } from './Compactable.js'
+import * as E from './Either.js'
+import * as ET from './EitherT.js'
 import {
   filter as filter_,
   Filterable2C,
   filterMap as filterMap_,
   partition as partition_,
   partitionMap as partitionMap_
-} from './Filterable'
+} from './Filterable.js'
 import {
   chainOptionK as chainOptionK_,
   filterOrElse as filterOrElse_,
@@ -38,23 +38,23 @@ import {
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_,
   tapEither as tapEither_
-} from './FromEither'
-import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
-import { dual, flow, identity, LazyArg, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor'
-import * as _ from './internal'
-import * as I from './IO'
-import { Monad2, Monad2C } from './Monad'
-import { MonadIO2, MonadIO2C } from './MonadIO'
-import { MonadThrow2, MonadThrow2C } from './MonadThrow'
-import { Monoid } from './Monoid'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Option } from './Option'
-import { Pointed2 } from './Pointed'
-import { Predicate } from './Predicate'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
+} from './FromEither.js'
+import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
+import { dual, flow, identity, LazyArg, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import * as I from './IO.js'
+import { Monad2, Monad2C } from './Monad.js'
+import { MonadIO2, MonadIO2C } from './MonadIO.js'
+import { MonadThrow2, MonadThrow2C } from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Option } from './Option.js'
+import { Pointed2 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

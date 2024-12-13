@@ -60,48 +60,48 @@
  *
  * @since 2.0.0
  */
-import { Alt1 } from './Alt'
-import { Alternative1 } from './Alternative'
-import { Applicative as ApplicativeHKT, Applicative1, getApplicativeMonoid } from './Applicative'
+import { Alt1 } from './Alt.js'
+import { Alternative1 } from './Alternative.js'
+import { Applicative as ApplicativeHKT, Applicative1, getApplicativeMonoid } from './Applicative.js'
 import {
   apFirst as apFirst_,
   Apply1,
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import * as chainable from './Chain'
-import { Compactable1 } from './Compactable'
-import { Either } from './Either'
-import { Eq } from './Eq'
-import { Extend1 } from './Extend'
-import { Filterable1 } from './Filterable'
-import { Foldable1 } from './Foldable'
+} from './Apply.js'
+import * as chainable from './Chain.js'
+import { Compactable1 } from './Compactable.js'
+import { Either } from './Either.js'
+import { Eq } from './Eq.js'
+import { Extend1 } from './Extend.js'
+import { Filterable1 } from './Filterable.js'
+import { Foldable1 } from './Foldable.js'
 import {
   chainEitherK as chainEitherK_,
   FromEither1,
   fromEitherK as fromEitherK_,
   tapEither as tapEither_
-} from './FromEither'
-import { constNull, constUndefined, dual, flow, identity, LazyArg, pipe } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor'
-import { HKT } from './HKT'
-import * as _ from './internal'
-import { Monad1 } from './Monad'
-import { MonadThrow1 } from './MonadThrow'
-import { Monoid } from './Monoid'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Ord } from './Ord'
-import { Pointed1 } from './Pointed'
-import { not, Predicate } from './Predicate'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { first, last, Semigroup } from './Semigroup'
-import { Separated, separated } from './Separated'
-import { Show } from './Show'
-import { PipeableTraverse1, Traversable1 } from './Traversable'
-import { PipeableWilt1, PipeableWither1, wiltDefault, Witherable1, witherDefault } from './Witherable'
-import { guard as guard_, Zero1 } from './Zero'
+} from './FromEither.js'
+import { constNull, constUndefined, dual, flow, identity, LazyArg, pipe } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor.js'
+import { HKT } from './HKT.js'
+import * as _ from './internal.js'
+import { Monad1 } from './Monad.js'
+import { MonadThrow1 } from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Ord } from './Ord.js'
+import { Pointed1 } from './Pointed.js'
+import { not, Predicate } from './Predicate.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { first, last, Semigroup } from './Semigroup.js'
+import { Separated, separated } from './Separated.js'
+import { Show } from './Show.js'
+import { PipeableTraverse1, Traversable1 } from './Traversable.js'
+import { PipeableWilt1, PipeableWither1, wiltDefault, Witherable1, witherDefault } from './Witherable.js'
+import { guard as guard_, Zero1 } from './Zero.js'
 
 // -------------------------------------------------------------------------------------
 // model

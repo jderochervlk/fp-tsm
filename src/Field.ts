@@ -3,8 +3,8 @@
  *
  * @since 2.0.0
  */
-import { Eq } from './Eq'
-import { Ring } from './Ring'
+import { Eq } from './Eq.js'
+import { Ring } from './Ring.js'
 
 // -------------------------------------------------------------------------------------
 // model

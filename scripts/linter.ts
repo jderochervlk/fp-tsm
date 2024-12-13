@@ -1,12 +1,12 @@
-import * as glob from 'glob'
-import * as path from 'path'
-import * as ast from 'ts-morph'
+import * as glob from 'glob.js'
+import * as path from 'path.js'
+import * as ast from 'ts-morph.js'
 
-import { pipe } from '../src/function'
-import * as M from '../src/Monoid'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as string from '../src/string'
+import { pipe } from '../src/function.js'
+import * as M from '../src/Monoid.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as string from '../src/string.js'
 
 // -------------------------------------------------------------------------------------
 // domain

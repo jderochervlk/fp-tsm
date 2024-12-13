@@ -6,37 +6,37 @@
  *
  * @since 2.12.0
  */
-import { Alt1 } from './Alt'
-import { Alternative1 } from './Alternative'
-import { Applicative1 } from './Applicative'
-import { apFirst as apFirst_, Apply1, apS as apS_, apSecond as apSecond_ } from './Apply'
-import * as chainable from './Chain'
-import { compact as compact_, Compactable1, separate as separate_ } from './Compactable'
-import { Either } from './Either'
+import { Alt1 } from './Alt.js'
+import { Alternative1 } from './Alternative.js'
+import { Applicative1 } from './Applicative.js'
+import { apFirst as apFirst_, Apply1, apS as apS_, apSecond as apSecond_ } from './Apply.js'
+import * as chainable from './Chain.js'
+import { compact as compact_, Compactable1, separate as separate_ } from './Compactable.js'
+import { Either } from './Either.js'
 import {
   filter as filter_,
   Filterable1,
   filterMap as filterMap_,
   partition as partition_,
   partitionMap as partitionMap_
-} from './Filterable'
-import { FromEither1, fromEitherK as fromEitherK_, tapEither as tapEither_ } from './FromEither'
-import { FromIO1, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
-import { dual, flow, identity, LazyArg, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor'
-import * as _ from './internal'
-import * as I from './IO'
-import { IOEither } from './IOEither'
-import { Monad1 } from './Monad'
-import { MonadIO1 } from './MonadIO'
-import * as O from './Option'
-import * as OT from './OptionT'
-import { Pointed1 } from './Pointed'
-import { Predicate } from './Predicate'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Separated } from './Separated'
-import { guard as guard_, Zero1 } from './Zero'
+} from './Filterable.js'
+import { FromEither1, fromEitherK as fromEitherK_, tapEither as tapEither_ } from './FromEither.js'
+import { FromIO1, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
+import { dual, flow, identity, LazyArg, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import * as I from './IO.js'
+import { IOEither } from './IOEither.js'
+import { Monad1 } from './Monad.js'
+import { MonadIO1 } from './MonadIO.js'
+import * as O from './Option.js'
+import * as OT from './OptionT.js'
+import { Pointed1 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Separated } from './Separated.js'
+import { guard as guard_, Zero1 } from './Zero.js'
 
 import IO = I.IO
 import Option = O.Option

@@ -1,37 +1,37 @@
 /**
  * @since 2.4.0
  */
-import { Applicative2C } from './Applicative'
-import { Apply1, Apply2C, getApplySemigroup } from './Apply'
-import { Bifunctor2 } from './Bifunctor'
-import { Chain2C } from './Chain'
-import { Either } from './Either'
+import { Applicative2C } from './Applicative.js'
+import { Apply1, Apply2C, getApplySemigroup } from './Apply.js'
+import { Bifunctor2 } from './Bifunctor.js'
+import { Chain2C } from './Chain.js'
+import { Either } from './Either.js'
 import {
   FromEither2,
   fromOption as fromOption_,
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_
-} from './FromEither'
-import { FromIO2, fromIOK as fromIOK_ } from './FromIO'
-import { FromTask2, fromTaskK as fromTaskK_ } from './FromTask'
-import { FromThese2, fromTheseK as fromTheseK_ } from './FromThese'
-import { flow, LazyArg, pipe, SK } from './function'
-import { flap as flap_, Functor2 } from './Functor'
-import * as _ from './internal'
-import { IO } from './IO'
-import { IOEither } from './IOEither'
-import { Monad2C } from './Monad'
-import { MonadTask2C } from './MonadTask'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Option } from './Option'
-import { Pointed2 } from './Pointed'
-import { Predicate } from './Predicate'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import * as T from './Task'
-import * as TH from './These'
-import * as TT from './TheseT'
+} from './FromEither.js'
+import { FromIO2, fromIOK as fromIOK_ } from './FromIO.js'
+import { FromTask2, fromTaskK as fromTaskK_ } from './FromTask.js'
+import { FromThese2, fromTheseK as fromTheseK_ } from './FromThese.js'
+import { flow, LazyArg, pipe, SK } from './function.js'
+import { flap as flap_, Functor2 } from './Functor.js'
+import * as _ from './internal.js'
+import { IO } from './IO.js'
+import { IOEither } from './IOEither.js'
+import { Monad2C } from './Monad.js'
+import { MonadTask2C } from './MonadTask.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Option } from './Option.js'
+import { Pointed2 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import * as T from './Task.js'
+import * as TH from './These.js'
+import * as TT from './TheseT.js'
 
 import These = TH.These
 import Task = T.Task

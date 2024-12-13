@@ -22,9 +22,9 @@ import {
   CompactableComposition22,
   CompactableComposition23,
   separate
-} from './Compactable'
-import { Either } from './Either'
-import { pipe } from './function'
+} from './Compactable.js'
+import { Either } from './Either.js'
+import { pipe } from './function.js'
 import {
   Functor,
   Functor1,
@@ -41,12 +41,12 @@ import {
   FunctorComposition22,
   FunctorComposition23,
   getFunctorComposition
-} from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { getLeft, getRight, Option } from './Option'
-import { not, Predicate } from './Predicate'
-import { Refinement } from './Refinement'
-import { Separated, separated } from './Separated'
+} from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { getLeft, getRight, Option } from './Option.js'
+import { not, Predicate } from './Predicate.js'
+import { Refinement } from './Refinement.js'
+import { Separated, separated } from './Separated.js'
 
 // -------------------------------------------------------------------------------------
 // model

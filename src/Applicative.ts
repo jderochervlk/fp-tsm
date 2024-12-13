@@ -17,8 +17,8 @@
  *
  * @since 2.0.0
  */
-import { ap, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4, getApplySemigroup } from './Apply'
-import { pipe } from './function'
+import { ap, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4, getApplySemigroup } from './Apply.js'
+import { pipe } from './function.js'
 import {
   FunctorComposition,
   FunctorComposition2C1,
@@ -32,10 +32,10 @@ import {
   FunctorCompositionHKT2,
   FunctorCompositionHKT2C,
   getFunctorComposition
-} from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Monoid } from './Monoid'
-import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed'
+} from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Monoid } from './Monoid.js'
+import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed.js'
 
 // -------------------------------------------------------------------------------------
 // model

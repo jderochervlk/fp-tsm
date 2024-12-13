@@ -37,11 +37,11 @@
  *
  * @since 2.0.0
  */
-import { getSemigroup, identity } from './function'
-import * as _ from './internal'
-import * as M from './Magma'
-import * as Or from './Ord'
-import { ReadonlyRecord } from './ReadonlyRecord'
+import { getSemigroup, identity } from './function.js'
+import * as _ from './internal.js'
+import * as M from './Magma.js'
+import * as Or from './Ord.js'
+import { ReadonlyRecord } from './ReadonlyRecord.js'
 
 import Ord = Or.Ord
 import Magma = M.Magma

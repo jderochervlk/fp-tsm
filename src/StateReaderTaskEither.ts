@@ -1,13 +1,13 @@
 /**
  * @since 2.0.0
  */
-import { Alt4 } from './Alt'
-import { Applicative4 } from './Applicative'
-import { apFirst as apFirst_, Apply4, apS as apS_, apSecond as apSecond_ } from './Apply'
-import { Bifunctor4 } from './Bifunctor'
-import * as chainable from './Chain'
-import * as E from './Either'
-import { Endomorphism } from './Endomorphism'
+import { Alt4 } from './Alt.js'
+import { Applicative4 } from './Applicative.js'
+import { apFirst as apFirst_, Apply4, apS as apS_, apSecond as apSecond_ } from './Apply.js'
+import { Bifunctor4 } from './Bifunctor.js'
+import * as chainable from './Chain.js'
+import * as E from './Either.js'
+import { Endomorphism } from './Endomorphism.js'
 import {
   chainOptionK as chainOptionK_,
   filterOrElse as filterOrElse_,
@@ -17,15 +17,15 @@ import {
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_,
   tapEither as tapEither_
-} from './FromEither'
-import { FromIO4, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
+} from './FromEither.js'
+import { FromIO4, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
 import {
   ask as ask_,
   asks as asks_,
   FromReader4,
   fromReaderK as fromReaderK_,
   tapReader as tapReader_
-} from './FromReader'
+} from './FromReader.js'
 import {
   chainStateK as chainStateK_,
   FromState4,
@@ -34,30 +34,30 @@ import {
   gets as gets_,
   modify as modify_,
   put as put_
-} from './FromState'
-import { FromTask4, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask'
-import { dual, flow, identity, LazyArg, pipe } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor4, let as let__ } from './Functor'
-import * as _ from './internal'
-import { IO } from './IO'
-import { IOEither } from './IOEither'
-import { Monad4 } from './Monad'
-import { MonadIO4 } from './MonadIO'
-import { MonadTask4 } from './MonadTask'
-import { MonadThrow4 } from './MonadThrow'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Option } from './Option'
-import { Pointed4 } from './Pointed'
-import { Predicate } from './Predicate'
-import * as R from './Reader'
-import { ReaderEither } from './ReaderEither'
-import * as RTE from './ReaderTaskEither'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { State } from './State'
-import * as ST from './StateT'
-import { Task } from './Task'
-import { TaskEither } from './TaskEither'
+} from './FromState.js'
+import { FromTask4, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask.js'
+import { dual, flow, identity, LazyArg, pipe } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor4, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { IO } from './IO.js'
+import { IOEither } from './IOEither.js'
+import { Monad4 } from './Monad.js'
+import { MonadIO4 } from './MonadIO.js'
+import { MonadTask4 } from './MonadTask.js'
+import { MonadThrow4 } from './MonadThrow.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Option } from './Option.js'
+import { Pointed4 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import * as R from './Reader.js'
+import { ReaderEither } from './ReaderEither.js'
+import * as RTE from './ReaderTaskEither.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { State } from './State.js'
+import * as ST from './StateT.js'
+import { Task } from './Task.js'
+import { TaskEither } from './TaskEither.js'
 
 // -------------------------------------------------------------------------------------
 // model

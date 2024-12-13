@@ -27,10 +27,10 @@ import {
   FoldableComposition22,
   FoldableComposition22C,
   getFoldableComposition
-} from './Foldable'
-import { pipe } from './function'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Monoid } from './Monoid'
+} from './Foldable.js'
+import { pipe } from './function.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Monoid } from './Monoid.js'
 
 // -------------------------------------------------------------------------------------
 // model

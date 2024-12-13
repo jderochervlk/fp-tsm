@@ -1,15 +1,15 @@
 /**
  * @since 2.10.0
  */
-import * as B from './Bounded'
-import * as E from './Eq'
-import * as F from './Field'
-import { Magma } from './Magma'
-import { Monoid } from './Monoid'
-import * as O from './Ord'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import * as S from './Show'
+import * as B from './Bounded.js'
+import * as E from './Eq.js'
+import * as F from './Field.js'
+import { Magma } from './Magma.js'
+import { Monoid } from './Monoid.js'
+import * as O from './Ord.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import * as S from './Show.js'
 
 // -------------------------------------------------------------------------------------
 // refinements

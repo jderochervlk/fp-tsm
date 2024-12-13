@@ -10,29 +10,29 @@
  *
  * @since 2.0.0
  */
-import { Applicative1, getApplicativeMonoid } from './Applicative'
+import { Applicative1, getApplicativeMonoid } from './Applicative.js'
 import {
   apFirst as apFirst_,
   Apply1,
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import * as chainable from './Chain'
-import { FromIO1, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
-import { FromTask1 } from './FromTask'
-import { dual, identity, pipe } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor'
-import * as _ from './internal'
-import { IO } from './IO'
-import { Monad1 } from './Monad'
-import { MonadIO1 } from './MonadIO'
-import { MonadTask1 } from './MonadTask'
-import { Monoid } from './Monoid'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Pointed1 } from './Pointed'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Semigroup } from './Semigroup'
+} from './Apply.js'
+import * as chainable from './Chain.js'
+import { FromIO1, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
+import { FromTask1 } from './FromTask.js'
+import { dual, identity, pipe } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor1, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { IO } from './IO.js'
+import { Monad1 } from './Monad.js'
+import { MonadIO1 } from './MonadIO.js'
+import { MonadTask1 } from './MonadTask.js'
+import { Monoid } from './Monoid.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Pointed1 } from './Pointed.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

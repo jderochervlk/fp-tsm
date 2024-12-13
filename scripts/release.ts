@@ -1,8 +1,8 @@
-import * as child_process from 'child_process'
+import * as child_process from 'child_process.js'
 
-import { left, right } from '../src/Either'
-import * as TE from '../src/TaskEither'
-import { run } from './run'
+import { left, right } from '../src/Either.js'
+import * as TE from '../src/TaskEither.js'
+import { run } from './run.js'
 
 const DIST = 'dist'
 

@@ -19,36 +19,36 @@
  *
  * @since 2.0.0
  */
-import { Applicative, Applicative2C } from './Applicative'
-import { Apply2C } from './Apply'
-import { Bifunctor2 } from './Bifunctor'
-import { Chain2C } from './Chain'
-import { Either, Left, Right } from './Either'
-import { Eq, fromEquals } from './Eq'
-import { Foldable2 } from './Foldable'
+import { Applicative, Applicative2C } from './Applicative.js'
+import { Apply2C } from './Apply.js'
+import { Bifunctor2 } from './Bifunctor.js'
+import { Chain2C } from './Chain.js'
+import { Either, Left, Right } from './Either.js'
+import { Eq, fromEquals } from './Eq.js'
+import { Foldable2 } from './Foldable.js'
 import {
   FromEither2,
   fromOption as fromOption_,
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_
-} from './FromEither'
-import { FromThese2 } from './FromThese'
-import { identity, LazyArg, pipe } from './function'
-import { flap as flap_, Functor2 } from './Functor'
-import { HKT } from './HKT'
-import * as _ from './internal'
-import { Monad2C } from './Monad'
-import { MonadThrow2C } from './MonadThrow'
-import { Monoid } from './Monoid'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Option } from './Option'
-import { Pointed2 } from './Pointed'
-import { Predicate } from './Predicate'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import { Show } from './Show'
-import { PipeableTraverse2, Traversable2 } from './Traversable'
+} from './FromEither.js'
+import { FromThese2 } from './FromThese.js'
+import { identity, LazyArg, pipe } from './function.js'
+import { flap as flap_, Functor2 } from './Functor.js'
+import { HKT } from './HKT.js'
+import * as _ from './internal.js'
+import { Monad2C } from './Monad.js'
+import { MonadThrow2C } from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Option } from './Option.js'
+import { Pointed2 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import { Show } from './Show.js'
+import { PipeableTraverse2, Traversable2 } from './Traversable.js'
 
 // -------------------------------------------------------------------------------------
 // model

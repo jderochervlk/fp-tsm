@@ -1,11 +1,11 @@
-import { Either, Left, Right } from './Either'
-import { dual } from './function'
-import { IO } from './IO'
-import { NonEmptyArray } from './NonEmptyArray'
-import { None, Option, Some } from './Option'
-import { Reader } from './Reader'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Task } from './Task'
+import { Either, Left, Right } from './Either.js'
+import { dual } from './function.js'
+import { IO } from './IO.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { None, Option, Some } from './Option.js'
+import { Reader } from './Reader.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Task } from './Task.js'
 
 // -------------------------------------------------------------------------------------
 // Option

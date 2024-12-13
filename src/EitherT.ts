@@ -5,16 +5,16 @@
  *
  * @since 2.0.0
  */
-import { ApplicativeComposition12, ApplicativeComposition22, ApplicativeCompositionHKT2 } from './Applicative'
-import { ap as ap_, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C } from './Apply'
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C } from './Chain'
-import * as E from './Either'
-import { flow, LazyArg, pipe } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, map as map_ } from './Functor'
-import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad'
-import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './Pointed'
-import { Semigroup } from './Semigroup'
+import { ApplicativeComposition12, ApplicativeComposition22, ApplicativeCompositionHKT2 } from './Applicative.js'
+import { ap as ap_, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C } from './Apply.js'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C } from './Chain.js'
+import * as E from './Either.js'
+import { flow, LazyArg, pipe } from './function.js'
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, map as map_ } from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT.js'
+import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad.js'
+import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './Pointed.js'
+import { Semigroup } from './Semigroup.js'
 
 import Either = E.Either
 

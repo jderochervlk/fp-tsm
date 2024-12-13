@@ -6,18 +6,18 @@ import {
   ApplicativeComposition11,
   ApplicativeComposition21,
   ApplicativeCompositionHKT1
-} from './Applicative'
-import { ap as ap_, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4 } from './Apply'
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4 } from './Chain'
-import { Either } from './Either'
-import { constant, flow, LazyArg, pipe } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4, map as map_ } from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C, Monad4 } from './Monad'
-import * as O from './Option'
-import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed'
-import { Predicate } from './Predicate'
-import { Refinement } from './Refinement'
+} from './Applicative.js'
+import { ap as ap_, Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4 } from './Apply.js'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4 } from './Chain.js'
+import { Either } from './Either.js'
+import { constant, flow, LazyArg, pipe } from './function.js'
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4, map as map_ } from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C, Monad4 } from './Monad.js'
+import * as O from './Option.js'
+import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import { Refinement } from './Refinement.js'
 
 import Option = O.Option
 

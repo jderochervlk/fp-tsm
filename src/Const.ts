@@ -7,22 +7,22 @@
  *
  * @since 2.0.0
  */
-import { Applicative2C } from './Applicative'
-import { Apply2C } from './Apply'
-import { Bifunctor2 } from './Bifunctor'
-import { BooleanAlgebra } from './BooleanAlgebra'
-import { Bounded } from './Bounded'
-import { Contravariant2 } from './Contravariant'
-import { Eq } from './Eq'
-import { identity, pipe, unsafeCoerce } from './function'
-import { flap as flap_, Functor2 } from './Functor'
-import { HeytingAlgebra } from './HeytingAlgebra'
-import { Monoid } from './Monoid'
-import { Ord } from './Ord'
-import { Ring } from './Ring'
-import { Semigroup } from './Semigroup'
-import { Semiring } from './Semiring'
-import { Show } from './Show'
+import { Applicative2C } from './Applicative.js'
+import { Apply2C } from './Apply.js'
+import { Bifunctor2 } from './Bifunctor.js'
+import { BooleanAlgebra } from './BooleanAlgebra.js'
+import { Bounded } from './Bounded.js'
+import { Contravariant2 } from './Contravariant.js'
+import { Eq } from './Eq.js'
+import { identity, pipe, unsafeCoerce } from './function.js'
+import { flap as flap_, Functor2 } from './Functor.js'
+import { HeytingAlgebra } from './HeytingAlgebra.js'
+import { Monoid } from './Monoid.js'
+import { Ord } from './Ord.js'
+import { Ring } from './Ring.js'
+import { Semigroup } from './Semigroup.js'
+import { Semiring } from './Semiring.js'
+import { Show } from './Show.js'
 
 // -------------------------------------------------------------------------------------
 // model

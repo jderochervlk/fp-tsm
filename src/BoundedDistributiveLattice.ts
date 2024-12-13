@@ -3,9 +3,9 @@
  *
  * @since 2.0.0
  */
-import { BoundedLattice } from './BoundedLattice'
-import { DistributiveLattice, getMinMaxDistributiveLattice } from './DistributiveLattice'
-import { Ord } from './Ord'
+import { BoundedLattice } from './BoundedLattice.js'
+import { DistributiveLattice, getMinMaxDistributiveLattice } from './DistributiveLattice.js'
+import { Ord } from './Ord.js'
 
 // -------------------------------------------------------------------------------------
 // model

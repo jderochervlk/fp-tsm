@@ -1,18 +1,18 @@
 /**
  * @since 2.5.0
  */
-import { Either } from './Either'
-import { Eq, fromEquals } from './Eq'
-import { identity } from './function'
-import { Magma } from './Magma'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Ord } from './Ord'
-import { not, Predicate } from './Predicate'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import { Separated, separated } from './Separated'
-import { Show } from './Show'
+import { Either } from './Either.js'
+import { Eq, fromEquals } from './Eq.js'
+import { identity } from './function.js'
+import { Magma } from './Magma.js'
+import { Monoid } from './Monoid.js'
+import { Option } from './Option.js'
+import { Ord } from './Ord.js'
+import { not, Predicate } from './Predicate.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import { Separated, separated } from './Separated.js'
+import { Show } from './Show.js'
 
 /**
  * @category conversions

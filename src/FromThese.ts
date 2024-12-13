@@ -3,9 +3,9 @@
  *
  * @since 2.11.0
  */
-import { flow } from './function'
-import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT'
-import { These } from './These'
+import { flow } from './function.js'
+import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT.js'
+import { These } from './These.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -1,11 +1,11 @@
 /**
  * @since 2.0.0
  */
-import { BooleanAlgebra } from './BooleanAlgebra'
-import { Monoid } from './Monoid'
-import { Ring } from './Ring'
-import { Semigroup } from './Semigroup'
-import { Semiring } from './Semiring'
+import { BooleanAlgebra } from './BooleanAlgebra.js'
+import { Monoid } from './Monoid.js'
+import { Ring } from './Ring.js'
+import { Semigroup } from './Semigroup.js'
+import { Semiring } from './Semiring.js'
 
 // -------------------------------------------------------------------------------------
 // instances

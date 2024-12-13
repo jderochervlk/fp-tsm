@@ -1,17 +1,17 @@
 /**
  * @since 2.0.0
  */
-import { Applicative2 } from './Applicative'
-import { apFirst as apFirst_, Apply2, apS as apS_, apSecond as apSecond_ } from './Apply'
-import * as chainable from './Chain'
-import { FromState2 } from './FromState'
-import { dual, identity, pipe } from './function'
-import { bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor'
-import * as _ from './internal'
-import { Monad2 } from './Monad'
-import { NonEmptyArray } from './NonEmptyArray'
-import { Pointed2 } from './Pointed'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
+import { Applicative2 } from './Applicative.js'
+import { apFirst as apFirst_, Apply2, apS as apS_, apSecond as apSecond_ } from './Apply.js'
+import * as chainable from './Chain.js'
+import { FromState2 } from './FromState.js'
+import { dual, identity, pipe } from './function.js'
+import { bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { Monad2 } from './Monad.js'
+import { NonEmptyArray } from './NonEmptyArray.js'
+import { Pointed2 } from './Pointed.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -3,10 +3,10 @@
  *
  * @since 2.11.0
  */
-import { Chain, Chain2, Chain3, Chain3C, Chain4, tap } from './Chain'
-import { flow } from './function'
-import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT'
-import * as R from './Reader'
+import { Chain, Chain2, Chain3, Chain3C, Chain4, tap } from './Chain.js'
+import { flow } from './function.js'
+import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT.js'
+import * as R from './Reader.js'
 
 import Reader = R.Reader
 

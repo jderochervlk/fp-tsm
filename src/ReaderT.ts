@@ -5,12 +5,12 @@
  *
  * @since 2.0.0
  */
-import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4 } from './Apply'
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4 } from './Chain'
-import { flow, pipe } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad'
+import { Apply, Apply1, Apply2, Apply2C, Apply3, Apply3C, Apply4 } from './Apply.js'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4 } from './Chain.js'
+import { flow, pipe } from './function.js'
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C, Functor4 } from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Monad, Monad1, Monad2, Monad2C, Monad3 } from './Monad.js'
 import {
   NaturalTransformation,
   NaturalTransformation11,
@@ -18,9 +18,9 @@ import {
   NaturalTransformation22,
   NaturalTransformation23R,
   NaturalTransformation24S
-} from './NaturalTransformation'
-import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed'
-import { Reader } from './Reader'
+} from './NaturalTransformation.js'
+import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 } from './Pointed.js'
+import { Reader } from './Reader.js'
 
 /**
  * @since 2.10.0

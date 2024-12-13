@@ -1,8 +1,8 @@
 /**
  * @since 2.0.0
  */
-import { Alt3, Alt3C } from './Alt'
-import { Applicative3, Applicative3C, getApplicativeMonoid } from './Applicative'
+import { Alt3, Alt3C } from './Alt.js'
+import { Applicative3, Applicative3C, getApplicativeMonoid } from './Applicative.js'
 import {
   ap as ap_,
   apFirst as apFirst_,
@@ -11,19 +11,19 @@ import {
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import { Bifunctor3 } from './Bifunctor'
-import * as chainable from './Chain'
-import { compact as compact_, Compactable3C, separate as separate_ } from './Compactable'
-import * as E from './Either'
-import * as ET from './EitherT'
+} from './Apply.js'
+import { Bifunctor3 } from './Bifunctor.js'
+import * as chainable from './Chain.js'
+import { compact as compact_, Compactable3C, separate as separate_ } from './Compactable.js'
+import * as E from './Either.js'
+import * as ET from './EitherT.js'
 import {
   filter as filter_,
   Filterable3C,
   filterMap as filterMap_,
   partition as partition_,
   partitionMap as partitionMap_
-} from './Filterable'
+} from './Filterable.js'
 import {
   chainOptionK as chainOptionK_,
   filterOrElse as filterOrElse_,
@@ -33,38 +33,38 @@ import {
   fromOptionK as fromOptionK_,
   fromPredicate as fromPredicate_,
   tapEither as tapEither_
-} from './FromEither'
-import { FromIO3, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
+} from './FromEither.js'
+import { FromIO3, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
 import {
   ask as ask_,
   asks as asks_,
   FromReader3,
   fromReaderK as fromReaderK_,
   tapReader as tapReader_
-} from './FromReader'
-import { FromTask3, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask'
-import { dual, flow, identity, LazyArg, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor3, let as let__ } from './Functor'
-import * as _ from './internal'
-import { IO } from './IO'
-import { IOEither } from './IOEither'
-import { Monad3, Monad3C } from './Monad'
-import { MonadIO3 } from './MonadIO'
-import { MonadTask3, MonadTask3C } from './MonadTask'
-import { MonadThrow3, MonadThrow3C } from './MonadThrow'
-import { Monoid } from './Monoid'
-import { Option } from './Option'
-import { Pointed3 } from './Pointed'
-import { Predicate } from './Predicate'
-import * as R from './Reader'
-import { ReaderEither } from './ReaderEither'
-import * as RIO from './ReaderIO'
-import * as RT from './ReaderTask'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Refinement } from './Refinement'
-import { Semigroup } from './Semigroup'
-import * as T from './Task'
-import * as TE from './TaskEither'
+} from './FromReader.js'
+import { FromTask3, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask.js'
+import { dual, flow, identity, LazyArg, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor3, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { IO } from './IO.js'
+import { IOEither } from './IOEither.js'
+import { Monad3, Monad3C } from './Monad.js'
+import { MonadIO3 } from './MonadIO.js'
+import { MonadTask3, MonadTask3C } from './MonadTask.js'
+import { MonadThrow3, MonadThrow3C } from './MonadThrow.js'
+import { Monoid } from './Monoid.js'
+import { Option } from './Option.js'
+import { Pointed3 } from './Pointed.js'
+import { Predicate } from './Predicate.js'
+import * as R from './Reader.js'
+import { ReaderEither } from './ReaderEither.js'
+import * as RIO from './ReaderIO.js'
+import * as RT from './ReaderTask.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Refinement } from './Refinement.js'
+import { Semigroup } from './Semigroup.js'
+import * as T from './Task.js'
+import * as TE from './TaskEither.js'
 
 import Either = E.Either
 import Task = T.Task

@@ -1,12 +1,12 @@
 import * as path from 'path'
 
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as J from '../src/Json'
-import * as RTE from '../src/ReaderTaskEither'
-import * as TE from '../src/TaskEither'
-import { FileSystem, fileSystem } from './FileSystem'
-import { run } from './run'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as J from '../src/Json.js'
+import * as RTE from '../src/ReaderTaskEither.js'
+import * as TE from '../src/TaskEither.js'
+import { FileSystem, fileSystem } from './FileSystem.js'
+import { run } from './run.js'
 
 interface Build<A> extends RTE.ReaderTaskEither<FileSystem, Error, A> {}
 

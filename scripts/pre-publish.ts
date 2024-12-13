@@ -1,5 +1,5 @@
-import { left } from '../src/TaskEither'
-import { run } from './run'
+import { left } from '../src/TaskEither.js'
+import { run } from './run.js'
 
 const main = left(new Error('"npm publish" can not be run from root, run "npm run release" instead'))
 

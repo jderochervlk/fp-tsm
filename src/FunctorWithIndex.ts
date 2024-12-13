@@ -11,7 +11,7 @@
  *
  * @since 2.0.0
  */
-import { pipe } from './function'
+import { pipe } from './function.js'
 import {
   Functor,
   Functor1,
@@ -29,8 +29,8 @@ import {
   FunctorComposition22,
   FunctorComposition22C,
   getFunctorComposition
-} from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
+} from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -1,15 +1,15 @@
 /**
  * @since 2.0.0
  */
-import { Applicative2C } from './Applicative'
-import { Apply2C } from './Apply'
-import { Chain2C } from './Chain'
-import { pipe } from './function'
-import { flap as flap_, Functor2 } from './Functor'
-import { Monad2C } from './Monad'
-import { Monoid } from './Monoid'
-import { Pointed2C } from './Pointed'
-import { Semigroup } from './Semigroup'
+import { Applicative2C } from './Applicative.js'
+import { Apply2C } from './Apply.js'
+import { Chain2C } from './Chain.js'
+import { pipe } from './function.js'
+import { flap as flap_, Functor2 } from './Functor.js'
+import { Monad2C } from './Monad.js'
+import { Monoid } from './Monoid.js'
+import { Pointed2C } from './Pointed.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

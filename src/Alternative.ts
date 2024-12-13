@@ -14,7 +14,7 @@
  *
  * @since 2.0.0
  */
-import { Alt, Alt1, Alt2, Alt2C, Alt3, Alt3C, Alt4, altAll as altAll_ } from './Alt'
+import { Alt, Alt1, Alt2, Alt2C, Alt3, Alt3C, Alt4, altAll as altAll_ } from './Alt.js'
 import {
   Applicative,
   Applicative1,
@@ -23,12 +23,12 @@ import {
   Applicative3,
   Applicative3C,
   Applicative4
-} from './Applicative'
-import { getApplySemigroup } from './Apply'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
-import { Zero, Zero1, Zero2, Zero2C, Zero3, Zero3C, Zero4 } from './Zero'
+} from './Applicative.js'
+import { getApplySemigroup } from './Apply.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { Monoid } from './Monoid.js'
+import { Semigroup } from './Semigroup.js'
+import { Zero, Zero1, Zero2, Zero2C, Zero3, Zero3C, Zero4 } from './Zero.js'
 
 // -------------------------------------------------------------------------------------
 // model

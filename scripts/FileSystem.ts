@@ -1,8 +1,8 @@
-import * as fs from 'fs'
-import G from 'glob'
+import * as fs from 'fs.js'
+import G from 'glob.js'
 
-import { flow } from '../src/function'
-import * as TE from '../src/TaskEither'
+import { flow } from '../src/function.js'
+import * as TE from '../src/TaskEither.js'
 
 export interface FileSystem {
   readonly readFile: (path: string) => TE.TaskEither<Error, string>

@@ -1,39 +1,39 @@
 /**
  * @since 2.3.0
  */
-import { Applicative2, getApplicativeMonoid } from './Applicative'
+import { Applicative2, getApplicativeMonoid } from './Applicative.js'
 import {
   apFirst as apFirst_,
   Apply2,
   apS as apS_,
   apSecond as apSecond_,
   getApplySemigroup as getApplySemigroup_
-} from './Apply'
-import * as chainable from './Chain'
-import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO'
+} from './Apply.js'
+import * as chainable from './Chain.js'
+import { FromIO2, fromIOK as fromIOK_, tapIO as tapIO_ } from './FromIO.js'
 import {
   ask as ask_,
   asks as asks_,
   FromReader2,
   fromReaderK as fromReaderK_,
   tapReader as tapReader_
-} from './FromReader'
-import { FromTask2, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask'
-import { dual, flow, identity, pipe, SK } from './function'
-import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor'
-import * as _ from './internal'
-import { IO } from './IO'
-import { Monad2 } from './Monad'
-import { MonadIO2 } from './MonadIO'
-import { MonadTask2 } from './MonadTask'
-import { Monoid } from './Monoid'
-import { Pointed2 } from './Pointed'
-import * as R from './Reader'
-import * as RIO from './ReaderIO'
-import * as RT from './ReaderT'
-import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
-import { Semigroup } from './Semigroup'
-import * as T from './Task'
+} from './FromReader.js'
+import { FromTask2, fromTaskK as fromTaskK_, tapTask as tapTask_ } from './FromTask.js'
+import { dual, flow, identity, pipe, SK } from './function.js'
+import { as as as_, asUnit as asUnit_, bindTo as bindTo_, flap as flap_, Functor2, let as let__ } from './Functor.js'
+import * as _ from './internal.js'
+import { IO } from './IO.js'
+import { Monad2 } from './Monad.js'
+import { MonadIO2 } from './MonadIO.js'
+import { MonadTask2 } from './MonadTask.js'
+import { Monoid } from './Monoid.js'
+import { Pointed2 } from './Pointed.js'
+import * as R from './Reader.js'
+import * as RIO from './ReaderIO.js'
+import * as RT from './ReaderT.js'
+import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
+import { Semigroup } from './Semigroup.js'
+import * as T from './Task.js'
 
 // -------------------------------------------------------------------------------------
 // model

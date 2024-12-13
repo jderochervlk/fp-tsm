@@ -9,12 +9,12 @@
  *
  * @since 2.0.0
  */
-import { Contravariant1 } from './Contravariant'
-import { Eq, eqStrict } from './Eq'
-import { constant, constTrue, pipe } from './function'
-import { Monoid } from './Monoid'
-import { Ordering } from './Ordering'
-import { Semigroup } from './Semigroup'
+import { Contravariant1 } from './Contravariant.js'
+import { Eq, eqStrict } from './Eq.js'
+import { constant, constTrue, pipe } from './function.js'
+import { Monoid } from './Monoid.js'
+import { Ordering } from './Ordering.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

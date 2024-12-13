@@ -6,13 +6,13 @@ import {
   ApplicativeComposition22C,
   ApplicativeCompositionHKT2C,
   getApplicativeComposition
-} from './Applicative'
-import * as E from './Either'
-import { LazyArg } from './function'
-import { HKT, Kind, Kind2, URIS, URIS2 } from './HKT'
-import * as _ from './internal'
-import { Monad, Monad1, Monad2 } from './Monad'
-import { Semigroup } from './Semigroup'
+} from './Applicative.js'
+import * as E from './Either.js'
+import { LazyArg } from './function.js'
+import { HKT, Kind, Kind2, URIS, URIS2 } from './HKT.js'
+import * as _ from './internal.js'
+import { Monad, Monad1, Monad2 } from './Monad.js'
+import { Semigroup } from './Semigroup.js'
 
 import Either = E.Either
 

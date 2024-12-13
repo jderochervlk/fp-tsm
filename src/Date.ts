@@ -1,11 +1,11 @@
 /**
  * @since 2.0.0
  */
-import * as E from './Eq'
-import { pipe } from './function'
-import { IO } from './IO'
-import * as N from './number'
-import * as O from './Ord'
+import * as E from './Eq.js'
+import { pipe } from './function.js'
+import { IO } from './IO.js'
+import * as N from './number.js'
+import * as O from './Ord.js'
 
 // -------------------------------------------------------------------------------------
 // instances

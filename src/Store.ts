@@ -1,12 +1,12 @@
 /**
  * @since 2.0.0
  */
-import { Comonad2 } from './Comonad'
-import { Endomorphism } from './Endomorphism'
-import { Extend2 } from './Extend'
-import { identity, pipe } from './function'
-import { flap as flap_, Functor as FunctorHKT, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor'
-import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT'
+import { Comonad2 } from './Comonad.js'
+import { Endomorphism } from './Endomorphism.js'
+import { Extend2 } from './Extend.js'
+import { identity, pipe } from './function.js'
+import { flap as flap_, Functor as FunctorHKT, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT.js'
 
 // -------------------------------------------------------------------------------------
 // model

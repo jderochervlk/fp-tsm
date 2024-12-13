@@ -2,9 +2,9 @@
  * @since 2.11.0
  */
 
-import { flow, identity } from './function'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
+import { flow, identity } from './function.js'
+import { Monoid } from './Monoid.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -9,8 +9,8 @@
  *
  * @since 2.0.0
  */
-import { Either } from './Either'
-import { pipe } from './function'
+import { Either } from './Either.js'
+import { pipe } from './function.js'
 import {
   Functor,
   Functor1,
@@ -29,10 +29,10 @@ import {
   FunctorComposition23C,
   getFunctorComposition,
   map
-} from './Functor'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { getLeft, getRight, Option } from './Option'
-import * as S from './Separated'
+} from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { getLeft, getRight, Option } from './Option.js'
+import * as S from './Separated.js'
 
 // -------------------------------------------------------------------------------------
 // model

@@ -1,10 +1,10 @@
 /**
  * @since 2.11.0
  */
-import { Contravariant1 } from './Contravariant'
-import { constFalse, constTrue, flow, pipe } from './function'
-import { Monoid } from './Monoid'
-import { Semigroup } from './Semigroup'
+import { Contravariant1 } from './Contravariant.js'
+import { constFalse, constTrue, flow, pipe } from './function.js'
+import { Monoid } from './Monoid.js'
+import { Semigroup } from './Semigroup.js'
 
 // -------------------------------------------------------------------------------------
 // model

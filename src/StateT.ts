@@ -6,14 +6,14 @@
  *
  * @since 2.0.0
  */
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C } from './Chain'
-import { pipe } from './function'
-import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor'
-import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT'
-import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad'
-import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './Pointed'
-import { snd } from './ReadonlyTuple'
-import { State } from './State'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C } from './Chain.js'
+import { pipe } from './function.js'
+import { Functor, Functor1, Functor2, Functor2C, Functor3, Functor3C } from './Functor.js'
+import { HKT, Kind, Kind2, Kind3, URIS, URIS2, URIS3 } from './HKT.js'
+import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad.js'
+import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './Pointed.js'
+import { snd } from './ReadonlyTuple.js'
+import { State } from './State.js'
 
 /**
  * @category model

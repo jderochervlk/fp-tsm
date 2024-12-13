@@ -4,14 +4,14 @@
  * @since 2.10.0
  */
 
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, tap } from './Chain'
-import { Either } from './Either'
-import { flow, LazyArg } from './function'
-import { HKT2, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import * as _ from './internal'
-import { Option } from './Option'
-import { Predicate } from './Predicate'
-import { Refinement } from './Refinement'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, tap } from './Chain.js'
+import { Either } from './Either.js'
+import { flow, LazyArg } from './function.js'
+import { HKT2, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import * as _ from './internal.js'
+import { Option } from './Option.js'
+import { Predicate } from './Predicate.js'
+import { Refinement } from './Refinement.js'
 
 // -------------------------------------------------------------------------------------
 // model

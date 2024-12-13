@@ -3,10 +3,10 @@
  *
  * @since 2.10.0
  */
-import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, tap } from './Chain'
-import { flow } from './function'
-import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT'
-import { IO } from './IO'
+import { Chain, Chain1, Chain2, Chain2C, Chain3, Chain3C, Chain4, tap } from './Chain.js'
+import { flow } from './function.js'
+import { HKT, Kind, Kind2, Kind3, Kind4, URIS, URIS2, URIS3, URIS4 } from './HKT.js'
+import { IO } from './IO.js'
 
 // -------------------------------------------------------------------------------------
 // model
