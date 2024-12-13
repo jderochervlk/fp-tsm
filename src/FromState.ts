@@ -9,7 +9,7 @@ import { flow } from './function.js'
 import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT.js'
 import * as S from './State.js'
 
-import State = S.State
+type State<S, A> = S.State<S, A>
 
 // -------------------------------------------------------------------------------------
 // model

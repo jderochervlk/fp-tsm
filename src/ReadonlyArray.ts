@@ -48,8 +48,7 @@ import {
 } from './Witherable.js'
 import { guard as guard_, Zero1 } from './Zero.js'
 
-import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
-
+type ReadonlyNonEmptyArray<A> = RNEA.ReadonlyNonEmptyArray<A>
 // -------------------------------------------------------------------------------------
 // refinements
 // -------------------------------------------------------------------------------------

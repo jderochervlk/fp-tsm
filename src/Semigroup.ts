@@ -43,8 +43,8 @@ import * as M from './Magma.js'
 import * as Or from './Ord.js'
 import { ReadonlyRecord } from './ReadonlyRecord.js'
 
-import Ord = Or.Ord
-import Magma = M.Magma
+type Ord<A> = Or.Ord<A>
+type Magma<A> = M.Magma<A>
 
 // -------------------------------------------------------------------------------------
 // model

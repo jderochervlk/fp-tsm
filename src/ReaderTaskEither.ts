@@ -67,11 +67,11 @@ import * as T from './Task.js'
 import * as TE from './TaskEither.js'
 
 type Either<L, R> = E.Either<L, R>
-import Task = T.Task
-import TaskEither = TE.TaskEither
+type Task<A> = T.Task<A>
+type TaskEither<R, L> = TE.TaskEither<R, L>
 type Reader<R, A> = R.Reader<R, A>
-import ReaderIO = RIO.ReaderIO
-import ReaderTask = RT.ReaderTask
+type ReaderIO<R, A> = RIO.ReaderIO<R, A>
+type ReaderTask<R, A> = RT.ReaderTask<R, A>
 
 // -------------------------------------------------------------------------------------
 // model

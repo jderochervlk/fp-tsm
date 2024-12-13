@@ -38,8 +38,8 @@ import { Refinement } from './Refinement.js'
 import { Separated } from './Separated.js'
 import { guard as guard_, Zero1 } from './Zero.js'
 
-import IO = I.IO
-import Option = O.Option
+type IO<A> = I.IO<A>
+type Option<A> = O.Option<A>
 
 // -------------------------------------------------------------------------------------
 // model

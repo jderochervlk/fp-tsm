@@ -68,7 +68,7 @@ import { TaskOption } from './TaskOption.js'
 // -------------------------------------------------------------------------------------
 
 type Either<L, R> = E.Either<L, R>
-import Task = T.Task
+type Task<A> = T.Task<A>
 
 /**
  * @category model

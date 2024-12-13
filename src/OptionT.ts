@@ -19,7 +19,7 @@ import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C, Pointed4 }
 import { Predicate } from './Predicate.js'
 import { Refinement } from './Refinement.js'
 
-import Option = O.Option
+type Option<A> = O.Option<A>
 
 // -------------------------------------------------------------------------------------
 // constructors

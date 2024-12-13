@@ -35,12 +35,12 @@ import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 import { Semigroup } from './Semigroup.js'
 import * as T from './Task.js'
 
+
 // -------------------------------------------------------------------------------------
 // model
 // -------------------------------------------------------------------------------------
-
-import ReaderIO = RIO.ReaderIO
-import Task = T.Task
+type Task<A> = T.Task<A>
+type ReaderIO<R, A> = RIO.ReaderIO<R, A>
 
 /**
  * @category model

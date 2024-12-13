@@ -61,7 +61,7 @@ import { Semigroup } from './Semigroup.js'
 // -------------------------------------------------------------------------------------
 
 type Either<L, R> = E.Either<L, R>
-import IO = I.IO
+type IO<A> = I.IO<A>
 
 /**
  * @category model

@@ -42,8 +42,8 @@ import * as T from './Task.js'
 import { TaskEither } from './TaskEither.js'
 import { guard as guard_, Zero1 } from './Zero.js'
 
-import Task = T.Task
-import Option = O.Option
+type Task<A> = T.Task<A>
+type Option<A> = O.Option<A>
 
 // -------------------------------------------------------------------------------------
 // model

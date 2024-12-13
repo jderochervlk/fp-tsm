@@ -42,7 +42,7 @@ import { TraversableWithIndex1 } from './TraversableWithIndex.js'
 import { Unfoldable, Unfoldable1 } from './Unfoldable.js'
 import { PipeableWilt1, PipeableWither1, wiltDefault, Witherable1, witherDefault } from './Witherable.js'
 
-import Semigroup = Se.Semigroup
+type Semigroup<A> = Se.Semigroup<A>
 
 // -------------------------------------------------------------------------------------
 // model

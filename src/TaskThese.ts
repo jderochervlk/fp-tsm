@@ -33,8 +33,8 @@ import * as T from './Task.js'
 import * as TH from './These.js'
 import * as TT from './TheseT.js'
 
-import These = TH.These
-import Task = T.Task
+type These<E, A> = TH.These<E, A>
+type Task<A> = T.Task<A>
 
 // -------------------------------------------------------------------------------------
 // model

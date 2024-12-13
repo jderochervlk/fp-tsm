@@ -1,9 +1,13 @@
 {
-  "name": "fp-ts",
+  "name": "@jvlk/fp-tsm",
   "version": "2.16.9",
   "description": "Functional programming in TypeScript",
   "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./*": "./dist/*"
+  },
   "scripts": {
     "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
     "lint-fix": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
@@ -55,17 +59,19 @@
     "ts-node": "^8.0.2",
     "tslint": "5.11.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.5.2",
+    "typescript": "^5",
     "vitest": "^1.6.0"
   },
   "tags": [
     "typescript",
     "algebraic-data-types",
-    "functional-programming"
+    "functional-programming",
+    "ESM"
   ],
   "keywords": [
     "typescript",
     "algebraic-data-types",
-    "functional-programming"
+    "functional-programming",
+    "ESM"
   ]
 }

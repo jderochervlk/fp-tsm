@@ -36,5 +36,6 @@
         "message": "Do not use spread arguments in Array.push"
       }
     ]
-  }
+  },
+  "ignorePatterns": ["dist", "node_modules"]
 }

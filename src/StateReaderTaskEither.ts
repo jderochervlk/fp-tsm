@@ -63,7 +63,7 @@ import { TaskEither } from './TaskEither.js'
 // model
 // -------------------------------------------------------------------------------------
 
-import ReaderTaskEither = RTE.ReaderTaskEither
+type ReaderTaskEither<R, E, A> = RTE.ReaderTaskEither<R, E, A>
 type Either<L, R> = E.Either<L, R>
 type Reader<R, A> = R.Reader<R, A>
 

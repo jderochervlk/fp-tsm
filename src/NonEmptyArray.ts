@@ -39,8 +39,9 @@ import { Show } from './Show.js'
 import { PipeableTraverse1, Traversable1 } from './Traversable.js'
 import { PipeableTraverseWithIndex1, TraversableWithIndex1 } from './TraversableWithIndex.js'
 
-import Semigroup = Se.Semigroup
-import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
+type ReadonlyNonEmptyArray<A> = RNEA.ReadonlyNonEmptyArray<A>
+
+type Semigroup<A> = Se.Semigroup<A>
 
 // -------------------------------------------------------------------------------------
 // model

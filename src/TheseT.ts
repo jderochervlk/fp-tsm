@@ -11,7 +11,7 @@ import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './P
 import { Semigroup } from './Semigroup.js'
 import * as T from './These.js'
 
-import These = T.These
+type These<E, A> = T.These<E, A>
 
 /**
  * @since 2.10.0

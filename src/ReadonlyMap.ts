@@ -28,7 +28,7 @@ import { TraversableWithIndex2C } from './TraversableWithIndex.js'
 import { Unfoldable, Unfoldable1 } from './Unfoldable.js'
 import { wiltDefault, Witherable2C, witherDefault } from './Witherable.js'
 
-import Option = O.Option
+type Option<A> = O.Option<A>
 
 /**
  * @category conversions
