@@ -124,6 +124,9 @@ import * as writer from './Writer.js'
 import * as writerT from './WriterT.js'
 import * as zero from './Zero.js'
 
+export * as O from './Option.js'
+export * as Option from './Option.js'
+
 export {
   /**
    * @category model

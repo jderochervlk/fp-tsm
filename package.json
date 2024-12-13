@@ -1,13 +1,16 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "2.16.9",
+  "version": "3.0.0-alpha.5",
   "description": "Functional programming in TypeScript",
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./dist/index.mjs",
+    ".": "./dist/index.js",
     "./*": "./dist/*"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
     "lint-fix": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
@@ -15,12 +18,9 @@
     "fix-prettier": "prettier --write \"./{src,test,examples,scripts}/**/*.ts\"",
     "test": "npm run lint && npm run prettier && npm run dtslint && npm run vitest && npm run docs",
     "build": "tsup src",
-    "prepublishOnly": "ts-node scripts/pre-publish",
     "mocha": "mocha -r ts-node/register test/*.ts",
     "dtslint": "dtslint dtslint",
     "docs": "docs-ts",
-    "prerelease": "npm run build",
-    "release": "ts-node scripts/release",
     "dpdm": "dpdm --warning=false --tree=false --exit-code circular:1 -T src/index.ts",
     "vitest": "vitest run",
     "coverage": "vitest run --coverage"

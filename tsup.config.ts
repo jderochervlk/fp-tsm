@@ -7,5 +7,5 @@ export default defineConfig({
   clean: true,
   target: 'esnext',
   format: 'esm',
-  dts: true
+  dts: true,
 })

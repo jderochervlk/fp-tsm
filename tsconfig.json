@@ -22,6 +22,6 @@
       }
     ]
   },
-  "include": ["./src", "./test", "./scripts", "./perf", "./dtslint"],
+  "include": ["./src", "./test", "./scripts", "./perf", "./dtslint", "./*.ts"],
   "exclude": ["./node_modules"]
 }
