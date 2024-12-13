@@ -54,8 +54,8 @@ import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 import { Refinement } from './Refinement.js'
 import { Semigroup } from './Semigroup.js'
 
-import Reader = R.Reader
-import Either = E.Either
+type Reader<R, A> = R.Reader<R, A>
+type Either<L, R> = E.Either<L, R>
 
 // -------------------------------------------------------------------------------------
 // model
@@ -465,7 +465,7 @@ export const URI = 'ReaderEither'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind3<R, E, A> {
     readonly [URI]: ReaderEither<R, E, A>
   }

@@ -51,7 +51,7 @@ import {
 } from './Witherable.js'
 import { guard as guard_, Zero1 } from './Zero.js'
 
-import NonEmptyArray = NEA.NonEmptyArray
+type NonEmptyArray<T> = NEA.NonEmptyArray<T>
 
 // -------------------------------------------------------------------------------------
 // refinements
@@ -2222,7 +2222,7 @@ export const URI = 'Array'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind<A> {
     readonly [URI]: Array<A>
   }

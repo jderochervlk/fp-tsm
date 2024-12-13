@@ -1,8 +1,8 @@
-import { pipe, tuple } from '../src/function'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as _ from '../src/State'
-import * as U from './util'
+import { pipe, tuple } from '../src/function.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as _ from '../src/State.js'
+import * as U from './util.js'
 
 describe('State', () => {
   describe('pipeables', () => {

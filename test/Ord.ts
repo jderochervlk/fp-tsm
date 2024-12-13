@@ -1,12 +1,12 @@
-import * as B from '../src/boolean'
-import { pipe } from '../src/function'
-import { concatAll } from '../src/Monoid'
-import * as N from '../src/number'
-import * as _ from '../src/Ord'
-import { sort } from '../src/ReadonlyArray'
-import * as RR from '../src/ReadonlyRecord'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import { pipe } from '../src/function.js'
+import { concatAll } from '../src/Monoid.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/Ord.js'
+import { sort } from '../src/ReadonlyArray.js'
+import * as RR from '../src/ReadonlyRecord.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('Ord', () => {
   it('tuple', () => {

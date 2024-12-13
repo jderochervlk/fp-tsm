@@ -1,5 +1,5 @@
-import { flow, pipe } from '../src/function'
-import * as _ from '../src/Option'
+import { flow, pipe } from '../src/function.js'
+import * as _ from '../src/Option.js'
 
 //
 // getOrElseW

@@ -64,8 +64,8 @@ import { TaskEither } from './TaskEither.js'
 // -------------------------------------------------------------------------------------
 
 import ReaderTaskEither = RTE.ReaderTaskEither
-import Either = E.Either
-import Reader = R.Reader
+type Either<L, R> = E.Either<L, R>
+type Reader<R, A> = R.Reader<R, A>
 
 /**
  * @category model
@@ -657,7 +657,7 @@ export const URI = 'StateReaderTaskEither'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind4<S, R, E, A> {
     readonly [URI]: StateReaderTaskEither<S, R, E, A>
   }

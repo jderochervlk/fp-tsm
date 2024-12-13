@@ -1,7 +1,7 @@
-import { getFunctorComposition } from '../src/Functor'
-import * as option from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as U from './util'
+import { getFunctorComposition } from '../src/Functor.js'
+import * as option from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as U from './util.js'
 
 describe('Functor', () => {
   it('getFunctorComposition', () => {

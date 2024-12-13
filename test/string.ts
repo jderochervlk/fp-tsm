@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import * as _ from '../src/string'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/string.js'
+import * as U from './util.js'
 
 describe('string', () => {
   // -------------------------------------------------------------------------------------

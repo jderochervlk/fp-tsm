@@ -60,7 +60,7 @@ import { Semigroup } from './Semigroup.js'
 // model
 // -------------------------------------------------------------------------------------
 
-import Either = E.Either
+type Either<L, R> = E.Either<L, R>
 import IO = I.IO
 
 /**
@@ -433,7 +433,7 @@ export const URI = 'IOEither'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind2<E, A> {
     readonly [URI]: IOEither<E, A>
   }

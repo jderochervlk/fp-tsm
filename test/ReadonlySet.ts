@@ -1,15 +1,15 @@
 import * as assert from 'assert'
 
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import * as Eq from '../src/Eq'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import { none, some as optionSome } from '../src/Option'
-import * as _ from '../src/ReadonlySet'
-import { separated } from '../src/Separated'
-import * as S from '../src/string'
-import * as U from './util'
+import { getMonoid } from '../src/Array.js'
+import { left, right } from '../src/Either.js'
+import * as Eq from '../src/Eq.js'
+import { pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import { none, some as optionSome } from '../src/Option.js'
+import * as _ from '../src/ReadonlySet.js'
+import { separated } from '../src/Separated.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 const gte2 = (n: number) => n >= 2
 
@@ -70,6 +70,7 @@ describe('ReadonlySet', () => {
   })
 
   it('filter', () => {
+    // @ts-ignore
     U.deepStrictEqual(_.filter(gte2)(new Set([1, 2, 3])), new Set([2, 3]))
 
     // refinements
@@ -84,6 +85,7 @@ describe('ReadonlySet', () => {
     U.deepStrictEqual(_.partition(() => false)(new Set([1])), separated(new Set([1]), new Set([])))
     U.deepStrictEqual(
       _.partition((n: number) => n % 2 === 0)(new Set([1, 2, 3, 4])),
+      // @ts-ignore
       separated(new Set([1, 3]), new Set([2, 4]))
     )
 

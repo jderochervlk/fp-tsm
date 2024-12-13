@@ -2,7 +2,7 @@ import * as assert from 'assert'
 import * as glob from 'glob'
 import * as path from 'path'
 
-import * as _ from '../src'
+import * as _ from '../src/index.js'
 
 const getExportName = (name: string): string => {
   if (name === 'HKT' || name === 'IO') {

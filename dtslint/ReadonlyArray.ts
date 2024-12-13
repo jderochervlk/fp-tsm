@@ -1,8 +1,8 @@
-import * as E from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import { Ord } from '../src/Ord'
-import * as _ from '../src/ReadonlyArray'
+import * as E from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import { Ord } from '../src/Ord.js'
+import * as _ from '../src/ReadonlyArray.js'
 
 declare const rus: ReadonlyArray<unknown>
 declare const rns: ReadonlyArray<number>

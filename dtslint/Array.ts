@@ -1,8 +1,8 @@
-import * as _ from '../src/Array'
-import * as E from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import { Ord } from '../src/Ord'
+import * as _ from '../src/Array.js'
+import * as E from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import { Ord } from '../src/Ord.js'
 
 declare const us: Array<unknown>
 declare const ns: Array<number>

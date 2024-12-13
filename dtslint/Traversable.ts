@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import * as RA from '../src/ReadonlyArray'
-import * as TE from '../src/TaskEither'
-import * as _ from '../src/Traversable'
+import * as E from '../src/Either.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as TE from '../src/TaskEither.js'
+import * as _ from '../src/Traversable.js'
 
 //
 // traversable

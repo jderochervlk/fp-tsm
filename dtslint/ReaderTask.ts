@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import * as RIO from '../src/ReaderIO'
-import * as _ from '../src/ReaderTask'
+import { pipe } from '../src/function.js'
+import * as RIO from '../src/ReaderIO.js'
+import * as _ from '../src/ReaderTask.js'
 
 interface R1 {
   foo: string

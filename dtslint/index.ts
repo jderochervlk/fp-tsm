@@ -1,5 +1,5 @@
-import * as _ from '../src/HKT'
-import * as T from '../src/Task'
+import * as _ from '../src/HKT.js'
+import * as T from '../src/Task.js'
 
 // issue #536
 export function testIssue536<F extends _.URIS, G extends _.URIS, A>(x: _.Kind<F, A>): _.Kind<G, A> {

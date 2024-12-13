@@ -1,8 +1,8 @@
-import * as B from '../src/boolean'
-import { pipe } from '../src/function'
-import { Monoid, struct } from '../src/Monoid'
-import * as _ from '../src/Traced'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import { pipe } from '../src/function.js'
+import { Monoid, struct } from '../src/Monoid.js'
+import * as _ from '../src/Traced.js'
+import * as U from './util.js'
 
 // Adapted from https://chshersh.github.io/posts/2019-03-25-comonadic-builders
 

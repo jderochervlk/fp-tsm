@@ -14,7 +14,7 @@ import * as _ from './internal.js'
 import { Monad, Monad1, Monad2 } from './Monad.js'
 import { Semigroup } from './Semigroup.js'
 
-import Either = E.Either
+type Either<L, R> = E.Either<L, R>
 
 // -------------------------------------------------------------------------------------
 // deprecated

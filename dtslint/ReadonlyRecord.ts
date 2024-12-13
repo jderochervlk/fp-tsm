@@ -1,13 +1,13 @@
-import * as E from '../src/Either'
-import { Foldable } from '../src/Foldable'
-import { identity, pipe } from '../src/function'
-import { HKT } from '../src/HKT'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/ReadonlyRecord'
-import { getFirstSemigroup } from '../src/Semigroup'
-import * as S from '../src/string'
+import * as E from '../src/Either.js'
+import { Foldable } from '../src/Foldable.js'
+import { identity, pipe } from '../src/function.js'
+import { HKT } from '../src/HKT.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as _ from '../src/ReadonlyRecord.js'
+import { getFirstSemigroup } from '../src/Semigroup.js'
+import * as S from '../src/string.js'
 
 declare const do1: { [key: string]: O.Option<number> }
 declare const ro1: Readonly<Record<'a1' | 'a2', O.Option<number>>>

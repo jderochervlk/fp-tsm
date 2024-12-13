@@ -1,7 +1,7 @@
-import { fanin, splitChoice } from '../src/Choice'
-import { left, right } from '../src/Either'
-import * as R from '../src/Reader'
-import * as U from './util'
+import { fanin, splitChoice } from '../src/Choice.js'
+import { left, right } from '../src/Either.js'
+import * as R from '../src/Reader.js'
+import * as U from './util.js'
 
 describe('Choice', () => {
   it('splitChoice', () => {

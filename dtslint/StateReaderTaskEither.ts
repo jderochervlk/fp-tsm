@@ -1,9 +1,9 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as IOE from '../src/IOEither'
-import * as RTE from '../src/ReaderTaskEither'
-import * as _ from '../src/StateReaderTaskEither'
-import * as TE from '../src/TaskEither'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as IOE from '../src/IOEither.js'
+import * as RTE from '../src/ReaderTaskEither.js'
+import * as _ from '../src/StateReaderTaskEither.js'
+import * as TE from '../src/TaskEither.js'
 
 //
 // chainW

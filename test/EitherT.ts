@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import { getEitherM } from '../src/EitherT'
-import * as I from '../src/IO'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { getEitherM } from '../src/EitherT.js'
+import * as I from '../src/IO.js'
+import * as U from './util.js'
 
 describe('EitherT', () => {
   const T = getEitherM(I.Monad)

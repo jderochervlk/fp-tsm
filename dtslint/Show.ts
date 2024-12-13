@@ -1,7 +1,7 @@
-import * as B from '../src/boolean'
-import * as N from '../src/number'
-import * as _ from '../src/Show'
-import * as S from '../src/string'
+import * as B from '../src/boolean.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/Show.js'
+import * as S from '../src/string.js'
 
 //
 // struct

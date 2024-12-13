@@ -1,17 +1,17 @@
 import * as assert from 'assert'
 import { createInterface } from 'readline'
 
-import { apS as apS_ } from '../src/Apply'
-import { chainFirst as chainFirst_ } from '../src/Chain'
-import { log } from '../src/Console'
-import { flow, pipe } from '../src/function'
-import { Kind, URIS } from '../src/HKT'
-import { Monad1 } from '../src/Monad'
-import * as O from '../src/Option'
-import { randomInt } from '../src/Random'
-import { append, dropLeft } from '../src/ReadonlyArray'
-import * as S from '../src/State'
-import * as T from '../src/Task'
+import { apS as apS_ } from '../src/Apply.js'
+import { chainFirst as chainFirst_ } from '../src/Chain.js'
+import { log } from '../src/Console.js'
+import { flow, pipe } from '../src/function.js'
+import { Kind, URIS } from '../src/HKT.js'
+import { Monad1 } from '../src/Monad.js'
+import * as O from '../src/Option.js'
+import { randomInt } from '../src/Random.js'
+import { append, dropLeft } from '../src/ReadonlyArray.js'
+import * as S from '../src/State.js'
+import * as T from '../src/Task.js'
 
 //
 // type classes
@@ -171,7 +171,7 @@ const URI = 'Test'
 
 type URI = typeof URI
 
-declare module '../src/HKT' {
+declare module '../src/HKT.js' {
   interface URItoKind<A> {
     readonly Test: Test<A>
   }

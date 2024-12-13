@@ -1,5 +1,5 @@
-import * as _ from '../src/Date'
-import * as U from './util'
+import * as _ from '../src/Date.js'
+import * as U from './util.js'
 
 describe('Date', () => {
   // -------------------------------------------------------------------------------------

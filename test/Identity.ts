@@ -1,10 +1,10 @@
-import { left, right } from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as _ from '../src/Identity'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as S from '../src/string'
-import * as U from './util'
+import { left, right } from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as _ from '../src/Identity.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('Identity', () => {
   describe('pipeables', () => {

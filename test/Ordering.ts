@@ -1,5 +1,5 @@
-import * as _ from '../src/Ordering'
-import * as U from './util'
+import * as _ from '../src/Ordering.js'
+import * as U from './util.js'
 
 describe('Ordering', () => {
   // -------------------------------------------------------------------------------------

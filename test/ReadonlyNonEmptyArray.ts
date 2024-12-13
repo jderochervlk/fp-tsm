@@ -1,16 +1,16 @@
 import * as assert from 'assert'
 
-import * as B from '../src/boolean'
-import { Endomorphism } from '../src/Endomorphism'
-import * as Eq from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as Ord from '../src/Ord'
-import * as _ from '../src/ReadonlyNonEmptyArray'
-import * as Se from '../src/Semigroup'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import { Endomorphism } from '../src/Endomorphism.js'
+import * as Eq from '../src/Eq.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as Ord from '../src/Ord.js'
+import * as _ from '../src/ReadonlyNonEmptyArray.js'
+import * as Se from '../src/Semigroup.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('ReadonlyNonEmptyArray', () => {
   describe('pipeables', () => {

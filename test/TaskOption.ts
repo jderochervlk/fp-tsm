@@ -1,13 +1,13 @@
-import * as E from '../src/Either'
-import { pipe, SK } from '../src/function'
-import * as IO from '../src/IO'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as T from '../src/Task'
-import * as TE from '../src/TaskEither'
-import * as _ from '../src/TaskOption'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { pipe, SK } from '../src/function.js'
+import * as IO from '../src/IO.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as T from '../src/Task.js'
+import * as TE from '../src/TaskEither.js'
+import * as _ from '../src/TaskOption.js'
+import * as U from './util.js'
 
 describe('TaskOption', () => {
   // -------------------------------------------------------------------------------------

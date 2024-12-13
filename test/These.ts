@@ -1,11 +1,11 @@
-import * as Apply from '../src/Apply'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as S from '../src/string'
-import * as _ from '../src/These'
-import * as U from './util'
+import * as Apply from '../src/Apply.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as S from '../src/string.js'
+import * as _ from '../src/These.js'
+import * as U from './util.js'
 
 describe('These', () => {
   describe('pipeables', () => {

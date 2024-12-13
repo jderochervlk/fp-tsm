@@ -90,7 +90,7 @@ export const URI = 'Separated'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind2<E, A> {
     readonly [URI]: Separated<E, A>
   }

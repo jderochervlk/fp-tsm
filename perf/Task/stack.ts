@@ -1,6 +1,6 @@
-import * as RNEA from '../../src/ReadonlyNonEmptyArray'
-import * as _ from '../../src/Task'
-import { pipe } from '../../src/function'
+import * as RNEA from '../../src/ReadonlyNonEmptyArray.js'
+import * as _ from '../../src/Task.js'
+import { pipe } from '../../src/function.js'
 
 const as = RNEA.range(0, 100000)
 

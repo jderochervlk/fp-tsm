@@ -1,9 +1,9 @@
-import * as _ from '../src/Apply'
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as Fu from '../src/Functor'
-import { Kind, URIS } from '../src/HKT'
-import * as RTE from '../src/ReaderTaskEither'
+import * as _ from '../src/Apply.js'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as Fu from '../src/Functor.js'
+import { Kind, URIS } from '../src/HKT.js'
+import * as RTE from '../src/ReaderTaskEither.js'
 
 //
 // apS

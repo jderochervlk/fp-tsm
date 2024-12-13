@@ -1,8 +1,8 @@
-import * as B from '../src/boolean'
-import * as N from '../src/number'
-import * as _ from '../src/Semigroup'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/Semigroup.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('Semigroup', () => {
   it('tuple', () => {

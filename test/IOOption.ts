@@ -1,12 +1,12 @@
-import * as E from '../src/Either'
-import { pipe, SK } from '../src/function'
-import * as I from '../src/IO'
-import * as IE from '../src/IOEither'
-import * as _ from '../src/IOOption'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { pipe, SK } from '../src/function.js'
+import * as I from '../src/IO.js'
+import * as IE from '../src/IOEither.js'
+import * as _ from '../src/IOOption.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as U from './util.js'
 
 describe('IOOption', () => {
   // -------------------------------------------------------------------------------------

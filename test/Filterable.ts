@@ -1,10 +1,10 @@
-import { left, right } from '../src/Either'
-import { getFilterableComposition } from '../src/Filterable'
-import { increment } from '../src/function'
-import { none, some } from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { separated } from '../src/Separated'
-import * as U from './util'
+import { left, right } from '../src/Either.js'
+import { getFilterableComposition } from '../src/Filterable.js'
+import { increment } from '../src/function.js'
+import { none, some } from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { separated } from '../src/Separated.js'
+import * as U from './util.js'
 
 describe('Filterable', () => {
   it('getFilterableComposition', () => {

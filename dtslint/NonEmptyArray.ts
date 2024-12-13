@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import * as _ from '../src/NonEmptyArray'
-import { Ord } from '../src/Ord'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/NonEmptyArray.js'
+import { Ord } from '../src/Ord.js'
 
 declare const as: Array<string>
 declare const neas: _.NonEmptyArray<string>

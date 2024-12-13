@@ -1,5 +1,5 @@
-import * as _ from '../src/Endomorphism'
-import * as U from './util'
+import * as _ from '../src/Endomorphism.js'
+import * as U from './util.js'
 
 describe('Endomorphism', () => {
   it('getMonoid', () => {

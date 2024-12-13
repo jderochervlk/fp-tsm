@@ -143,7 +143,7 @@ export const URI = 'Eq'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind<A> {
     readonly [URI]: Eq<A>
   }

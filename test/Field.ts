@@ -1,6 +1,6 @@
-import * as _ from '../src/Field'
-import * as N from '../src/number'
-import * as U from './util'
+import * as _ from '../src/Field.js'
+import * as N from '../src/number.js'
+import * as U from './util.js'
 
 describe('Field', () => {
   it('gcd', () => {

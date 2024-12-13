@@ -1,8 +1,8 @@
-import * as _ from '../src/Const'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import * as S from '../src/string'
-import * as U from './util'
+import * as _ from '../src/Const.js'
+import { pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('Const', () => {
   describe('pipeables', () => {

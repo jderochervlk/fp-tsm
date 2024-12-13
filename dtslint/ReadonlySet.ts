@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import * as _ from '../src/ReadonlySet'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/ReadonlySet.js'
 
 declare const me: ReadonlySet<number>
 

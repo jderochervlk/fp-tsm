@@ -1293,7 +1293,7 @@ export const URI = 'Record'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind<A> {
     readonly [URI]: Record<string, A>
   }

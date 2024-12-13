@@ -1,6 +1,6 @@
-import * as _ from '../src/Either'
-import { flow, identity, pipe } from '../src/function'
-import * as RA from '../src/ReadonlyArray'
+import * as _ from '../src/Either.js'
+import { flow, identity, pipe } from '../src/function.js'
+import * as RA from '../src/ReadonlyArray.js'
 
 //
 // getOrElseW

@@ -1,8 +1,8 @@
-import { pipe } from '../src/function'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/Store'
-import * as S from '../src/string'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as _ from '../src/Store.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('Store', () => {
   describe('pipeables', () => {

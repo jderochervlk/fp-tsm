@@ -1,5 +1,5 @@
-import * as fs from 'fs.js'
-import G from 'glob.js'
+import * as fs from 'node:fs'
+import G from 'glob'
 
 import { flow } from '../src/function.js'
 import * as TE from '../src/TaskEither.js'

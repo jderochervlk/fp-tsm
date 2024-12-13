@@ -67,7 +67,7 @@ import { TaskOption } from './TaskOption.js'
 // model
 // -------------------------------------------------------------------------------------
 
-import Either = E.Either
+type Either<L, R> = E.Either<L, R>
 import Task = T.Task
 
 /**
@@ -634,7 +634,7 @@ export const URI = 'TaskEither'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind2<E, A> {
     readonly [URI]: TaskEither<E, A>
   }

@@ -66,10 +66,10 @@ import { Semigroup } from './Semigroup.js'
 import * as T from './Task.js'
 import * as TE from './TaskEither.js'
 
-import Either = E.Either
+type Either<L, R> = E.Either<L, R>
 import Task = T.Task
 import TaskEither = TE.TaskEither
-import Reader = R.Reader
+type Reader<R, A> = R.Reader<R, A>
 import ReaderIO = RIO.ReaderIO
 import ReaderTask = RT.ReaderTask
 
@@ -653,7 +653,7 @@ export const URI = 'ReaderTaskEither'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind3<R, E, A> {
     readonly [URI]: ReaderTaskEither<R, E, A>
   }

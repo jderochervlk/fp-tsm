@@ -1,6 +1,6 @@
-import * as R from '../src/Reader'
-import { fanout, splitStrong } from '../src/Strong'
-import * as U from './util'
+import * as R from '../src/Reader.js'
+import { fanout, splitStrong } from '../src/Strong.js'
+import * as U from './util.js'
 
 describe('Strong', () => {
   it('splitStrong', () => {

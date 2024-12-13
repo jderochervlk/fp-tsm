@@ -8,7 +8,7 @@ import { flow } from './function.js'
 import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from './HKT.js'
 import * as R from './Reader.js'
 
-import Reader = R.Reader
+type Reader<R, A> = R.Reader<R, A>
 
 // -------------------------------------------------------------------------------------
 // model

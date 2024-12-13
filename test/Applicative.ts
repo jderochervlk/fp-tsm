@@ -1,8 +1,8 @@
-import { getApplicativeComposition } from '../src/Applicative'
-import { increment } from '../src/function'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as U from './util'
+import { getApplicativeComposition } from '../src/Applicative.js'
+import { increment } from '../src/function.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as U from './util.js'
 
 describe('Applicative', () => {
   it('getApplicativeComposition', () => {

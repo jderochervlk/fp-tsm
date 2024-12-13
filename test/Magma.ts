@@ -1,7 +1,7 @@
-import { increment, pipe } from '../src/function'
-import * as _ from '../src/Magma'
-import * as N from '../src/number'
-import * as U from './util'
+import { increment, pipe } from '../src/function.js'
+import * as _ from '../src/Magma.js'
+import * as N from '../src/number.js'
+import * as U from './util.js'
 
 describe('Magma', () => {
   it('reverse', () => {

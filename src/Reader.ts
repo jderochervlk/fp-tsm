@@ -271,7 +271,7 @@ export const URI = 'Reader'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind2<E, A> {
     readonly [URI]: Reader<E, A>
   }

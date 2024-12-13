@@ -1,13 +1,13 @@
-import * as E from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as _ from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import { separated } from '../src/Separated'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import { separated } from '../src/Separated.js'
+import * as S from '../src/string.js'
+import * as T from '../src/Task.js'
+import * as U from './util.js'
 
 const p = (n: number): boolean => n > 2
 

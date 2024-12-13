@@ -1,7 +1,7 @@
-import * as _ from '../src/Applicative'
-import * as E from '../src/Either'
-import * as R from '../src/Reader'
-import * as S from '../src/Semigroup'
+import * as _ from '../src/Applicative.js'
+import * as E from '../src/Either.js'
+import * as R from '../src/Reader.js'
+import * as S from '../src/Semigroup.js'
 
 //
 // getApplicativeComposition

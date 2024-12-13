@@ -1,12 +1,12 @@
 import * as assert from 'assert'
 
-import { Endomorphism } from '../src/Endomorphism'
-import { identity, pipe } from '../src/function'
-import * as _ from '../src/NonEmptyArray'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as S from '../src/string'
-import * as U from './util'
+import { Endomorphism } from '../src/Endomorphism.js'
+import { identity, pipe } from '../src/function.js'
+import * as _ from '../src/NonEmptyArray.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('NonEmptyArray', () => {
   describe('pipeables', () => {

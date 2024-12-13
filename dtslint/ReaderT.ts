@@ -1,8 +1,8 @@
-import * as _ from '../src/ReaderT'
-import * as RTE from '../src/ReaderTaskEither'
-import * as SRTE from '../src/StateReaderTaskEither'
-import * as TE from '../src/TaskEither'
-import * as TTH from '../src/TaskThese'
+import * as _ from '../src/ReaderT.js'
+import * as RTE from '../src/ReaderTaskEither.js'
+import * as SRTE from '../src/StateReaderTaskEither.js'
+import * as TE from '../src/TaskEither.js'
+import * as TTH from '../src/TaskThese.js'
 
 // $ExpectType <R, E, A>(f: (r: R) => Either<E, A>) => Reader<R, TaskEither<E, A>>
 _.fromNaturalTransformation<'Either', 'TaskEither'>(TE.fromEither)

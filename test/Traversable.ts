@@ -1,9 +1,9 @@
-import * as E from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/Traversable'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as O from '../src/Option.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as _ from '../src/Traversable.js'
+import * as U from './util.js'
 
 export const ArrayOptionURI = 'ArrayOption'
 

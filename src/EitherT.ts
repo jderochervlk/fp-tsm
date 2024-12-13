@@ -16,7 +16,7 @@ import { Monad, Monad1, Monad2, Monad2C, Monad3, Monad3C } from './Monad.js'
 import { Pointed, Pointed1, Pointed2, Pointed2C, Pointed3, Pointed3C } from './Pointed.js'
 import { Semigroup } from './Semigroup.js'
 
-import Either = E.Either
+type Either<L, R> = E.Either<L, R>
 
 // -------------------------------------------------------------------------------------
 // constructors
@@ -815,7 +815,7 @@ export function toUnion<F>(F: Functor<F>): <E, A>(fa: HKT<F, Either<E, A>>) => H
 // -------------------------------------------------------------------------------------
 
 // eslint-disable-next-line import/first
-import URI = E.URI
+type URI = E.URI
 
 /**
  * @category zone of death

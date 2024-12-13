@@ -1,11 +1,11 @@
-import * as Eq from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as _ from '../src/Tree'
-import * as U from './util'
+import * as Eq from '../src/Eq.js'
+import { identity, pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as O from '../src/Option.js'
+import * as S from '../src/string.js'
+import * as T from '../src/Task.js'
+import * as _ from '../src/Tree.js'
+import * as U from './util.js'
 
 describe('Tree', () => {
   describe('pipeables', () => {

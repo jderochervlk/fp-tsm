@@ -1,6 +1,6 @@
-import * as glob from 'glob.js'
-import * as path from 'path.js'
-import * as ast from 'ts-morph.js'
+import * as glob from 'glob'
+import * as path from 'path'
+import * as ast from 'ts-morph'
 
 import { pipe } from '../src/function.js'
 import * as M from '../src/Monoid.js'

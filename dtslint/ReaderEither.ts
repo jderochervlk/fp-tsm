@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as R from '../src/Reader'
-import * as _ from '../src/ReaderEither'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as R from '../src/Reader.js'
+import * as _ from '../src/ReaderEither.js'
 
 //
 // getOrElseW

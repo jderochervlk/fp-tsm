@@ -1,5 +1,5 @@
-import * as N from '../src/number'
-import * as _ from '../src/Ring'
+import * as N from '../src/number.js'
+import * as _ from '../src/Ring.js'
 
 //
 // tuple

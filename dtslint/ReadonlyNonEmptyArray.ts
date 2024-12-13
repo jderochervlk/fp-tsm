@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import { Ord } from '../src/Ord'
-import * as _ from '../src/ReadonlyNonEmptyArray'
+import { pipe } from '../src/function.js'
+import { Ord } from '../src/Ord.js'
+import * as _ from '../src/ReadonlyNonEmptyArray.js'
 
 declare const ras: ReadonlyArray<string>
 declare const rneas: _.ReadonlyNonEmptyArray<string>

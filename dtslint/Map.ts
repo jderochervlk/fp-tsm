@@ -1,8 +1,8 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as _ from '../src/Map'
-import * as N from '../src/number'
-import * as S from '../src/string'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/Map.js'
+import * as N from '../src/number.js'
+import * as S from '../src/string.js'
 
 //
 // member

@@ -1,5 +1,5 @@
-import { error, info, log, warn } from '../src/Console'
-import * as U from './util'
+import { error, info, log, warn } from '../src/Console.js'
+import * as U from './util.js'
 
 describe('Console', () => {
   it('log', () => {

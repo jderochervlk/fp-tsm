@@ -1,12 +1,12 @@
 import * as assert from 'assert'
 
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as O from '../src/Option'
-import * as _ from '../src/ReadonlyTuple'
-import * as S from '../src/string'
-import * as U from './util'
+import { getMonoid } from '../src/Array.js'
+import { left, right } from '../src/Either.js'
+import { identity, pipe } from '../src/function.js'
+import * as O from '../src/Option.js'
+import * as _ from '../src/ReadonlyTuple.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('ReadonlyTuple', () => {
   describe('pipeables', () => {

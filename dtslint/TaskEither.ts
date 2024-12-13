@@ -1,10 +1,10 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as IO from '../src/IO'
-import * as IOE from '../src/IOEither'
-import * as T from '../src/Task'
-import * as _ from '../src/TaskEither'
-import * as TO from '../src/TaskOption'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as IO from '../src/IO.js'
+import * as IOE from '../src/IOEither.js'
+import * as T from '../src/Task.js'
+import * as _ from '../src/TaskEither.js'
+import * as TO from '../src/TaskOption.js'
 
 //
 // getOrElseW

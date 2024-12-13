@@ -155,7 +155,7 @@ export const URI = 'Task'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind<A> {
     readonly [URI]: Task<A>
   }

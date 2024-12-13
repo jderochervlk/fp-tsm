@@ -1,6 +1,6 @@
-import { getFunctorWithIndexComposition } from '../src/FunctorWithIndex'
-import * as RA from '../src/ReadonlyArray'
-import * as U from './util'
+import { getFunctorWithIndexComposition } from '../src/FunctorWithIndex.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as U from './util.js'
 
 describe('FunctorWithIndex', () => {
   it('getFunctorComposition', () => {

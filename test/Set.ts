@@ -1,13 +1,13 @@
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import * as Eq from '../src/Eq'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import { none, some as optionSome } from '../src/Option'
-import { separated } from '../src/Separated'
-import * as _ from '../src/Set'
-import * as S from '../src/string'
-import * as U from './util'
+import { getMonoid } from '../src/Array.js'
+import { left, right } from '../src/Either.js'
+import * as Eq from '../src/Eq.js'
+import { pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import { none, some as optionSome } from '../src/Option.js'
+import { separated } from '../src/Separated.js'
+import * as _ from '../src/Set.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 const gte2 = (n: number) => n >= 2
 

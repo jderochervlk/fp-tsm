@@ -1,9 +1,9 @@
-import * as _ from '../src/Alternative'
-import * as M from '../src/Monoid'
-import * as NEA from '../src/NonEmptyArray'
-import * as O from '../src/Option'
-import * as S from '../src/Semigroup'
-import * as U from './util'
+import * as _ from '../src/Alternative.js'
+import * as M from '../src/Monoid.js'
+import * as NEA from '../src/NonEmptyArray.js'
+import * as O from '../src/Option.js'
+import * as S from '../src/Semigroup.js'
+import * as U from './util.js'
 
 describe('Alternative', () => {
   it('altAll', () => {

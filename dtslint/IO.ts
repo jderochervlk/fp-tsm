@@ -1,5 +1,5 @@
-import { pipe } from '../src/function'
-import * as _ from '../src/IO'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/IO.js'
 
 //
 // Do

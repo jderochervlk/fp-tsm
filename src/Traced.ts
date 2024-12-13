@@ -101,7 +101,7 @@ export const URI = 'Traced'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind2<E, A> {
     readonly [URI]: Traced<E, A>
   }

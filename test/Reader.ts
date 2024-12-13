@@ -1,10 +1,10 @@
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import * as _ from '../src/Reader'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as S from '../src/string'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as N from '../src/number.js'
+import * as _ from '../src/Reader.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 interface Env {
   readonly count: number

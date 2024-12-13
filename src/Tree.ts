@@ -415,7 +415,7 @@ export const URI = 'Tree'
  */
 export type URI = typeof URI
 
-declare module './HKT' {
+declare module './HKT.js' {
   interface URItoKind<A> {
     readonly [URI]: Tree<A>
   }

@@ -1,7 +1,7 @@
 import * as Benchmark from 'benchmark'
-import * as RNEA from '../../src/ReadonlyNonEmptyArray'
-import * as _ from '../../src/StateReaderTaskEither'
-import { pipe } from '../../src/function'
+import * as RNEA from '../../src/ReadonlyNonEmptyArray.js'
+import * as _ from '../../src/StateReaderTaskEither.js'
+import { pipe } from '../../src/function.js'
 
 /*
 A.sequence(_.Applicative) x 5,930 ops/sec ±0.39% (90 runs sampled)

@@ -1,7 +1,7 @@
 import * as Benchmark from 'benchmark'
-import * as RNEA from '../../src/ReadonlyNonEmptyArray'
-import * as _ from '../../src/TaskEither'
-import { pipe } from '../../src/function'
+import * as RNEA from '../../src/ReadonlyNonEmptyArray.js'
+import * as _ from '../../src/TaskEither.js'
+import { pipe } from '../../src/function.js'
 
 /*
 A.traverseWithIndex(_.ApplicativeSeq) x 309 ops/sec ±8.49% (67 runs sampled)

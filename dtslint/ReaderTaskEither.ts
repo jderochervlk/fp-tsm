@@ -1,10 +1,10 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as IOE from '../src/IOEither'
-import * as RIO from '../src/ReaderIO'
-import * as RT from '../src/ReaderTask'
-import * as _ from '../src/ReaderTaskEither'
-import * as TE from '../src/TaskEither'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as IOE from '../src/IOEither.js'
+import * as RIO from '../src/ReaderIO.js'
+import * as RT from '../src/ReaderTask.js'
+import * as _ from '../src/ReaderTaskEither.js'
+import * as TE from '../src/TaskEither.js'
 
 //
 // rightReaderIO

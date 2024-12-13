@@ -1,4 +1,4 @@
-import * as child_process from 'child_process.js'
+import * as child_process from 'child_process'
 
 import { left, right } from '../src/Either.js'
 import * as TE from '../src/TaskEither.js'

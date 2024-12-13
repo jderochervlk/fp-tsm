@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as IO from '../src/IO'
-import * as _ from '../src/IOEither'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as IO from '../src/IO.js'
+import * as _ from '../src/IOEither.js'
 
 //
 // getOrElseW

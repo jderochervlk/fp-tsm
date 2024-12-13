@@ -1,7 +1,7 @@
-import { pipe } from '../src/function'
-import * as I from '../src/IO'
-import { IORef, newIORef } from '../src/IORef'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as I from '../src/IO.js'
+import { IORef, newIORef } from '../src/IORef.js'
+import * as U from './util.js'
 
 describe('IORef', () => {
   it('read', () => {

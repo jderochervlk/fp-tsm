@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import * as _ from '../src/struct'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/struct.js'
+import * as U from './util.js'
 
 describe('struct', () => {
   it('getAssignSemigroup', () => {

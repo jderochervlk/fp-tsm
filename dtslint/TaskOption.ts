@@ -1,6 +1,6 @@
-import { pipe } from '../src/function'
-import * as TE from '../src/TaskEither'
-import * as _ from '../src/TaskOption'
+import { pipe } from '../src/function.js'
+import * as TE from '../src/TaskEither.js'
+import * as _ from '../src/TaskOption.js'
 
 declare const tesn: TE.TaskEither<string, number>
 

@@ -1,11 +1,11 @@
-import { pipe } from '../src/function'
-import * as I from '../src/IO'
-import * as R from '../src/Reader'
-import * as _ from '../src/ReaderIO'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as S from '../src/string'
-import * as U from './util'
+import { pipe } from '../src/function.js'
+import * as I from '../src/IO.js'
+import * as R from '../src/Reader.js'
+import * as _ from '../src/ReaderIO.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as S from '../src/string.js'
+import * as U from './util.js'
 
 describe('ReaderIO', () => {
   // -------------------------------------------------------------------------------------

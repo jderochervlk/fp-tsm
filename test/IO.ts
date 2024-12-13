@@ -1,10 +1,10 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as _ from '../src/IO'
-import * as N from '../src/number'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/IO.js'
+import * as N from '../src/number.js'
+import * as RA from '../src/ReadonlyArray.js'
+import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray.js'
+import * as U from './util.js'
 
 describe('IO', () => {
   describe('pipeables', () => {

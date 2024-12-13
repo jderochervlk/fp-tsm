@@ -1,11 +1,11 @@
 import * as assert from 'assert'
 
-import * as B from '../src/boolean'
-import * as _ from '../src/function'
-import { concatAll } from '../src/Monoid'
-import * as N from '../src/number'
-import * as RA from '../src/ReadonlyArray'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import * as _ from '../src/function.js'
+import { concatAll } from '../src/Monoid.js'
+import * as N from '../src/number.js'
+import * as RA from '../src/ReadonlyArray.js'
+import * as U from './util.js'
 
 const f = (n: number) => n + 1
 const g = (n: number) => n * 2

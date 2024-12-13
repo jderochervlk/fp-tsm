@@ -1,7 +1,7 @@
-import * as O from '../src/Option'
-import { getOptionM } from '../src/OptionT'
-import * as T from '../src/Task'
-import * as U from './util'
+import * as O from '../src/Option.js'
+import { getOptionM } from '../src/OptionT.js'
+import * as T from '../src/Task.js'
+import * as U from './util.js'
 
 const MT = getOptionM(T.Monad)
 

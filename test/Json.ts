@@ -1,7 +1,7 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as _ from '../src/Json'
-import * as U from './util'
+import * as E from '../src/Either.js'
+import { pipe } from '../src/function.js'
+import * as _ from '../src/Json.js'
+import * as U from './util.js'
 
 describe('Json', () => {
   it('parse', () => {

@@ -1,6 +1,6 @@
-import * as B from '../src/boolean'
-import * as _ from '../src/BooleanAlgebra'
-import * as U from './util'
+import * as B from '../src/boolean.js'
+import * as _ from '../src/BooleanAlgebra.js'
+import * as U from './util.js'
 
 describe('BooleanAlgebra', () => {
   it('booleanAlgebraBoolean', () => {
