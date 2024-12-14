@@ -8,7 +8,7 @@
  * data from it, how to access the `Reader` data with `ask` and `asks`.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as O from 'fp-ts/Option'
  * import * as R from 'fp-ts/Reader'
  * import * as RR from 'fp-ts/ReadonlyRecord'
@@ -97,7 +97,7 @@ export const asks: <R, A>(f: (r: R) => A) => Reader<R, A> = identity
  * `contramap`).
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as R from 'fp-ts/Reader'
  * import * as string from 'fp-ts/string'
  *

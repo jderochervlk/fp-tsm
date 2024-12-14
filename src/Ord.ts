@@ -107,7 +107,7 @@ const contramap_: <A, B>(fa: Ord<A>, f: (b: B) => A) => Ord<B> = (fa, f) => pipe
  * using `contramap` we can do this
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { contramap, Ord } from 'fp-ts/Ord'
  * import * as RA from 'fp-ts/ReadonlyArray'
  * import * as S from 'fp-ts/string'
@@ -166,7 +166,7 @@ declare module './HKT.js' {
  *
  * @example
  * import * as D from 'fp-ts/Date'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { contramap, getSemigroup, Ord, reverse } from 'fp-ts/Ord'
  * import * as RA from 'fp-ts/ReadonlyArray'
  * import * as S from 'fp-ts/string'
@@ -227,7 +227,7 @@ export const getSemigroup = <A = never>(): Semigroup<Ord<A>> => ({
  * import { contramap, reverse, getMonoid } from 'fp-ts/Ord'
  * import * as S from 'fp-ts/string'
  * import * as B from 'fp-ts/boolean'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { concatAll } from 'fp-ts/Monoid'
  * import * as N from 'fp-ts/number'
  *

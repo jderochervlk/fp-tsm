@@ -714,7 +714,7 @@ export const tap: {
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RE from 'fp-ts/ReaderEither'
  *
  * const checkString = (value: string) => pipe(

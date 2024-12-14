@@ -456,7 +456,7 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RT from 'fp-ts/ReaderTask'
  * import * as Console from 'fp-ts/Console'
  *
@@ -497,9 +497,9 @@ export const tapReader: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RT from 'fp-ts/ReaderTask'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * const effect = pipe(
  *   RT.ask<number>(),

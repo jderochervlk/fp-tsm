@@ -120,7 +120,7 @@ export const isString: Refinement<unknown, string> = (u: unknown): u is string =
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('a', S.toUpperCase), 'A')
  *
@@ -131,7 +131,7 @@ export const toUpperCase = (s: string): string => s.toUpperCase()
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('A', S.toLowerCase), 'a')
  *
@@ -142,7 +142,7 @@ export const toLowerCase = (s: string): string => s.toLowerCase()
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.replace('b', 'd')), 'adc')
  *
@@ -156,7 +156,7 @@ export const replace =
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trim), 'a')
  *
@@ -167,7 +167,7 @@ export const trim = (s: string): string => s.trim()
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trimLeft), 'a ')
  *
@@ -178,7 +178,7 @@ export const trimLeft = (s: string): string => s.trimLeft()
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trimRight), ' a')
  *
@@ -189,7 +189,7 @@ export const trimRight = (s: string): string => s.trimRight()
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abcd', S.slice(1, 3)), 'bc')
  *
@@ -209,7 +209,7 @@ export const slice =
  *
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('', S.isEmpty), true)
  * assert.deepStrictEqual(pipe('a', S.isEmpty), false)
@@ -223,7 +223,7 @@ export const isEmpty = (s: string): boolean => s.length === 0
  *
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.size), 3)
  *
@@ -234,7 +234,7 @@ export const size = (s: string): number => s.length
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.split('')), ['a', 'b', 'c'])
  * assert.deepStrictEqual(pipe('', S.split('')), [''])
@@ -251,7 +251,7 @@ export const split =
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.includes('b')), true)
  * assert.deepStrictEqual(pipe('abc', S.includes('d')), false)
@@ -266,7 +266,7 @@ export const includes =
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.startsWith('a')), true)
  * assert.deepStrictEqual(pipe('bc', S.startsWith('a')), false)
@@ -281,7 +281,7 @@ export const startsWith =
 /**
  * @example
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.endsWith('c')), true)
  * assert.deepStrictEqual(pipe('ab', S.endsWith('c')), false)

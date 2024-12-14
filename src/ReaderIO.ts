@@ -345,7 +345,7 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RIO from 'fp-ts/ReaderIO'
  * import * as Console from 'fp-ts/Console'
  *

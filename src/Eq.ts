@@ -93,7 +93,7 @@ const contramap_: <A, B>(fa: Eq<A>, f: (b: B) => A) => Eq<B> = (fa, f) => pipe(f
  *
  * @example
  * import { contramap, Eq } from 'fp-ts/Eq'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as S from 'fp-ts/string'
  *
  * type UUID = string

@@ -65,7 +65,7 @@ export const fromIO: <A>(fa: IO<A>) => Task<A> = (ma) => () => Promise.resolve()
  *
  * @example
  * import { sequenceT } from 'fp-ts/Apply'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  * import { takeRight } from 'fp-ts/Array'
  *
  * async function test() {
@@ -167,7 +167,7 @@ declare module './HKT.js' {
  * Note: uses `Promise.race` internally.
  *
  * @example
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * async function test() {
  *   const S = T.getRaceMonoid<string>()
@@ -402,8 +402,8 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
- * import * as T from 'fp-ts/Task'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  * import * as Console from 'fp-ts/Console'
  *
  * // Will produce `Hello, fp-ts` to the stdout

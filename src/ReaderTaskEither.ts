@@ -990,7 +990,7 @@ export const tap: {
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RTE from 'fp-ts/ReaderTaskEither'
  *
  * const checkString = (value: string) => pipe(
@@ -1050,7 +1050,7 @@ export const tapIO: {
  * @example
  * import * as RTE from 'fp-ts/ReaderTaskEither'
  * import * as E from 'fp-ts/Either'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  *
  * const effect = RTE.tapTask(

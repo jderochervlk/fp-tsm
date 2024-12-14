@@ -13,7 +13,7 @@
  *
  * @example
  * import * as O from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
  *
@@ -829,7 +829,7 @@ export const foldW = matchW
  *
  * @example
  * import { some, none, match } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
  *   pipe(
@@ -878,7 +878,7 @@ export const getOrElseW =
  *
  * @example
  * import { some, none, getOrElse } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
  *   pipe(
@@ -943,7 +943,7 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as O from 'fp-ts/Option'
  * import * as E from 'fp-ts/Either'
  *
@@ -1074,7 +1074,7 @@ export const fromNullableK: <A extends ReadonlyArray<unknown>, B>(
  *
  * @example
  * import { some, none, fromNullable, chainNullableK } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Employee {
  *   readonly company?: {
@@ -1123,7 +1123,7 @@ export const chainNullableK =
  *
  * @example
  * import { some, none, toNullable } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
  *   pipe(
@@ -1150,7 +1150,7 @@ export const toNullable: <A>(ma: Option<A>) => A | null = /*#__PURE__*/ match(co
  *
  * @example
  * import { some, none, toUndefined } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
  *   pipe(
@@ -1181,7 +1181,7 @@ export const toUndefined: <A>(ma: Option<A>) => A | undefined = /*#__PURE__*/ ma
  *
  * @example
  * import { some, none, elem } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as N from 'fp-ts/number'
  *
  * assert.strictEqual(pipe(some(1), elem(N.Eq)(1)), true)
@@ -1209,7 +1209,7 @@ export function elem<A>(E: Eq<A>): (a: A, ma?: Option<A>) => boolean | ((ma: Opt
  *
  * @example
  * import { some, none, exists } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
  *   pipe(

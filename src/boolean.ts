@@ -48,7 +48,7 @@ export const foldW = matchW
  *
  * @example
  * import { some, map } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { match } from 'fp-ts/boolean'
  *
  * assert.deepStrictEqual(

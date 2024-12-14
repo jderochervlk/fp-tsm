@@ -185,7 +185,7 @@ export const tuple = <A extends ReadonlyArray<unknown>>(
  * @example
  * import { intercalate } from 'fp-ts/Semigroup'
  * import * as S from 'fp-ts/string'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const S1 = pipe(S.Semigroup, intercalate(' + '))
  *

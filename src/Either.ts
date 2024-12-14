@@ -14,7 +14,7 @@
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
  *
@@ -355,7 +355,7 @@ export const getWitherable = <E>(M: Monoid<E>): Witherable2C<URI, E> => {
  * @example
  * import * as A from 'fp-ts/Apply'
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as S from 'fp-ts/Semigroup'
  * import * as string from 'fp-ts/string'
  *
@@ -422,7 +422,7 @@ export const getApplicativeValidation = <E>(SE: Semigroup<E>): Applicative2C<URI
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as S from 'fp-ts/Semigroup'
  * import * as string from 'fp-ts/string'
  *
@@ -577,7 +577,7 @@ export const Monad: Monad2<URI> = {
  * Left-associative fold of a structure.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as E from 'fp-ts/Either'
  *
  * const startWith = 'prefix'
@@ -603,7 +603,7 @@ export const reduce: <A, B>(b: B, f: (b: B, a: A) => B) => <E>(fa: Either<E, A>)
  * Map each element of the structure to a monoid, and combine the results.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as E from 'fp-ts/Either'
  * import * as S from 'fp-ts/string'
  *
@@ -629,7 +629,7 @@ export const foldMap: <M>(M: Monoid<M>) => <A>(f: (a: A) => M) => <E>(fa: Either
  * Right-associative fold of a structure.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as E from 'fp-ts/Either'
  *
  * const startWith = 'postfix'
@@ -666,7 +666,7 @@ export const Foldable: Foldable2<URI> = {
  * Map each element of a structure to an action, evaluate these actions from left to right, and collect the results.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RA from 'fp-ts/ReadonlyArray'
  * import * as E from 'fp-ts/Either'
  * import * as O from 'fp-ts/Option'
@@ -694,7 +694,7 @@ export const traverse: PipeableTraverse2<URI> =
  * Evaluate each monadic action in the structure from left to right, and collect the results.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as E from 'fp-ts/Either'
  * import * as O from 'fp-ts/Option'
  *
@@ -787,7 +787,7 @@ export const altW: <E2, B>(that: LazyArg<Either<E2, B>>) => <E1, A>(fa: Either<E
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -891,7 +891,7 @@ export const FromEither: FromEither2<URI> = {
 /**
  * @example
  * import { fromPredicate, left, right } from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -930,7 +930,7 @@ export const fromPredicate: {
 /**
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as O from 'fp-ts/Option'
  *
  * assert.deepStrictEqual(
@@ -1001,7 +1001,7 @@ export const foldW = matchW
  *
  * @example
  * import { match, left, right } from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * function onLeft(errors: Array<string>): string {
  *   return `Errors: ${errors.join(', ')}`
@@ -1057,7 +1057,7 @@ export const getOrElseW =
  *
  * @example
  * import { getOrElse, left, right } from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -1259,7 +1259,7 @@ export const flatMapOption: {
 /**
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(

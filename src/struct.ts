@@ -37,7 +37,7 @@ export const getAssignSemigroup = <A extends object = never>(): Semigroup<A> => 
  * Creates a new object by recursively evolving a shallow copy of `a`, according to the `transformation` functions.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { evolve } from 'fp-ts/struct'
  *
  * assert.deepStrictEqual(

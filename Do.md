@@ -25,8 +25,8 @@ nameDo = do putStrLn "What is your first name? "
 TypeScript
 
 ```ts
-import { pipe } from 'fp-ts/function'
-import * as T from 'fp-ts/Task'
+import { pipe } from '@jvlk/fp-tsm/function.js'
+import * as T from '@jvlk/fp-tsm/Task.js''
 
 declare const putStrLn: (s: string) => T.Task<void>
 declare const getLine: T.Task<string>

@@ -27,7 +27,7 @@ export interface JsonArray extends ReadonlyArray<Json> {}
  * @example
  * import * as J from 'fp-ts/Json'
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('{"a":1}', J.parse), E.right({ a: 1 }))
  * assert.deepStrictEqual(pipe('{"a":}', J.parse), E.left(new SyntaxError(`Unexpected token '}', "{"a":}" is not valid JSON`)))
@@ -42,7 +42,7 @@ export const parse = (s: string): Either<unknown, Json> => tryCatch(() => JSON.p
  * @example
  * import * as E from 'fp-ts/Either'
  * import * as J from 'fp-ts/Json'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(J.stringify({ a: 1 }), E.right('{"a":1}'))
  * const circular: any = { ref: null }

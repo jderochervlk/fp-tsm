@@ -700,7 +700,7 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as IOE from 'fp-ts/IOEither'
  * import * as E from 'fp-ts/Either'
  *
@@ -725,7 +725,7 @@ export const tapEither: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as IOE from 'fp-ts/IOEither'
  * import * as E from 'fp-ts/Either'
  * import * as Console from 'fp-ts/Console'

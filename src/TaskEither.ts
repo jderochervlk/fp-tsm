@@ -318,7 +318,7 @@ export const chainNullableK: <E>(
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as TE from 'fp-ts/TaskEither'
  *
  * async function test() {
@@ -564,7 +564,7 @@ export const flatten: <E, A>(mma: TaskEither<E, TaskEither<E, A>>) => TaskEither
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as TE from 'fp-ts/TaskEither'
  *
  * async function test() {
@@ -646,11 +646,11 @@ declare module './HKT.js' {
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RA from 'fp-ts/ReadonlyArray'
  * import * as S from 'fp-ts/Semigroup'
  * import * as string from 'fp-ts/string'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  * import * as TE from 'fp-ts/TaskEither'
  *
  * interface User {
@@ -1000,7 +1000,7 @@ export const tap: {
  *
  * @example
  * import * as E from 'fp-ts/Either'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as TE from 'fp-ts/TaskEither'
  *
  * const checkString = (value: string) => pipe(
@@ -1028,7 +1028,7 @@ export const tapEither: {
  * keeping only the result of the first.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as TE from 'fp-ts/TaskEither'
  * import * as E from 'fp-ts/Either'
  * import * as Console from 'fp-ts/Console'
@@ -1067,7 +1067,7 @@ export const tapIO: {
  *
  * @example
  * import * as TE from 'fp-ts/TaskEither'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  * import * as E from 'fp-ts/Either'
  *
  *

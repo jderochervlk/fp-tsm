@@ -83,7 +83,7 @@ export const isNonEmpty: <A>(as: ReadonlyArray<A>) => as is ReadonlyNonEmptyArra
  *
  * @example
  * import { prepend } from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([2, 3, 4], prepend(1)), [1, 2, 3, 4])
  *
@@ -103,7 +103,7 @@ export const prependW = RNEA.prependW
  *
  * @example
  * import { append } from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], append(4)), [1, 2, 3, 4])
  *
@@ -361,7 +361,7 @@ export const isOutOfBound: <A>(i: number, as: ReadonlyArray<A>) => boolean = RNE
  * @example
  * import { lookup } from 'fp-ts/ReadonlyArray'
  * import { some, none } from 'fp-ts/Option'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], lookup(1)), some(2))
  * assert.deepStrictEqual(pipe([1, 2, 3], lookup(3)), none)
@@ -439,7 +439,7 @@ export const init = <A>(as: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
  * assert.deepStrictEqual(pipe(input, RA.takeLeft(2)), [1, 2])
@@ -462,7 +462,7 @@ export const takeLeft =
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
  * assert.deepStrictEqual(pipe(input, RA.takeRight(2)), [2, 3])
@@ -553,7 +553,7 @@ export function spanLeft<A>(predicate: Predicate<A>): (as: ReadonlyArray<A>) => 
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
  * assert.deepStrictEqual(pipe(input, RA.dropLeft(2)), [3])
@@ -574,7 +574,7 @@ export const dropLeft =
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
  * assert.deepStrictEqual(pipe(input, RA.dropRight(2)), [1])
@@ -953,7 +953,7 @@ export const zipWith = <A, B, C>(
  *
  * @example
  * import { zip } from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], zip(['a', 'b', 'c', 'd'])), [[1, 'a'], [2, 'b'], [3, 'c']])
  *
@@ -1045,7 +1045,7 @@ export const rotate = (n: number): (<A>(as: ReadonlyArray<A>) => ReadonlyArray<A
  * @example
  * import { elem } from 'fp-ts/ReadonlyArray'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(pipe([1, 2, 3], elem(N.Eq)(2)), true)
  * assert.strictEqual(pipe([1, 2, 3], elem(N.Eq)(0)), false)
@@ -1098,7 +1098,7 @@ export const uniq = <A>(E: Eq<A>): ((as: ReadonlyArray<A>) => ReadonlyArray<A>) 
  * import { contramap } from 'fp-ts/Ord'
  * import * as S from 'fp-ts/string'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
  *   readonly name: string
@@ -1133,7 +1133,7 @@ export const sortBy = <B>(ords: ReadonlyArray<Ord<B>>): (<A extends B>(as: Reado
  * import { Eq } from 'fp-ts/Eq'
  * import * as RA from 'fp-ts/ReadonlyArray'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const group = <A>(S: Eq<A>): ((as: ReadonlyArray<A>) => ReadonlyArray<ReadonlyArray<A>>) => {
  *   return RA.chop(as => {
@@ -1273,7 +1273,7 @@ export const concat: <A>(second: ReadonlyArray<A>) => (first: ReadonlyArray<A>) 
  * @example
  * import { union } from 'fp-ts/ReadonlyArray'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], union(N.Eq)([2, 3])), [1, 2, 3])
  *
@@ -1304,7 +1304,7 @@ export function union<A>(
  * @example
  * import { intersection } from 'fp-ts/ReadonlyArray'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], intersection(N.Eq)([2, 3])), [2])
  *
@@ -1335,7 +1335,7 @@ export function intersection<A>(
  * @example
  * import { difference } from 'fp-ts/ReadonlyArray'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], difference(N.Eq)([2, 3])), [1])
  *
@@ -1435,7 +1435,7 @@ export const zero: <A>() => ReadonlyArray<A> = () => empty
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -1461,7 +1461,7 @@ export const altW =
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -1487,7 +1487,7 @@ export const ap: <A>(fa: ReadonlyArray<A>) => <B>(fab: ReadonlyArray<(a: A) => B
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -2082,7 +2082,7 @@ export const Monad: Monad1<URI> = {
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -2370,9 +2370,9 @@ export const Witherable: Witherable1<URI> = {
  * Filter values inside a context.
  *
  * @example
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as T from 'fp-ts/Task'
+ * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * const filterE = RA.filterE(T.ApplicativePar)
  * async function test() {
@@ -2463,7 +2463,7 @@ export const empty: ReadonlyArray<never> = RNEA.empty
  *
  * @example
  * import { every } from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const isPositive = (n: number): boolean => n > 0
  *
@@ -2483,7 +2483,7 @@ export function every<A>(predicate: Predicate<A>): Predicate<ReadonlyArray<A>> {
  *
  * @example
  * import { some } from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const isPositive = (n: number): boolean => n > 0
  *

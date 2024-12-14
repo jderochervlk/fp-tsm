@@ -171,7 +171,7 @@ export function reduceRight<F, G>(
  * import { reduceM } from 'fp-ts/Foldable'
  * import { Monad, some } from 'fp-ts/Option'
  * import { make, Foldable } from 'fp-ts/Tree'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const t = make(1, [make(2, []), make(3, []), make(4, [])])
  * assert.deepStrictEqual(pipe(t, reduceM(Monad, Foldable)(0, (b, a) => (a > 2 ? some(b + a) : some(b)))), some(7))

@@ -152,7 +152,7 @@ export const uniq =
  * import { contramap } from 'fp-ts/Ord'
  * import * as S from 'fp-ts/string'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
  *   name: string
@@ -250,7 +250,7 @@ export const fromArray = <A>(as: Array<A>): Option<NonEmptyArray<A>> => (isNonEm
  *
  * @example
  * import { makeBy } from 'fp-ts/NonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
  * assert.deepStrictEqual(pipe(5, makeBy(double)), [0, 2, 4, 6, 8])
@@ -276,7 +276,7 @@ export const makeBy =
  *
  * @example
  * import { replicate } from 'fp-ts/NonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(3, replicate('a')), ['a', 'a', 'a'])
  *
@@ -664,7 +664,7 @@ const _traverseWithIndex: TraversableWithIndex1<URI, number>['traverseWithIndex'
  *
  * @example
  * import * as NEA from 'fp-ts/NonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -690,7 +690,7 @@ export const altW =
  *
  * @example
  * import * as NEA from 'fp-ts/NonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -716,7 +716,7 @@ export const ap = <A>(as: NonEmptyArray<A>): (<B>(fab: NonEmptyArray<(a: A) => B
 /**
  * @example
  * import * as NEA from 'fp-ts/NonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(

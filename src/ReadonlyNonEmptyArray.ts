@@ -160,7 +160,7 @@ export const uniq =
  * import { contramap } from 'fp-ts/Ord'
  * import * as S from 'fp-ts/string'
  * import * as N from 'fp-ts/number'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
  *   name: string
@@ -256,7 +256,7 @@ export const fromReadonlyArray = <A>(as: ReadonlyArray<A>): Option<ReadonlyNonEm
  *
  * @example
  * import { makeBy } from 'fp-ts/ReadonlyNonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
  * assert.deepStrictEqual(pipe(5, makeBy(double)), [0, 2, 4, 6, 8])
@@ -282,7 +282,7 @@ export const makeBy =
  *
  * @example
  * import { replicate } from 'fp-ts/ReadonlyNonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(3, replicate('a')), ['a', 'a', 'a'])
  *
@@ -672,7 +672,7 @@ export const of: <A>(a: A) => ReadonlyNonEmptyArray<A> = _.singleton
  *
  * @example
  * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -698,7 +698,7 @@ export const altW =
  *
  * @example
  * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -725,7 +725,7 @@ export const ap = <A>(
 /**
  * @example
  * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -1048,7 +1048,7 @@ export const Chain: Chain1<URI> = {
  *
  * @example
  * import * as RA from 'fp-ts/ReadonlyArray'
- * import { pipe } from 'fp-ts/function'
+ * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
