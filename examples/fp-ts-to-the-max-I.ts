@@ -1,10 +1,10 @@
 import { createInterface } from 'readline'
 
-import { log } from '../src/Console'
-import { flow, pipe } from '../src/function'
-import * as O from '../src/Option'
-import { randomInt } from '../src/Random'
-import * as T from '../src/Task'
+import { log } from '../src/Console.js'
+import { flow, pipe } from '../src/function.js'
+import * as O from '../src/Option.js'
+import { randomInt } from '../src/Random.js'
+import * as T from '../src/Task.js'
 
 //
 // helpers

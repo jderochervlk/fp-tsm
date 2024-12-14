@@ -11,7 +11,6 @@
     "./examples/**/*.ts",
     "./benchmark/**/*.ts",
     "./vitest.config.ts",
-    "./scripts/**/*.ts",
     "*.ts"
   ]
 }

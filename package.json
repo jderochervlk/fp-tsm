@@ -12,10 +12,10 @@
     "dist"
   ],
   "scripts": {
-    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
-    "lint-fix": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\" \"scripts/**/*.ts\"",
-    "prettier": "prettier --list-different \"./{src,test,examples,scripts}/**/*.ts\"",
-    "fix-prettier": "prettier --write \"./{src,test,examples,scripts}/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint-fix": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prettier": "prettier --list-different \"./{src,test,examples}/**/*.ts\"",
+    "fix-prettier": "prettier --write \"./{src,test,examples}/**/*.ts\"",
     "test": "npm run lint && npm run prettier && npm run dtslint && npm run vitest && npm run docs",
     "build": "tsup src && npm run types",
     "types": "tsc -p tsconfig.build.json",

@@ -20,6 +20,6 @@
       }
     ]
   },
-  "include": ["./src", "./test", "./scripts", "./perf", "./dtslint", "./*.ts"],
+  "include": ["./src", "./test", "./perf", "./dtslint", "./*.ts"],
   "exclude": ["./node_modules"]
 }
