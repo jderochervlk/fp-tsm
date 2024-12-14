@@ -16,7 +16,7 @@
     "lint-fix": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\"",
     "prettier": "prettier --list-different \"./{src,test,examples}/**/*.ts\"",
     "fix-prettier": "prettier --write \"./{src,test,examples}/**/*.ts\"",
-    "test": "npm run lint && npm run prettier && npm run dtslint && npm run vitest && npm run docs",
+    "test": "npm run lint && npm run prettier && npm run dtslint && npm run vitest",
     "build": "tsup src && npm run types",
     "types": "tsc -p tsconfig.build.json",
     "mocha": "mocha -r ts-node/register test/*.ts",
