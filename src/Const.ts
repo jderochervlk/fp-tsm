@@ -230,7 +230,7 @@ export const Bifunctor: Bifunctor2<URI> = {
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `C.Functor` instead of `C.const_`
- * (where `C` is from `import C from 'fp-ts/Const'`)
+ * (where `C` is from `import C from  '@jvlk/fp-tsm/Const.js'`)
  *
  * @category zone of death
  * @since 2.0.0

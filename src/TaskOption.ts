@@ -610,9 +610,9 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TO from 'fp-ts/TaskOption'
- * import * as O from 'fp-ts/Option'
- * import * as E from 'fp-ts/Either'
+ * import * as TO from  '@jvlk/fp-tsm/TaskOption.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const compute = (value: number) => pipe(
  *   TO.of(value),
@@ -640,9 +640,9 @@ export const tapEither: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TO from 'fp-ts/TaskOption'
- * import * as O from 'fp-ts/Option'
- * import * as Console from 'fp-ts/Console'
+ * import * as TO from  '@jvlk/fp-tsm/TaskOption.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  *
  * // Will produce `Hello, fp-ts` to the stdout
@@ -677,8 +677,8 @@ export const tapIO: {
  * keeping only the result of the first.
  *
  * @example
- * import * as TO from 'fp-ts/TaskOption'
- * import * as O from 'fp-ts/Option'
+ * import * as TO from  '@jvlk/fp-tsm/TaskOption.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * const effect = TO.tapIO(

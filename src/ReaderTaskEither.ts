@@ -490,8 +490,8 @@ export const map: <A, B>(f: (a: A) => B) => <R, E>(fa: ReaderTaskEither<R, E, A>
  * Returns a `ReaderTaskEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
  * @example
- * import * as ReaderTaskEither from 'fp-ts/ReaderTaskEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as ReaderTaskEither from  '@jvlk/fp-tsm/ReaderTaskEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  * const g = (n: number) => n * 2
@@ -526,8 +526,8 @@ export const bimap: <E, G, A, B>(
  * Returns a `ReaderTaskEither` with its error channel mapped using the specified function.
  *
  * @example
- * import * as ReaderTaskEither from 'fp-ts/ReaderTaskEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as ReaderTaskEither from  '@jvlk/fp-tsm/ReaderTaskEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  *
@@ -989,9 +989,9 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RTE from 'fp-ts/ReaderTaskEither'
+ * import * as RTE from  '@jvlk/fp-tsm/ReaderTaskEither.js'
  *
  * const checkString = (value: string) => pipe(
  *   RTE.ask<number>(),
@@ -1018,9 +1018,9 @@ export const tapEither: {
  * keeping only the result of the first.
  *
  * @example
- * import * as RTE from 'fp-ts/ReaderTaskEither'
- * import * as E from 'fp-ts/Either'
- * import * as Console from 'fp-ts/Console'
+ * import * as RTE from  '@jvlk/fp-tsm/ReaderTaskEither.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  *
  * // Will produce `Hello, fp-ts` to the stdout
@@ -1048,8 +1048,8 @@ export const tapIO: {
  * keeping only the result of the first.
  *
  * @example
- * import * as RTE from 'fp-ts/ReaderTaskEither'
- * import * as E from 'fp-ts/Either'
+ * import * as RTE from  '@jvlk/fp-tsm/ReaderTaskEither.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  *
@@ -2175,7 +2175,7 @@ export const orElseFirstW: <E1, R2, E2, B>(
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RTE.Functor` instead of `RTE.readerTaskEither`
- * (where `RTE` is from `import RTE from 'fp-ts/ReaderTaskEither'`)
+ * (where `RTE` is from `import RTE from  '@jvlk/fp-tsm/ReaderTaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0
@@ -2198,7 +2198,7 @@ export const readerTaskEither: Monad3<URI> & Bifunctor3<URI> & Alt3<URI> & Monad
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RTE.Functor` instead of `RTE.readerTaskEitherSeq`
- * (where `RTE` is from `import RTE from 'fp-ts/ReaderTaskEither'`)
+ * (where `RTE` is from `import RTE from  '@jvlk/fp-tsm/ReaderTaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0

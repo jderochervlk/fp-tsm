@@ -233,8 +233,8 @@ export const getOrElseW: <E, B>(onLeft: (e: E) => Task<B>) => <A>(ma: TaskEither
  * See also [`tryCatchK`](#trycatchk).
  *
  * @example
- * import { left, right } from 'fp-ts/Either'
- * import { tryCatch } from 'fp-ts/TaskEither'
+ * import { left, right } from  '@jvlk/fp-tsm/Either.js'
+ * import { tryCatch } from  '@jvlk/fp-tsm/TaskEither.js'
  *
  * tryCatch(() => Promise.resolve(1), String)().then(result => {
  *   assert.deepStrictEqual(result, right(1))
@@ -317,9 +317,9 @@ export const chainNullableK: <E>(
  * See also [alt](#alt).
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TE from 'fp-ts/TaskEither'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
  *
  * async function test() {
  *   const errorHandler = TE.orElse((error: string) => TE.right(`recovering from ${error}...`))
@@ -450,8 +450,8 @@ export const map: <A, B>(f: (a: A) => B) => <E>(fa: TaskEither<E, A>) => TaskEit
  * Returns a `TaskEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
  * @example
- * import * as TaskEither from 'fp-ts/TaskEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as TaskEither from  '@jvlk/fp-tsm/TaskEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  * const g = (n: number) => n * 2
@@ -483,8 +483,8 @@ export const bimap: <E, G, A, B>(f: (e: E) => G, g: (a: A) => B) => (fa: TaskEit
  * Returns a `TaskEither` with its error channel mapped using the specified function.
  *
  * @example
- * import * as TaskEither from 'fp-ts/TaskEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as TaskEither from  '@jvlk/fp-tsm/TaskEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  *
@@ -563,9 +563,9 @@ export const flatten: <E, A>(mma: TaskEither<E, TaskEither<E, A>>) => TaskEither
  * See also [orElse](#orelse).
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TE from 'fp-ts/TaskEither'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
  *
  * async function test() {
  *   assert.deepStrictEqual(
@@ -645,13 +645,13 @@ declare module './HKT.js' {
  * get all errors you need to provide a way to concatenate them via a `Semigroup`.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as S from 'fp-ts/Semigroup'
- * import * as string from 'fp-ts/string'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as S from  '@jvlk/fp-tsm/Semigroup.js'
+ * import * as string from  '@jvlk/fp-tsm/string.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
- * import * as TE from 'fp-ts/TaskEither'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
  *
  * interface User {
  *   readonly id: string
@@ -999,9 +999,9 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TE from 'fp-ts/TaskEither'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
  *
  * const checkString = (value: string) => pipe(
  *   TE.of(value),
@@ -1029,9 +1029,9 @@ export const tapEither: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as TE from 'fp-ts/TaskEither'
- * import * as E from 'fp-ts/Either'
- * import * as Console from 'fp-ts/Console'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  *
  * // Will produce `Hello, fp-ts` to the stdout
@@ -1066,9 +1066,9 @@ export const tapIO: {
  * keeping only the result of the first.
  *
  * @example
- * import * as TE from 'fp-ts/TaskEither'
+ * import * as TE from  '@jvlk/fp-tsm/TaskEither.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  *
  * const effect = TE.tapIO(
@@ -1453,7 +1453,7 @@ export const chainIOEitherK: <E, A, B>(f: (a: A) => IOEither<E, B>) => (ma: Task
  * ```
  *
  * @example
- * import { taskify } from 'fp-ts/TaskEither'
+ * import { taskify } from  '@jvlk/fp-tsm/TaskEither.js'
  * import * as fs from 'fs'
  *
  * // const stat: (a: string | Buffer) => TaskEither<NodeJS.ErrnoException, fs.Stats>
@@ -1778,7 +1778,7 @@ export const orElseFirstW: <E1, E2, B>(
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `TE.Functor` instead of `TE.taskEither`
- * (where `TE` is from `import TE from 'fp-ts/TaskEither'`)
+ * (where `TE` is from `import TE from  '@jvlk/fp-tsm/TaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0
@@ -1801,7 +1801,7 @@ export const taskEither: Monad2<URI> & Bifunctor2<URI> & Alt2<URI> & MonadTask2<
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `TE.Functor` instead of `TE.taskEitherSeq`
- * (where `TE` is from `import TE from 'fp-ts/TaskEither'`)
+ * (where `TE` is from `import TE from  '@jvlk/fp-tsm/TaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0

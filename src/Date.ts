@@ -45,7 +45,7 @@ export const eqYear: E.Eq<Date> = {
 
 /**
  * @example
- * import { Ord } from 'fp-ts/Date'
+ * import { Ord } from  '@jvlk/fp-tsm/Date.js'
  *
  * assert.deepStrictEqual(Ord.compare(new Date(1, 1, 2020), new Date(1, 1, 2021)), -1)
  *

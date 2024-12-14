@@ -20,7 +20,7 @@
  * Many types that form a `Semigroup` also form a `Monoid`, such as `number`s (with `0`) and `string`s (with `''`).
  *
  * ```ts
- * import { Monoid } from 'fp-ts/Monoid'
+ * import { Monoid } from  '@jvlk/fp-tsm/Monoid.js'
  *
  * const monoidString: Monoid<string> = {
  *   concat: (x, y) => x + y,
@@ -61,8 +61,8 @@ export interface Monoid<A> extends Se.Semigroup<A> {
  * The `empty` value is the `top` value.
  *
  * @example
- * import * as N from 'fp-ts/number'
- * import * as M from 'fp-ts/Monoid'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
+ * import * as M from  '@jvlk/fp-tsm/Monoid.js'
  *
  * const M1 = M.min(N.Bounded)
  *
@@ -81,8 +81,8 @@ export const min = <A>(B: Bounded<A>): Monoid<A> => ({
  * The `empty` value is the `bottom` value.
  *
  * @example
- * import * as N from 'fp-ts/number'
- * import * as M from 'fp-ts/Monoid'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
+ * import * as M from  '@jvlk/fp-tsm/Monoid.js'
  *
  * const M1 = M.max(N.Bounded)
  *
@@ -104,8 +104,8 @@ export const max = <A>(B: Bounded<A>): Monoid<A> => ({
  * The dual of a `Monoid`, obtained by swapping the arguments of `concat`.
  *
  * @example
- * import { reverse } from 'fp-ts/Monoid'
- * import * as S from 'fp-ts/string'
+ * import { reverse } from  '@jvlk/fp-tsm/Monoid.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(reverse(S.Monoid).concat('a', 'b'), 'ba')
  *
@@ -120,8 +120,8 @@ export const reverse = <A>(M: Monoid<A>): Monoid<A> => ({
  * Given a struct of monoids returns a monoid for the struct.
  *
  * @example
- * import { struct } from 'fp-ts/Monoid'
- * import * as N from 'fp-ts/number'
+ * import { struct } from  '@jvlk/fp-tsm/Monoid.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * interface Point {
  *   readonly x: number
@@ -154,10 +154,10 @@ export const struct = <A>(monoids: { [K in keyof A]: Monoid<A[K]> }): Monoid<{ r
  * Given a tuple of monoids returns a monoid for the tuple.
  *
  * @example
- * import { tuple } from 'fp-ts/Monoid'
- * import * as B from 'fp-ts/boolean'
- * import * as N from 'fp-ts/number'
- * import * as S from 'fp-ts/string'
+ * import { tuple } from  '@jvlk/fp-tsm/Monoid.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * const M1 = tuple(S.Monoid, N.MonoidSum)
  * assert.deepStrictEqual(M1.concat(['a', 1], ['b', 2]), ['ab', 3])
@@ -185,8 +185,8 @@ export const tuple = <A extends ReadonlyArray<unknown>>(
  * If `as` is empty, return the monoid `empty` value.
  *
  * @example
- * import { concatAll } from 'fp-ts/Monoid'
- * import * as N from 'fp-ts/number'
+ * import { concatAll } from  '@jvlk/fp-tsm/Monoid.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(concatAll(N.MonoidSum)([1, 2, 3]), 6)
  * assert.deepStrictEqual(concatAll(N.MonoidSum)([]), 0)

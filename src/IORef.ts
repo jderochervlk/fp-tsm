@@ -7,8 +7,8 @@ import { IO } from './IO.js'
 
 /**
  * @example
- * import { flatMap } from 'fp-ts/IO'
- * import { newIORef } from 'fp-ts/IORef'
+ * import { flatMap } from  '@jvlk/fp-tsm/IO.js'
+ * import { newIORef } from  '@jvlk/fp-tsm/IORef.js'
  *
  * assert.strictEqual(flatMap(newIORef(1), ref => flatMap(ref.write(2), () => ref.read))(), 2)
  *

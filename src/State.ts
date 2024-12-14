@@ -404,7 +404,7 @@ export const execState: <S, A>(ma: State<S, A>, s: S) => S = (ma, s) => ma(s)[1]
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `S.Functor` instead of `S.state`
- * (where `S` is from `import S from 'fp-ts/State'`)
+ * (where `S` is from `import S from  '@jvlk/fp-tsm/State.js'`)
  *
  * @category zone of death
  * @since 2.0.0

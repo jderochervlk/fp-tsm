@@ -216,8 +216,8 @@ export function partitionMap<B, C>(
  * Form the set difference (`x` - `y`)
  *
  * @example
- * import { difference } from 'fp-ts/Set'
- * import * as N from 'fp-ts/number'
+ * import { difference } from  '@jvlk/fp-tsm/Set.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(new Set([1, 2]), difference(N.Eq)(new Set([1, 3]))), new Set([2]))

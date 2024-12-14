@@ -13,7 +13,7 @@
  *
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
@@ -235,8 +235,8 @@ export const getEq = <E, A>(EL: Eq<E>, EA: Eq<A>): Eq<Either<E, A>> => ({
  * concatenated using the provided `Semigroup`
  *
  * @example
- * import { getSemigroup, left, right } from 'fp-ts/Either'
- * import { SemigroupSum } from 'fp-ts/number'
+ * import { getSemigroup, left, right } from  '@jvlk/fp-tsm/Either.js'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
  *
  * const S = getSemigroup<string, number>(SemigroupSum)
  * assert.deepStrictEqual(S.concat(left('a'), left('b')), left('a'))
@@ -353,11 +353,11 @@ export const getWitherable = <E>(M: Monoid<E>): Witherable2C<URI, E> => {
  * get all errors you need to provide a way to concatenate them via a `Semigroup`.
  *
  * @example
- * import * as A from 'fp-ts/Apply'
- * import * as E from 'fp-ts/Either'
+ * import * as A from '@jvlk/fp-tsm/Apply.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as S from 'fp-ts/Semigroup'
- * import * as string from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/Semigroup.js'
+ * import * as string from  '@jvlk/fp-tsm/string.js'
  *
  * const parseString = (u: unknown): E.Either<string, string> =>
  *   typeof u === 'string' ? E.right(u) : E.left('not a string')
@@ -421,10 +421,10 @@ export const getApplicativeValidation = <E>(SE: Semigroup<E>): Applicative2C<URI
  * get all errors you need to provide a way to concatenate them via a `Semigroup`.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as S from 'fp-ts/Semigroup'
- * import * as string from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/Semigroup.js'
+ * import * as string from  '@jvlk/fp-tsm/string.js'
  *
  * const parseString = (u: unknown): E.Either<string, string> =>
  *   typeof u === 'string' ? E.right(u) : E.left('not a string')
@@ -578,7 +578,7 @@ export const Monad: Monad2<URI> = {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const startWith = 'prefix'
  * const concat = (a: string, b: string) => `${a}:${b}`
@@ -604,8 +604,8 @@ export const reduce: <A, B>(b: B, f: (b: B, a: A) => B) => <E>(fa: Either<E, A>)
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as E from 'fp-ts/Either'
- * import * as S from 'fp-ts/string'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * const yell = (a: string) => `${a}!`
  *
@@ -630,7 +630,7 @@ export const foldMap: <M>(M: Monoid<M>) => <A>(f: (a: A) => M) => <E>(fa: Either
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const startWith = 'postfix'
  * const concat = (a: string, b: string) => `${a}:${b}`
@@ -667,9 +667,9 @@ export const Foldable: Foldable2<URI> = {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as E from 'fp-ts/Either'
- * import * as O from 'fp-ts/Option'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(
  *   pipe(E.right(['a']), E.traverse(O.Applicative)(RA.head)),
@@ -695,8 +695,8 @@ export const traverse: PipeableTraverse2<URI> =
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as E from 'fp-ts/Either'
- * import * as O from 'fp-ts/Option'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(
  *   pipe(E.right(O.some('a')), E.sequence(O.Applicative)),
@@ -786,7 +786,7 @@ export const altW: <E2, B>(that: LazyArg<Either<E2, B>>) => <E1, A>(fa: Either<E
  * | right(1) | right(2) | right(1)             |
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -890,7 +890,7 @@ export const FromEither: FromEither2<URI> = {
 
 /**
  * @example
- * import { fromPredicate, left, right } from 'fp-ts/Either'
+ * import { fromPredicate, left, right } from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -929,9 +929,9 @@ export const fromPredicate: {
 
 /**
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as O from 'fp-ts/Option'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(
  *   pipe(
@@ -1000,7 +1000,7 @@ export const foldW = matchW
  * if the value is a `Right` the inner value is applied to the second function.
  *
  * @example
- * import { match, left, right } from 'fp-ts/Either'
+ * import { match, left, right } from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * function onLeft(errors: Array<string>): string {
@@ -1056,7 +1056,7 @@ export const getOrElseW =
  * Returns the wrapped value if it's a `Right` or a default value if is a `Left`.
  *
  * @example
- * import { getOrElse, left, right } from 'fp-ts/Either'
+ * import { getOrElse, left, right } from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1150,7 +1150,7 @@ export const flattenW: <E1, E2, A>(mma: Either<E1, Either<E2, A>>) => Either<E1 
  * The `flatten` function is the conventional monad join operator. It is used to remove one level of monadic structure, projecting its bound argument into the outer level.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(E.flatten(E.right(E.right('a'))), E.right('a'))
  * assert.deepStrictEqual(E.flatten(E.right(E.left('e'))), E.left('e'))
@@ -1258,7 +1258,7 @@ export const flatMapOption: {
 
 /**
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1350,7 +1350,7 @@ export const orElse: <E1, A, E2>(onLeft: (e: E1) => Either<E2, A>) => (ma: Eithe
  * the provided default as a `Left`.
  *
  * @example
- * import { fromNullable, left, right } from 'fp-ts/Either'
+ * import { fromNullable, left, right } from  '@jvlk/fp-tsm/Either.js'
  *
  * const parse = fromNullable('nully')
  *
@@ -1371,7 +1371,7 @@ export const fromNullable =
  * See also [`tryCatchK`](#trycatchk).
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const unsafeHead = <A>(as: ReadonlyArray<A>): A => {
  *   if (as.length > 0) {
@@ -1484,7 +1484,7 @@ export function elem<A>(E: Eq<A>): <E>(a: A, ma?: Either<E, A>) => boolean | ((m
  * Returns `false` if `Left` or returns the result of the application of the given predicate to the `Right` value.
  *
  * @example
- * import { exists, left, right } from 'fp-ts/Either'
+ * import { exists, left, right } from  '@jvlk/fp-tsm/Either.js'
  *
  * const gt2 = exists((n: number) => n > 2)
  *
@@ -1737,7 +1737,7 @@ export const stringifyJSON = <E>(u: unknown, onError: (reason: unknown) => E): E
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `E.Functor` instead of `E.either`
- * (where `E` is from `import E from 'fp-ts/Either'`)
+ * (where `E` is from `import E from  '@jvlk/fp-tsm/Either.js'`)
  *
  * @category zone of death
  * @since 2.0.0

@@ -313,8 +313,8 @@ export const map: <A, B>(f: (a: A) => B) => <R, E>(fa: ReaderEither<R, E, A>) =>
  * Returns a `ReaderEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
  * @example
- * import * as ReaderEither from 'fp-ts/ReaderEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as ReaderEither from  '@jvlk/fp-tsm/ReadonlyRecord.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  * const g = (n: number) => n * 2
@@ -345,8 +345,8 @@ export const bimap: <E, G, A, B>(
  * Returns a `ReaderEither` with its error channel mapped using the specified function.
  *
  * @example
- * import * as ReaderEither from 'fp-ts/ReaderEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as ReaderEither from  '@jvlk/fp-tsm/ReadonlyRecord.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  *
@@ -713,9 +713,9 @@ export const tap: {
  * keeping only the result of the first.
  *
  * @example
- * import * as E from 'fp-ts/Either'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RE from 'fp-ts/ReaderEither'
+ * import * as RE from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * const checkString = (value: string) => pipe(
  *   RE.ask<number>(),
@@ -1277,7 +1277,7 @@ export const orElseFirstW: <E1, R2, E2, B>(
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RE.Functor` instead of `RE.readerEither`
- * (where `R` is from `import R from 'fp-ts/ReaderEither'`)
+ * (where `R` is from `import R from  '@jvlk/fp-tsm/ReadonlyRecord.js'`)
  *
  * @category zone of death
  * @since 2.0.0

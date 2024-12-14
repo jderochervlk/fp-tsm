@@ -483,9 +483,9 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as IOO from 'fp-ts/IOOption'
- * import * as O from 'fp-ts/Option'
- * import * as E from 'fp-ts/Either'
+ * import * as IOO from  '@jvlk/fp-tsm/IOOption.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const compute = (value: number) => pipe(
  *   IOO.of(value),
@@ -509,9 +509,9 @@ export const tapEither: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as IOO from 'fp-ts/IOOption'
- * import * as O from 'fp-ts/Option'
- * import * as Console from 'fp-ts/Console'
+ * import * as IOO from  '@jvlk/fp-tsm/IOOption.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  * // Will produce `Hello, fp-ts` to the stdout
  * const effectA = pipe(

@@ -62,10 +62,10 @@ export const fromCompare = <A>(compare: Ord<A>['compare']): Ord<A> => ({
  * Given a tuple of `Ord`s returns an `Ord` for the tuple.
  *
  * @example
- * import { tuple } from 'fp-ts/Ord'
- * import * as B from 'fp-ts/boolean'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
+ * import { tuple } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const O = tuple(S.Ord, N.Ord, B.Ord)
  * assert.strictEqual(O.compare(['a', 1, true], ['b', 2, true]), -1)
@@ -108,9 +108,9 @@ const contramap_: <A, B>(fa: Ord<A>, f: (b: B) => A) => Ord<B> = (fa, f) => pipe
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import { contramap, Ord } from 'fp-ts/Ord'
- * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as S from 'fp-ts/string'
+ * import { contramap, Ord } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * interface User {
  *   readonly firstName: string
@@ -165,11 +165,11 @@ declare module './HKT.js' {
  * sorts by `created` date descending, and **then** `lastName`
  *
  * @example
- * import * as D from 'fp-ts/Date'
+ * import * as D from  '@jvlk/fp-tsm/Date.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import { contramap, getSemigroup, Ord, reverse } from 'fp-ts/Ord'
- * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as S from 'fp-ts/string'
+ * import { contramap, getSemigroup, Ord, reverse } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * interface User {
  *   readonly id: string
@@ -223,13 +223,13 @@ export const getSemigroup = <A = never>(): Semigroup<Ord<A>> => ({
  * - its `empty` value is an `Ord` that always considers compared elements equal
  *
  * @example
- * import { sort } from 'fp-ts/Array'
- * import { contramap, reverse, getMonoid } from 'fp-ts/Ord'
- * import * as S from 'fp-ts/string'
- * import * as B from 'fp-ts/boolean'
+ * import { sort } from  '@jvlk/fp-tsm/Array.js'
+ * import { contramap, reverse, getMonoid } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import { concatAll } from 'fp-ts/Monoid'
- * import * as N from 'fp-ts/number'
+ * import { concatAll } from  '@jvlk/fp-tsm/Monoid.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * interface User {
  *   readonly id: number

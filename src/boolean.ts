@@ -47,9 +47,9 @@ export const foldW = matchW
  * If `value` is false, `onFalse()` is returned, otherwise `onTrue()`.
  *
  * @example
- * import { some, map } from 'fp-ts/Option'
+ * import { some, map } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import { match } from 'fp-ts/boolean'
+ * import { match } from  '@jvlk/fp-tsm/boolean.js'
  *
  * assert.deepStrictEqual(
  *  pipe(
@@ -101,7 +101,7 @@ export const BooleanAlgebra: BA.BooleanAlgebra<boolean> = {
  * `boolean` semigroup under conjunction.
  *
  * @example
- * import { SemigroupAll } from 'fp-ts/boolean'
+ * import { SemigroupAll } from  '@jvlk/fp-tsm/boolean.js'
  *
  * assert.deepStrictEqual(SemigroupAll.concat(true, true), true)
  * assert.deepStrictEqual(SemigroupAll.concat(true, false), false)
@@ -117,7 +117,7 @@ export const SemigroupAll: Semigroup<boolean> = {
  * `boolean` semigroup under disjunction.
  *
  * @example
- * import { SemigroupAny } from 'fp-ts/boolean'
+ * import { SemigroupAny } from  '@jvlk/fp-tsm/boolean.js'
  *
  * assert.deepStrictEqual(SemigroupAny.concat(true, true), true)
  * assert.deepStrictEqual(SemigroupAny.concat(true, false), true)
@@ -136,7 +136,7 @@ export const SemigroupAny: Semigroup<boolean> = {
  * The `empty` value is `true`.
  *
  * @example
- * import { MonoidAll } from 'fp-ts/boolean'
+ * import { MonoidAll } from  '@jvlk/fp-tsm/boolean.js'
  *
  * assert.deepStrictEqual(MonoidAll.concat(true, true), true)
  * assert.deepStrictEqual(MonoidAll.concat(true, false), false)
@@ -155,7 +155,7 @@ export const MonoidAll: Monoid<boolean> = {
  * The `empty` value is `false`.
  *
  * @example
- * import { MonoidAny } from 'fp-ts/boolean'
+ * import { MonoidAny } from  '@jvlk/fp-tsm/boolean.js'
  *
  * assert.deepStrictEqual(MonoidAny.concat(true, true), true)
  * assert.deepStrictEqual(MonoidAny.concat(true, false), true)

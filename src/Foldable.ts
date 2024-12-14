@@ -168,9 +168,9 @@ export function reduceRight<F, G>(
  * Note: this function is not generally stack-safe, e.g., for monads which build up thunks a la `IO`.
  *
  * @example
- * import { reduceM } from 'fp-ts/Foldable'
- * import { Monad, some } from 'fp-ts/Option'
- * import { make, Foldable } from 'fp-ts/Tree'
+ * import { reduceM } from  '@jvlk/fp-tsm/Foldable.js'
+ * import { Monad, some } from  '@jvlk/fp-tsm/Option.js'
+ * import { make, Foldable } from  '@jvlk/fp-tsm/Tree.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const t = make(1, [make(2, []), make(3, []), make(4, [])])
@@ -214,9 +214,9 @@ export function reduceM<M, F>(
  * Fold a data structure, accumulating values in some `Monoid`, combining adjacent elements using the specified separator
  *
  * @example
- * import { intercalate } from 'fp-ts/Foldable'
- * import * as S from 'fp-ts/string'
- * import { make, Foldable } from 'fp-ts/Tree'
+ * import { intercalate } from  '@jvlk/fp-tsm/Foldable.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { make, Foldable } from  '@jvlk/fp-tsm/Tree.js'
  *
  * const t = make('a', [make('b', []), make('c', []), make('d', [])])
  * assert.strictEqual(intercalate(S.Monoid, Foldable)('|', t), 'a|b|c|d')
@@ -250,8 +250,8 @@ export function intercalate<M, F>(M: Monoid<M>, F: Foldable<F>): (middle: M, fm:
  * Transforms a `Foldable` into a `toReadonlyArray`.
  *
  * @example
- * import { toReadonlyArray } from 'fp-ts/Foldable'
- * import { Foldable, make } from 'fp-ts/Tree'
+ * import { toReadonlyArray } from  '@jvlk/fp-tsm/Foldable.js'
+ * import { Foldable, make } from  '@jvlk/fp-tsm/Tree.js'
  *
  * const t = make(1, [make(2, []), make(3, []), make(4, [])])
  * assert.deepStrictEqual(toReadonlyArray(Foldable)(t), [1, 2, 3, 4])
@@ -282,9 +282,9 @@ export function toReadonlyArray<F>(F: Foldable<F>): <A>(fa: HKT<F, A>) => Readon
  * final result.
  *
  * @example
- * import { Foldable } from 'fp-ts/Array'
- * import { traverse_ } from 'fp-ts/Foldable'
- * import { Applicative } from 'fp-ts/IO'
+ * import { Foldable } from  '@jvlk/fp-tsm/Array.js'
+ * import { traverse_ } from  '@jvlk/fp-tsm/Foldable.js'
+ * import { Applicative } from  '@jvlk/fp-tsm/IO.js'
  *
  * let log = ''
  * const append = (s: string) => () => (log += s)

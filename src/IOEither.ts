@@ -294,8 +294,8 @@ export const map: <A, B>(f: (a: A) => B) => <E>(fa: IOEither<E, A>) => IOEither<
  * Returns a `IOEither` whose failure and success channels have been mapped by the specified pair of functions, `f` and `g`.
  *
  * @example
- * import * as IOEither from 'fp-ts/IOEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as IOEither from  '@jvlk/fp-tsm/IOEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  * const g = (n: number) => n * 2
@@ -323,8 +323,8 @@ export const bimap: <E, G, A, B>(f: (e: E) => G, g: (a: A) => B) => (fa: IOEithe
  * Returns a `IOEither` with its error channel mapped using the specified function.
  *
  * @example
- * import * as IOEither from 'fp-ts/IOEither'
- * import * as Either from 'fp-ts/Either'
+ * import * as IOEither from  '@jvlk/fp-tsm/IOEither.js'
+ * import * as Either from  '@jvlk/fp-tsm/Either.js'
  *
  * const f = (s: string) => new Error(s)
  *
@@ -701,8 +701,8 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as IOE from 'fp-ts/IOEither'
- * import * as E from 'fp-ts/Either'
+ * import * as IOE from  '@jvlk/fp-tsm/IOEither.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const compute = (value: string) => pipe(
  *   IOE.of(value),
@@ -726,9 +726,9 @@ export const tapEither: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as IOE from 'fp-ts/IOEither'
- * import * as E from 'fp-ts/Either'
- * import * as Console from 'fp-ts/Console'
+ * import * as IOE from  '@jvlk/fp-tsm/IOEither.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  * const sayHello = (value: string) => Console.log(`Hello, ${value}`)
  *
@@ -1317,7 +1317,7 @@ export const orElseFirstW: <E1, E2, B>(
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `IOE.Functor` instead of `IOE.ioEither`
- * (where `IOE` is from `import IOE from 'fp-ts/IOEither'`)
+ * (where `IOE` is from `import IOE from  '@jvlk/fp-tsm/IOEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0

@@ -346,8 +346,8 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RIO from 'fp-ts/ReaderIO'
- * import * as Console from 'fp-ts/Console'
+ * import * as RIO from  '@jvlk/fp-tsm/ReaderIO.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  * // Will produce `Hello, fp-ts` to the stdout
  * const effect = pipe(

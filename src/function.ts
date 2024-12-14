@@ -30,8 +30,8 @@ export const getBooleanAlgebra =
  * Unary functions form a semigroup as long as you can provide a semigroup for the codomain.
  *
  * @example
- * import { Predicate, getSemigroup } from 'fp-ts/function'
- * import * as B from 'fp-ts/boolean'
+ * import { Predicate, getSemigroup } from  '@jvlk/fp-tsm/function.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
  *
  * const f: Predicate<number> = (n) => n <= 2
  * const g: Predicate<number> = (n) => n >= 0
@@ -59,9 +59,9 @@ export const getSemigroup =
  * Unary functions form a monoid as long as you can provide a monoid for the codomain.
  *
  * @example
- * import { Predicate } from 'fp-ts/Predicate'
- * import { getMonoid } from 'fp-ts/function'
- * import * as B from 'fp-ts/boolean'
+ * import { Predicate } from  '@jvlk/fp-tsm/Predicate.js'
+ * import { getMonoid } from  '@jvlk/fp-tsm/function.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
  *
  * const f: Predicate<number> = (n) => n <= 2
  * const g: Predicate<number> = (n) => n >= 0
@@ -127,7 +127,7 @@ export const apply =
 
 /**
  * @example
- * import { FunctionN } from 'fp-ts/function'
+ * import { FunctionN } from  '@jvlk/fp-tsm/function.js'
  *
  * export const sum: FunctionN<[number, number], number> = (a, b) => a + b
  *
@@ -195,7 +195,7 @@ export const constVoid: LazyArg<void> = constUndefined
  * Flips the arguments of a curried function.
  *
  * @example
- * import { flip } from 'fp-ts/function'
+ * import { flip } from  '@jvlk/fp-tsm/function.js'
  *
  * const f = (a: number) => (b: string) => a - b.length
  *
@@ -222,7 +222,7 @@ export function flip(f: Function): Function {
  * See also [`pipe`](#pipe).
  *
  * @example
- * import { flow } from 'fp-ts/function'
+ * import { flow } from  '@jvlk/fp-tsm/function.js'
  *
  * const len = (s: string): number => s.length
  * const double = (n: number): number => n * 2
@@ -373,7 +373,7 @@ export function absurd<A>(_: never): A {
  * Creates a tupled version of this function: instead of `n` arguments, it accepts a single tuple argument.
  *
  * @example
- * import { tupled } from 'fp-ts/function'
+ * import { tupled } from  '@jvlk/fp-tsm/function.js'
  *
  * const add = tupled((x: number, y: number): number => x + y)
  *

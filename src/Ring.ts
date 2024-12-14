@@ -32,8 +32,8 @@ export interface Ring<A> extends Semiring<A> {
  * Given a tuple of `Ring`s returns a `Ring` for the tuple
  *
  * @example
- * import { tuple } from 'fp-ts/Ring'
- * import * as N from 'fp-ts/number'
+ * import { tuple } from  '@jvlk/fp-tsm/Ring.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const R = tuple(N.Field, N.Field, N.Field)
  * assert.deepStrictEqual(R.add([1, 2, 3], [4, 5, 6]), [5, 7, 9])

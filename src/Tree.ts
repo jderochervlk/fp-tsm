@@ -109,7 +109,7 @@ export function drawForest(forest: Forest<string>): string {
  * Neat 2-dimensional drawing of a tree
  *
  * @example
- * import { make, drawTree } from 'fp-ts/Tree'
+ * import { make, drawTree } from  '@jvlk/fp-tsm/Tree.js'
  *
  * const fa = make('a', [
  *   make('b'),
@@ -228,9 +228,9 @@ export function unfoldForestM<M>(
  * This is also known as the catamorphism on trees.
  *
  * @example
- * import { fold, make } from 'fp-ts/Tree'
- * import { concatAll } from 'fp-ts/Monoid'
- * import { MonoidSum } from 'fp-ts/number'
+ * import { fold, make } from  '@jvlk/fp-tsm/Tree.js'
+ * import { concatAll } from  '@jvlk/fp-tsm/Monoid.js'
+ * import { MonoidSum } from  '@jvlk/fp-tsm/number.js'
  *
  * const t = make(1, [make(2), make(3)])
  *
@@ -624,7 +624,7 @@ export const chain: <A, B>(f: (a: A) => Tree<B>) => (ma: Tree<A>) => Tree<B> = f
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.tree`
- * (where `T` is from `import T from 'fp-ts/Tree'`)
+ * (where `T` is from `import T from  '@jvlk/fp-tsm/Tree.js'`)
  *
  * @category zone of death
  * @since 2.0.0

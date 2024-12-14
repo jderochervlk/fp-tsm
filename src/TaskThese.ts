@@ -575,7 +575,7 @@ export const toTuple = <E, A>(e: E, a: A): ((fa: TaskThese<E, A>) => Task<[E, A]
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `TT.Functor` instead of `TT.taskThese`
- * (where `TT` is from `import TT from 'fp-ts/TaskThese'`)
+ * (where `TT` is from `import TT from  '@jvlk/fp-tsm/TaskThese.js'`)
  *
  * @category zone of death
  * @since 2.4.0

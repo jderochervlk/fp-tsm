@@ -57,7 +57,7 @@ type ReadonlyNonEmptyArray<A> = RNEA.ReadonlyNonEmptyArray<A>
  * Test whether a `ReadonlyArray` is empty.
  *
  * @example
- * import { isEmpty } from 'fp-ts/ReadonlyArray'
+ * import { isEmpty } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.strictEqual(isEmpty([]), true)
  *
@@ -82,7 +82,7 @@ export const isNonEmpty: <A>(as: ReadonlyArray<A>) => as is ReadonlyNonEmptyArra
  * Prepend an element to the front of a `ReadonlyArray`, creating a new `ReadonlyNonEmptyArray`.
  *
  * @example
- * import { prepend } from 'fp-ts/ReadonlyArray'
+ * import { prepend } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([2, 3, 4], prepend(1)), [1, 2, 3, 4])
@@ -102,7 +102,7 @@ export const prependW = RNEA.prependW
  * Append an element to the end of a `ReadonlyArray`, creating a new `ReadonlyNonEmptyArray`.
  *
  * @example
- * import { append } from 'fp-ts/ReadonlyArray'
+ * import { append } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], append(4)), [1, 2, 3, 4])
@@ -124,7 +124,7 @@ export const appendW = RNEA.appendW
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { makeBy } from 'fp-ts/ReadonlyArray'
+ * import { makeBy } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * const double = (n: number): number => n * 2
  * assert.deepStrictEqual(makeBy(5, double), [0, 2, 4, 6, 8])
@@ -140,7 +140,7 @@ export const makeBy = <A>(n: number, f: (i: number) => A): ReadonlyArray<A> => (
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { replicate } from 'fp-ts/ReadonlyArray'
+ * import { replicate } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(replicate(3, 'a'), ['a', 'a', 'a'])
  *
@@ -215,7 +215,7 @@ export const matchLeftW =
  * Break a `ReadonlyArray` into its first element and remaining elements.
  *
  * @example
- * import { matchLeft } from 'fp-ts/ReadonlyArray'
+ * import { matchLeft } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * const len: <A>(as: ReadonlyArray<A>) => number = matchLeft(() => 0, (_, tail) => 1 + len(tail))
  * assert.strictEqual(len([1, 2, 3]), 3)
@@ -300,7 +300,7 @@ export const chainWithIndex =
  * Same as `reduce` but it carries over the intermediate steps.
  *
  * @example
- * import { scanLeft } from 'fp-ts/ReadonlyArray'
+ * import { scanLeft } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(scanLeft(10, (b, a: number) => b - a)([1, 2, 3]), [10, 9, 7, 4])
  *
@@ -322,7 +322,7 @@ export const scanLeft =
  * Fold an array from the right, keeping all intermediate results instead of only the final result
  *
  * @example
- * import { scanRight } from 'fp-ts/ReadonlyArray'
+ * import { scanRight } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(scanRight(10, (a: number, b) => b - a)([1, 2, 3]), [4, 5, 7, 10])
  *
@@ -359,8 +359,8 @@ export const isOutOfBound: <A>(i: number, as: ReadonlyArray<A>) => boolean = RNE
  * This function provides a safe way to read a value at a particular index from an array
  *
  * @example
- * import { lookup } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { lookup } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], lookup(1)), some(2))
@@ -378,8 +378,8 @@ export function lookup<A>(i: number, as?: ReadonlyArray<A>): Option<A> | (<A>(as
  * Get the first element in an array, or `None` if the array is empty
  *
  * @example
- * import { head } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { head } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(head([1, 2, 3]), some(1))
  * assert.deepStrictEqual(head([]), none)
@@ -392,8 +392,8 @@ export const head = <A>(as: ReadonlyArray<A>): Option<A> => (isNonEmpty(as) ? _.
  * Get the last element in an array, or `None` if the array is empty
  *
  * @example
- * import { last } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { last } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(last([1, 2, 3]), some(3))
  * assert.deepStrictEqual(last([]), none)
@@ -406,8 +406,8 @@ export const last = <A>(as: ReadonlyArray<A>): Option<A> => (isNonEmpty(as) ? _.
  * Get all but the first element of an array, creating a new array, or `None` if the array is empty
  *
  * @example
- * import { tail } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { tail } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(tail([1, 2, 3]), some([2, 3]))
  * assert.deepStrictEqual(tail([]), none)
@@ -421,8 +421,8 @@ export const tail = <A>(as: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
  * Get all but the last element of an array, creating a new array, or `None` if the array is empty
  *
  * @example
- * import { init } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { init } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(init([1, 2, 3]), some([1, 2]))
  * assert.deepStrictEqual(init([]), none)
@@ -438,7 +438,7 @@ export const init = <A>(as: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
@@ -461,7 +461,7 @@ export const takeLeft =
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
@@ -482,7 +482,7 @@ export const takeRight =
  * Calculate the longest initial subarray for which all element satisfy the specified predicate, creating a new array
  *
  * @example
- * import { takeLeftWhile } from 'fp-ts/ReadonlyArray'
+ * import { takeLeftWhile } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(takeLeftWhile((n: number) => n % 2 === 0)([2, 4, 3, 6]), [2, 4])
  *
@@ -530,7 +530,7 @@ const spanLeftIndex = <A>(as: ReadonlyArray<A>, predicate: Predicate<A>): number
  * 2. the remaining elements
  *
  * @example
- * import { spanLeft } from 'fp-ts/ReadonlyArray'
+ * import { spanLeft } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(spanLeft((n: number) => n % 2 === 1)([1, 3, 2, 4, 5]), { init: [1, 3], rest: [2, 4, 5] })
  *
@@ -552,7 +552,7 @@ export function spanLeft<A>(predicate: Predicate<A>): (as: ReadonlyArray<A>) => 
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
@@ -573,7 +573,7 @@ export const dropLeft =
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const input: ReadonlyArray<number> = [1, 2, 3]
@@ -592,7 +592,7 @@ export const dropRight =
  * Remove the longest initial subarray for which all element satisfy the specified predicate, creating a new array
  *
  * @example
- * import { dropLeftWhile } from 'fp-ts/ReadonlyArray'
+ * import { dropLeftWhile } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(dropLeftWhile((n: number) => n % 2 === 1)([1, 3, 2, 4, 5]), [2, 4, 5])
  *
@@ -612,8 +612,8 @@ export function dropLeftWhile<A>(predicate: Predicate<A>): (as: ReadonlyArray<A>
  * Find the first index for which a predicate holds
  *
  * @example
- * import { findIndex } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { findIndex } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(findIndex((n: number) => n === 2)([1, 2, 3]), some(1))
  * assert.deepStrictEqual(findIndex((n: number) => n === 2)([]), none)
@@ -635,8 +635,8 @@ export const findIndex =
  * Find the first element which satisfies a predicate (or a refinement) function
  *
  * @example
- * import { findFirst } from 'fp-ts/ReadonlyArray'
- * import { some } from 'fp-ts/Option'
+ * import { findFirst } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * type X = {
  *   readonly a: number
@@ -665,8 +665,8 @@ export function findFirst<A>(predicate: Predicate<A>): (as: ReadonlyArray<A>) =>
  * Find the first element returned by an option based selector function
  *
  * @example
- * import { findFirstMap } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { findFirstMap } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface Person {
  *   readonly name: string
@@ -696,8 +696,8 @@ export const findFirstMap =
  * Find the last element which satisfies a predicate function
  *
  * @example
- * import { findLast } from 'fp-ts/ReadonlyArray'
- * import { some } from 'fp-ts/Option'
+ * import { findLast } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * type X = {
  *   readonly a: number
@@ -726,8 +726,8 @@ export function findLast<A>(predicate: Predicate<A>): (as: ReadonlyArray<A>) => 
  * Find the last element returned by an option based selector function
  *
  * @example
- * import { findLastMap } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { findLastMap } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface Person {
  *   readonly name: string
@@ -757,8 +757,8 @@ export const findLastMap =
  * Returns the index of the last element of the list which matches the predicate
  *
  * @example
- * import { findLastIndex } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { findLastIndex } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface X {
  *   readonly a: number
@@ -786,8 +786,8 @@ export const findLastIndex =
  * Insert an element at the specified index, creating a new array, or returning `None` if the index is out of bounds
  *
  * @example
- * import { insertAt } from 'fp-ts/ReadonlyArray'
- * import { some } from 'fp-ts/Option'
+ * import { insertAt } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(insertAt(2, 5)([1, 2, 3, 4]), some([1, 2, 5, 3, 4]))
  *
@@ -802,8 +802,8 @@ export const insertAt =
  * Change the element at the specified index, creating a new array, or returning `None` if the index is out of bounds
  *
  * @example
- * import { updateAt } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { updateAt } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(updateAt(1, 1)([1, 2, 3]), some([1, 1, 3]))
  * assert.deepStrictEqual(updateAt(1, 1)([]), none)
@@ -817,8 +817,8 @@ export const updateAt = <A>(i: number, a: A): ((as: ReadonlyArray<A>) => Option<
  * Delete the element at the specified index, creating a new array, or returning `None` if the index is out of bounds
  *
  * @example
- * import { deleteAt } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { deleteAt } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(deleteAt(0)([1, 2, 3]), some([2, 3]))
  * assert.deepStrictEqual(deleteAt(1)([]), none)
@@ -835,8 +835,8 @@ export const deleteAt =
  * of bounds
  *
  * @example
- * import { modifyAt } from 'fp-ts/ReadonlyArray'
- * import { some, none } from 'fp-ts/Option'
+ * import { modifyAt } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * const double = (x: number): number => x * 2
  * assert.deepStrictEqual(modifyAt(1, double)([1, 2, 3]), some([1, 4, 3]))
@@ -853,7 +853,7 @@ export const modifyAt =
  * Reverse an array, creating a new array
  *
  * @example
- * import { reverse } from 'fp-ts/ReadonlyArray'
+ * import { reverse } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(reverse([1, 2, 3]), [3, 2, 1])
  *
@@ -865,8 +865,8 @@ export const reverse = <A>(as: ReadonlyArray<A>): ReadonlyArray<A> => (as.length
  * Extracts from an array of `Either` all the `Right` elements. All the `Right` elements are extracted in order
  *
  * @example
- * import { rights } from 'fp-ts/ReadonlyArray'
- * import { right, left } from 'fp-ts/Either'
+ * import { rights } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { right, left } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(rights([right(1), left('foo'), right(2)]), [1, 2])
  *
@@ -887,8 +887,8 @@ export const rights = <E, A>(as: ReadonlyArray<Either<E, A>>): ReadonlyArray<A> 
  * Extracts from an array of `Either` all the `Left` elements. All the `Left` elements are extracted in order
  *
  * @example
- * import { lefts } from 'fp-ts/ReadonlyArray'
- * import { left, right } from 'fp-ts/Either'
+ * import { lefts } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { left, right } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(lefts([right(1), left('foo'), right(2)]), ['foo'])
  *
@@ -909,8 +909,8 @@ export const lefts = <E, A>(as: ReadonlyArray<Either<E, A>>): ReadonlyArray<E> =
  * Sort the elements of an array in increasing order, creating a new array
  *
  * @example
- * import { sort } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { sort } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(sort(N.Ord)([3, 2, 1]), [1, 2, 3])
  *
@@ -927,7 +927,7 @@ export const sort =
  * input array is short, excess elements of the longer array are discarded.
  *
  * @example
- * import { zipWith } from 'fp-ts/ReadonlyArray'
+ * import { zipWith } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(zipWith([1, 2, 3], ['a', 'b', 'c', 'd'], (n, s) => s + n), ['a1', 'b2', 'c3'])
  *
@@ -952,7 +952,7 @@ export const zipWith = <A, B, C>(
  * longer array are discarded
  *
  * @example
- * import { zip } from 'fp-ts/ReadonlyArray'
+ * import { zip } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], zip(['a', 'b', 'c', 'd'])), [[1, 'a'], [2, 'b'], [3, 'c']])
@@ -975,7 +975,7 @@ export function zip<A, B>(
  * The function is reverse of `zip`. Takes an array of pairs and return two corresponding arrays
  *
  * @example
- * import { unzip } from 'fp-ts/ReadonlyArray'
+ * import { unzip } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(unzip([[1, 'a'], [2, 'b'], [3, 'c']]), [[1, 2, 3], ['a', 'b', 'c']])
  *
@@ -995,7 +995,7 @@ export const unzip = <A, B>(as: ReadonlyArray<readonly [A, B]>): readonly [Reado
  * Prepend an element to every member of an array
  *
  * @example
- * import { prependAll } from 'fp-ts/ReadonlyArray'
+ * import { prependAll } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(prependAll(9)([1, 2, 3, 4]), [9, 1, 9, 2, 9, 3, 9, 4])
  *
@@ -1010,7 +1010,7 @@ export const prependAll = <A>(middle: A): ((as: ReadonlyArray<A>) => ReadonlyArr
  * Places an element in between members of an array
  *
  * @example
- * import { intersperse } from 'fp-ts/ReadonlyArray'
+ * import { intersperse } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(intersperse(9)([1, 2, 3, 4]), [1, 9, 2, 9, 3, 9, 4])
  *
@@ -1025,7 +1025,7 @@ export const intersperse = <A>(middle: A): ((as: ReadonlyArray<A>) => ReadonlyAr
  * Rotate a `ReadonlyArray` by `n` steps.
  *
  * @example
- * import { rotate } from 'fp-ts/ReadonlyArray'
+ * import { rotate } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(rotate(2)([1, 2, 3, 4, 5]), [4, 5, 1, 2, 3])
  *
@@ -1043,8 +1043,8 @@ export const rotate = (n: number): (<A>(as: ReadonlyArray<A>) => ReadonlyArray<A
  * an array of type `ReadonlyArray<A>`.
  *
  * @example
- * import { elem } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { elem } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(pipe([1, 2, 3], elem(N.Eq)(2)), true)
@@ -1077,8 +1077,8 @@ export function elem<A>(E: Eq<A>): (a: A, as?: ReadonlyArray<A>) => boolean | ((
  * Remove duplicates from an array, keeping the first occurrence of an element.
  *
  * @example
- * import { uniq } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { uniq } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(uniq(N.Eq)([1, 2, 1]), [1, 2])
  *
@@ -1094,10 +1094,10 @@ export const uniq = <A>(E: Eq<A>): ((as: ReadonlyArray<A>) => ReadonlyArray<A>) 
  * etc...
  *
  * @example
- * import { sortBy } from 'fp-ts/ReadonlyArray'
- * import { contramap } from 'fp-ts/Ord'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
+ * import { sortBy } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { contramap } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
@@ -1130,9 +1130,9 @@ export const sortBy = <B>(ords: ReadonlyArray<Ord<B>>): (<A extends B>(as: Reado
  * value and the tail of the `ReadonlyArray`.
  *
  * @example
- * import { Eq } from 'fp-ts/Eq'
- * import * as RA from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { Eq } from  '@jvlk/fp-tsm/Eq.js'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const group = <A>(S: Eq<A>): ((as: ReadonlyArray<A>) => ReadonlyArray<ReadonlyArray<A>>) => {
@@ -1156,7 +1156,7 @@ export const chop = <A, B>(
  * Splits a `ReadonlyArray` into two pieces, the first piece has max `n` elements.
  *
  * @example
- * import { splitAt } from 'fp-ts/ReadonlyArray'
+ * import { splitAt } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(splitAt(2)([1, 2, 3, 4, 5]), [[1, 2], [3, 4, 5]])
  *
@@ -1179,7 +1179,7 @@ export const splitAt =
  * whenever `n` evenly divides the length of `as`.
  *
  * @example
- * import { chunksOf } from 'fp-ts/ReadonlyArray'
+ * import { chunksOf } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(chunksOf(2)([1, 2, 3, 4, 5]), [[1, 2], [3, 4], [5]])
  *
@@ -1207,8 +1207,8 @@ export const fromOptionK =
  * ```
  *
  * @example
- * import { comprehension } from 'fp-ts/ReadonlyArray'
- * import { tuple } from 'fp-ts/function'
+ * import { comprehension } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { tuple } from  '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(comprehension([[1, 2, 3], ['a', 'b']], tuple, (a, b) => (a + b.length) % 2 === 0), [
  *   [1, 'a'],
@@ -1271,8 +1271,8 @@ export const concat: <A>(second: ReadonlyArray<A>) => (first: ReadonlyArray<A>) 
  * Creates an array of unique values, in order, from all given arrays using a `Eq` for equality comparisons
  *
  * @example
- * import { union } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { union } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], union(N.Eq)([2, 3])), [1, 2, 3])
@@ -1302,8 +1302,8 @@ export function union<A>(
  * comparisons. The order and references of result values are determined by the first array.
  *
  * @example
- * import { intersection } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { intersection } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], intersection(N.Eq)([2, 3])), [2])
@@ -1333,8 +1333,8 @@ export function intersection<A>(
  * comparisons. The order and references of result values are determined by the first array.
  *
  * @example
- * import { difference } from 'fp-ts/ReadonlyArray'
- * import * as N from 'fp-ts/number'
+ * import { difference } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], difference(N.Eq)([2, 3])), [1])
@@ -1434,7 +1434,7 @@ export const zero: <A>() => ReadonlyArray<A> = () => empty
  * The `W` suffix (short for **W**idening) means that the return types will be merged.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1460,7 +1460,7 @@ export const altW =
  * In case of `ReadonlyArray` concatenates the inputs into a single array.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1486,7 +1486,7 @@ export const ap: <A>(fa: ReadonlyArray<A>) => <B>(fab: ReadonlyArray<(a: A) => B
  * Composes computations in sequence, using the return value of one computation to determine the next computation.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1877,7 +1877,7 @@ export const getSemigroup = <A = never>(): Semigroup<ReadonlyArray<A>> => ({
  * Returns a `Monoid` for `ReadonlyArray<A>`.
  *
  * @example
- * import { getMonoid } from 'fp-ts/ReadonlyArray'
+ * import { getMonoid } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * const M = getMonoid<number>()
  * assert.deepStrictEqual(M.concat([1, 2], [3, 4]), [1, 2, 3, 4])
@@ -1896,8 +1896,8 @@ export const getMonoid = <A = never>(): Monoid<ReadonlyArray<A>> => ({
  * different lengths, the result is non equality.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { getEq } from 'fp-ts/ReadonlyArray'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { getEq } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * const E = getEq(S.Eq)
  * assert.strictEqual(E.equals(['a', 'b'], ['a', 'b']), true)
@@ -1916,8 +1916,8 @@ export const getEq = <A>(E: Eq<A>): Eq<ReadonlyArray<A>> =>
  * the same length, the result is equality.
  *
  * @example
- * import { getOrd } from 'fp-ts/ReadonlyArray'
- * import * as S from 'fp-ts/string'
+ * import { getOrd } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * const O = getOrd(S.Ord)
  * assert.strictEqual(O.compare(['b'], ['a']), 1)
@@ -2081,7 +2081,7 @@ export const Monad: Monad1<URI> = {
  * keeping only the result of the first.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -2371,7 +2371,7 @@ export const Witherable: Witherable1<URI> = {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * const filterE = RA.filterE(T.ApplicativePar)
@@ -2462,7 +2462,7 @@ export const empty: ReadonlyArray<never> = RNEA.empty
  * Check if a predicate holds true for every array member.
  *
  * @example
- * import { every } from 'fp-ts/ReadonlyArray'
+ * import { every } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const isPositive = (n: number): boolean => n > 0
@@ -2482,7 +2482,7 @@ export function every<A>(predicate: Predicate<A>): Predicate<ReadonlyArray<A>> {
  * Check if a predicate holds true for any array member.
  *
  * @example
- * import { some } from 'fp-ts/ReadonlyArray'
+ * import { some } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const isPositive = (n: number): boolean => n > 0
@@ -2509,8 +2509,8 @@ export const exists: <A>(predicate: Predicate<A>) => (as: ReadonlyArray<A>) => a
  * Places an element in between members of a `ReadonlyArray`, then folds the results using the provided `Monoid`.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { intercalate } from 'fp-ts/ReadonlyArray'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { intercalate } from  '@jvlk/fp-tsm/ReadonlyArray.js'
  *
  * assert.deepStrictEqual(intercalate(S.Monoid)('-')(['a', 'b', 'c']), 'a-b-c')
  *
@@ -2614,7 +2614,7 @@ export const prependToAll = prependAll
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RA.Functor` instead of `RA.readonlyArray`
- * (where `RA` is from `import RA from 'fp-ts/ReadonlyArray'`)
+ * (where `RA` is from `import RA from  '@jvlk/fp-tsm/ReadonlyArray.js'`)
  *
  * @category zone of death
  * @since 2.5.0

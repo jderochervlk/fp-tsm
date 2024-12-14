@@ -1198,7 +1198,7 @@ export const insertAt: <K>(E: Eq<K>) => <A>(k: K, a: A) => (m: ReadonlyMap<K, A>
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RM.Functor` instead of `RM.readonlyMap`
- * (where `RM` is from `import RM from 'fp-ts/ReadonlyMap'`)
+ * (where `RM` is from `import RM from  '@jvlk/fp-tsm/ReadonlyMap.js'`)
  *
  * @category zone of death
  * @since 2.5.0

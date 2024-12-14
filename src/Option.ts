@@ -12,7 +12,7 @@
  *
  *
  * @example
- * import * as O from 'fp-ts/Option'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
@@ -154,7 +154,7 @@ export const some: <A>(a: A) => Option<A> = _.some
  * Returns a *smart constructor* based on the given predicate.
  *
  * @example
- * import { none, some, fromPredicate } from 'fp-ts/Option'
+ * import { none, some, fromPredicate } from  '@jvlk/fp-tsm/Option.js'
  *
  * const getOption = fromPredicate((n: number) => n >= 0)
  *
@@ -175,8 +175,8 @@ export function fromPredicate<A>(predicate: Predicate<A>): (a: A) => Option<A> {
  * Returns the `Left` value of an `Either` if possible.
  *
  * @example
- * import { getLeft, none, some } from 'fp-ts/Option'
- * import { right, left } from 'fp-ts/Either'
+ * import { getLeft, none, some } from  '@jvlk/fp-tsm/Option.js'
+ * import { right, left } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(getLeft(right(1)), none)
  * assert.deepStrictEqual(getLeft(left('a')), some('a'))
@@ -190,8 +190,8 @@ export const getLeft = <E, A>(ma: Either<E, A>): Option<E> => (ma._tag === 'Righ
  * Returns the `Right` value of an `Either` if possible.
  *
  * @example
- * import { getRight, none, some } from 'fp-ts/Option'
- * import { right, left } from 'fp-ts/Either'
+ * import { getRight, none, some } from  '@jvlk/fp-tsm/Option.js'
+ * import { right, left } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(getRight(right(1)), some(1))
  * assert.deepStrictEqual(getRight(left('a')), none)
@@ -256,8 +256,8 @@ export const getShow = <A>(S: Show<A>): Show<Option<A>> => ({
 
 /**
  * @example
- * import { none, some, getEq } from 'fp-ts/Option'
- * import * as N from 'fp-ts/number'
+ * import { none, some, getEq } from  '@jvlk/fp-tsm/Option.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const E = getEq(N.Eq)
  * assert.strictEqual(E.equals(none, none), true)
@@ -282,8 +282,8 @@ export const getEq = <A>(E: Eq<A>): Eq<Option<A>> => ({
  *
  *
  * @example
- * import { none, some, getOrd } from 'fp-ts/Option'
- * import * as N from 'fp-ts/number'
+ * import { none, some, getOrd } from  '@jvlk/fp-tsm/Option.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const O = getOrd(N.Ord)
  * assert.strictEqual(O.compare(none, none), 0)
@@ -312,8 +312,8 @@ export const getOrd = <A>(O: Ord<A>): Ord<Option<A>> => ({
  * | some(a) | some(b) | some(concat(a, b)) |
  *
  * @example
- * import { getMonoid, some, none } from 'fp-ts/Option'
- * import { SemigroupSum } from 'fp-ts/number'
+ * import { getMonoid, some, none } from  '@jvlk/fp-tsm/Option.js'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
  *
  * const M = getMonoid(SemigroupSum)
  * assert.deepStrictEqual(M.concat(none, none), none)
@@ -778,7 +778,7 @@ export const FromEither: FromEither1<URI> = {
  * Returns `true` if the option is an instance of `Some`, `false` otherwise.
  *
  * @example
- * import { some, none, isSome } from 'fp-ts/Option'
+ * import { some, none, isSome } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.strictEqual(isSome(some(1)), true)
  * assert.strictEqual(isSome(none), false)
@@ -792,7 +792,7 @@ export const isSome: <A>(fa: Option<A>) => fa is Some<A> = _.isSome
  * Returns `true` if the option is `None`, `false` otherwise.
  *
  * @example
- * import { some, none, isNone } from 'fp-ts/Option'
+ * import { some, none, isNone } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.strictEqual(isNone(some(1)), false)
  * assert.strictEqual(isNone(none), true)
@@ -828,7 +828,7 @@ export const foldW = matchW
  * returned, otherwise the function is applied to the value inside the `Some` and the result is returned.
  *
  * @example
- * import { some, none, match } from 'fp-ts/Option'
+ * import { some, none, match } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
@@ -877,7 +877,7 @@ export const getOrElseW =
  * Extracts the value out of the structure, if it exists. Otherwise returns the given default value
  *
  * @example
- * import { some, none, getOrElse } from 'fp-ts/Option'
+ * import { some, none, getOrElse } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
@@ -944,8 +944,8 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as O from 'fp-ts/Option'
- * import * as E from 'fp-ts/Either'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  *
  * const compute = (value: number) => pipe(
  *   O.of(value),
@@ -996,7 +996,7 @@ export const chainFirstEitherK: <E, A, B>(f: (a: A) => Either<E, B>) => (ma: Opt
  * returns the value wrapped in a `Some`.
  *
  * @example
- * import { none, some, fromNullable } from 'fp-ts/Option'
+ * import { none, some, fromNullable } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(fromNullable(undefined), none)
  * assert.deepStrictEqual(fromNullable(null), none)
@@ -1014,7 +1014,7 @@ export const fromNullable = <A>(a: A): Option<NonNullable<A>> => (a == null ? no
  * See also [`tryCatchK`](#trycatchk).
  *
  * @example
- * import { none, some, tryCatch } from 'fp-ts/Option'
+ * import { none, some, tryCatch } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(
  *   tryCatch(() => {
@@ -1050,7 +1050,7 @@ export const tryCatchK =
  * Returns a *smart constructor* from a function that returns a nullable value.
  *
  * @example
- * import { fromNullableK, none, some } from 'fp-ts/Option'
+ * import { fromNullableK, none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * const f = (s: string): number | undefined => {
  *   const n = parseFloat(s)
@@ -1073,7 +1073,7 @@ export const fromNullableK: <A extends ReadonlyArray<unknown>, B>(
  * This is `chain` + `fromNullable`, useful when working with optional values.
  *
  * @example
- * import { some, none, fromNullable, chainNullableK } from 'fp-ts/Option'
+ * import { some, none, fromNullable, chainNullableK } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Employee {
@@ -1122,7 +1122,7 @@ export const chainNullableK =
  * Extracts the value out of the structure, if it exists. Otherwise returns `null`.
  *
  * @example
- * import { some, none, toNullable } from 'fp-ts/Option'
+ * import { some, none, toNullable } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
@@ -1149,7 +1149,7 @@ export const toNullable: <A>(ma: Option<A>) => A | null = /*#__PURE__*/ match(co
  * Extracts the value out of the structure, if it exists. Otherwise returns `undefined`.
  *
  * @example
- * import { some, none, toUndefined } from 'fp-ts/Option'
+ * import { some, none, toUndefined } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
@@ -1180,9 +1180,9 @@ export const toUndefined: <A>(ma: Option<A>) => A | undefined = /*#__PURE__*/ ma
  * Returns `true` if `ma` contains `a`
  *
  * @example
- * import { some, none, elem } from 'fp-ts/Option'
+ * import { some, none, elem } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as N from 'fp-ts/number'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.strictEqual(pipe(some(1), elem(N.Eq)(1)), true)
  * assert.strictEqual(pipe(some(1), elem(N.Eq)(2)), false)
@@ -1208,7 +1208,7 @@ export function elem<A>(E: Eq<A>): (a: A, ma?: Option<A>) => boolean | ((ma: Opt
  * Returns `true` if the predicate is satisfied by the wrapped value
  *
  * @example
- * import { some, none, exists } from 'fp-ts/Option'
+ * import { some, none, exists } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(
@@ -1399,7 +1399,7 @@ export const mapNullable = chainNullableK
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `O.Functor` instead of `O.option`
- * (where `O` is from `import O from 'fp-ts/Option'`)
+ * (where `O` is from `import O from  '@jvlk/fp-tsm/Option.js'`)
  *
  * @category zone of death
  * @since 2.0.0
@@ -1457,8 +1457,8 @@ export const getApplyMonoid: <A>(M: Monoid<A>) => Monoid<Option<A>> = /*#__PURE_
  * Use
  *
  * ```ts
- * import { first } from 'fp-ts/Semigroup'
- * import { getMonoid } from 'fp-ts/Option'
+ * import { first } from  '@jvlk/fp-tsm/Semigroup.js'
+ * import { getMonoid } from  '@jvlk/fp-tsm/Option.js'
  *
  * getMonoid(first())
  * ```
@@ -1475,7 +1475,7 @@ export const getApplyMonoid: <A>(M: Monoid<A>) => Monoid<Option<A>> = /*#__PURE_
  * | some(a) | some(b) | some(a)      |
  *
  * @example
- * import { getFirstMonoid, some, none } from 'fp-ts/Option'
+ * import { getFirstMonoid, some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * const M = getFirstMonoid<number>()
  * assert.deepStrictEqual(M.concat(none, none), none)
@@ -1493,8 +1493,8 @@ export const getFirstMonoid = <A = never>(): Monoid<Option<A>> => getMonoid(firs
  * Use
  *
  * ```ts
- * import { last } from 'fp-ts/Semigroup'
- * import { getMonoid } from 'fp-ts/Option'
+ * import { last } from  '@jvlk/fp-tsm/Semigroup.js'
+ * import { getMonoid } from  '@jvlk/fp-tsm/Option.js'
  *
  * getMonoid(last())
  * ```
@@ -1511,7 +1511,7 @@ export const getFirstMonoid = <A = never>(): Monoid<Option<A>> => getMonoid(firs
  * | some(a) | some(b) | some(b)      |
  *
  * @example
- * import { getLastMonoid, some, none } from 'fp-ts/Option'
+ * import { getLastMonoid, some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * const M = getLastMonoid<number>()
  * assert.deepStrictEqual(M.concat(none, none), none)

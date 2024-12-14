@@ -131,8 +131,8 @@ export const keys: <K extends string>(r: ReadonlyRecord<K, unknown>) => Readonly
  * Map a `ReadonlyRecord` into an `ReadonlyArray`.
  *
  * @example
- * import { collect } from 'fp-ts/ReadonlyRecord'
- * import { Ord } from 'fp-ts/string'
+ * import { collect } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
+ * import { Ord } from  '@jvlk/fp-tsm/string.js'
  *
  * const f = <A>(k: string, a: A) => `${k.toUpperCase()}-${a}`;
  * const x = { c: 3, a: "foo", b: false };
@@ -172,7 +172,7 @@ export function collect<A, B>(
  * Get a sorted `ReadonlyArray` of the key/value pairs contained in a `ReadonlyRecord`.
  *
  * @example
- * import { toReadonlyArray } from 'fp-ts/ReadonlyRecord'
+ * import { toReadonlyArray } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * const x = { c: 3, a: "foo", b: false };
  * assert.deepStrictEqual(toReadonlyArray(x), [
@@ -197,7 +197,7 @@ export const toReadonlyArray: <K extends string, A>(r: ReadonlyRecord<K, A>) => 
  *
  * @example
  * import { array, readonlyArray } from 'fp-ts'
- * import { toUnfoldable } from 'fp-ts/ReadonlyRecord'
+ * import { toUnfoldable } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(toUnfoldable(array)({ b: 2, a: 1 }),[ [ 'a', 1 ], [ 'b', 2 ]])
  * assert.deepStrictEqual(toUnfoldable(readonlyArray)({ b: 2, a: 1 }),[ [ 'a', 1 ], [ 'b', 2 ]])
@@ -223,7 +223,7 @@ export function toUnfoldable<F>(U: Unfoldable<F>): <A>(r: ReadonlyRecord<string,
  * Insert or replace a key/value pair in a `ReadonlyRecord`.
  *
  * @example
- * import { upsertAt } from 'fp-ts/ReadonlyRecord'
+ * import { upsertAt } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(upsertAt("a", 5)({ a: 1, b: 2 }), { a: 5, b: 2 });
  * assert.deepStrictEqual(upsertAt("c", 5)({ a: 1, b: 2 }), { a: 1, b: 2, c: 5 });
@@ -247,7 +247,7 @@ export const upsertAt =
  * Note. This function is not pipeable because is a `Refinement`.
  *
  * @example
- * import { has } from 'fp-ts/ReadonlyRecord'
+ * import { has } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(has("a", { a: 1, b: 2 }), true);
  * assert.deepStrictEqual(has("c", { a: 1, b: 2 }), false);
@@ -260,7 +260,7 @@ export const has = <K extends string>(k: string, r: ReadonlyRecord<K, unknown>):
  * Delete a key and value from a `ReadonlyRecord`.
  *
  * @example
- * import { deleteAt } from 'fp-ts/ReadonlyRecord'
+ * import { deleteAt } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(deleteAt("a")({ a: 1, b: 2 }), { b: 2 });
  * assert.deepStrictEqual(deleteAt("c")({ a: 1, b: 2 }), { a: 1, b: 2 });
@@ -288,7 +288,7 @@ export function deleteAt(k: string): <A>(r: ReadonlyRecord<string, A>) => Readon
  * with the entry updated, otherwise it returns `None`
  *
  * @example
- * import { updateAt } from 'fp-ts/ReadonlyRecord'
+ * import { updateAt } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(updateAt("a", 3)({ a: 1, b: 2 }), option.some({ a: 3, b: 2 }));
@@ -317,7 +317,7 @@ export const updateAt =
  * with the entry updated, otherwise it returns `None`
  *
  * @example
- * import { modifyAt } from 'fp-ts/ReadonlyRecord'
+ * import { modifyAt } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(modifyAt("a", (x: number) => x * 3)({ a: 1, b: 2 }), option.some({ a: 3, b: 2 }));
@@ -347,7 +347,7 @@ export const modifyAt =
  * with the entry removed, otherwise it returns `None`
  *
  * @example
- * import { pop } from 'fp-ts/ReadonlyRecord'
+ * import { pop } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(pop("a")({ a: 1, b: 2, c: 3 }), option.some([1, { b: 2, c: 3 }]));
@@ -374,7 +374,7 @@ export function pop(k: string): <A>(r: ReadonlyRecord<string, A>) => Option<read
  * contained in another `ReadonlyRecord`.
  *
  * @example
- * import { isSubrecord } from 'fp-ts/ReadonlyRecord'
+ * import { isSubrecord } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { string } from 'fp-ts'
  *
  * assert.deepStrictEqual(
@@ -428,7 +428,7 @@ export function isSubrecord<A>(
  * otherwise it returns `None`
  *
  * @example
- * import { lookup } from 'fp-ts/ReadonlyRecord'
+ * import { lookup } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(lookup("b")({ a: "foo", b: "bar" }), option.some("bar"));
@@ -1039,10 +1039,10 @@ export function fromFoldable<F, A>(
  * - combine values for duplicate keys.
  *
  * @example
- * import { last } from 'fp-ts/Semigroup'
- * import { Foldable, zip } from 'fp-ts/ReadonlyArray'
- * import { identity } from 'fp-ts/function'
- * import { ReadonlyRecord, fromFoldableMap } from 'fp-ts/ReadonlyRecord'
+ * import { last } from  '@jvlk/fp-tsm/Semigroup.js'
+ * import { Foldable, zip } from  '@jvlk/fp-tsm/ReadonlyArray.js'
+ * import { identity } from  '@jvlk/fp-tsm/function.js'
+ * import { ReadonlyRecord, fromFoldableMap } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * export const zipObject = <K extends string, A>(keys: ReadonlyArray<K>, values: ReadonlyArray<A>): ReadonlyRecord<K, A> =>
  *   fromFoldableMap(last<A>(), Foldable)(zip(keys, values), identity)
@@ -1100,7 +1100,7 @@ export function fromFoldableMap<F, B>(
  * Alias of [`toReadonlyArray`](#toreadonlyarray).
  *
  * @example
- * import { toEntries } from 'fp-ts/ReadonlyRecord'
+ * import { toEntries } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(toEntries({ b: 2, a: 1 }), [['a', 1], ['b', 2]])
  *
@@ -1113,7 +1113,7 @@ export const toEntries = toReadonlyArray
  * Converts a `ReadonlyArray` of `[key, value]` tuples into a `ReadonlyRecord`.
  *
  * @example
- * import { fromEntries } from 'fp-ts/ReadonlyRecord'
+ * import { fromEntries } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * assert.deepStrictEqual(fromEntries([['a', 1], ['b', 2], ['a', 3]]), { b: 2, a: 3 })
  *
@@ -1682,7 +1682,7 @@ export function reduceRight<A, B>(
  * keeping the `Some` values.
  *
  * @example
- * import { compact } from 'fp-ts/ReadonlyRecord'
+ * import { compact } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(compact({ a: option.some("foo"), b: option.none, c: option.some("bar") }), {
@@ -1710,7 +1710,7 @@ export const compact = <A>(r: ReadonlyRecord<string, Option<A>>): ReadonlyRecord
  * Separate a `ReadonlyRecord` of `Either`s into `Left`s and `Right`s.
  *
  * @example
- * import { separate } from 'fp-ts/ReadonlyRecord'
+ * import { separate } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  * import { either } from 'fp-ts'
  *
  * assert.deepStrictEqual(
@@ -1833,8 +1833,8 @@ export function getEq<A>(E: Eq<A>): Eq<ReadonlyRecord<string, A>> {
  * overlapping entries with the provided `Semigroup`.
  *
  * @example
- * import { SemigroupSum } from 'fp-ts/number'
- * import { getMonoid } from 'fp-ts/ReadonlyRecord'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
+ * import { getMonoid } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * const M = getMonoid(SemigroupSum);
  * assert.deepStrictEqual(M.concat({ foo: 123, bar: 234 }, { foo: 456, baz: 567 }), { foo: 579 , bar: 234, baz: 567 });
@@ -2073,8 +2073,8 @@ export const getUnionSemigroup = <A>(S: Semigroup<A>): Semigroup<ReadonlyRecord<
  * entries that have the same key with the provided `Semigroup`.
  *
  * @example
- * import { SemigroupSum } from 'fp-ts/number'
- * import { getUnionMonoid } from 'fp-ts/ReadonlyRecord'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
+ * import { getUnionMonoid } from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * const M = getUnionMonoid(SemigroupSum);
  * assert.deepStrictEqual(M.concat({ foo: 123, bar: 234 }, { foo: 456, baz: 567 }), { foo: 579 , bar: 234, baz: 567 });
@@ -2258,7 +2258,7 @@ export function hasOwnProperty<K extends string>(this: any, k: string, r?: Reado
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RR.Functor` instead of `RR.readonlyRecord`
- * (where `RR` is from `import RR from 'fp-ts/ReadonlyRecord'`)
+ * (where `RR` is from `import RR from  '@jvlk/fp-tsm/ReadonlyRecord.js'`)
  *
  * @category zone of death
  * @since 2.5.0

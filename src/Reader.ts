@@ -9,9 +9,9 @@
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as O from 'fp-ts/Option'
- * import * as R from 'fp-ts/Reader'
- * import * as RR from 'fp-ts/ReadonlyRecord'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
+ * import * as R from  '@jvlk/fp-tsm/Reader.js'
+ * import * as RR from  '@jvlk/fp-tsm/ReadonlyRecord.js'
  *
  * interface Bindings extends RR.ReadonlyRecord<string, number> {}
  *
@@ -98,8 +98,8 @@ export const asks: <R, A>(f: (r: R) => A) => Reader<R, A> = identity
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as R from 'fp-ts/Reader'
- * import * as string from 'fp-ts/string'
+ * import * as R from  '@jvlk/fp-tsm/Reader.js'
+ * import * as string from  '@jvlk/fp-tsm/string.js'
  *
  * const calculateContentLen: R.Reader<string, number> = pipe(
  *   R.Do,
@@ -610,7 +610,7 @@ export const chainFirstW: <R2, A, B>(f: (a: A) => Reader<R2, B>) => <R1>(ma: Rea
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `R.Functor` instead of `R.reader`
- * (where `R` is from `import R from 'fp-ts/Reader'`)
+ * (where `R` is from `import R from  '@jvlk/fp-tsm/Reader.js'`)
  *
  * @category zone of death
  * @since 2.0.0

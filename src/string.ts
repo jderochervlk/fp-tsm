@@ -15,7 +15,7 @@ import * as Sh from './Show.js'
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.Eq.equals('a', 'a'), true)
  * assert.deepStrictEqual(S.Eq.equals('a', 'b'), false)
@@ -31,7 +31,7 @@ export const Eq: E.Eq<string> = {
  * `string` semigroup under concatenation.
  *
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.Semigroup.concat('a', 'b'), 'ab')
  *
@@ -55,7 +55,7 @@ export const empty = ''
  * The `empty` value is `''`.
  *
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.Monoid.concat('a', 'b'), 'ab')
  * assert.deepStrictEqual(S.Monoid.concat('a', S.Monoid.empty), 'a')
@@ -70,7 +70,7 @@ export const Monoid: M.Monoid<string> = {
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.Ord.compare('a', 'a'), 0)
  * assert.deepStrictEqual(S.Ord.compare('a', 'b'), -1)
@@ -86,7 +86,7 @@ export const Ord: O.Ord<string> = {
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.Show.show('a'), '"a"')
  *
@@ -103,7 +103,7 @@ export const Show: Sh.Show<string> = {
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * assert.deepStrictEqual(S.isString('a'), true)
  * assert.deepStrictEqual(S.isString(1), false)
@@ -119,7 +119,7 @@ export const isString: Refinement<unknown, string> = (u: unknown): u is string =
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('a', S.toUpperCase), 'A')
@@ -130,7 +130,7 @@ export const toUpperCase = (s: string): string => s.toUpperCase()
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('A', S.toLowerCase), 'a')
@@ -141,7 +141,7 @@ export const toLowerCase = (s: string): string => s.toLowerCase()
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.replace('b', 'd')), 'adc')
@@ -155,7 +155,7 @@ export const replace =
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trim), 'a')
@@ -166,7 +166,7 @@ export const trim = (s: string): string => s.trim()
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trimLeft), 'a ')
@@ -177,7 +177,7 @@ export const trimLeft = (s: string): string => s.trimLeft()
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(' a ', S.trimRight), ' a')
@@ -188,7 +188,7 @@ export const trimRight = (s: string): string => s.trimRight()
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abcd', S.slice(1, 3)), 'bc')
@@ -208,7 +208,7 @@ export const slice =
  * Test whether a `string` is empty.
  *
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('', S.isEmpty), true)
@@ -222,7 +222,7 @@ export const isEmpty = (s: string): boolean => s.length === 0
  * Calculate the number of characters in a `string`.
  *
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.size), 3)
@@ -233,7 +233,7 @@ export const size = (s: string): number => s.length
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.split('')), ['a', 'b', 'c'])
@@ -250,7 +250,7 @@ export const split =
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.includes('b')), true)
@@ -265,7 +265,7 @@ export const includes =
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.startsWith('a')), true)
@@ -280,7 +280,7 @@ export const startsWith =
 
 /**
  * @example
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('abc', S.endsWith('c')), true)

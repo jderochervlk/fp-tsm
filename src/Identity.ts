@@ -406,7 +406,7 @@ export const chain: <A, B>(f: (a: A) => Identity<B>) => (ma: Identity<A>) => Ide
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `I.Functor` instead of `I.identity`
- * (where `I` is from `import I from 'fp-ts/Identity'`)
+ * (where `I` is from `import I from  '@jvlk/fp-tsm/Identity.js'`)
  *
  * @category zone of death
  * @since 2.0.0

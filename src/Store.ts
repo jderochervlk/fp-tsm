@@ -160,7 +160,7 @@ export const Comonad: Comonad2<URI> = {
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Comonad` instance, pass `S.Comonad` instead of `S.store`
- * (where `S` is from `import S from 'fp-ts/Store'`)
+ * (where `S` is from `import S from  '@jvlk/fp-tsm/Store.js'`)
  *
  * @category zone of death
  * @since 2.0.0

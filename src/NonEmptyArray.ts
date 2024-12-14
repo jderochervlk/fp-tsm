@@ -120,8 +120,8 @@ export const unsafeUpdateAt = <A>(i: number, a: A, as: NonEmptyArray<A>): NonEmp
  * Remove duplicates from a `NonEmptyArray`, keeping the first occurrence of an element.
  *
  * @example
- * import { uniq } from 'fp-ts/NonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { uniq } from  '@jvlk/fp-tsm/NonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(uniq(N.Eq)([1, 2, 1]), [1, 2])
  *
@@ -148,10 +148,10 @@ export const uniq =
  * etc...
  *
  * @example
- * import * as NEA from 'fp-ts/NonEmptyArray'
- * import { contramap } from 'fp-ts/Ord'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
+ * import * as NEA from  '@jvlk/fp-tsm/NonEmptyArray.js'
+ * import { contramap } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
@@ -201,7 +201,7 @@ export const union = <A>(E: Eq<A>): ((second: NonEmptyArray<A>) => (first: NonEm
  * Rotate a `NonEmptyArray` by `n` steps.
  *
  * @example
- * import { rotate } from 'fp-ts/NonEmptyArray'
+ * import { rotate } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(rotate(2)([1, 2, 3, 4, 5]), [4, 5, 1, 2, 3])
  * assert.deepStrictEqual(rotate(-2)([1, 2, 3, 4, 5]), [3, 4, 5, 1, 2])
@@ -249,7 +249,7 @@ export const fromArray = <A>(as: Array<A>): Option<NonEmptyArray<A>> => (isNonEm
  * **Note**. `n` is normalized to a natural number.
  *
  * @example
- * import { makeBy } from 'fp-ts/NonEmptyArray'
+ * import { makeBy } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
@@ -275,7 +275,7 @@ export const makeBy =
  * **Note**. `n` is normalized to a natural number.
  *
  * @example
- * import { replicate } from 'fp-ts/NonEmptyArray'
+ * import { replicate } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(3, replicate('a')), ['a', 'a', 'a'])
@@ -289,7 +289,7 @@ export const replicate = <A>(a: A): ((n: number) => ReadonlyNonEmptyArray<A>) =>
  * Create a `NonEmptyArray` containing a range of integers, including both endpoints.
  *
  * @example
- * import { range } from 'fp-ts/NonEmptyArray'
+ * import { range } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(range(1, 5), [1, 2, 3, 4, 5])
  *
@@ -303,7 +303,7 @@ export const range = (start: number, end: number): NonEmptyArray<number> =>
  * Return the tuple of the `head` and the `tail`.
  *
  * @example
- * import { unprepend } from 'fp-ts/NonEmptyArray'
+ * import { unprepend } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(unprepend([1, 2, 3]), [1, [2, 3]])
  *
@@ -315,7 +315,7 @@ export const unprepend = <A>(as: NonEmptyArray<A>): [A, Array<A>] => [head(as), 
  * Return the tuple of the `init` and the `last`.
  *
  * @example
- * import { unappend } from 'fp-ts/NonEmptyArray'
+ * import { unappend } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(unappend([1, 2, 3, 4]), [[1, 2, 3], 4])
  *
@@ -358,8 +358,8 @@ export const reverse = <A>(as: NonEmptyArray<A>): NonEmptyArray<A> => [last(as),
  * Group equal, consecutive elements of an array into non empty arrays.
  *
  * @example
- * import { group } from 'fp-ts/NonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { group } from  '@jvlk/fp-tsm/NonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(group(N.Ord)([1, 2, 1, 1]), [
  *   [1],
@@ -402,7 +402,7 @@ export function group<A>(E: Eq<A>): (as: Array<A>) => Array<NonEmptyArray<A>> {
  * function on each element, and grouping the results according to values returned
  *
  * @example
- * import { groupBy } from 'fp-ts/NonEmptyArray'
+ * import { groupBy } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(groupBy((s: string) => String(s.length))(['a', 'b', 'ab']), {
  *   '1': ['a', 'b'],
@@ -515,7 +515,7 @@ export const unzip = <A, B>(abs: NonEmptyArray<[A, B]>): [NonEmptyArray<A>, NonE
  * Prepend an element to every member of an array
  *
  * @example
- * import { prependAll } from 'fp-ts/NonEmptyArray'
+ * import { prependAll } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(prependAll(9)([1, 2, 3, 4]), [9, 1, 9, 2, 9, 3, 9, 4])
  *
@@ -535,7 +535,7 @@ export const prependAll =
  * Places an element in between members of an array
  *
  * @example
- * import { intersperse } from 'fp-ts/NonEmptyArray'
+ * import { intersperse } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(intersperse(9)([1, 2, 3, 4]), [1, 9, 2, 9, 3, 9, 4])
  *
@@ -663,7 +663,7 @@ const _traverseWithIndex: TraversableWithIndex1<URI, number>['traverseWithIndex'
  * The `W` suffix (short for **W**idening) means that the return types will be merged.
  *
  * @example
- * import * as NEA from 'fp-ts/NonEmptyArray'
+ * import * as NEA from  '@jvlk/fp-tsm/NonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -689,7 +689,7 @@ export const altW =
  * In case of `NonEmptyArray` concatenates the inputs into a single array.
  *
  * @example
- * import * as NEA from 'fp-ts/NonEmptyArray'
+ * import * as NEA from  '@jvlk/fp-tsm/NonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -715,7 +715,7 @@ export const ap = <A>(as: NonEmptyArray<A>): (<B>(fab: NonEmptyArray<(a: A) => B
 
 /**
  * @example
- * import * as NEA from 'fp-ts/NonEmptyArray'
+ * import * as NEA from  '@jvlk/fp-tsm/NonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -894,8 +894,8 @@ export const getSemigroup = <A = never>(): Semigroup<NonEmptyArray<A>> => ({
 
 /**
  * @example
- * import { getEq } from 'fp-ts/NonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { getEq } from  '@jvlk/fp-tsm/NonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const E = getEq(N.Eq)
  * assert.strictEqual(E.equals([1, 2], [1, 2]), true)
@@ -1158,7 +1158,7 @@ export const last: <A>(nea: NonEmptyArray<A>) => A = RNEA.last
  * Get all but the last element of a non empty array, creating a new array.
  *
  * @example
- * import { init } from 'fp-ts/NonEmptyArray'
+ * import { init } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(init([1, 2, 3]), [1, 2])
  * assert.deepStrictEqual(init([1]), [])
@@ -1245,8 +1245,8 @@ export const updateLast = <A>(a: A): ((as: NonEmptyArray<A>) => NonEmptyArray<A>
  * Places an element in between members of a `NonEmptyArray`, then folds the results using the provided `Semigroup`.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { intercalate } from 'fp-ts/NonEmptyArray'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { intercalate } from  '@jvlk/fp-tsm/NonEmptyArray.js'
  *
  * assert.deepStrictEqual(intercalate(S.Semigroup)('-')(['a', 'b', 'c']), 'a-b-c')
  *
@@ -1375,7 +1375,7 @@ export const fold: <A>(S: Semigroup<A>) => (fa: NonEmptyArray<A>) => A = RNEA.co
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `NEA.Functor` instead of `NEA.nonEmptyArray`
- * (where `NEA` is from `import NEA from 'fp-ts/NonEmptyArray'`)
+ * (where `NEA` is from `import NEA from  '@jvlk/fp-tsm/NonEmptyArray.js'`)
  *
  * @category zone of death
  * @since 2.0.0

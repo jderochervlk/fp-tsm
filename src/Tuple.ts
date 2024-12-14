@@ -361,7 +361,7 @@ export const mapLeft: <E, G>(f: (e: E) => G) => <A>(fa: [A, E]) => [A, G] = mapS
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.tuple`
- * (where `T` is from `import T from 'fp-ts/Tuple'`)
+ * (where `T` is from `import T from  '@jvlk/fp-tsm/Tuple.js'`)
  *
  * @category zone of death
  * @since 2.0.0

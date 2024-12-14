@@ -457,8 +457,8 @@ export const tap: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RT from 'fp-ts/ReaderTask'
- * import * as Console from 'fp-ts/Console'
+ * import * as RT from  '@jvlk/fp-tsm/ReaderTask.js'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  * // Will produce `Hello, fp-ts` to the stdout
  * const effect = pipe(
@@ -498,7 +498,7 @@ export const tapReader: {
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as RT from 'fp-ts/ReaderTask'
+ * import * as RT from  '@jvlk/fp-tsm/ReaderTask.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
  *
  * const effect = pipe(
@@ -933,7 +933,7 @@ export const sequenceSeqArray: <R, A>(arr: ReadonlyArray<ReaderTask<R, A>>) => R
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RT.Functor` instead of `RT.readerTask`
- * (where `RT` is from `import RT from 'fp-ts/ReaderTask'`)
+ * (where `RT` is from `import RT from  '@jvlk/fp-tsm/ReaderTask.js'`)
  *
  * @category zone of death
  * @since 2.3.0
@@ -952,7 +952,7 @@ export const readerTask: MonadTask2<URI> = {
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RT.Functor` instead of `RT.readerTaskSeq`
- * (where `RT` is from `import RT from 'fp-ts/ReaderTask'`)
+ * (where `RT` is from `import RT from  '@jvlk/fp-tsm/ReaderTask.js'`)
  *
  * @category zone of death
  * @since 2.3.0

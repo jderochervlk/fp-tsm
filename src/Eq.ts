@@ -60,10 +60,10 @@ export const struct = <A>(eqs: { [K in keyof A]: Eq<A[K]> }): Eq<{ readonly [K i
  * Given a tuple of `Eq`s returns a `Eq` for the tuple
  *
  * @example
- * import { tuple } from 'fp-ts/Eq'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
- * import * as B from 'fp-ts/boolean'
+ * import { tuple } from  '@jvlk/fp-tsm/Eq.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
+ * import * as B from  '@jvlk/fp-tsm/boolean.js'
  *
  * const E = tuple(S.Eq, N.Eq, B.Eq)
  * assert.strictEqual(E.equals(['a', 1, true], ['a', 1, true]), true)
@@ -92,9 +92,9 @@ const contramap_: <A, B>(fa: Eq<A>, f: (b: B) => A) => Eq<B> = (fa, f) => pipe(f
  * using `contramap` we can do this
  *
  * @example
- * import { contramap, Eq } from 'fp-ts/Eq'
+ * import { contramap, Eq } from  '@jvlk/fp-tsm/Eq.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import * as S from 'fp-ts/string'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * type UUID = string
  *
@@ -223,7 +223,7 @@ export const strictEqual: <A>(a: A, b: A) => boolean = eqStrict.equals
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Contravariant` instance, pass `E.Contravariant` instead of `E.eq`
- * (where `E` is from `import E from 'fp-ts/Eq'`)
+ * (where `E` is from `import E from  '@jvlk/fp-tsm/Eq.js'`)
  *
  * @category zone of death
  * @since 2.0.0

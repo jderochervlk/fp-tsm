@@ -11,7 +11,7 @@
  * Formally, `Apply` represents a strong lax semi-monoidal endofunctor.
  *
  * @example
- * import * as O from 'fp-ts/Option'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const f = (a: string) => (b: number) => (c: boolean) => a + String(b) + String(c)
@@ -540,8 +540,8 @@ function getTupleConstructor(len: number): (a: unknown) => any {
  * Tuple sequencing, i.e., take a tuple of monadic actions and does them from left-to-right, returning the resulting tuple.
  *
  * @example
- * import { sequenceT } from 'fp-ts/Apply'
- * import * as O from 'fp-ts/Option'
+ * import { sequenceT } from '@jvlk/fp-tsm/Apply.js'
+ * import * as O from '@jvlk/fp-tsm/Option.js'
  *
  * const sequenceTOption = sequenceT(O.Apply)
  * assert.deepStrictEqual(sequenceTOption(O.some(1)), O.some([1]))
@@ -642,8 +642,8 @@ function getRecordConstructor(keys: ReadonlyArray<string>) {
  * Like `Apply.sequenceT` but works with structs instead of tuples.
  *
  * @example
- * import * as E from 'fp-ts/Either'
- * import { sequenceS } from 'fp-ts/Apply'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import { sequenceS } from '@jvlk/fp-tsm/Apply.js'
  *
  * const ado = sequenceS(E.Apply)
  *

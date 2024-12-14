@@ -330,8 +330,8 @@ export function getMonad<E>(S: Semigroup<E>): Monad2C<URI, E> & MonadThrow2C<URI
  * Returns an `E` value if possible
  *
  * @example
- * import { getLeft, left, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { getLeft, left, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(getLeft(left('a')), some('a'))
  * assert.deepStrictEqual(getLeft(right(1)), none)
@@ -348,8 +348,8 @@ export function getLeft<E, A>(fa: These<E, A>): Option<E> {
  * Returns an `A` value if possible
  *
  * @example
- * import { getRight, left, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { getRight, left, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(getRight(left('a')), none)
  * assert.deepStrictEqual(getRight(right(1)), some(1))
@@ -365,8 +365,8 @@ export function getRight<E, A>(fa: These<E, A>): Option<A> {
 // TODO: make lazy in v3
 /**
  * @example
- * import { leftOrBoth, left, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { leftOrBoth, left, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(leftOrBoth('a')(none), left('a'))
  * assert.deepStrictEqual(leftOrBoth('a')(some(1)), both('a', 1))
@@ -381,8 +381,8 @@ export function leftOrBoth<E>(e: E): <A>(ma: Option<A>) => These<E, A> {
 // TODO: make lazy in v3
 /**
  * @example
- * import { rightOrBoth, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { rightOrBoth, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(rightOrBoth(1)(none), right(1))
  * assert.deepStrictEqual(rightOrBoth(1)(some('a')), both('a', 1))
@@ -398,8 +398,8 @@ export function rightOrBoth<A>(a: A): <E>(me: Option<E>) => These<E, A> {
  * Returns the `E` value if and only if the value is constructed with `Left`
  *
  * @example
- * import { getLeftOnly, left, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { getLeftOnly, left, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(getLeftOnly(left('a')), some('a'))
  * assert.deepStrictEqual(getLeftOnly(right(1)), none)
@@ -416,8 +416,8 @@ export function getLeftOnly<E, A>(fa: These<E, A>): Option<E> {
  * Returns the `A` value if and only if the value is constructed with `Right`
  *
  * @example
- * import { getRightOnly, left, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { getRightOnly, left, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(getRightOnly(left('a')), none)
  * assert.deepStrictEqual(getRightOnly(right(1)), some(1))
@@ -434,8 +434,8 @@ export function getRightOnly<E, A>(fa: These<E, A>): Option<A> {
  * Takes a pair of `Option`s and attempts to create a `These` from them
  *
  * @example
- * import { fromOptions, left, right, both } from 'fp-ts/These'
- * import { none, some } from 'fp-ts/Option'
+ * import { fromOptions, left, right, both } from  '@jvlk/fp-tsm/These.js'
+ * import { none, some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(fromOptions(none, none), none)
  * assert.deepStrictEqual(fromOptions(some('a'), none), some(left('a')))
@@ -695,7 +695,7 @@ export const exists =
 
 /**
  * @example
- * import { toTuple2, left, right, both } from 'fp-ts/These'
+ * import { toTuple2, left, right, both } from  '@jvlk/fp-tsm/These.js'
  *
  * assert.deepStrictEqual(toTuple2(() => 'a', () => 1)(left('b')), ['b', 1])
  * assert.deepStrictEqual(toTuple2(() => 'a', () => 1)(right(2)), ['a', 2])
@@ -787,7 +787,7 @@ export const traverseReadonlyArrayWithIndex =
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.these`
- * (where `T` is from `import T from 'fp-ts/These'`)
+ * (where `T` is from `import T from  '@jvlk/fp-tsm/These.js'`)
  *
  * @category zone of death
  * @since 2.0.0

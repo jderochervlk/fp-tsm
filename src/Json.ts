@@ -25,8 +25,8 @@ export interface JsonArray extends ReadonlyArray<Json> {}
  * Converts a JavaScript Object Notation (JSON) string into a `Json` type.
  *
  * @example
- * import * as J from 'fp-ts/Json'
- * import * as E from 'fp-ts/Either'
+ * import * as J from  '@jvlk/fp-tsm/Json.js'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe('{"a":1}', J.parse), E.right({ a: 1 }))
@@ -40,8 +40,8 @@ export const parse = (s: string): Either<unknown, Json> => tryCatch(() => JSON.p
  * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
  *
  * @example
- * import * as E from 'fp-ts/Either'
- * import * as J from 'fp-ts/Json'
+ * import * as E from  '@jvlk/fp-tsm/Either.js'
+ * import * as J from  '@jvlk/fp-tsm/Json.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(J.stringify({ a: 1 }), E.right('{"a":1}'))

@@ -61,7 +61,7 @@ type NonEmptyArray<T> = NEA.NonEmptyArray<T>
  * Test whether an array is empty
  *
  * @example
- * import { isEmpty } from 'fp-ts/Array'
+ * import { isEmpty } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.strictEqual(isEmpty([]), true)
  * assert.strictEqual(isEmpty(['a']), false)
@@ -75,7 +75,7 @@ export const isEmpty = <A>(as: Array<A>): as is [] => as.length === 0
  * Test whether an array is non empty narrowing down the type to `NonEmptyArray<A>`
  *
  * @example
- * import { isNonEmpty } from 'fp-ts/Array'
+ * import { isNonEmpty } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.strictEqual(isNonEmpty([]), false)
  * assert.strictEqual(isNonEmpty(['a']), true)
@@ -93,7 +93,7 @@ export const isNonEmpty: <A>(as: Array<A>) => as is NonEmptyArray<A> = NEA.isNon
  * Prepend an element to the front of a `Array`, creating a new `NonEmptyArray`.
  *
  * @example
- * import { prepend } from 'fp-ts/Array'
+ * import { prepend } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([2, 3, 4], prepend(1)), [1, 2, 3, 4])
@@ -106,7 +106,7 @@ export const prepend: <A>(head: A) => (tail: Array<A>) => NEA.NonEmptyArray<A> =
  * Less strict version of [`prepend`](#prepend).
  *
  * @example
- * import { prependW } from 'fp-ts/Array'
+ * import { prependW } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([2, 3, 4], prependW("a")), ["a", 2, 3, 4]);
@@ -119,7 +119,7 @@ export const prependW: <A, B>(head: B) => (tail: Array<A>) => NEA.NonEmptyArray<
  * Append an element to the end of a `Array`, creating a new `NonEmptyArray`.
  *
  * @example
- * import { append } from 'fp-ts/Array'
+ * import { append } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], append(4)), [1, 2, 3, 4])
@@ -132,7 +132,7 @@ export const append: <A>(end: A) => (init: Array<A>) => NEA.NonEmptyArray<A> = N
  * Less strict version of [`append`](#append).
  *
  * @example
- * import { appendW } from 'fp-ts/Array'
+ * import { appendW } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], appendW("d")), [1, 2, 3, "d"]);
@@ -147,7 +147,7 @@ export const appendW: <A, B>(end: B) => (init: Array<A>) => NEA.NonEmptyArray<A 
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { makeBy } from 'fp-ts/Array'
+ * import { makeBy } from  '@jvlk/fp-tsm/Array.js'
  *
  * const double = (i: number): number => i * 2
  * assert.deepStrictEqual(makeBy(5, double), [0, 2, 4, 6, 8])
@@ -165,7 +165,7 @@ export const makeBy = <A>(n: number, f: (i: number) => A): Array<A> => (n <= 0 ?
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { replicate } from 'fp-ts/Array'
+ * import { replicate } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(replicate(3, 'a'), ['a', 'a', 'a'])
  * assert.deepStrictEqual(replicate(-3, 'a'), [])
@@ -181,7 +181,7 @@ export const replicate = <A>(n: number, a: A): Array<A> => makeBy(n, () => a)
  * it returns an empty array.
  *
  * @example
- * import { fromPredicate } from 'fp-ts/Array'
+ * import { fromPredicate } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { isString } from "fp-ts/string";
  *
@@ -210,7 +210,7 @@ export function fromPredicate<A>(predicate: Predicate<A>): (a: A) => Array<A> {
  * `Option` if it is `Some` and it will be empty if the `Option` is `None`.
  *
  * @example
- * import { fromOption } from 'fp-ts/Array'
+ * import { fromOption } from  '@jvlk/fp-tsm/Array.js'
  * import { option } from "fp-ts";
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
@@ -227,7 +227,7 @@ export const fromOption: <A>(fa: Option<A>) => Array<A> = (ma) => (_.isNone(ma) 
  * `Either` if it is `Right` and it will be empty if the `Either` is `Left`.
  *
  * @example
- * import { fromEither } from 'fp-ts/Array'
+ * import { fromEither } from  '@jvlk/fp-tsm/Array.js'
  * import { either } from "fp-ts";
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
@@ -245,7 +245,7 @@ export const fromEither: <A>(fa: Either<unknown, A>) => Array<A> = (e) => (_.isL
  * The `W` suffix (short for **W**idening) means that the handler return types will be merged.
  *
  * @example
- * import { matchW } from 'fp-ts/Array'
+ * import { matchW } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const matcherW = matchW(
@@ -268,7 +268,7 @@ export const matchW =
  * it passes the array to `onNonEmpty` and returns the result.
  *
  * @example
- * import { match } from 'fp-ts/Array'
+ * import { match } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const matcher = match(
@@ -288,7 +288,7 @@ export const match: <B, A>(onEmpty: LazyArg<B>, onNonEmpty: (as: NonEmptyArray<A
  * `onNonEmpty` have different return types.
  *
  * @example
- * import { matchLeftW } from 'fp-ts/Array'
+ * import { matchLeftW } from  '@jvlk/fp-tsm/Array.js'
  *
  * const f = matchLeftW(
  *   () => 0,
@@ -310,7 +310,7 @@ export const matchLeftW =
  * it passes the array to `onNonEmpty` broken into its first element and remaining elements.
  *
  * @example
- * import { matchLeft } from 'fp-ts/Array'
+ * import { matchLeft } from  '@jvlk/fp-tsm/Array.js'
  *
  * const len: <A>(as: Array<A>) => number = matchLeft(() => 0, (_, tail) => 1 + len(tail))
  * assert.strictEqual(len([1, 2, 3]), 3)
@@ -335,7 +335,7 @@ export const foldLeft: <A, B>(onEmpty: LazyArg<B>, onNonEmpty: (head: A, tail: A
  * `onNonEmpty` have different return types.
  *
  * @example
- * import { matchRightW } from 'fp-ts/Array'
+ * import { matchRightW } from  '@jvlk/fp-tsm/Array.js'
  *
  * const f = matchRightW(
  *   () => 0,
@@ -357,7 +357,7 @@ export const matchRightW =
  * it passes the array to `onNonEmpty` broken  into its initial elements and the last element.
  *
  * @example
- * import { matchRight } from 'fp-ts/Array'
+ * import { matchRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * const len: <A>(as: Array<A>) => number = matchRight(
  *   () => 0,
@@ -390,7 +390,7 @@ export const foldRight: <A, B>(onEmpty: LazyArg<B>, onNonEmpty: (init: Array<A>,
  * Same as [`chain`](#chain), but passing also the index to the iterating function.
  *
  * @example
- * import { chainWithIndex, replicate } from 'fp-ts/Array'
+ * import { chainWithIndex, replicate } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const f = (index: number, x: string) => replicate(2, `${x}${index}`);
@@ -416,7 +416,7 @@ export const chainWithIndex =
  * Same as `reduce` but it carries over the intermediate steps
  *
  * @example
- * import { scanLeft } from 'fp-ts/Array'
+ * import { scanLeft } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(scanLeft(10, (b, a: number) => b - a)([1, 2, 3]), [10, 9, 7, 4])
  *
@@ -438,7 +438,7 @@ export const scanLeft =
  * Fold an array from the right, keeping all intermediate results instead of only the final result
  *
  * @example
- * import { scanRight } from 'fp-ts/Array'
+ * import { scanRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(scanRight(10, (a: number, b) => b - a)([1, 2, 3]), [4, 5, 7, 10])
  *
@@ -460,7 +460,7 @@ export const scanRight =
  * Calculate the number of elements in a `Array`.
  *
  * @example
- * import { size } from 'fp-ts/Array'
+ * import { size } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.strictEqual(size(["a","b","c"]),3)
  *
@@ -472,7 +472,7 @@ export const size = <A>(as: Array<A>): number => as.length
  * Test whether an array contains a particular index
  *
  * @example
- * import { isOutOfBound } from 'fp-ts/Array'
+ * import { isOutOfBound } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.strictEqual(isOutOfBound(1,["a","b","c"]),false)
  * assert.strictEqual(isOutOfBound(-1,["a","b","c"]),true)
@@ -489,8 +489,8 @@ export const isOutOfBound: <A>(i: number, as: Array<A>) => boolean = NEA.isOutOf
  * index is valid.
  *
  * @example
- * import { lookup } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { lookup } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], lookup(1)), some(2))
@@ -507,8 +507,8 @@ export const lookup: {
  * Get the first element in an array, or `None` if the array is empty
  *
  * @example
- * import { head } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { head } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(head([1, 2, 3]), some(1))
  * assert.deepStrictEqual(head([]), none)
@@ -521,8 +521,8 @@ export const head: <A>(as: Array<A>) => Option<A> = RA.head
  * Get the last element in an array, or `None` if the array is empty
  *
  * @example
- * import { last } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { last } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(last([1, 2, 3]), some(3))
  * assert.deepStrictEqual(last([]), none)
@@ -535,8 +535,8 @@ export const last: <A>(as: Array<A>) => Option<A> = RA.last
  * Get all but the first element of an array, creating a new array, or `None` if the array is empty
  *
  * @example
- * import { tail } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { tail } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(tail([1, 2, 3]), some([2, 3]))
  * assert.deepStrictEqual(tail([]), none)
@@ -549,8 +549,8 @@ export const tail = <A>(as: Array<A>): Option<Array<A>> => (isNonEmpty(as) ? _.s
  * Get all but the last element of an array, creating a new array, or `None` if the array is empty
  *
  * @example
- * import { init } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { init } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(init([1, 2, 3]), some([1, 2]))
  * assert.deepStrictEqual(init([]), none)
@@ -565,7 +565,7 @@ export const init = <A>(as: Array<A>): Option<Array<A>> => (isNonEmpty(as) ? _.s
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { takeLeft } from 'fp-ts/Array'
+ * import { takeLeft } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(takeLeft(2)([1, 2, 3, 4, 5]), [1, 2]);
  * assert.deepStrictEqual(takeLeft(7)([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
@@ -585,7 +585,7 @@ export const takeLeft =
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { takeRight } from 'fp-ts/Array'
+ * import { takeRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(takeRight(2)([1, 2, 3, 4, 5]), [4, 5]);
  * assert.deepStrictEqual(takeRight(7)([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
@@ -603,7 +603,7 @@ export const takeRight =
  * Calculate the longest initial subarray for which all element satisfy the specified predicate, creating a new array
  *
  * @example
- * import { takeLeftWhile } from 'fp-ts/Array'
+ * import { takeLeftWhile } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(takeLeftWhile((n: number) => n % 2 === 0)([2, 4, 3, 6]), [2, 4])
  *
@@ -652,7 +652,7 @@ export interface Spanned<I, R> {
  * 2. the remaining elements
  *
  * @example
- * import { spanLeft } from 'fp-ts/Array'
+ * import { spanLeft } from  '@jvlk/fp-tsm/Array.js'
  *
  * const isOdd = (n: number) => n % 2 === 1;
  * assert.deepStrictEqual(spanLeft(isOdd)([1, 3, 2, 4, 5]), { init: [1, 3], rest: [2, 4, 5] });
@@ -677,7 +677,7 @@ export function spanLeft<A>(predicate: Predicate<A>): (as: Array<A>) => Spanned<
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { dropLeft } from 'fp-ts/Array'
+ * import { dropLeft } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(dropLeft(2)([1, 2, 3]), [3]);
  * assert.deepStrictEqual(dropLeft(5)([1, 2, 3]), []);
@@ -697,7 +697,7 @@ export const dropLeft =
  * **Note**. `n` is normalized to a non negative integer.
  *
  * @example
- * import { dropRight } from 'fp-ts/Array'
+ * import { dropRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(dropRight(2)([1, 2, 3]), [1]);
  * assert.deepStrictEqual(dropRight(5)([1, 2, 3]), []);
@@ -716,7 +716,7 @@ export const dropRight =
  * which all element satisfy the specified predicate.
  *
  * @example
- * import { dropLeftWhile } from 'fp-ts/Array'
+ * import { dropLeftWhile } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(dropLeftWhile((n: number) => n % 2 === 1)([1, 3, 2, 4, 5]), [2, 4, 5])
  *
@@ -735,8 +735,8 @@ export function dropLeftWhile<A>(predicate: Predicate<A>): (as: Array<A>) => Arr
  * Similar to [`findFirst`](#findFirst) but returning the index instead of the element.
  *
  * @example
- * import { findIndex } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { findIndex } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(findIndex((n: number) => n === 2)([1, 2, 3]), some(1))
  * assert.deepStrictEqual(findIndex((n: number) => n === 2)([]), none)
@@ -750,8 +750,8 @@ export const findIndex: <A>(predicate: Predicate<A>) => (as: Array<A>) => Option
  * It returns an `Option` containing the element or `None` if not found.
  *
  * @example
- * import { findFirst } from 'fp-ts/Array'
- * import { some } from 'fp-ts/Option'
+ * import { findFirst } from  '@jvlk/fp-tsm/Array.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * type X = {
  *   readonly a: number
@@ -775,8 +775,8 @@ export function findFirst<A>(predicate: Predicate<A>): (as: Array<A>) => Option<
  * returns the first `Some` result. Otherwise it returns `None`.
  *
  * @example
- * import { findFirstMap } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { findFirstMap } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface Person {
  *   readonly name: string;
@@ -803,8 +803,8 @@ export const findFirstMap: <A, B>(f: (a: A) => Option<B>) => (as: Array<A>) => O
  * It returns an `Option` containing the element or `None` if not found.
  *
  * @example
- * import { findLast } from 'fp-ts/Array'
- * import { some } from 'fp-ts/Option'
+ * import { findLast } from  '@jvlk/fp-tsm/Array.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * type X = {
  *   readonly a: number
@@ -828,8 +828,8 @@ export function findLast<A>(predicate: Predicate<A>): (as: Array<A>) => Option<A
  * end and returns the last `Some` result. Otherwise it returns `None`.
  *
  * @example
- * import { findLastMap } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { findLastMap } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface Person {
  *   readonly name: string;
@@ -856,8 +856,8 @@ export const findLastMap: <A, B>(f: (a: A) => Option<B>) => (as: Array<A>) => Op
  * It returns an `Option` containing the index or `None` if not found.
  *
  * @example
- * import { findLastIndex } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { findLastIndex } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * interface X {
  *   readonly a: number
@@ -883,8 +883,8 @@ export const copy = <A>(as: Array<A>): Array<A> => as.slice()
  * or returning `None` if the index is out of bounds.
  *
  * @example
- * import { insertAt } from 'fp-ts/Array'
- * import { some } from 'fp-ts/Option'
+ * import { insertAt } from  '@jvlk/fp-tsm/Array.js'
+ * import { some } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(insertAt(2, 5)([1, 2, 3, 4]), some([1, 2, 5, 3, 4]))
  *
@@ -900,8 +900,8 @@ export const insertAt =
  * or returning `None` if the index is out of bounds.
  *
  * @example
- * import { updateAt } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { updateAt } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(updateAt(1, 1)([1, 2, 3]), some([1, 1, 3]))
  * assert.deepStrictEqual(updateAt(1, 1)([]), none)
@@ -914,8 +914,8 @@ export const updateAt = <A>(i: number, a: A): ((as: Array<A>) => Option<Array<A>
  * Delete the element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
  *
  * @example
- * import { deleteAt } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { deleteAt } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * assert.deepStrictEqual(deleteAt(0)([1, 2, 3]), some([2, 3]))
  * assert.deepStrictEqual(deleteAt(1)([]), none)
@@ -932,8 +932,8 @@ export const deleteAt =
  * of bounds.
  *
  * @example
- * import { modifyAt } from 'fp-ts/Array'
- * import { some, none } from 'fp-ts/Option'
+ * import { modifyAt } from  '@jvlk/fp-tsm/Array.js'
+ * import { some, none } from  '@jvlk/fp-tsm/Option.js'
  *
  * const double = (x: number): number => x * 2
  * assert.deepStrictEqual(modifyAt(1, double)([1, 2, 3]), some([1, 4, 3]))
@@ -950,7 +950,7 @@ export const modifyAt =
  * Reverse an array, creating a new array
  *
  * @example
- * import { reverse } from 'fp-ts/Array'
+ * import { reverse } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(reverse([1, 2, 3]), [3, 2, 1])
  *
@@ -963,8 +963,8 @@ export const reverse = <A>(as: Array<A>): Array<A> => (isEmpty(as) ? [] : as.sli
  * the values of all the `Right` elements in the same order.
  *
  * @example
- * import { rights } from 'fp-ts/Array'
- * import { right, left } from 'fp-ts/Either'
+ * import { rights } from  '@jvlk/fp-tsm/Array.js'
+ * import { right, left } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(rights([right(1), left('foo'), right(2)]), [1, 2])
  *
@@ -986,8 +986,8 @@ export const rights = <E, A>(as: Array<Either<E, A>>): Array<A> => {
  * the values of all the `Left` elements in the same order.
  *
  * @example
- * import { lefts } from 'fp-ts/Array'
- * import { left, right } from 'fp-ts/Either'
+ * import { lefts } from  '@jvlk/fp-tsm/Array.js'
+ * import { left, right } from  '@jvlk/fp-tsm/Either.js'
  *
  * assert.deepStrictEqual(lefts([right(1), left('foo'), right(2)]), ['foo'])
  *
@@ -1008,8 +1008,8 @@ export const lefts = <E, A>(as: Array<Either<E, A>>): Array<E> => {
  * Sort the elements of an array in increasing order, creating a new array
  *
  * @example
- * import { sort } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { sort } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(sort(N.Ord)([3, 2, 1]), [1, 2, 3])
  *
@@ -1025,7 +1025,7 @@ export const sort =
  * input array is short, excess elements of the longer array are discarded.
  *
  * @example
- * import { zipWith } from 'fp-ts/Array'
+ * import { zipWith } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(zipWith([1, 2, 3], ['a', 'b', 'c', 'd'], (n, s) => s + n), ['a1', 'b2', 'c3'])
  *
@@ -1046,7 +1046,7 @@ export const zipWith = <A, B, C>(fa: Array<A>, fb: Array<B>, f: (a: A, b: B) => 
  * longer array are discarded
  *
  * @example
- * import { zip } from 'fp-ts/Array'
+ * import { zip } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2, 3], zip(['a', 'b', 'c', 'd'])), [[1, 'a'], [2, 'b'], [3, 'c']])
@@ -1066,7 +1066,7 @@ export function zip<A, B>(as: Array<A>, bs?: Array<B>): Array<[A, B]> | ((bs: Ar
  * The function is reverse of `zip`. Takes an array of pairs and return two corresponding arrays
  *
  * @example
- * import { unzip } from 'fp-ts/Array'
+ * import { unzip } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(unzip([[1, 'a'], [2, 'b'], [3, 'c']]), [[1, 2, 3], ['a', 'b', 'c']])
  *
@@ -1086,7 +1086,7 @@ export const unzip = <A, B>(as: Array<[A, B]>): [Array<A>, Array<B>] => {
  * Creates a new `Array`, prepending an element to every member of the input `Array`.
  *
  * @example
- * import { prependAll } from 'fp-ts/Array'
+ * import { prependAll } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(prependAll(9)([1, 2, 3, 4]), [9, 1, 9, 2, 9, 3, 9, 4])
  *
@@ -1101,7 +1101,7 @@ export const prependAll = <A>(middle: A): ((as: Array<A>) => Array<A>) => {
  * Creates a new `Array` placing an element in between members of the input `Array`.
  *
  * @example
- * import { intersperse } from 'fp-ts/Array'
+ * import { intersperse } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(intersperse(9)([1, 2, 3, 4]), [1, 9, 2, 9, 3, 9, 4])
  *
@@ -1116,7 +1116,7 @@ export const intersperse = <A>(middle: A): ((as: Array<A>) => Array<A>) => {
  * Creates a new `Array` rotating the input `Array` by `n` steps.
  *
  * @example
- * import { rotate } from 'fp-ts/Array'
+ * import { rotate } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(rotate(2)([1, 2, 3, 4, 5]), [4, 5, 1, 2, 3])
  *
@@ -1134,8 +1134,8 @@ export const rotate = (n: number): (<A>(as: Array<A>) => Array<A>) => {
  * an `Array<A>`.
  *
  * @example
- * import { elem } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { elem } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.strictEqual(pipe([1, 2, 3], elem(N.Eq)(2)), true)
@@ -1153,8 +1153,8 @@ export const elem: <A>(E: Eq<A>) => {
  * based on a `Eq<A>`.
  *
  * @example
- * import { uniq } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { uniq } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(uniq(N.Eq)([1, 2, 1]), [1, 2])
  *
@@ -1170,10 +1170,10 @@ export const uniq = <A>(E: Eq<A>): ((as: Array<A>) => Array<A>) => {
  * etc...
  *
  * @example
- * import { sortBy } from 'fp-ts/Array'
- * import { contramap } from 'fp-ts/Ord'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
+ * import { sortBy } from  '@jvlk/fp-tsm/Array.js'
+ * import { contramap } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
@@ -1206,9 +1206,9 @@ export const sortBy = <B>(ords: Array<Ord<B>>): (<A extends B>(as: Array<A>) => 
  * value and the rest of the array.
  *
  * @example
- * import { Eq } from 'fp-ts/Eq'
- * import * as A from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { Eq } from  '@jvlk/fp-tsm/Eq.js'
+ * import * as A from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const group = <A>(S: Eq<A>): ((as: Array<A>) => Array<Array<A>>) => {
@@ -1230,7 +1230,7 @@ export const chop = <A, B>(f: (as: NonEmptyArray<A>) => [B, Array<A>]): ((as: Ar
  * Splits an `Array` into two pieces, the first piece has max `n` elements.
  *
  * @example
- * import { splitAt } from 'fp-ts/Array'
+ * import { splitAt } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(splitAt(2)([1, 2, 3, 4, 5]), [[1, 2], [3, 4, 5]])
  *
@@ -1253,7 +1253,7 @@ export const splitAt =
  * whenever `n` evenly divides the length of `xs`.
  *
  * @example
- * import { chunksOf } from 'fp-ts/Array'
+ * import { chunksOf } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(chunksOf(2)([1, 2, 3, 4, 5]), [[1, 2], [3, 4], [5]])
  *
@@ -1281,8 +1281,8 @@ export const fromOptionK =
  * ```
  *
  * @example
- * import { comprehension } from 'fp-ts/Array'
- * import { tuple } from 'fp-ts/function'
+ * import { comprehension } from  '@jvlk/fp-tsm/Array.js'
+ * import { tuple } from  '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(comprehension([[1, 2, 3], ['a', 'b']], tuple, (a, b) => (a + b.length) % 2 === 0), [
  *   [1, 'a'],
@@ -1341,8 +1341,8 @@ export const concat: <A>(second: Array<A>) => (first: Array<A>) => Array<A> = co
  * Creates an array of unique values, in order, from all given arrays using a `Eq` for equality comparisons
  *
  * @example
- * import { union } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { union } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], union(N.Eq)([2, 3])), [1, 2, 3])
@@ -1374,8 +1374,8 @@ export function union<A>(E: Eq<A>): (xs: Array<A>, ys?: Array<A>) => Array<A> | 
  * comparisons. The order and references of result values are determined by the first array.
  *
  * @example
- * import { intersection } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { intersection } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], intersection(N.Eq)([2, 3])), [2])
@@ -1403,8 +1403,8 @@ export function intersection<A>(E: Eq<A>): (xs: Array<A>, ys?: Array<A>) => Arra
  * comparisons. The order and references of result values are determined by the first array.
  *
  * @example
- * import { difference } from 'fp-ts/Array'
- * import * as N from 'fp-ts/number'
+ * import { difference } from  '@jvlk/fp-tsm/Array.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe([1, 2], difference(N.Eq)([2, 3])), [1])
@@ -1504,7 +1504,7 @@ const _chainRecBreadthFirst: ChainRec1<URI>['chainRec'] = RA._chainRecBreadthFir
  * element of the base type (this is useful for building a `Monad`).
  *
  * @example
- * import { of } from 'fp-ts/Array'
+ * import { of } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(of("a"), ["a"]);
  *
@@ -1526,7 +1526,7 @@ export const zero: <A>() => Array<A> = () => []
  * results in a new array.
  *
  * @example
- * import { map } from 'fp-ts/Array'
+ * import { map } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const f = (n: number) => n * 2;
@@ -1539,7 +1539,7 @@ export const map: <A, B>(f: (a: A) => B) => (fa: Array<A>) => Array<B> = (f) => 
 
 /**
  * @example
- * import { ap, map, of } from 'fp-ts/Array'
+ * import { ap, map, of } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * // a curried function with 3 input parameteres
@@ -1576,7 +1576,7 @@ export const ap: <A>(fa: Array<A>) => <B>(fab: Array<(a: A) => B>) => Array<B> =
  * results into a single array (like [`flatten`](#flatten)).
  *
  * @example
- * import { flatMap, map, replicate } from 'fp-ts/Array'
+ * import { flatMap, map, replicate } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const f = (n: number) => replicate(n, `${n}`);
@@ -1603,7 +1603,7 @@ export const flatMap: {
  * by concatenating the elements of each array in order.
  *
  * @example
- * import { flatten } from 'fp-ts/Array'
+ * import { flatten } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(flatten([["a"], ["b", "c"], ["d", "e", "f"]]), ["a", "b", "c", "d", "e", "f"]);
  *
@@ -1617,7 +1617,7 @@ export const flatten: <A>(mma: Array<Array<A>>) => Array<A> = /*#__PURE__*/ flat
  * of the element.
  *
  * @example
- * import { mapWithIndex } from 'fp-ts/Array'
+ * import { mapWithIndex } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const f = (i: number, s: string) => `${s} - ${i}`;
@@ -1638,7 +1638,7 @@ export const mapWithIndex: <A, B>(f: (i: number, a: A) => B) => (fa: Array<A>) =
  * the index as input.
  *
  * @example
- * import { filterMapWithIndex } from 'fp-ts/Array'
+ * import { filterMapWithIndex } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { option } from "fp-ts";
  *
@@ -1666,7 +1666,7 @@ export const filterMapWithIndex =
  * and it keeps only the `Some` values discarding the `None`s.
  *
  * @example
- * import { filterMap } from 'fp-ts/Array'
+ * import { filterMap } from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import { option } from "fp-ts";
  *
@@ -1685,7 +1685,7 @@ export const filterMap: <A, B>(f: (a: A) => Option<B>) => (fa: Array<A>) => Arra
  * the `Some` options.
  *
  * @example
- * import { compact } from 'fp-ts/Array'
+ * import { compact } from  '@jvlk/fp-tsm/Array.js'
  * import { option } from "fp-ts";
  *
  * assert.deepStrictEqual(compact([option.some("a"), option.none, option.some("b")]), ["a", "b"]);
@@ -1700,7 +1700,7 @@ export const compact: <A>(fa: Array<Option<A>>) => Array<A> = /*#__PURE__*/ filt
  * one containing all the left values and one containing all the right values.
  *
  * @example
- * import { separate } from 'fp-ts/Array'
+ * import { separate } from  '@jvlk/fp-tsm/Array.js'
  * import { either } from "fp-ts";
  *
  * assert.deepStrictEqual(separate([either.right("r1"), either.left("l1"), either.right("r2")]), {
@@ -1730,7 +1730,7 @@ export const separate = <A, B>(fa: Array<Either<A, B>>): Separated<Array<A>, Arr
  * `Array` for which the iterating function is `true`.
  *
  * @example
- * import { filter } from 'fp-ts/Array'
+ * import { filter } from  '@jvlk/fp-tsm/Array.js'
  * import { isString } from "fp-ts/string";
  *
  * assert.deepStrictEqual(filter(isString)(["a", 1, {}, "b", 5]), ["a", "b"]);
@@ -1755,7 +1755,7 @@ export const filter: {
  * for which it is false.
  *
  * @example
- * import { partition } from 'fp-ts/Array'
+ * import { partition } from  '@jvlk/fp-tsm/Array.js'
  * import { isString } from "fp-ts/string";
  *
  * assert.deepStrictEqual(partition(isString)(["a", 1, {}, "b", 5]), { left: [1, {}, 5], right: ["a", "b"] });
@@ -1775,7 +1775,7 @@ export const partition: {
  * Same as [`partition`](#partition), but passing also the index to the iterating function.
  *
  * @example
- * import { partitionWithIndex } from 'fp-ts/Array'
+ * import { partitionWithIndex } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(partitionWithIndex((index, x: number) => index < 3 && x > 0)([-2, 5, 6, 7]), {
  *   left: [-2, 7],
@@ -1813,7 +1813,7 @@ export const partitionWithIndex: {
  * `right` containing the values of `Right` results, `left` containing the values of `Left` results.
  *
  * @example
- * import { partitionMap } from 'fp-ts/Array'
+ * import { partitionMap } from  '@jvlk/fp-tsm/Array.js'
  * import { Either, left, right } from "fp-ts/Either";
  *
  * const upperIfString = <B>(x: B): Either<B, string> =>
@@ -1834,7 +1834,7 @@ export const partitionMap: <A, B, C>(f: (a: A) => Either<B, C>) => (fa: Array<A>
  * Same as [`partitionMap`](#partitionMap), but passing also the index to the iterating function.
  *
  * @example
- * import { partitionMapWithIndex } from 'fp-ts/Array'
+ * import { partitionMapWithIndex } from  '@jvlk/fp-tsm/Array.js'
  * import { Either, left, right } from "fp-ts/Either";
  *
  * const upperIfStringBefore3 = <B>(index: number, x: B): Either<B, string> =>
@@ -1869,7 +1869,7 @@ export const partitionMapWithIndex =
  * The `W` suffix (short for **W**idening) means that the return types will be merged.
  *
  * @example
- * import * as A from 'fp-ts/Array'
+ * import * as A from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1895,7 +1895,7 @@ export const altW =
  * In case of `Array` concatenates the inputs into a single array.
  *
  * @example
- * import * as A from 'fp-ts/Array'
+ * import * as A from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1915,7 +1915,7 @@ export const alt: <A>(that: LazyArg<Array<A>>) => (fa: Array<A>) => Array<A> = a
  * Same as [`filter`](#filter), but passing also the index to the iterating function.
  *
  * @example
- * import { filterWithIndex } from 'fp-ts/Array';
+ * import { filterWithIndex } from  '@jvlk/fp-tsm/Array.js';
  *
  * const f = (index: number, x: number) => x > 0 && index <= 2;
  * assert.deepStrictEqual(filterWithIndex(f)([-3, 1, -2, 5]), [1]);
@@ -1939,7 +1939,7 @@ export const filterWithIndex: {
  * `Array` without the first two elements, etc.
  *
  * @example
- * import { extend } from 'fp-ts/Array'
+ * import { extend } from  '@jvlk/fp-tsm/Array.js'
  *
  * const f = (a: string[]) => a.join(",");
  * assert.deepStrictEqual(extend(f)(["a", "b", "c"]), ["a,b,c", "b,c", "c"]);
@@ -1955,7 +1955,7 @@ export const extend: <A, B>(f: (as: Array<A>) => B) => (as: Array<A>) => Array<B
  * `Array` dropping the first two elements, etc.
  *
  * @example
- * import { duplicate } from 'fp-ts/Array'
+ * import { duplicate } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(duplicate(["a", "b", "c"]), [["a", "b", "c"], ["b", "c"], ["c"]]);
  *
@@ -1969,7 +1969,7 @@ export const duplicate: <A>(wa: Array<A>) => Array<Array<A>> = /*#__PURE__*/ ext
  * Then fold the results using the provided `Monoid`.
  *
  * @example
- * import { foldMap } from 'fp-ts/Array'
+ * import { foldMap } from  '@jvlk/fp-tsm/Array.js'
  *
  * const monoid = { concat: (a: string, b: string) => a + b, empty: "" };
  * const f = (s: string) => s.toUpperCase()
@@ -1984,7 +1984,7 @@ export const foldMap: <M>(M: Monoid<M>) => <A>(f: (a: A) => M) => (fa: Array<A>)
  * Same as [`foldMap`](#foldMap) but passing also the index to the iterating function.
  *
  * @example
- * import { foldMapWithIndex } from 'fp-ts/Array'
+ * import { foldMapWithIndex } from  '@jvlk/fp-tsm/Array.js'
  *
  * const monoid = { concat: (a: string, b: string) => a + b, empty: "" };
  * const f = (index:number, s: string) => `${s.toUpperCase()}(${index})`
@@ -2006,7 +2006,7 @@ export const foldMapWithIndex: <M>(M: Monoid<M>) => <A>(f: (i: number, a: A) => 
  * previous calculation", the initial value is used in its place.
  *
  * @example
- * import { reduce } from 'fp-ts/Array'
+ * import { reduce } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(reduce(5, (acc: number, cur: number) => acc * cur)([2, 3]), 5 * 2 * 3);
  *
@@ -2019,7 +2019,7 @@ export const reduce: <A, B>(b: B, f: (b: B, a: A) => B) => (fa: Array<A>) => B =
  * Same as [`reduce`](#reduce) but passing also the index to the iterating function.
  *
  * @example
- * import { reduceWithIndex } from 'fp-ts/Array'
+ * import { reduceWithIndex } from  '@jvlk/fp-tsm/Array.js'
  *
  * const f = (index: number, acc: string, cur: unknown) =>
  *   acc + (typeof cur === "string" ? cur.toUpperCase() + index : "");
@@ -2036,7 +2036,7 @@ export const reduceWithIndex: <A, B>(b: B, f: (i: number, b: B, a: A) => B) => (
  * *Note*: the iterating function in this case takes the accumulator as the last argument.
  *
  * @example
- * import { reduceRight } from 'fp-ts/Array'
+ * import { reduceRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(reduceRight("", (cur: string, acc: string) => acc + cur)(["a", "b", "c"]), "cba");
  *
@@ -2049,7 +2049,7 @@ export const reduceRight: <A, B>(b: B, f: (a: A, b: B) => B) => (fa: Array<A>) =
  * Same as [`reduceRight`](#reduceRight) but passing also the index to the iterating function.
  *
  * @example
- * import { reduceRightWithIndex } from 'fp-ts/Array'
+ * import { reduceRightWithIndex } from  '@jvlk/fp-tsm/Array.js'
  *
  * const f = (index: number, cur: unknown, acc: string) =>
  *   acc + (typeof cur === "string" ? cur.toUpperCase() + index : "");
@@ -2073,7 +2073,7 @@ export const reduceRightWithIndex: <A, B>(b: B, f: (i: number, a: A, b: B) => B)
  * are `Error`s.
  *
  * @example
- * import { traverse } from 'fp-ts/Array'
+ * import { traverse } from  '@jvlk/fp-tsm/Array.js'
  * import { Applicative, left, right } from "fp-ts/Either";
  *
  * const f = (x: unknown) =>
@@ -2102,7 +2102,7 @@ export const traverse: PipeableTraverse1<URI> = <F>(
  * it needs an `Applicative` for `Option`.
  *
  * @example
- * import { sequence } from 'fp-ts/Array'
+ * import { sequence } from  '@jvlk/fp-tsm/Array.js'
  * import { Applicative, left, right } from "fp-ts/Either";
  *
  * assert.deepStrictEqual(sequence(Applicative)([right("a"), right("b")]), right(["a", "b"]));
@@ -2129,7 +2129,7 @@ export const sequence: Traversable1<URI>['sequence'] =
  * Same as [`traverse`](#traverse) but passing also the index to the iterating function.
  *
  * @example
- * import { traverseWithIndex } from 'fp-ts/Array'
+ * import { traverseWithIndex } from  '@jvlk/fp-tsm/Array.js'
  * import { Applicative, left, right } from "fp-ts/Either";
  *
  * const f = (index:number, x:unknown) =>
@@ -2180,7 +2180,7 @@ export const wilt: PipeableWilt1<URI> = <F>(
  * calculation until `f` returns `Option.none`.
  *
  * @example
- * import { unfold } from 'fp-ts/Array'
+ * import { unfold } from  '@jvlk/fp-tsm/Array.js'
  * import { option } from 'fp-ts'
  *
  * const f = (n: number) => {
@@ -2233,7 +2233,7 @@ declare module './HKT.js' {
  * an `A`.
  *
  * @example
- * import { getShow } from 'fp-ts/Array'
+ * import { getShow } from  '@jvlk/fp-tsm/Array.js'
  *
  * const numShow = { show: (n: number) => (n >= 0 ? `${n}` : `(${-n})`) };
  * assert.deepStrictEqual(getShow(numShow).show([-2, -1, 0, 1]), "[(2), (1), 0, 1]");
@@ -2248,7 +2248,7 @@ export const getShow: <A>(S: Show<A>) => Show<Array<A>> = RA.getShow
  * See also [`getMonoid`](#getMonoid).
  *
  * @example
- * import { getSemigroup } from 'fp-ts/Array'
+ * import { getSemigroup } from  '@jvlk/fp-tsm/Array.js'
  *
  * const S = getSemigroup<number>();
  * assert.deepStrictEqual(S.concat([1, 2], [2, 3]), [1, 2, 2, 3]);
@@ -2264,7 +2264,7 @@ export const getSemigroup = <A = never>(): Semigroup<Array<A>> => ({
  * Returns a `Monoid` for `Array<A>` based on the concatenation of `Array`s.
  *
  * @example
- * import { getMonoid } from 'fp-ts/Array'
+ * import { getMonoid } from  '@jvlk/fp-tsm/Array.js'
  *
  * const M = getMonoid<number>()
  * assert.deepStrictEqual(M.concat([1, 2], [3, 4]), [1, 2, 3, 4])
@@ -2283,8 +2283,8 @@ export const getMonoid = <A = never>(): Monoid<Array<A>> => ({
  * different lengths, the result is non equality.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { getEq } from 'fp-ts/Array'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { getEq } from  '@jvlk/fp-tsm/Array.js'
  *
  * const E = getEq(S.Eq)
  * assert.strictEqual(E.equals(['a', 'b'], ['a', 'b']), true)
@@ -2302,8 +2302,8 @@ export const getEq: <A>(E: Eq<A>) => Eq<Array<A>> = RA.getEq
  * the same length, the result is equality.
  *
  * @example
- * import { getOrd } from 'fp-ts/Array'
- * import * as S from 'fp-ts/string'
+ * import { getOrd } from  '@jvlk/fp-tsm/Array.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
  *
  * const O = getOrd(S.Ord)
  * assert.strictEqual(O.compare(['b'], ['a']), 1)
@@ -2322,8 +2322,8 @@ export const getOrd: <A>(O: Ord<A>) => Ord<Array<A>> = RA.getOrd
  * See also [`getUnionMonoid`](#getUnionMonoid).
  *
  * @example
- * import { getUnionSemigroup } from 'fp-ts/Array';
- * import { Eq } from 'fp-ts/number';
+ * import { getUnionSemigroup } from  '@jvlk/fp-tsm/Array.js';
+ * import { Eq } from  '@jvlk/fp-tsm/number.js';
  *
  * const S = getUnionSemigroup<number>(Eq);
  * assert.deepStrictEqual(S.concat([1, 2], [2, 3]), [1, 2, 3]);
@@ -2344,8 +2344,8 @@ export const getUnionSemigroup = <A>(E: Eq<A>): Semigroup<Array<A>> => {
  * only once in the result.
  *
  * @example
- * import { getUnionMonoid } from 'fp-ts/Array'
- * import { Eq } from 'fp-ts/number';
+ * import { getUnionMonoid } from  '@jvlk/fp-tsm/Array.js'
+ * import { Eq } from  '@jvlk/fp-tsm/number.js';
  *
  * const M = getUnionMonoid<number>(Eq);
  * assert.deepStrictEqual(M.concat([1, 2], [2, 3]), [1, 2, 3]);
@@ -2365,8 +2365,8 @@ export const getUnionMonoid = <A>(E: Eq<A>): Monoid<Array<A>> => ({
  * provided `Eq` are included in the result.
  *
  * @example
- * import { getIntersectionSemigroup } from 'fp-ts/Array'
- * import { Eq } from 'fp-ts/number';
+ * import { getIntersectionSemigroup } from  '@jvlk/fp-tsm/Array.js'
+ * import { Eq } from  '@jvlk/fp-tsm/number.js';
  *
  * const S = getIntersectionSemigroup<number>(Eq);
  * assert.deepStrictEqual(S.concat([1, 2], [2, 3]), [2]);
@@ -2389,8 +2389,8 @@ export const getIntersectionSemigroup = <A>(E: Eq<A>): Semigroup<Array<A>> => {
  *
  *
  * @example
- * import { getDifferenceMagma } from 'fp-ts/Array'
- * import { Eq } from 'fp-ts/number';
+ * import { getDifferenceMagma } from  '@jvlk/fp-tsm/Array.js'
+ * import { Eq } from  '@jvlk/fp-tsm/number.js';
  *
  * const S = getDifferenceMagma<number>(Eq);
  * assert.deepStrictEqual(S.concat([1, 2], [2, 3]), [1]);
@@ -2419,7 +2419,7 @@ export const Functor: Functor1<URI> = {
  * the results of applying each function to the given input.
  *
  * @example
- * import { flap } from 'fp-ts/Array'
+ * import { flap } from  '@jvlk/fp-tsm/Array.js'
  *
  * const funs = [
  *   (n: number) => `Double: ${n * 2}`,
@@ -2503,7 +2503,7 @@ export const Chain: Chain1<URI> = {
  * keeping only the result of the first.
  *
  * @example
- * import * as A from 'fp-ts/Array'
+ * import * as A from  '@jvlk/fp-tsm/Array.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -2821,7 +2821,7 @@ export const unsafeDeleteAt = <A>(i: number, as: Array<A>): Array<A> => {
  * `every` tells if the provided predicate holds true for every element in the `Array`.
  *
  * @example
- * import { every } from 'fp-ts/Array'
+ * import { every } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.equal(every((x: number) => x >= 0)([1, 2, 3]), true);
  * assert.equal(every((x: number) => x >= 0)([-1, 2, 3]), false);
@@ -2837,7 +2837,7 @@ export const every: {
  * `some` tells if the provided predicate holds true at least for one element in the `Array`.
  *
  * @example
- * import { some } from 'fp-ts/Array'
+ * import { some } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.equal(some((x: number) => x >= 0)([1, 2, 3]), true);
  * assert.equal(some((x: number) => x >= 10)([1, 2, 3]), false);
@@ -2860,8 +2860,8 @@ export const exists: <A>(predicate: Predicate<A>) => (as: Array<A>) => as is NEA
  * Places an element in between members of an `Array`, then folds the results using the provided `Monoid`.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { intercalate } from 'fp-ts/Array'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { intercalate } from  '@jvlk/fp-tsm/Array.js'
  *
  * assert.deepStrictEqual(intercalate(S.Monoid)('-')(['a', 'b', 'c']), 'a-b-c')
  *
@@ -2971,7 +2971,7 @@ export const prependToAll = prependAll
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `A.Functor` instead of `A.array`
- * (where `A` is from `import A from 'fp-ts/Array'`)
+ * (where `A` is from `import A from  '@jvlk/fp-tsm/Array.js'`)
  *
  * @category zone of death
  * @since 2.0.0

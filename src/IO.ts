@@ -395,7 +395,7 @@ export const chainFirst: <A, B>(f: (a: A) => IO<B>) => (first: IO<A>) => IO<A> =
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `IO.Functor` instead of `IO.io`
- * (where `IO` is from `import IO from 'fp-ts/IO'`)
+ * (where `IO` is from `import IO from  '@jvlk/fp-tsm/IO.js'`)
  *
  * @category zone of death
  * @since 2.0.0

@@ -15,7 +15,7 @@
  * `Traversable` instances should also be compatible with the corresponding `Foldable` instances, in the following sense:
  *
  * ```ts
- * import { getApplicative, make } from 'fp-ts/Const'
+ * import { getApplicative, make } from  '@jvlk/fp-tsm/Const.js'
  *
  * const A = getApplicative(M)
  *

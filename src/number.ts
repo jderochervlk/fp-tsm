@@ -73,7 +73,7 @@ export const MagmaSub: Magma<number> = {
  * `number` semigroup under addition.
  *
  * @example
- * import { SemigroupSum } from 'fp-ts/number'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(SemigroupSum.concat(2, 3), 5)
  *
@@ -88,7 +88,7 @@ export const SemigroupSum: Semigroup<number> = {
  * `number` semigroup under multiplication.
  *
  * @example
- * import { SemigroupProduct } from 'fp-ts/number'
+ * import { SemigroupProduct } from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(SemigroupProduct.concat(2, 3), 6)
  *
@@ -105,7 +105,7 @@ export const SemigroupProduct: Semigroup<number> = {
  * The `empty` value is `0`.
  *
  * @example
- * import { MonoidSum } from 'fp-ts/number'
+ * import { MonoidSum } from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(MonoidSum.concat(2, MonoidSum.empty), 2)
  *
@@ -123,7 +123,7 @@ export const MonoidSum: Monoid<number> = {
  * The `empty` value is `1`.
  *
  * @example
- * import { MonoidProduct } from 'fp-ts/number'
+ * import { MonoidProduct } from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(MonoidProduct.concat(2, MonoidProduct.empty), 2)
  *

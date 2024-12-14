@@ -1571,7 +1571,7 @@ export const chainFirstW: <S, R2, E2, A, B>(
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `SRTE.Functor` instead of `SRTE.stateReaderTaskEither`
- * (where `SRTE` is from `import SRTE from 'fp-ts/StateReaderTaskEither'`)
+ * (where `SRTE` is from `import SRTE from  '@jvlk/fp-tsm/StateReaderTaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0
@@ -1594,7 +1594,7 @@ export const stateReaderTaskEither: Monad4<URI> & Bifunctor4<URI> & Alt4<URI> & 
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `SRTE.Functor` instead of `SRTE.stateReaderTaskEitherSeq`
- * (where `SRTE` is from `import SRTE from 'fp-ts/StateReaderTaskEither'`)
+ * (where `SRTE` is from `import SRTE from  '@jvlk/fp-tsm/StateReaderTaskEither.js'`)
  *
  * @category zone of death
  * @since 2.0.0

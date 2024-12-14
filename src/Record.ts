@@ -96,8 +96,8 @@ export const keys: <K extends string>(r: Record<K, unknown>) => Array<K> = /*#__
  * the results in an array, sorted alphabetically by the original key.
  *
  * @example
- * import { collect } from 'fp-ts/Record'
- * import { Ord } from 'fp-ts/string'
+ * import { collect } from  '@jvlk/fp-tsm/Record.js'
+ * import { Ord } from  '@jvlk/fp-tsm/string.js'
  *
  * const f = <A>(k: string, a: A) => `${k.toUpperCase()}-${a}`;
  * const x = { c: 3, a: "foo", b: false };
@@ -143,7 +143,7 @@ export function collect<A, B>(
  * Sorted alphabetically by key.
  *
  * @example
- * import { toArray } from 'fp-ts/Record'
+ * import { toArray } from  '@jvlk/fp-tsm/Record.js'
  *
  * const x = { c: 3, a: "foo", b: false };
  * assert.deepStrictEqual(toArray(x), [
@@ -170,7 +170,7 @@ export const toArray: <K extends string, A>(r: Record<K, A>) => Array<[K, A]> = 
  *
  * @example
  * import { array, readonlyArray } from 'fp-ts'
- * import { toUnfoldable } from 'fp-ts/Record'
+ * import { toUnfoldable } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(toUnfoldable(array)({ b: 2, a: 1 }),[ [ 'a', 1 ], [ 'b', 2 ]])
  * assert.deepStrictEqual(toUnfoldable(readonlyArray)({ b: 2, a: 1 }),[ [ 'a', 1 ], [ 'b', 2 ]])
@@ -193,7 +193,7 @@ export function toUnfoldable<F>(U: Unfoldable<F>): <A>(r: Record<string, A>) => 
  * Insert or replace a key/value pair in a `Record`.
  *
  * @example
- * import { upsertAt } from 'fp-ts/Record'
+ * import { upsertAt } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(upsertAt("a", 5)({ a: 1, b: 2 }), { a: 5, b: 2 });
  * assert.deepStrictEqual(upsertAt("c", 5)({ a: 1, b: 2 }), { a: 1, b: 2, c: 5 });
@@ -208,7 +208,7 @@ export const upsertAt: <A>(k: string, a: A) => (r: Record<string, A>) => Record<
  * Note. This function is not pipeable because is a `Refinement`.
  *
  * @example
- * import { has } from 'fp-ts/Record'
+ * import { has } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(has("a", { a: 1, b: 2 }), true);
  * assert.deepStrictEqual(has("c", { a: 1, b: 2 }), false);
@@ -221,7 +221,7 @@ export const has: <K extends string>(k: string, r: Record<K, unknown>) => k is K
  * Delete a key and value from a `Record`.
  *
  * @example
- * import { deleteAt } from 'fp-ts/Record'
+ * import { deleteAt } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(deleteAt("a")({ a: 1, b: 2 }), { b: 2 });
  * assert.deepStrictEqual(deleteAt("c")({ a: 1, b: 2 }), { a: 1, b: 2 });
@@ -249,7 +249,7 @@ export function deleteAt(k: string): <A>(r: Record<string, A>) => Record<string,
  * with the entry updated, otherwise it returns `None`
  *
  * @example
- * import { updateAt } from 'fp-ts/Record'
+ * import { updateAt } from  '@jvlk/fp-tsm/Record.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(updateAt("a", 3)({ a: 1, b: 2 }), option.some({ a: 3, b: 2 }));
@@ -267,7 +267,7 @@ export const updateAt = <A>(k: string, a: A): (<K extends string>(r: Record<K, A
  * with the entry updated, otherwise it returns `None`
  *
  * @example
- * import { modifyAt } from 'fp-ts/Record'
+ * import { modifyAt } from  '@jvlk/fp-tsm/Record.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(modifyAt("a", (x: number) => x * 3)({ a: 1, b: 2 }), option.some({ a: 3, b: 2 }));
@@ -293,7 +293,7 @@ export const modifyAt =
  * with the entry removed, otherwise it returns `None`
  *
  * @example
- * import { pop } from 'fp-ts/Record'
+ * import { pop } from  '@jvlk/fp-tsm/Record.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(pop("a")({ a: 1, b: 2, c: 3 }), option.some([1, { b: 2, c: 3 }]));
@@ -318,7 +318,7 @@ export function pop(k: string): <A>(r: Record<string, A>) => Option<[A, Record<s
  * contained in another `Record`.
  *
  * @example
- * import { isSubrecord } from 'fp-ts/Record'
+ * import { isSubrecord } from  '@jvlk/fp-tsm/Record.js'
  * import { string } from 'fp-ts'
  *
  * assert.deepStrictEqual(
@@ -353,7 +353,7 @@ export const isSubrecord: <A>(E: Eq<A>) => {
  * otherwise it returns `None`
  *
  * @example
- * import { lookup } from 'fp-ts/Record'
+ * import { lookup } from  '@jvlk/fp-tsm/Record.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(lookup("b")({ a: "foo", b: "bar" }), option.some("bar"));
@@ -788,7 +788,7 @@ export function fromFoldable<F, A>(M: Magma<A>, F: FoldableHKT<F>): (fka: HKT<F,
  * Alias of [`toArray`](#toArray).
  *
  * @example
- * import { toEntries } from 'fp-ts/Record'
+ * import { toEntries } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(toEntries({ b: 2, a: 1 }), [['a', 1], ['b', 2]])
  *
@@ -801,7 +801,7 @@ export const toEntries = toArray
  * Converts an `Array` of `[key, value]` tuples into a `Record`.
  *
  * @example
- * import { fromEntries } from 'fp-ts/Record'
+ * import { fromEntries } from  '@jvlk/fp-tsm/Record.js'
  *
  * assert.deepStrictEqual(fromEntries([['a', 1], ['b', 2], ['a', 3]]), { b: 2, a: 3 })
  *
@@ -817,10 +817,10 @@ export const fromEntries = <A>(fa: Array<[string, A]>): Record<string, A> => fro
  * - combine values for duplicate keys.
  *
  * @example
- * import { last } from 'fp-ts/Semigroup'
- * import { Foldable, zip } from 'fp-ts/Array'
- * import { identity } from 'fp-ts/function'
- * import { fromFoldableMap } from 'fp-ts/Record'
+ * import { last } from  '@jvlk/fp-tsm/Semigroup.js'
+ * import { Foldable, zip } from  '@jvlk/fp-tsm/Array.js'
+ * import { identity } from  '@jvlk/fp-tsm/function.js'
+ * import { fromFoldableMap } from  '@jvlk/fp-tsm/Record.js'
  *
  * export const zipObject = <K extends string, A>(keys: Array<K>, values: Array<A>): Record<K, A> =>
  *   fromFoldableMap(last<A>(), Foldable)(zip(keys, values), identity)
@@ -1242,7 +1242,7 @@ export function reduceRight<A, B>(
  * keeping the `Some` values.
  *
  * @example
- * import { compact } from 'fp-ts/Record'
+ * import { compact } from  '@jvlk/fp-tsm/Record.js'
  * import { option } from 'fp-ts'
  *
  * assert.deepStrictEqual(compact({ a: option.some("foo"), b: option.none, c: option.some("bar") }), {
@@ -1259,7 +1259,7 @@ export const compact: <A>(fa: Record<string, Option<A>>) => Record<string, A> = 
  * Separate a `Record` of `Either`s into `Left`s and `Right`s.
  *
  * @example
- * import { separate } from 'fp-ts/Record'
+ * import { separate } from  '@jvlk/fp-tsm/Record.js'
  * import { either } from 'fp-ts'
  *
  * assert.deepStrictEqual(
@@ -1355,8 +1355,8 @@ export const getEq: <K extends string, A>(E: Eq<A>) => Eq<Record<K, A>> = RR.get
  * overlapping entries with the provided `Semigroup`.
  *
  * @example
- * import { SemigroupSum } from 'fp-ts/number'
- * import { getMonoid } from 'fp-ts/Record'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
+ * import { getMonoid } from  '@jvlk/fp-tsm/Record.js'
  *
  * const M = getMonoid(SemigroupSum);
  * assert.deepStrictEqual(M.concat({ foo: 123, bar: 234 }, { foo: 456, baz: 567 }), { foo: 579 , bar: 234, baz: 567 });
@@ -1575,8 +1575,8 @@ export const getUnionSemigroup = <A>(S: Semigroup<A>): Semigroup<Record<string, 
  * entries that have the same key with the provided `Semigroup`.
  *
  * @example
- * import { SemigroupSum } from 'fp-ts/number'
- * import { getUnionMonoid } from 'fp-ts/Record'
+ * import { SemigroupSum } from  '@jvlk/fp-tsm/number.js'
+ * import { getUnionMonoid } from  '@jvlk/fp-tsm/Record.js'
  *
  * const M = getUnionMonoid(SemigroupSum);
  * assert.deepStrictEqual(M.concat({ foo: 123, bar: 234 }, { foo: 456, baz: 567 }), { foo: 579 , bar: 234, baz: 567 });
@@ -1766,7 +1766,7 @@ export const hasOwnProperty: <K extends string>(k: string, r: Record<K, unknown>
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `R.Functor` instead of `R.record`
- * (where `R` is from `import R from 'fp-ts/Record'`)
+ * (where `R` is from `import R from  '@jvlk/fp-tsm/Record.js'`)
  *
  * @category zone of death
  * @since 2.0.0

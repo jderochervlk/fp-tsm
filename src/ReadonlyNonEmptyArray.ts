@@ -128,8 +128,8 @@ export const unsafeUpdateAt = <A>(i: number, a: A, as: ReadonlyNonEmptyArray<A>)
  * Remove duplicates from a `ReadonlyNonEmptyArray`, keeping the first occurrence of an element.
  *
  * @example
- * import { uniq } from 'fp-ts/ReadonlyNonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { uniq } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(uniq(N.Eq)([1, 2, 1]), [1, 2])
  *
@@ -156,10 +156,10 @@ export const uniq =
  * etc...
  *
  * @example
- * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
- * import { contramap } from 'fp-ts/Ord'
- * import * as S from 'fp-ts/string'
- * import * as N from 'fp-ts/number'
+ * import * as RNEA from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
+ * import { contramap } from  '@jvlk/fp-tsm/Ord.js'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * interface Person {
@@ -213,7 +213,7 @@ export const union = <A>(
  * Rotate a `ReadonlyNonEmptyArray` by `n` steps.
  *
  * @example
- * import { rotate } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { rotate } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(rotate(2)([1, 2, 3, 4, 5]), [4, 5, 1, 2, 3])
  * assert.deepStrictEqual(rotate(-2)([1, 2, 3, 4, 5]), [3, 4, 5, 1, 2])
@@ -255,7 +255,7 @@ export const fromReadonlyArray = <A>(as: ReadonlyArray<A>): Option<ReadonlyNonEm
  * **Note**. `n` is normalized to a natural number.
  *
  * @example
- * import { makeBy } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { makeBy } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * const double = (n: number): number => n * 2
@@ -281,7 +281,7 @@ export const makeBy =
  * **Note**. `n` is normalized to a natural number.
  *
  * @example
- * import { replicate } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { replicate } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(pipe(3, replicate('a')), ['a', 'a', 'a'])
@@ -295,7 +295,7 @@ export const replicate = <A>(a: A): ((n: number) => ReadonlyNonEmptyArray<A>) =>
  * Create a `ReadonlyNonEmptyArray` containing a range of integers, including both endpoints.
  *
  * @example
- * import { range } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { range } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(range(1, 5), [1, 2, 3, 4, 5])
  *
@@ -309,7 +309,7 @@ export const range = (start: number, end: number): ReadonlyNonEmptyArray<number>
  * Return the tuple of the `head` and the `tail`.
  *
  * @example
- * import { unprepend } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { unprepend } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(unprepend([1, 2, 3, 4]), [1, [2, 3, 4]])
  *
@@ -321,7 +321,7 @@ export const unprepend = <A>(as: ReadonlyNonEmptyArray<A>): readonly [A, Readonl
  * Return the tuple of the `init` and the `last`.
  *
  * @example
- * import { unappend } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { unappend } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(unappend([1, 2, 3, 4]), [[1, 2, 3], 4])
  *
@@ -378,8 +378,8 @@ export const reverse = <A>(as: ReadonlyNonEmptyArray<A>): ReadonlyNonEmptyArray<
  * Group equal, consecutive elements of a `ReadonlyArray` into `ReadonlyNonEmptyArray`s.
  *
  * @example
- * import { group } from 'fp-ts/ReadonlyNonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { group } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * assert.deepStrictEqual(group(N.Eq)([1, 2, 1, 1]), [
  *   [1],
@@ -422,7 +422,7 @@ export function group<A>(E: Eq<A>): (as: ReadonlyArray<A>) => ReadonlyArray<Read
  * function on each element, and grouping the results according to values returned
  *
  * @example
- * import { groupBy } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { groupBy } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(groupBy((s: string) => String(s.length))(['a', 'b', 'ab']), {
  *   '1': ['a', 'b'],
@@ -523,7 +523,7 @@ export const unzip = <A, B>(
  * Prepend an element to every member of a `ReadonlyNonEmptyArray`.
  *
  * @example
- * import { prependAll } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { prependAll } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(prependAll(9)([1, 2, 3, 4]), [9, 1, 9, 2, 9, 3, 9, 4])
  *
@@ -543,7 +543,7 @@ export const prependAll =
  * Places an element in between members of a `ReadonlyNonEmptyArray`.
  *
  * @example
- * import { intersperse } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { intersperse } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(intersperse(9)([1, 2, 3, 4]), [1, 9, 2, 9, 3, 9, 4])
  *
@@ -671,7 +671,7 @@ export const of: <A>(a: A) => ReadonlyNonEmptyArray<A> = _.singleton
  * The `W` suffix (short for **W**idening) means that the return types will be merged.
  *
  * @example
- * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
+ * import * as RNEA from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -697,7 +697,7 @@ export const altW =
  * In case of `ReadonlyNonEmptyArray` concatenates the inputs into a single array.
  *
  * @example
- * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
+ * import * as RNEA from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -724,7 +724,7 @@ export const ap = <A>(
 
 /**
  * @example
- * import * as RNEA from 'fp-ts/ReadonlyNonEmptyArray'
+ * import * as RNEA from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -939,8 +939,8 @@ export const getSemigroup = <A = never>(): Semigroup<ReadonlyNonEmptyArray<A>> =
 
 /**
  * @example
- * import { getEq } from 'fp-ts/ReadonlyNonEmptyArray'
- * import * as N from 'fp-ts/number'
+ * import { getEq } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const E = getEq(N.Eq)
  * assert.strictEqual(E.equals([1, 2], [1, 2]), true)
@@ -1047,7 +1047,7 @@ export const Chain: Chain1<URI> = {
  * keeping only the result of the first.
  *
  * @example
- * import * as RA from 'fp-ts/ReadonlyArray'
+ * import * as RA from  '@jvlk/fp-tsm/ReadonlyArray.js'
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  *
  * assert.deepStrictEqual(
@@ -1217,7 +1217,7 @@ export const last = <A>(as: ReadonlyNonEmptyArray<A>): A => as[as.length - 1]
  * Get all but the last element of a non empty array, creating a new array.
  *
  * @example
- * import { init } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import { init } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(init([1, 2, 3]), [1, 2])
  * assert.deepStrictEqual(init([1]), [])
@@ -1310,8 +1310,8 @@ export const updateLast = <A>(a: A): ((as: ReadonlyNonEmptyArray<A>) => Readonly
  * Places an element in between members of a `ReadonlyNonEmptyArray`, then folds the results using the provided `Semigroup`.
  *
  * @example
- * import * as S from 'fp-ts/string'
- * import { intercalate } from 'fp-ts/ReadonlyNonEmptyArray'
+ * import * as S from  '@jvlk/fp-tsm/string.js'
+ * import { intercalate } from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'
  *
  * assert.deepStrictEqual(intercalate(S.Semigroup)('-')(['a', 'b', 'c']), 'a-b-c')
  *
@@ -1464,7 +1464,7 @@ export const fold = concatAll
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RNEA.Functor` instead of `RNEA.readonlyNonEmptyArray`
- * (where `RNEA` is from `import RNEA from 'fp-ts/ReadonlyNonEmptyArray'`)
+ * (where `RNEA` is from `import RNEA from  '@jvlk/fp-tsm/ReadonlyNonEmptyArray.js'`)
  *
  * @category zone of death
  * @since 2.5.0

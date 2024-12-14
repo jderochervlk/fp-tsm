@@ -64,9 +64,9 @@ export const fromIO: <A>(fa: IO<A>) => Task<A> = (ma) => () => Promise.resolve()
  * Creates a task that will complete after a time delay
  *
  * @example
- * import { sequenceT } from 'fp-ts/Apply'
+ * import { sequenceT } from '@jvlk/fp-tsm/Apply.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
- * import { takeRight } from 'fp-ts/Array'
+ * import { takeRight } from  '@jvlk/fp-tsm/Array.js'
  *
  * async function test() {
  *   const log: Array<string> = []
@@ -404,7 +404,7 @@ export const tap: {
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
  * import * as T from '@jvlk/fp-tsm/Task.js''
- * import * as Console from 'fp-ts/Console'
+ * import * as Console from  '@jvlk/fp-tsm/Console.js'
  *
  * // Will produce `Hello, fp-ts` to the stdout
  * const effect = pipe(
@@ -663,7 +663,7 @@ export const chainFirst: <A, B>(f: (a: A) => Task<B>) => (first: Task<A>) => Tas
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.task`
- * (where `T` is from `import T from 'fp-ts/Task'`)
+ * (where `T` is from `import T from  '@jvlk/fp-tsm/Task.js'`)
  *
  * @category zone of death
  * @since 2.0.0
@@ -682,7 +682,7 @@ export const task: Monad1<URI> & MonadTask1<URI> = {
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `T.Functor` instead of `T.taskSeq`
- * (where `T` is from `import T from 'fp-ts/Task'`)
+ * (where `T` is from `import T from  '@jvlk/fp-tsm/Task.js'`)
  *
  * @category zone of death
  * @since 2.0.0

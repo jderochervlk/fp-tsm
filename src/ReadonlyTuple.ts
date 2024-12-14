@@ -375,7 +375,7 @@ export const Traversable: Traversable2<URI> = {
 /**
  * This instance is deprecated, use small, specific instances instead.
  * For example if a function needs a `Functor` instance, pass `RT.Functor` instead of `RT.readonlyTuple`
- * (where `RT` is from `import RT from 'fp-ts/ReadonlyTuple'`)
+ * (where `RT` is from `import RT from  '@jvlk/fp-tsm/ReadonlyTuple.js'`)
  *
  * @category zone of death
  * @since 2.5.0

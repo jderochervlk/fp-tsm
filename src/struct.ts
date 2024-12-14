@@ -12,7 +12,7 @@ import { Semigroup } from './Semigroup.js'
  * Return a semigroup which works like `Object.assign`.
  *
  * @example
- * import { getAssignSemigroup } from 'fp-ts/struct'
+ * import { getAssignSemigroup } from  '@jvlk/fp-tsm/struct.js'
  *
  * interface Person {
  *   readonly name: string
@@ -38,7 +38,7 @@ export const getAssignSemigroup = <A extends object = never>(): Semigroup<A> => 
  *
  * @example
  * import { pipe } from '@jvlk/fp-tsm/function.js'
- * import { evolve } from 'fp-ts/struct'
+ * import { evolve } from  '@jvlk/fp-tsm/struct.js'
  *
  * assert.deepStrictEqual(
  *   pipe(

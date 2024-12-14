@@ -29,8 +29,8 @@ export interface Magma<A> {
  * The dual of a `Magma`, obtained by swapping the arguments of `concat`.
  *
  * @example
- * import { reverse, concatAll } from 'fp-ts/Magma'
- * import * as N from 'fp-ts/number'
+ * import { reverse, concatAll } from  '@jvlk/fp-tsm/Magma.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const subAll = concatAll(reverse(N.MagmaSub))(0)
  *
@@ -79,8 +79,8 @@ export const endo =
  * If `as` is empty, return the provided `startWith` value.
  *
  * @example
- * import { concatAll } from 'fp-ts/Magma'
- * import * as N from 'fp-ts/number'
+ * import { concatAll } from  '@jvlk/fp-tsm/Magma.js'
+ * import * as N from  '@jvlk/fp-tsm/number.js'
  *
  * const subAll = concatAll(N.MagmaSub)(0)
  *
