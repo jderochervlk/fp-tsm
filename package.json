@@ -1,6 +1,6 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.8",
   "description": "Functional programming in TypeScript",
   "sideEffects": false,
   "type": "module",
