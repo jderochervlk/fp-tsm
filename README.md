@@ -13,8 +13,7 @@ Functional programming in TypeScript
     <img src="https://github.com/jderochervlk/fp-tsm/actions/workflows/main.yml/badge.svg?branch=master" alt="build status" height="20">
   </a>
   <a href="https://www.npmjs.com/package/@jvlk/fp-tsm">
-    <img src="https://img.shields.io/npm/dm/%40jvlk%2Ffp-tsm
-    " alt="npm downloads" height="20">
+    <img src="https://img.shields.io/npm/dm/%40jvlk%2Ffp-tsm" alt="npm downloads" height="20">
   </a>
 </p>
 
