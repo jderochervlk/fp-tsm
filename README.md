@@ -1,6 +1,6 @@
 <h3 align="center">
-  <a href="https://gcanti.github.io/fp-ts/">
-    <img src="./docs/fp-ts-logo.png">
+  <a href="https://github.com/jderochervlk/fp-tsm">
+    <img src="./fp-ts-logo.png">
   </a>
 </h3>
 
@@ -9,12 +9,13 @@ Functional programming in TypeScript
 </p>
 
 <p align="center">
-  <a href="https://github.com/gcanti/fp-ts/actions">
-    <img src="https://github.com/gcanti/fp-ts/actions/workflows/main.yml/badge.svg?branch=master" alt="build status" height="20">
+  <a href="https://github.com/jderochervlk/fp-tsm/actions">
+    <img src="https://github.com/jderochervlk/fp-tsm/actions/workflows/main.yml/badge.svg?branch=master" alt="build status" height="20">
   </a>
-  <a href="https://www.npmjs.com/package/fp-ts">
+  <!-- Too new -->
+  <!-- <a href="https://www.npmjs.com/package/@jvlk/fp-tsm">
     <img src="https://img.shields.io/npm/dm/fp-ts.svg" alt="npm downloads" height="20">
-  </a>
+  </a> -->
 </p>
 
 
