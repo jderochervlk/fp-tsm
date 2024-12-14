@@ -21,7 +21,6 @@
     "types": "tsc -p tsconfig.build.json",
     "mocha": "mocha -r ts-node/register test/*.ts",
     "dtslint": "dtslint dtslint",
-    "docs": "docs-ts",
     "dpdm": "dpdm --warning=false --tree=false --exit-code circular:1 -T src/index.ts",
     "vitest": "vitest run",
     "coverage": "vitest run --coverage"
@@ -48,7 +47,6 @@
     "@typescript-eslint/parser": "^5.59.0",
     "@vitest/coverage-istanbul": "^1.6.0",
     "benchmark": "2.1.4",
-    "docs-ts": "^0.8.0",
     "eslint": "^8.38.0",
     "eslint-plugin-deprecation": "^1.4.1",
     "eslint-plugin-import": "^2.27.5",

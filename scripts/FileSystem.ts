@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+
 import G from 'glob'
 
 import { flow } from '../src/function.js'

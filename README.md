@@ -53,6 +53,8 @@ Make sure to always have a single version of `fp-tsm` installed in your project.
 
 These are docs for the original `fp-ts` which should cover what you need to use `fp-tsm`.
 
+New docs are under development for `fp-tsm`. I'm hoping to eventually just use JSR for docs.
+
 **Disclaimer**. Teaching functional programming is out of scope of this project, so the documentation assumes you already know what FP is.
 
 - [Docs](https://gcanti.github.io/fp-ts)
