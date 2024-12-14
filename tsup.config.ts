@@ -6,6 +6,5 @@ export default defineConfig({
   sourcemap: false,
   clean: true,
   target: 'esnext',
-  format: 'esm',
-  dts: true,
+  format: 'esm'
 })

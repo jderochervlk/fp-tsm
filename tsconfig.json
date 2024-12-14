@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "noEmit": false,
-    "outDir": "./dist/lib",
+    "noEmit": true,
     "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "lib": [],
     "sourceMap": false,
-    "declaration": true,
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

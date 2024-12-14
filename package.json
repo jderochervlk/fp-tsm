@@ -1,6 +1,6 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.0-alpha.11",
   "description": "Functional programming in TypeScript",
   "sideEffects": false,
   "type": "module",
@@ -17,7 +17,8 @@
     "prettier": "prettier --list-different \"./{src,test,examples,scripts}/**/*.ts\"",
     "fix-prettier": "prettier --write \"./{src,test,examples,scripts}/**/*.ts\"",
     "test": "npm run lint && npm run prettier && npm run dtslint && npm run vitest && npm run docs",
-    "build": "tsup src",
+    "build": "tsup src && npm run types",
+    "types": "tsc -p tsconfig.build.json",
     "mocha": "mocha -r ts-node/register test/*.ts",
     "dtslint": "dtslint dtslint",
     "docs": "docs-ts",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@effect/dtslint": "^0.1.0",
     "@effect/language-service": "^0.0.19",
+    "@microsoft/api-extractor": "^7.48.1",
     "@types/benchmark": "^1.0.31",
     "@types/chai": "^3.5.2",
     "@types/glob": "^7.1.3",
