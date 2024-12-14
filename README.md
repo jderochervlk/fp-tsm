@@ -64,10 +64,6 @@ New docs are under development for `fp-tsm`. I'm hoping to eventually just use J
   - [version 2.x (current)](https://gcanti.github.io/fp-ts/modules/)
   - [version 1.x](https://github.com/gcanti/fp-ts/tree/1.x/docs/modules/)
 
-# Development
-
-- [Code conventions](https://gcanti.github.io/fp-ts/guides/code-conventions)
-
 # License
 
 The MIT License (MIT)
