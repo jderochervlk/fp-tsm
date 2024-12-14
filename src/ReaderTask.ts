@@ -35,7 +35,6 @@ import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray.js'
 import { Semigroup } from './Semigroup.js'
 import * as T from './Task.js'
 
-
 // -------------------------------------------------------------------------------------
 // model
 // -------------------------------------------------------------------------------------
