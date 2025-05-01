@@ -1,25 +1,16 @@
 {
   "compilerOptions": {
-    "noEmit": true,
-    "target": "ESNext",
+    "esModuleInterop": true,
+    "lib": ["DOM", "ESNext"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "lib": [],
-    "sourceMap": false,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
-    "stripInternal": true,
+    "noEmit": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
     "types": ["vitest/globals"],
-    "plugins": [
-      {
-        "name": "@effect/language-service"
-      }
-    ]
   },
-  "include": ["./src", "./test", "./perf", "./dtslint", "./*.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["./node_modules"]
 }
