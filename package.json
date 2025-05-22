@@ -1,42 +1,9 @@
 {
-  "name": "fp-tsm",
-  "version": "4.0.0",
-  "description": "Functional programming in TypeScript (fork of fp-ts)",
-  "type": "module",
-  "exports": {
-    "./*": "./dist/*"
-  },
-  "scripts": {
-    "test": "vitest",
-    "tsc": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jderochervlk/fp-tsm"
-  },
-  "author": "Josh Derocher-Vlk <josh@vlkpack.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jderochervlk/fp-tsm/issues"
-  },
-  "homepage": "https://github.com/jderochervlk/fp-tsm",
-  "devDependencies": {
-    "typescript": "^5",
-    "vite": "^6.3.4",
-    "vitest": "^3"
-  },
-  "tags": [
-    "option",
-    "result",
-    "typescript",
-    "algebraic-data-types",
-    "functional-programming",
-    "ESM"
-  ],
-  "keywords": [
-    "typescript",
-    "algebraic-data-types",
-    "functional-programming",
-    "ESM"
-  ]
+    "name": "fp-tsm",
+    "version": "4.0.0-alpha.1",
+    "license": "MIT",
+    "exports": "./src/index.ts",
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    }
 }

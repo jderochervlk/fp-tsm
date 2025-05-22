@@ -17,10 +17,12 @@ Functional programming in TypeScript
   </a>
 </p>
 
-
 # Introduction
-`@jvlk/fp-tsm` is a fork of [`fp-ts`](https://gcanti.github.io/fp-ts/) that supports ESM and removes more of the complex functional concepts.
-It's intended to take the best features from languages like Rust and ReScript and make them easy to use for TypeScript developers.
+
+`@jvlk/fp-tsm` is a fork of [`fp-ts`](https://gcanti.github.io/fp-ts/) that
+supports ESM and removes more of the complex functional concepts. It's intended
+to take the best features from languages like Rust and ReScript and make them
+easy to use for TypeScript developers.
 
 # License
 
