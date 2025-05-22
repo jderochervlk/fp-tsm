@@ -12,15 +12,44 @@
  *   inputs (referred to as “partial functions”)
  * - Managing optional fields in data structures
  * - Handling optional function arguments
- *
  */
-export type Option<T> = Some<T> | None;
+export type Option<T> = Some<T> | None
 
 type Some<T> = {
-	_tag: "Some";
-	value: T;
-};
+  _tag: "Some"
+  value: T
+}
 
 type None = {
-	_tag: "None";
-};
+  _tag: "None"
+}
+
+/**
+ * Create an `Option`.
+ *
+ * Returns `None` if the value is `null` or `undefined`, otherwise wraps the value in a `Some`.
+ *
+ * ```ts
+ * import { Option } from "@jvlk/fp-tsm/Option"
+ *
+ * console.log(Option.of(undefined))
+ * // Output: { _id: 'Option', _tag: 'None' }
+ *
+ * console.log(Option.of(null))
+ * // Output: { _id: 'Option', _tag: 'None' }
+ *
+ * console.log(Option.of(1))
+ * // Output: { _id: 'Option', _tag: 'Some', value: 1 }
+ * ```
+ */
+export function of<T>(value: T | null | undefined): Option<T> {
+  if (value == null) {
+    return { _tag: "None" }
+  }
+  return { _tag: "Some", value }
+}
+
+/**
+ * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
+ */
+export const fromNullable = of

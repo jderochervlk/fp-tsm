@@ -1,4 +1,14 @@
 {
-	"deno.lint": true,
-	"deno.codeLens.references": true
+  "deno.enable": true,
+  "deno.config": "./deno.jsonc",
+  "deno.lint": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.formatOnSave": true,
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.codeLens.test": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
 }
