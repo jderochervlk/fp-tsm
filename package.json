@@ -1,9 +1,0 @@
-{
-    "name": "fp-tsm",
-    "version": "4.0.0-alpha.1",
-    "license": "MIT",
-    "exports": "./src/index.ts",
-    "peerDependencies": {
-        "typescript": "^5.0.0"
-    }
-}
