@@ -12,6 +12,8 @@
  *   inputs (referred to as “partial functions”)
  * - Managing optional fields in data structures
  * - Handling optional function arguments
+ *
+ * @module
  */
 export type Option<T> = Some<T> | None
 
@@ -31,6 +33,7 @@ type None = {
  *
  * @example
  * ```ts
+ * import { expect } from "jsr:@std/expect"
  * import * as Option from "@jvlk/fp-tsm/Option"
  *
  * expect(Option.of(undefined)).toEqual({ _tag: "None" })
@@ -49,5 +52,6 @@ export function of<T>(value: T | null | undefined): Option<T> {
 
 /**
  * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
+ * @ignore
  */
 export const fromNullable = of

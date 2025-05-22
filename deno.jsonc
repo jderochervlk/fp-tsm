@@ -1,13 +1,13 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "4.0.0-alpha.3",
+  "version": "4.0.0-alpha.9",
   "license": "MIT",
   "exports": {
     "./Option": "./src/Option.ts",
     "./function": "./src/function.ts"
   },
   "tasks": {
-    "gen-jet": "gen-jet src/ --test-function-name 'Deno.test' --header 'import { expect } from \"jsr:@std/expect\"'"
+    "gen-jet": "gen-jet src/ --test-function-name 'Deno.test'"
   },
   "imports": {
     "@std/expect": "jsr:@std/expect@^1.0.16",
