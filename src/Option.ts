@@ -29,7 +29,7 @@ type None = {
  *
  * Returns `None` if the value is `null` or `undefined`, otherwise wraps the value in a `Some`.
  *
- * @example Creating an 'Option'
+ * @example
  * ```ts
  * import * as Option from "@jvlk/fp-tsm/Option"
  *

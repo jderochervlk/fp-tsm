@@ -2,7 +2,7 @@
 import { expect } from "jsr:@std/expect"
 import * as Option from '@jvlk/fp-tsm/Option'
 
-Deno.test("Creating an \\'Option\\'", () => {
+Deno.test('Example 1', () => {
   expect(Option.of(undefined)).toEqual({ _tag: 'None' })
   expect(Option.of(null)).toEqual({ _tag: 'None' })
   expect(Option.of(1)).toEqual({ _tag: 'Some', value: 1 })
