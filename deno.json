@@ -1,4 +1,10 @@
 {
+  "name": "@jvlk/fp-tsm",
+  "version": "4.0.0-alpha.1",
+  "license": "MIT",
+  "exports": {
+    "./Option": "./src/Option.ts"
+  },
   "tasks": {},
   "imports": {
     "@std/assert": "jsr:@std/assert@1"
