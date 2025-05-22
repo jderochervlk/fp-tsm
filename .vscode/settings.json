@@ -10,5 +10,9 @@
   "deno.codeLens.test": true,
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "typescript.suggest.jsdoc.generateReturns": false,
+  "typescript.suggest.completeJSDocs": false,
+  "javascript.suggest.jsdoc.generateReturns": false,
+  "javascript.suggest.completeJSDocs": false
 }

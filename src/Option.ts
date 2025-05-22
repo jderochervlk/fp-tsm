@@ -29,17 +29,15 @@ type None = {
  *
  * Returns `None` if the value is `null` or `undefined`, otherwise wraps the value in a `Some`.
  *
+ * @example Creating an 'Option'
  * ```ts
- * import { Option } from "@jvlk/fp-tsm/Option"
+ * import * as Option from "@jvlk/fp-tsm/Option"
  *
- * console.log(Option.of(undefined))
- * // Output: { _id: 'Option', _tag: 'None' }
+ * expect(Option.of(undefined)).toEqual({ _tag: "None" })
  *
- * console.log(Option.of(null))
- * // Output: { _id: 'Option', _tag: 'None' }
+ * expect(Option.of(null)).toEqual({ _tag: "None" })
  *
- * console.log(Option.of(1))
- * // Output: { _id: 'Option', _tag: 'Some', value: 1 }
+ * expect(Option.of(1)).toEqual({ _tag: 'Some', value: 1 })
  * ```
  */
 export function of<T>(value: T | null | undefined): Option<T> {
