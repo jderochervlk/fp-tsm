@@ -97,6 +97,7 @@ export function some<A>(a: NonNullable<A>): Option<A> {
  *
  * @example
  * ```ts
+ * import { expect } from "jsr:@std/expect"
  * import { Option } from '@jvlk/fp-tsm'
  *
  * const isPositive = Option.fromPredicate((n: number) => n >= 0)
