@@ -22,5 +22,5 @@ jobs:
       - name: Lint
         run: deno lint src
       - name: Check
-        run: deno check --docs src
+        run: deno check --doc src
 
