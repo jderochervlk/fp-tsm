@@ -14,7 +14,7 @@
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { pipe } from '@jvlk/fp-tsm/function'
+ * import { pipe } from '@jvlk/fp-tsm'
  *
  * const len = (s: string): number => s.length
  * const double = (n: number): number => n * 2
@@ -341,7 +341,7 @@ export function pipe(
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { flow } from '@jvlk/fp-tsm/function'
+ * import { flow } from '@jvlk/fp-tsm'
  *
  * const len = (s: string): number => s.length
  * const double = (n: number): number => n * 2

@@ -1,8 +1,9 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "4.0.0-alpha.9",
+  "version": "4.0.0-alpha.10",
   "license": "MIT",
   "exports": {
+    ".": "./src/index.ts",
     "./Option": "./src/Option.ts",
     "./function": "./src/function.ts"
   },
