@@ -24,11 +24,15 @@ title: ${module}
     if (node.name !== "") {
       nodes.set(node.name, node)
     } else {
-      nodes.set("moduleDoc", node)
+      nodes.set(module, node)
     }
   })
 
   for (const node of nodes.values()) {
+    console.log(node.name)
+    if (node.name === module) {
+      markdown += `${node.jsDoc?.doc}\n`
+    }
     if (node.declarationKind !== "private" && node.name !== module) {
       const category = node.jsDoc?.tags?.find((tag) => tag.kind === "category")
       if (
@@ -44,13 +48,12 @@ title: ${module}
       }
 
       markdown += `${node.jsDoc?.doc}\n`
-
-      const examples = node.jsDoc?.tags?.filter((tag) => tag.kind === "example")
-      if (examples && examples.length > 0) {
-        markdown += `#### Examples\n`
-        for (const example of examples) {
-          markdown += `${example.kind === "example" ? example.doc : ""}\n`
-        }
+    }
+    const examples = node.jsDoc?.tags?.filter((tag) => tag.kind === "example")
+    if (examples && examples.length > 0) {
+      markdown += `#### Examples\n`
+      for (const example of examples) {
+        markdown += `${example.kind === "example" ? example.doc : ""}\n`
       }
     }
   }

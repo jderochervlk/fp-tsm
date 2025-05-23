@@ -8,7 +8,7 @@ const log = debounce((event: Deno.FsEvent) => {
 }, 200)
 
 const run = debounce(async () => {
-  await exec("deno task docs:json")
+  await exec("deno task docs:json", { stdout: "piped" })
   await exec("deno task docs:md")
   await exec("deno check --doc-only")
   await exec("deno task tests:generate")
