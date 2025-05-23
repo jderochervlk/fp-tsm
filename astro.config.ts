@@ -2,6 +2,8 @@ import { defineConfig } from "astro/config"
 import starlight from "@astrojs/starlight"
 
 export default defineConfig({
+  site: "https://jderochervlk.github.io",
+  base: "/fp-tsm/",
   integrations: [
     starlight({
       title: "fp-tsm",
