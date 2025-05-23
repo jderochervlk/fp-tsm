@@ -1,3 +1,5 @@
 node_modules
 .env
 docs
+.astro
+src/**/*.example.test.ts
