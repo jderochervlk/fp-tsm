@@ -14,7 +14,8 @@
     "docs:preview": "astro preview",
     "docs:json": "deno doc --json src/**/*.ts > docs.json",
     "docs:md": "deno run -A scripts/generate-docs.ts",
-    "docs": "",
+    "docs:watch": "deno run -A scripts/watch-docs.ts",
+    "docs": "deno task docs:json && deno task docs:md && deno task docs:build",
     "tests:generate": "gen-jet src/ --test-function-name 'Deno.test'"
   },
   "imports": {

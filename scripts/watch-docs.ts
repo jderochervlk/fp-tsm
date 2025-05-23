@@ -10,10 +10,16 @@ const log = debounce((event: Deno.FsEvent) => {
 const run = debounce(async () => {
   await exec("deno task docs:json")
   await exec("deno task docs:md")
+  await exec("deno check --doc-only")
+  await exec("deno task tests:generate")
 }, 200)
 
 for await (const event of watcher) {
-  if (event.paths[0].includes(".ts") && event.kind === "modify") {
+  if (
+    event.paths[0].includes(".ts") &&
+    event.kind === "modify" &&
+    !event.paths[0].includes("test.ts")
+  ) {
     log(event)
     run()
   }

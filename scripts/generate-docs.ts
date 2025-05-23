@@ -32,6 +32,8 @@ title: ${module}
     if (node.declarationKind !== "private" && node.name !== module) {
       const category = node.jsDoc?.tags?.find((tag) => tag.kind === "category")
 
+      console.log(category)
+
       if (
         category && category.kind == "category" &&
         !categories.includes(category.doc)
