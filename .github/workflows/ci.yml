@@ -16,6 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Deno
         uses: denoland/setup-deno@v2
+      - name: Generate example tests
+        run: deno task tests:generate
       - name: Test
         run: deno test
       - name: Lint
