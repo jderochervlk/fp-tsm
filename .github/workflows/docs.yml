@@ -32,8 +32,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Deno
         uses: denoland/setup-deno@v2
+      - name: Install dependencies
+        run: deno install --allow-scripts
       - name: Build docs
-        run: deno doc --html src
+        run: deno task docs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
