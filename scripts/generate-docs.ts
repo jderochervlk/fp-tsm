@@ -1,4 +1,4 @@
-import { doc, DocNode } from "jsr:@deno/doc@0.174.0"
+import type { DocNode } from "jsr:@deno/doc@0.174.0"
 
 type jsonDoc = { nodes: DocNode[] }
 
@@ -6,21 +6,32 @@ const colorsDoc = await Deno.readTextFile("./docs.json")
 
 const docs = JSON.parse(colorsDoc) as jsonDoc
 
-let markdown = ""
+async function generate(module: string, category: string) {
+  const nodes: Map<string, DocNode> = new Map()
 
-let title = ""
+  let markdown = `
+---
+title: ${module}
+---
 
-// console.log(docs)
+`
 
-for (const node of docs.nodes) {
-  if (node.declarationKind !== "private") {
-    if (!node.name && node.kind === "moduleDoc") {
-      title = node.location.filename.split("/").slice(-1)[0].split(".")[0]
-      markdown += `# ${title}\n\n`
+  docs.nodes.filter((node) =>
+    node.location.filename.includes(module) && node.jsDoc
+  ).forEach((node) => {
+    if (node.name !== "") {
+      nodes.set(node.name, node)
     } else {
-      if (node.name !== title) {
+      nodes.set("moduleDoc", node)
+    }
+  })
+
+  for (const node of nodes.values()) {
+    if (node.declarationKind !== "private" && node.name !== module) {
+      if (node.name !== "") {
         markdown += `## ${node.name}\n\n`
       }
+
       markdown += `${node.jsDoc?.doc}\n`
       const examples = node.jsDoc?.tags?.filter((tag) => tag.kind === "example")
       if (examples && examples.length > 0) {
@@ -31,6 +42,26 @@ for (const node of docs.nodes) {
       }
     }
   }
+
+  await Deno.mkdir(`./src/content/docs/${category}`, {
+    recursive: true,
+  })
+
+  await Deno.writeTextFile(
+    `./src/content/docs/${category}/${module}.md`,
+    markdown,
+  )
 }
 
-await Deno.writeTextFile("./docs/docs.md", markdown)
+await generate("Option", "Data Types")
+
+await generate("utility", "Functions")
+
+// Copy the README.md file to src/content/docs/index.md
+const readme = `
+---
+title: fp-tsm
+---
+${(await Deno.readTextFile("README.md"))}`
+
+await Deno.writeTextFile("./src/content/docs/index.md", readme)

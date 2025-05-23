@@ -24,6 +24,20 @@ supports ESM and removes more of the complex functional concepts. It's intended
 to take the best features from languages like Rust and ReScript and make them
 easy to use for TypeScript developers.
 
+# Philosophy
+
+This is intended to be somewhat of a continuation of `fp-ts` and allow easy
+upgrades from `fp-ts`, but it does diverge from that library in a few
+significant ways.
+
+- `fp-tsm` isn't as complex as `fp-ts`. It doesn't use things like `Monoid` or
+  `Applicative` and just exports the data types and functions that developers
+  will use.
+- `fp-tsm` uses simpler types internally.
+- `fp-tsm` is `esm` only.
+- `fp-tsm` has robust documentation and presents things to developers in a way
+  that they can learn about these concepts if they are not familiar with them.
+
 # License
 
 The MIT License (MIT)

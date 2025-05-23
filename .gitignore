@@ -3,3 +3,5 @@ node_modules
 docs
 .astro
 src/**/*.example.test.ts
+docs.json
+!src/content/docs/getting-started.md

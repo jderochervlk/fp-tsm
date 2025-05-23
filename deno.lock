@@ -29,6 +29,7 @@
     "jsr:@std/path@0.223": "0.223.0",
     "jsr:@std/path@^1.0.8": "1.0.9",
     "npm:@astrojs/starlight@~0.34.3": "0.34.3_astro@5.8.0__vite@6.3.5___picomatch@4.0.2__zod@3.25.23",
+    "npm:astro-expressive-code@~0.41.2": "0.41.2_astro@5.8.0__vite@6.3.5___picomatch@4.0.2__zod@3.25.23",
     "npm:astro@5.8.0": "5.8.0_vite@6.3.5__picomatch@4.0.2_zod@3.25.23",
     "npm:astro@^5.8.0": "5.8.0_vite@6.3.5__picomatch@4.0.2_zod@3.25.23",
     "npm:generate-jsdoc-example-tests@0.2.4": "0.2.4",
@@ -2946,6 +2947,7 @@
       "jsr:@std/assert@^1.0.16",
       "jsr:@std/expect@^1.0.16",
       "npm:@astrojs/starlight@~0.34.3",
+      "npm:astro-expressive-code@~0.41.2",
       "npm:astro@^5.8.0",
       "npm:generate-jsdoc-example-tests@~0.2.4"
     ]
