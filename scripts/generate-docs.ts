@@ -6,7 +6,9 @@ const colorsDoc = await Deno.readTextFile("./docs.json")
 
 const docs = JSON.parse(colorsDoc) as jsonDoc
 
-async function generate(module: string, category: string) {
+async function generate(module: string, category: string): Promise<void> {
+  const categories: Array<string> = []
+
   const nodes: Map<string, DocNode> = new Map()
 
   let markdown = `
@@ -28,14 +30,25 @@ title: ${module}
 
   for (const node of nodes.values()) {
     if (node.declarationKind !== "private" && node.name !== module) {
+      const category = node.jsDoc?.tags?.find((tag) => tag.kind === "category")
+
+      if (
+        category && category.kind == "category" &&
+        !categories.includes(category.doc)
+      ) {
+        categories.push(category.doc)
+        markdown += `## ${category.doc}\n\n`
+      }
+
       if (node.name !== "") {
-        markdown += `## ${node.name}\n\n`
+        markdown += `### ${node.name}\n\n`
       }
 
       markdown += `${node.jsDoc?.doc}\n`
+
       const examples = node.jsDoc?.tags?.filter((tag) => tag.kind === "example")
       if (examples && examples.length > 0) {
-        markdown += `### Examples\n\n`
+        markdown += `#### Examples\n`
         for (const example of examples) {
           markdown += `${example.kind === "example" ? example.doc : ""}\n`
         }
@@ -55,7 +68,7 @@ title: ${module}
 
 await generate("Option", "Data Types")
 
-await generate("utility", "Functions")
+// await generate("utility", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
 const readme = `

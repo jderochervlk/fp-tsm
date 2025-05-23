@@ -10,6 +10,9 @@ export default defineConfig({
         { label: "Data Types", items: ["data-types/option"] },
         { label: "functions", items: ["functions/utility"] },
       ],
+      customCss: [
+        "./src/content/style.css",
+      ],
     }),
   ],
 })

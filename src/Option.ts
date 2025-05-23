@@ -1,17 +1,8 @@
 /**
- * The `Option` data type represents optional values. An `Option<A>` can either
- * be `Some<A>`, containing a value of type `A`, or `None`, representing the
- * absence of a value.
+ * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
+ * An `Option<A>` can either be `Some<A>`, containing a value of type `A`, or `None`, representing the absence of a value.
  *
- * **When to Use**
- *
- * You can use `Option` in scenarios like:
- *
- * - Using it for initial values
- * - Returning values from functions that are not defined for all possible
- *   inputs (referred to as “partial functions”)
- * - Managing optional fields in data structures
- * - Handling optional function arguments
+ * It can be useful to distinguish values between each other: you can represent `Some(None)` with options, whereas `undefined` or `null` replace the value they intend to make optional.
  *
  * @module
  */
@@ -33,20 +24,21 @@ type None = {
 }
 
 /**
- * Create an `Option`.
+ * This is probaly way you will usually create an `Option`. It's similar to doing `Array.of` to create a new array.
  *
  * Returns `None` if the value is `null` or `undefined`, otherwise wraps the value in a `Some`.
  *
- * @example
+ * @category Creating Options
+ * @example Creating an option
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from '@jvlk/fp-tsm'
+ * import { Option } from "@jvlk/fp-tsm"
  *
  * expect(Option.of(undefined)).toEqual({ _tag: "None" })
  *
  * expect(Option.of(null)).toEqual({ _tag: "None" })
  *
- * expect(Option.of(1)).toEqual({ _tag: 'Some', value: 1 })
+ * expect(Option.of(1)).toEqual({ _tag: "Some", value: 1 })
  * ```
  */
 export function of<T>(value: T | null | undefined): Option<T> {
@@ -65,10 +57,11 @@ export const fromNullable = of
 /**
  * `None` doesn't have a constructor, instead you can use it directly as a value. Represents a missing value.
  *
+ * @category Creating Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from '@jvlk/fp-tsm'
+ * import { Option } from "@jvlk/fp-tsm"
  *
  * expect(Option.none).toEqual({ _tag: "None" })
  * ```
@@ -79,10 +72,11 @@ export const none: Option<never> = { _tag: "None" }
  * Constructs a `Some`. Represents an optional value that exists.
  * This value cannot be `null` or `undefined`.
  *
+ * @category Creating Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from '@jvlk/fp-tsm'
+ * import { Option } from "@jvlk/fp-tsm"
  *
  * expect(Option.some(1)).toEqual({ _tag: "Some", value: 1 })
  * expect(Option.some("hello")).toEqual({ _tag: "Some", value: "hello" })
@@ -95,10 +89,11 @@ export function some<A>(a: NonNullable<A>): Option<A> {
 /**
  * You can create an `Option` based on a predicate, for example, to check if a value is positive.
  *
+ * @category Creating Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from '@jvlk/fp-tsm'
+ * import { Option } from "@jvlk/fp-tsm"
  *
  * const isPositive = Option.fromPredicate((n: number) => n >= 0)
  *

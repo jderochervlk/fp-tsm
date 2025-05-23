@@ -1,6 +1,13 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@bearz/chars@0.1": "0.1.0",
+    "jsr:@bearz/env@~0.1.3": "0.1.3",
+    "jsr:@bearz/exec@~0.1.1": "0.1.1",
+    "jsr:@bearz/fs@0.1": "0.1.0",
+    "jsr:@bearz/path@^0.0.0": "0.0.0",
+    "jsr:@bearz/slices@0.1.1": "0.1.1",
+    "jsr:@bearz/strings@~0.1.3": "0.1.3",
     "jsr:@deno/cache-dir@0.11": "0.11.1",
     "jsr:@deno/cache-dir@0.14": "0.14.0",
     "jsr:@deno/doc@*": "0.174.0",
@@ -13,6 +20,7 @@
     "jsr:@std/assert@0.223": "0.223.0",
     "jsr:@std/assert@1": "1.0.13",
     "jsr:@std/assert@^1.0.13": "1.0.13",
+    "jsr:@std/async@*": "1.0.9",
     "jsr:@std/bytes@0.223": "0.223.0",
     "jsr:@std/bytes@^1.0.5": "1.0.6",
     "jsr:@std/expect@*": "1.0.16",
@@ -36,6 +44,51 @@
     "npm:generate-jsdoc-example-tests@~0.2.4": "0.2.4"
   },
   "jsr": {
+    "@bearz/chars@0.1.0": {
+      "integrity": "37140b8b88c2059c6366ffeb00d7122c0db1ab99459e2b0f434a49047618d789"
+    },
+    "@bearz/env@0.1.3": {
+      "integrity": "8422dabb587293f339239ed836dce581dedd5fd2a53861eb2283ba29f7bb9931",
+      "dependencies": [
+        "jsr:@bearz/chars",
+        "jsr:@bearz/strings"
+      ]
+    },
+    "@bearz/exec@0.1.1": {
+      "integrity": "061c4595e4635990997873d0228be75877156dc5772a75a54fa84471c9740172",
+      "dependencies": [
+        "jsr:@bearz/chars",
+        "jsr:@bearz/env",
+        "jsr:@bearz/fs",
+        "jsr:@bearz/path",
+        "jsr:@bearz/strings"
+      ]
+    },
+    "@bearz/fs@0.1.0": {
+      "integrity": "424d501ec9446ee4206e0ff2d5a87220f0e8e80e2138ef2f80992bb30c19b063",
+      "dependencies": [
+        "jsr:@bearz/path"
+      ]
+    },
+    "@bearz/path@0.0.0": {
+      "integrity": "490a4c2cebd22c1f59abf2a9439a19171021e9b85cdc7cea2cdd6a4601d5e801",
+      "dependencies": [
+        "jsr:@bearz/chars"
+      ]
+    },
+    "@bearz/slices@0.1.1": {
+      "integrity": "b3182616a3e2f8aebb89ceef7b5e269c85094f98b3c0f6bf2daf0d15f66a4032",
+      "dependencies": [
+        "jsr:@bearz/chars"
+      ]
+    },
+    "@bearz/strings@0.1.3": {
+      "integrity": "34119e2d7351e4d36b7fddb301b4012f62c027320bf07c0b15f5f6db24608daa",
+      "dependencies": [
+        "jsr:@bearz/chars",
+        "jsr:@bearz/slices"
+      ]
+    },
     "@deno/cache-dir@0.11.1": {
       "integrity": "eaedd37ff99928cfbdee0174448322228bdc9e5a4f0fbd722fe925f28756f900",
       "dependencies": [
@@ -96,6 +149,9 @@
       "dependencies": [
         "jsr:@std/internal@^1.0.6"
       ]
+    },
+    "@std/async@1.0.9": {
+      "integrity": "c6472fd0623b3f3daae023cdf7ca5535e1b721dfbf376562c0c12b3fb4867f91"
     },
     "@std/bytes@0.223.0": {
       "integrity": "84b75052cd8680942c397c2631318772b295019098f40aac5c36cead4cba51a8"
@@ -2944,6 +3000,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@bearz/exec@~0.1.1",
       "jsr:@std/assert@^1.0.16",
       "jsr:@std/expect@^1.0.16",
       "npm:@astrojs/starlight@~0.34.3",

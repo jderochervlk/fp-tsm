@@ -4,4 +4,7 @@ docs
 .astro
 src/**/*.example.test.ts
 docs.json
+
+# These are doc files that are manually written
+!src/content/style.css
 !src/content/docs/getting-started.md
