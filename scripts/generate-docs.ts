@@ -31,9 +31,6 @@ title: ${module}
   for (const node of nodes.values()) {
     if (node.declarationKind !== "private" && node.name !== module) {
       const category = node.jsDoc?.tags?.find((tag) => tag.kind === "category")
-
-      console.log(category)
-
       if (
         category && category.kind == "category" &&
         !categories.includes(category.doc)
@@ -70,7 +67,7 @@ title: ${module}
 
 await generate("Option", "Data Types")
 
-// await generate("utility", "Functions")
+await generate("utility", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
 const readme = `
