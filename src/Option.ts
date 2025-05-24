@@ -254,6 +254,12 @@ export const flatMap: {
 )
 
 /**
+ * @private
+ * @deprecated This only exists for fp-ts compatibility and will be removed in the next major version. Please switch to `flatMap`.
+ */
+export const chain = flatMap
+
+/**
  * @category Working with multiple Options
  */
 export function map2<T1, T2, U extends NonNullable<V>, V>(
