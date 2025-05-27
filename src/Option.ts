@@ -1,5 +1,4 @@
 import { dual } from "./internal.ts"
-import { pipe } from "./utility.ts"
 
 /**
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
@@ -146,6 +145,29 @@ export function fromPredicate<A>(
 ): (a: A) => Option<A> {
   return (a) => (predicate(a) ? of(a) : none)
 }
+
+// TODO: Should I move this to the object global?
+
+/**
+ * Looks up a value in an object by its key and returns it wrapped in an `Option`.
+ *
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.lookup({ foo: 'bar'}, 'foo')).toEqual(Option.some('bar'))
+ *
+ * expect(Option.lookup({ foo: null }, 'foo')).toEqual(Option.none)
+ * ```
+ * @category Creating Options
+ */
+export const lookup: {
+  <O, K extends keyof O>(
+    key: K,
+  ): (self: O) => O[K]
+  <O, K extends keyof O>(self: O, key: K): Option<O[K]>
+} = dual(2, (obj, key) => of(obj[key]))
 
 // TODO: lookup - this is the same as R.lookup - It makes more sense to use here
 // TODO: tryCatch - this should take in an optional parameter for logging
