@@ -3,6 +3,9 @@
  * @module
  */
 
+import { array } from "astro/zod"
+import { Option } from "./index.ts"
+
 export type NonEmptyArray<T> = [T, ...T[]]
 export type ReadonlyNonEmptyArray<T> = readonly [T, ...T[]]
 
@@ -27,11 +30,18 @@ declare global {
     ): (
       a: A,
     ) => ArrayType<A, U>
+
+    at<T>(
+      index: number,
+    ): (a: AnyArray<T>) => Option.Option<T>
   }
 }
 
 // overload Array
 Array.map = map
+Array.at = function at<T>(index: number) {
+  return (array: AnyArray<T>) => Option.of(array[index])
+}
 
 // functions for overloading
 function map<T, U>(

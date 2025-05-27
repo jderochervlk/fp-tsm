@@ -1,13 +1,14 @@
 import { expect } from "@std/expect/expect"
-import { pipe } from "./utility.ts"
 import "./Array.ts"
-import { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
+import type { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
+import { pipe } from "./utility.ts"
 
-Deno.test("Array", () => {
+Deno.test("map", () => {
   const a1: ReadonlyArray<number> = [1, 2, 3]
   const a2: Array<number> = [1, 2, 3]
-  const a3: NonEmptyArray<number> = [1]
-  const a4: ReadonlyNonEmptyArray<number> = [1]
+  const a3: NonEmptyArray<number> = [1, 2, 3]
+  const a4: ReadonlyNonEmptyArray<number> = [1, 2, 3]
+
   const x1 = pipe(
     a1,
     Array.map((t) => {
@@ -20,7 +21,7 @@ Deno.test("Array", () => {
   const x2 = pipe(
     a2,
     Array.map((t) => {
-      return "Hello!"
+      return t + 1
     }),
   )
 
@@ -43,4 +44,10 @@ Deno.test("Array", () => {
   )
 
   expect(x4).toEqual([1, 2, 3].map((t) => t + 1))
+})
+
+Deno.test("at", () => {
+  expect(
+    pipe([1, 2, 3], Array.at(0)),
+  ).toEqual({ _tag: "Some", value: 1 })
 })
