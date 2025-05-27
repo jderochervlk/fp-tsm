@@ -18,13 +18,9 @@ export type AnyArray<Type = unknown> =
 declare global {
   interface ArrayConstructor {
     map<
-      T,
-      U,
-      A extends
-        | Array<T>
-        | ReadonlyArray<T>
-        | NonEmptyArray<T>
-        | ReadonlyNonEmptyArray<T>,
+      A extends AnyArray<T>,
+      T = unknown,
+      U = unknown,
     >(
       fn: (x: ValueOf<A>) => U,
     ): (
