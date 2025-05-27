@@ -70,7 +70,7 @@ type None = {
 // Generators
 
 /**
- * This is probaly way you will usually create an `Option`. It's similar to doing `Array.of` to create a new array.
+ * This is the main way to create an `Option`. It's similar to doing `Array.of` to create a new array.
  *
  * Returns `None` if the value is `null` or `undefined`, otherwise wraps the value in a `Some`.
  *
@@ -95,26 +95,6 @@ export function of<T>(value: T | null | undefined): Option<T> {
 }
 
 /**
- * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
- * @ignore
- */
-export const fromNullable = of
-
-/**
- * `None` doesn't have a constructor, instead you can use it directly as a value. Represents a missing value.
- *
- * @category Creating Options
- * @example
- * ```ts
- * import { expect } from "jsr:@std/expect"
- * import { Option } from "@jvlk/fp-tsm"
- *
- * expect(Option.none).toEqual({ _tag: "None" })
- * ```
- */
-export const none: Option<never> = { _tag: "None" }
-
-/**
  * Constructs a `Some`. Represents an optional value that exists.
  * This value cannot be `null` or `undefined`.
  *
@@ -131,6 +111,20 @@ export const none: Option<never> = { _tag: "None" }
 export function some<A>(a: NonNullable<A>): Option<A> {
   return { _tag: "Some", value: a }
 }
+
+/**
+ * `None` doesn't have a constructor, instead you can use it directly as a value. Represents a missing value.
+ *
+ * @category Creating Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.none).toEqual({ _tag: "None" })
+ * ```
+ */
+export const none: Option<never> = { _tag: "None" }
 
 /**
  * You can create an `Option` based on a predicate, for example, to check if a value is positive.
@@ -152,6 +146,9 @@ export function fromPredicate<A>(
 ): (a: A) => Option<A> {
   return (a) => (predicate(a) ? of(a) : none)
 }
+
+// TODO: lookup - this is the same as R.lookup - It makes more sense to use here
+// TODO: tryCatch - this should take in an optional parameter for logging
 
 // Working with Options
 
@@ -253,11 +250,30 @@ export const flatMap: {
     self._tag === "Some" ? f(self.value) : none,
 )
 
+// TODO: filter
+// TODO: match
+// TODO: fold - mark as deprecated and use `match` instead
+
+/**
+ * @category Working with Options
+ */
+// getOrElse
+
 /**
  * @private
- * @deprecated This only exists for fp-ts compatibility and will be removed in the next major version. Please switch to `flatMap`.
+ * @ignore
+ * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
  */
-export const chain = flatMap
+// orElse
+
+/**
+ * @private
+ * @ignore
+ * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
+ */
+// alt
+
+// Multiple options
 
 /**
  * @category Working with multiple Options
@@ -272,3 +288,30 @@ export function map2<T1, T2, U extends NonNullable<V>, V>(
   }
   return none
 }
+
+// Typeguards
+// todo: isSome
+// todo: isNone
+
+// Conversion
+// TODO: fromEither
+// TODO: fromResult
+// TODO: toNullable
+// TODO: toUndefined
+//
+
+// Do notation
+// I am not sure I want this? It seems complicated and could be solved with `mapA2`, `mapA3`, etc...
+// It should be here for fp-ts compat and migration
+
+/**
+ * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
+ * @ignore
+ */
+export const fromNullable = of
+
+/**
+ * @private
+ * @deprecated This only exists for fp-ts compatibility and will be removed in the next major version. Please switch to `flatMap`.
+ */
+export const chain = flatMap
