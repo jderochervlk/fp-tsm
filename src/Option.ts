@@ -146,31 +146,36 @@ export function fromPredicate<A>(
   return (a) => (predicate(a) ? of(a) : none)
 }
 
-// TODO: Should I move this to the object global?
-
 /**
- * Looks up a value in an object by its key and returns it wrapped in an `Option`.
+ * `tryCatch` is a utility function that allows you to execute a function that may throw an error and return an `Option`.
+ * You can also provide a function to call when there is an error, which is useful for logging or other side effects you might want to use when there is an error.
  *
+ * @category Creating Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Option } from "@jvlk/fp-tsm"
  *
- * expect(Option.lookup({ foo: 'bar'}, 'foo')).toEqual(Option.some('bar'))
+ * expect(Option.tryCatch(() => 1)).toEqual(Option.some(1))
  *
- * expect(Option.lookup({ foo: null }, 'foo')).toEqual(Option.none)
+ * expect(Option.tryCatch(() => { throw new Error("Error") })).toEqual(Option.none)
+ *
+ * expect(Option.tryCatch(() => { throw new Error("Error with logging") }, console.error)).toEqual(Option.none)
  * ```
- * @category Creating Options
  */
-export const lookup: {
-  <O, K extends keyof O>(
-    key: K,
-  ): (self: O) => O[K]
-  <O, K extends keyof O>(self: O, key: K): Option<O[K]>
-} = dual(2, (obj, key) => of(obj[key]))
-
-// TODO: lookup - this is the same as R.lookup - It makes more sense to use here
-// TODO: tryCatch - this should take in an optional parameter for logging
+export function tryCatch<A>(
+  fn: () => A,
+  onError?: (e: unknown) => void,
+): Option<A> {
+  try {
+    return of(fn())
+  } catch (e) {
+    if (onError) {
+      onError(e)
+    }
+    return none
+  }
+}
 
 // Working with Options
 
@@ -214,8 +219,6 @@ export const map: {
 /**
  * Applies a function to the value of a `Some` and flattens the resulting
  * `Option`. If the input is `None`, it remains `None`.
- *
- * **Details**
  *
  * This function allows you to chain computations that return `Option` values.
  * If the input `Option` is `Some`, the provided function `f` is applied to the
@@ -272,28 +275,171 @@ export const flatMap: {
     self._tag === "Some" ? f(self.value) : none,
 )
 
-// TODO: filter
-// TODO: match
-// TODO: fold - mark as deprecated and use `match` instead
-
 /**
+ * Applies a filter function to an `Option`, returning the `Option` itself if the value satisfies the predicate, or `None` if it does not.
+ *
  * @category Working with Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.filter(Option.some(42), (n) => n > 40)).toEqual(Option.some(42))
+ * expect(Option.filter(Option.some(42), (n) => n < 40)).toEqual(Option.none)
+ *
+ * expect(
+ *  pipe(
+ *    Option.some(42),
+ *    Option.filter((n) => n > 40),
+ *  )
+ * ).toEqual(Option.some(42))
+ *
+ * expect(
+ *  pipe(
+ *    Option.some(42),
+ *    Option.filter((n) => n < 40),
+ *  )
+ * ).toEqual(Option.none)
+ * ```
  */
-// getOrElse
+export const filter: {
+  <A>(f: (a: A) => boolean): (self: Option<A>) => Option<A>
+  <A>(self: Option<A>, f: (a: A) => boolean): Option<A>
+} = dual(2, (self, f) => {
+  if (self._tag === "Some" && f(self.value)) {
+    return self
+  }
+  return none
+})
+
+/**
+ * Matches an `Option` against two functions: one for the `Some` case and one for the `None` case.
+ * This is useful for handling both cases in a single expression without needing to check the `_tag` manually.
+ *
+ * @category Working with Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.match(Option.some(42), val => `The value is ${val}.`, () => "There is no value.")).toEqual("The value is 42.")
+ * expect(Option.match(Option.none, val => `The value is ${val}.`, () => "There is no value.")).toEqual("There is no value.")
+ *
+ * expect(
+ *  pipe(
+ *    Option.some(42),
+ *    Option.match(
+ *      (val) => `The value is ${val}.`,
+ *      () => "There is no value.",
+ *    )
+ *  )
+ * ).toEqual("The value is 42.")
+ *
+ * expect(
+ *  pipe(
+ *    Option.none,
+ *    Option.match(
+ *      (val) => `The value is ${val}.`,
+ *      () => "There is no value.",
+ *    )
+ *  )
+ * ).toEqual("There is no value.")
+ * ```
+ */
+export const match: {
+  <A, B>(some: (a: A) => B, none: () => B): (self: Option<A>) => B
+  <A, B>(self: Option<A>, some: (a: A) => B, none: () => B): B
+} = dual(3, (self, some, none) => {
+  if (self._tag === "Some") {
+    return some(self.value)
+  }
+  return none()
+})
+
+/**
+ * Gets the value from an `Option`, or returns a fallback value if the `Option` is `None`.
+ *
+ * @category Working with Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.getOrElse(Option.some(42), () => 10)).toEqual(42)
+ *
+ * expect(Option.getOrElse(Option.none, () => 10)).toEqual(10)
+ *
+ * expect(
+ *  pipe(
+ *    Option.some(42),
+ *    Option.getOrElse(() => 10),
+ *  )
+ * ).toEqual(42)
+ *
+ * expect(
+ *  pipe(
+ *    Option.none,
+ *    Option.getOrElse(() => 10),
+ *  )
+ * ).toEqual(10)
+ * ```
+ */
+export const getOrElse: {
+  <A>(f: () => A): (self: Option<A>) => A
+  <A>(self: Option<A>, f: () => A): A
+} = dual(
+  2,
+  (self, fallback) => self._tag === "Some" ? self.value : fallback(),
+)
 
 /**
  * @private
  * @ignore
  * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
  */
-// orElse
+export const orElse = getOrElse
 
 /**
- * @private
  * @ignore
  * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
  */
-// alt
+export const alt = getOrElse
+
+// Typeguards
+
+/**
+ * Checks if an `Option` is a `Some` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Option` to `Some<T>` when this function returns `true`.
+ *
+ * @category Type Guards
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.isSome(Option.some(1))).toEqual(true)
+ * expect(Option.isSome(Option.none)).toEqual(false)
+ * ```
+ */
+export function isSome<T>(self: Option<T>): self is Some<T> {
+  return self._tag === "Some"
+}
+
+/**
+ * Checks if an `Option` is a `None` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Option` to `None` when this function returns `true`.
+ *
+ * @category Type Guards
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.isNone(Option.some(1))).toEqual(false)
+ * expect(Option.isNone(Option.none)).toEqual(true)
+ * ```
+ */
+export function isNone<T>(self: Option<T>): self is None {
+  return self._tag === "None"
+}
 
 // Multiple options
 
@@ -311,10 +457,6 @@ export function map2<T1, T2, U extends NonNullable<V>, V>(
   return none
 }
 
-// Typeguards
-// todo: isSome
-// todo: isNone
-
 // Conversion
 // TODO: fromEither
 // TODO: fromResult
@@ -327,13 +469,19 @@ export function map2<T1, T2, U extends NonNullable<V>, V>(
 // It should be here for fp-ts compat and migration
 
 /**
- * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
  * @ignore
+ * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
  */
 export const fromNullable = of
 
 /**
- * @private
+ * @ignore
  * @deprecated This only exists for fp-ts compatibility and will be removed in the next major version. Please switch to `flatMap`.
  */
 export const chain = flatMap
+
+/**
+ * @ignore
+ * @deprecated Use `match` instead. This exists for `fp-ts` compatibility and will be removed in the next major version.
+ */
+export const fold = match

@@ -9,8 +9,6 @@
 /**
  * Pipes the value of an expression into a pipeline of functions.
  *
- * See also [`flow`](#flow).
- *
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
@@ -335,8 +333,6 @@ export function pipe(
 
 /**
  * Performs left-to-right function composition. The first argument may have any arity, the remaining arguments must be unary.
- *
- * See also [`pipe`](#pipe).
  *
  * @example
  * ```ts

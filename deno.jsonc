@@ -10,11 +10,16 @@
     "./function": "./src/utility.ts"
   },
   "tasks": {
+    "dev:docs:generate": "deno task docs:watch",
+    "dev:docs": "deno task docs:dev",
+    "dev:test:generate": "deno task tests:generate",
+    "dev:test": "deno test --watch",
+    "dev": "deno task \"dev:*\"",
     "docs:build": "astro build",
     "docs:dev": "astro dev",
-    "docs:preview": "astro preview",
-    "docs:json": "deno doc --json src/**/*.ts > docs.json",
+    "docs:json": "deno doc --json 'src/**/*.ts' '!src/**/*.test.ts' > docs.json",
     "docs:md": "deno run -A scripts/generate-docs.ts",
+    "docs:preview": "astro preview",
     "docs:watch": "deno run -A scripts/watch-docs.ts",
     "docs": "deno task docs:json && deno task docs:md && deno task docs:build",
     "tests:generate": "gen-jet src/ --test-function-name 'Deno.test'"
