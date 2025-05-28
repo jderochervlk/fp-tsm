@@ -524,7 +524,8 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * // without Do notation
  * const data2 =
  *  pipe(
- *    Option.bindTo("age", age),
+ *    age,
+ *    Option.map(age => ({ age })),
  *    Option.flatMap(({ age }) => Option.isSome(name) ? Option.some({ age, name: name.value }) : Option.none),
  *    Option.flatMap(({ age, name }) => Option.isSome(city) ? Option.some({ age, name, city: city.value }) : Option.none),
  *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
@@ -541,15 +542,38 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * const name = Option.some("John")
  * const city = Option.some("New York")
  *
- * // using Do notation
+ * // using Do notation with bindTo
  * const data =
  *  pipe(
- *    Option.Do,
- *    Option.bind("age", () => age),
+ *    Option.bindTo("age", age),
  *    Option.bind("name", () => name),
  *    Option.bind("city", () => city),
  *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
  *  )
+ *
+ * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
+ * ```
+ *
+ * @example using `bindTo` with partial application
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * const age = Option.some(30)
+ * const name = Option.some("John")
+ * const city = Option.some("New York")
+ *
+ * const data = pipe(
+ *   age,
+ *   Option.bindTo("age"),
+ *   Option.bind("name", () => name),
+ *   Option.bind("city", () => city),
+ *   Option.map(({ age, name, city }) =>
+ *     `Hello ${name}! You are ${age} years old and live in ${city}.`
+ *   )
+ * )
+ *
+ * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
  * ```
  *
  * If Typescript had proper Do syntax and the `<-` (known as the kleisli arrow in Haskell) these functions would look like this:
@@ -603,13 +627,20 @@ export function bind<N extends string, A extends object, B>(
  * @ignore
  * See {@link Do} for an example of how to use this.
  */
-export const bindTo: {
-  <N extends string, A>(name: N, self: Option<A>): Option<{ [K in N]: A }>
-  <N extends string, A>(name: N, self: Option<A>): Option<{ [K in N]: A }>
-} = dual(
-  2,
-  (name, self) => self._tag === "Some" ? some({ [name]: self.value }) : none,
-)
+export function bindTo<N extends string, T>(
+  name: N,
+): (self: Option<T>) => Option<{ [K in N]: T }>
+export function bindTo<N extends string, T>(
+  name: N,
+  self: Option<T>,
+): Option<{ [K in N]: T }>
+export function bindTo<N extends string, T>(name: N, self?: Option<T>) {
+  if (!self) {
+    return (self: Option<T>) =>
+      self._tag === "Some" ? some({ [name]: self.value }) : none
+  }
+  return self._tag === "Some" ? some({ [name]: self.value }) : none
+}
 
 /**
  * Maps two `Option`s to a new `Option` using a function that takes both values.
