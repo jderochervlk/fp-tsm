@@ -393,6 +393,12 @@ export const getOrElse: {
   (self, fallback) => self._tag === "Some" ? self.value : fallback(),
 )
 
+export const ap: <A extends NonNullable<T>, T>(
+  fa: Option<A>,
+) => <B extends NonNullable<U>, U>(fab: Option<(a: T) => B>) => Option<B> =
+  (fa) => (fab) =>
+    isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value))
+
 /**
  * @private
  * @ignore
@@ -504,7 +510,7 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * const city = Option.some("New York")
  *
  * // using Do notation
- * let data =
+ * const data =
  *  pipe(
  *    Option.Do,
  *    Option.bind("age", () => age),
@@ -518,8 +524,7 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * // without Do notation
  * const data2 =
  *  pipe(
- *    age,
- *    Option.map(age => ({ age })),
+ *    Option.bindTo("age", age),
  *    Option.flatMap(({ age }) => Option.isSome(name) ? Option.some({ age, name: name.value }) : Option.none),
  *    Option.flatMap(({ age, name }) => Option.isSome(city) ? Option.some({ age, name, city: city.value }) : Option.none),
  *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
@@ -527,6 +532,37 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  *
  * expect(data2).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
  * ```
+ * @example using `bindTo` which is a shorthand for starting a pipe with `Option.Do` and `Option.bind`.
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * const age = Option.some(30)
+ * const name = Option.some("John")
+ * const city = Option.some("New York")
+ *
+ * // using Do notation
+ * const data =
+ *  pipe(
+ *    Option.Do,
+ *    Option.bind("age", () => age),
+ *    Option.bind("name", () => name),
+ *    Option.bind("city", () => city),
+ *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
+ *  )
+ * ```
+ *
+ * If Typescript had proper Do syntax and the `<-` (known as the kleisli arrow in Haskell) these functions would look like this:
+ *
+ * ```ts ignore
+ * const data = Do {
+ *    let age <- Option.some(30)
+ *    let name <- Option.some("John")
+ *    let city <- Option.some("New York")
+ *    `Hello ${name}! You are ${age} years old and live in ${city}.`
+ * }
+ * ```
+ * There is a (TC39 proposal)[https://github.com/tc39/proposal-do-expressions] for this syntax, but it's in the very early stages and probably won't have the `<-` operator.
  */
 export const Do: Option<object> = of({})
 
@@ -559,6 +595,21 @@ export function bind<N extends string, A extends object, B>(
     return none
   }
 }
+
+/**
+ * A shorthand for starting a pipe with `Option.Do` and `Option.bind`
+ * Useful for when you want to work with multiple `Option`s and only do something if they are all `Some`.
+ *
+ * @ignore
+ * See {@link Do} for an example of how to use this.
+ */
+export const bindTo: {
+  <N extends string, A>(name: N, self: Option<A>): Option<{ [K in N]: A }>
+  <N extends string, A>(name: N, self: Option<A>): Option<{ [K in N]: A }>
+} = dual(
+  2,
+  (name, self) => self._tag === "Some" ? some({ [name]: self.value }) : none,
+)
 
 /**
  * Maps two `Option`s to a new `Option` using a function that takes both values.
