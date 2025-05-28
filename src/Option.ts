@@ -233,7 +233,7 @@ export const map: {
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from "@jvlk/fp-tsm"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
  *
  * type Address = {
  *   readonly city: string
@@ -283,7 +283,7 @@ export const flatMap: {
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from "@jvlk/fp-tsm"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
  *
  * expect(Option.filter(Option.some(42), (n) => n > 40)).toEqual(Option.some(42))
  * expect(Option.filter(Option.some(42), (n) => n < 40)).toEqual(Option.none)
@@ -496,6 +496,9 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * @category Working with multiple Options
  * @example
  * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
  * const age = Option.some(30)
  * const name = Option.some("John")
  * const city = Option.some("New York")
@@ -525,7 +528,7 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * expect(data2).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
  * ```
  */
-export const Do = of({})
+export const Do: Option<object> = of({})
 
 /**
  * Binds the value of an `Option` to a new key in an object, using a function that transforms the value.

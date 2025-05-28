@@ -29,9 +29,11 @@ title: ${module}
   })
 
   for (const node of nodes.values()) {
-    console.log(node.name)
     if (node.name === module) {
-      markdown += `${node.jsDoc?.doc}\n`
+      const t = markdown.lastIndexOf("---") + 3
+      const head = markdown.slice(0, t)
+      const tail = markdown.slice(t)
+      markdown = `${head}${node.jsDoc?.doc}\n${tail}`
     }
     if (node.declarationKind !== "private" && node.name !== module) {
       const category = node.jsDoc?.tags?.find((tag) => tag.kind === "category")
@@ -69,8 +71,9 @@ title: ${module}
 }
 
 await generate("Option", "Data Types")
-
 await generate("utility", "Functions")
+await generate("Array", "Functions")
+await generate("Object", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
 const readme = `

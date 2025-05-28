@@ -7,24 +7,24 @@ import * as Option from "./Option.ts"
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option } from "@jvlk/fp-tsm"
+ * import { Option, Object } from "@jvlk/fp-tsm"
  *
  * expect(Object.lookup({ foo: 'bar'}, 'foo')).toEqual(Option.some('bar'))
  *
  * expect(Object.lookup({ foo: null }, 'foo')).toEqual(Option.none)
  * ```
  */
-const lookup: {
+export const lookup: {
   <O, K extends keyof O>(
     key: K,
   ): (self: O) => O[K]
   <O, K extends keyof O>(self: O, key: K): Option.Option<O[K]>
 } = dual(2, (obj, key) => Option.of(obj[key]))
 
-declare global {
-  interface Object {
-    lookup: typeof lookup
-  }
-}
-
-Object.lookup = lookup
+/**
+ * This module provides utility functions for working with objects.
+ * The `Object` import extends the global `Object` constructor with additional methods, which means that you can use the new functions alongside the standard object methods.
+ *
+ * @module
+ */
+export const Object = { ...globalThis.Object, lookup }

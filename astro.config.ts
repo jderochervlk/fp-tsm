@@ -10,7 +10,10 @@ export default defineConfig({
       sidebar: [
         { slug: "getting-started" },
         { label: "Data Types", items: ["data-types/option"] },
-        { label: "functions", items: ["functions/utility"] },
+        {
+          label: "functions",
+          items: ["functions/utility", "functions/array", "functions/object"],
+        },
       ],
       customCss: [
         "./src/content/style.css",

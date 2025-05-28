@@ -1,5 +1,5 @@
 import { expect } from "@std/expect/expect"
-import "./Array.ts"
+import { Array } from "./Array.ts"
 import type { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
 import { pipe } from "./utility.ts"
 

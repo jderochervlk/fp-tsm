@@ -1,13 +1,30 @@
-/**
- * This module adds functions to the global `Array` that are point-free and some utility types for non empty arrays.
- * @module
- */
-
-import { array } from "astro/zod"
 import { Option } from "./index.ts"
 
+/**
+ * Represents a non-empty array type.
+ * @category Types
+ * @example
+ * ```ts
+ * import type { NonEmptyArray } from "@jvlk/fp-tsm";
+ *
+ * const arr: NonEmptyArray<number> = [1, 2, 3]; // valid
+ *
+ * // @ts-expect-error
+ * const emptyArr: NonEmptyArray<number> = []; // invalid, will cause a type error
+ * ```
+ */
 export type NonEmptyArray<T> = [T, ...T[]]
+
+/**
+ * Represents a non-empty readonly array type.
+ * @category Types
+ */
 export type ReadonlyNonEmptyArray<T> = readonly [T, ...T[]]
+
+/**
+ * A utilty type to represent any array type, including mutable and immutable arrays, as well as non-empty arrays.
+ * @category Types
+ */
 
 export type AnyArray<Type = unknown> =
   | Array<Type>
@@ -15,43 +32,38 @@ export type AnyArray<Type = unknown> =
   | ReadonlyNonEmptyArray<Type>
   | NonEmptyArray<Type>
 
-declare global {
-  interface ArrayConstructor {
-    map<
-      A extends AnyArray<T>,
-      T = unknown,
-      U = unknown,
-    >(
-      fn: (x: ValueOf<A>) => U,
-    ): (
-      a: A,
-    ) => ArrayType<A, U>
+/**
+ * The `Array` module provides point-free functions to work with arrays and some utility types for non empty arrays.
+ * @module
+ */
+export const Array: ArrayConstructor & {
+  map: <A extends AnyArray<T>, T = unknown, U = unknown>(
+    fn: (x: ValueOf<A>, index?: number) => U,
+  ) => (a: A) => ArrayType<A, U>
+  at: <T>(index: number) => (array: Array<T>) => Option.Option<T>
+} = Object.assign(globalThis.Array, { map, at })
 
-    at<T>(
-      index: number,
-    ): (a: AnyArray<T>) => Option.Option<T>
-  }
-}
-
-// overload Array
-Array.map = map
-Array.at = function at<T>(index: number) {
+/**
+ * Point-free way to get a value from an array by index.
+ * @category Functions
+ */
+export function at<T>(index: number): (array: Array<T>) => Option.Option<T> {
   return (array: AnyArray<T>) => Option.of(array[index])
 }
 
-// functions for overloading
-function map<T, U>(
-  fn: (x: T) => U,
-): (a: ReadonlyNonEmptyArray<T>) => ReadonlyNonEmptyArray<U>
-function map<T, U>(fn: (x: T) => U): (a: NonEmptyArray<T>) => NonEmptyArray<U>
-function map<T, U extends Array<T>>(
-  fn: <A extends T>(x: A) => A,
-): (a: U) => U
-function map<T, U extends ReadonlyArray<T> | Array<T> | NonEmptyArray<T>>(
-  fn: (x: T) => T,
-): (a: U) => U
-function map<T, U>(fn: (x: T) => U) {
-  return (x: Array<T> | ReadonlyArray<T> | NonEmptyArray<T>): any => x.map(fn)
+/**
+ * Point-free way to get a use `Array.prototype.map`.
+ * @category Functions
+ */
+export function map<A extends AnyArray<T>, T = unknown, U = unknown>(
+  fn: (x: ValueOf<A>, index?: number) => U,
+): (a: A) => ArrayType<A, U>
+export function map<
+  A extends AnyArray<T>,
+  T = unknown,
+  U = unknown,
+>(fn: any) {
+  return (x: A) => x.map(fn)
 }
 
 // utility types
