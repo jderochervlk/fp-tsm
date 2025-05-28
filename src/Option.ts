@@ -1,3 +1,4 @@
+import { pipe } from "./index.ts"
 import { dual } from "./internal.ts"
 
 /**
@@ -34,7 +35,7 @@ import { dual } from "./internal.ts"
  * import { Option, pipe } from "@jvlk/fp-tsm"
  *
  * const add = (a: Option.Option<number>, b: Option.Option<number>): Option.Option<number> =>
- *   Option.map2(a, b, (a, b) => a + b)
+ *   Option.mapA2(a, b, (a, b) => a + b)
  *
  * const increment = (a: Option.Option<number>): Option.Option<number> =>
  *  pipe(
@@ -160,7 +161,7 @@ export function fromPredicate<A>(
  *
  * expect(Option.tryCatch(() => { throw new Error("Error") })).toEqual(Option.none)
  *
- * expect(Option.tryCatch(() => { throw new Error("Error with logging") }, console.error)).toEqual(Option.none)
+ * expect(Option.tryCatch(() => { throw new Error("Error with logging") }, e => `Error!: ${e}`)).toEqual(Option.none)
  * ```
  */
 export function tryCatch<A>(
@@ -441,32 +442,419 @@ export function isNone<T>(self: Option<T>): self is None {
   return self._tag === "None"
 }
 
+// Conversion
+
+// TODO: fromEither
+// TODO: fromResult
+
+/**
+ * Converts an `Option` to a nullable value. If the `Option` is `Some`, it returns the contained value; if it is `None`, it returns `null`.
+ * This should be used only when you are doing interop with other libraries that expect `null` values.
+ * If you are using `Option` as a type, you should prefer to use `None` instead of `null`.
+ *
+ * @category Conversion
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.toNullable(Option.some(1))).toEqual(1)
+ * expect(Option.toNullable(Option.none)).toEqual(null)
+ * ```
+ */
+export function toNullable<T>(self: Option<T>): T | null {
+  return self._tag === "Some" ? self.value : null
+}
+
+/**
+ * Converts an `Option` to an `undefined` value. If the `Option` is `Some`, it returns the contained value; if it is `None`, it returns `undefined`.
+ * This should be used only when you are doing interop with other libraries that expect `undefined` values.
+ * If you are using `Option` as a type, you should prefer to use `None` instead of `undefined`.
+ *
+ * @category Conversion
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.toUndefined(Option.some(1))).toEqual(1)
+ * expect(Option.toUndefined(Option.none)).toEqual(undefined)
+ * ```
+ */
+export function toUndefined<T>(self: Option<T>): T | undefined {
+  return self._tag === "Some" ? self.value : undefined
+}
+
 // Multiple options
 
 /**
+ * Do notation allows you to write code in a more declarative style, similar to the “do notation” in other programming languages.
+ * Don't worry if you're not familiar with it, it's actually quite simple.
+ *
+ * If you have multiple `Option`s and you want to work with them in a sequential manner, you can use `bind` to create a new `Option` that contains the results of the computations without having to manually check for `None` at each step.
+ *
  * @category Working with multiple Options
+ * @example
+ * ```ts
+ * const age = Option.some(30)
+ * const name = Option.some("John")
+ * const city = Option.some("New York")
+ *
+ * // using Do notation
+ * let data =
+ *  pipe(
+ *    Option.Do,
+ *    Option.bind("age", () => age),
+ *    Option.bind("name", () => name),
+ *    Option.bind("city", () => city),
+ *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
+ *  )
+ *
+ * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
+ *
+ * // without Do notation
+ * const data2 =
+ *  pipe(
+ *    age,
+ *    Option.map(age => ({ age })),
+ *    Option.flatMap(({ age }) => Option.isSome(name) ? Option.some({ age, name: name.value }) : Option.none),
+ *    Option.flatMap(({ age, name }) => Option.isSome(city) ? Option.some({ age, name, city: city.value }) : Option.none),
+ *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
+ * )
+ *
+ * expect(data2).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
+ * ```
  */
-export function map2<T1, T2, U extends NonNullable<V>, V>(
+export const Do = of({})
+
+/**
+ * Binds the value of an `Option` to a new key in an object, using a function that transforms the value.
+ * Useful for when you want to work with multiple `Option`s and only do something if they are all `Some`.
+ *
+ * @ignore
+ * See {@link Do} for an example of how to use this.
+ */
+export function bind<N extends string, A extends object, B>(
+  name: Exclude<N, keyof A>,
+  f: (a: A) => Option<B>,
+): (
+  prev: Option<A>,
+) => Option<{ [K in N | keyof A]: K extends keyof A ? A[K] : B }> {
+  return (
+    prev,
+  ): Option<{ [K in N | keyof A]: K extends keyof A ? A[K] : B }> => {
+    if (prev._tag === "Some") {
+      const value = f(prev.value)
+      if (value._tag === "Some") {
+        return some(
+          { ...prev.value, [name]: value.value } as {
+            [K in N | keyof A]: K extends keyof A ? A[K] : B
+          },
+        )
+      }
+    }
+    return none
+  }
+}
+
+/**
+ * Maps two `Option`s to a new `Option` using a function that takes both values.
+ *
+ * The `A2` naming convention comes from functional programming, where `A2` indicates that the function takes two arguments, or has an arity of 2.
+ *
+ * There are `mapA(N)` functions for up to 10 arguments.
+ *
+ * @category Working with multiple Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * const age = Option.some(30)
+ * const name = Option.some("John")
+ *
+ * const message = Option.mapA2(age, name, (age, name) => `Hello ${name}! You are ${age} years old.`)
+ *
+ * expect(message).toEqual(Option.some("Hello John! You are 30 years old."))
+ * ```
+ */
+export function mapA2<T1, T2, U extends NonNullable<V>, V>(
   fa: Option<T1>,
   fb: Option<T2>,
   f: (a: T1, b: T2) => U,
-): Option<V> {
+): Option<U> {
   if (fa._tag === "Some" && fb._tag === "Some") {
     return some(f(fa.value, fb.value))
   }
   return none
 }
 
-// Conversion
-// TODO: fromEither
-// TODO: fromResult
-// TODO: toNullable
-// TODO: toUndefined
-//
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA3<T1, T2, T3, U extends NonNullable<V>, V>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  f: (a: T1, b: T2, c: T3) => U,
+): Option<U> {
+  if (fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some") {
+    return some(f(fa.value, fb.value, fc.value))
+  }
+  return none
+}
 
-// Do notation
-// I am not sure I want this? It seems complicated and could be solved with `mapA2`, `mapA3`, etc...
-// It should be here for fp-ts compat and migration
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA4<T1, T2, T3, T4, U extends NonNullable<V>, V>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  f: (a: T1, b: T2, c: T3, d: T4) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some"
+  ) {
+    return some(f(fa.value, fb.value, fc.value, fd.value))
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA5<T1, T2, T3, T4, T5, U extends NonNullable<V>, V>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  f: (a: T1, b: T2, c: T3, d: T4, e: T5) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some"
+  ) {
+    return some(f(fa.value, fb.value, fc.value, fd.value, fe.value))
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA6<T1, T2, T3, T4, T5, T6, U extends NonNullable<V>, V>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  ff: Option<T6>,
+  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some"
+  ) {
+    return some(f(fa.value, fb.value, fc.value, fd.value, fe.value, ff.value))
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA7<T1, T2, T3, T4, T5, T6, T7, U extends NonNullable<V>, V>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  ff: Option<T6>,
+  fg: Option<T7>,
+  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
+    fg._tag === "Some"
+  ) {
+    return some(
+      f(fa.value, fb.value, fc.value, fd.value, fe.value, ff.value, fg.value),
+    )
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA8<
+  T1,
+  T2,
+  T3,
+  T4,
+  T5,
+  T6,
+  T7,
+  T8,
+  U extends NonNullable<V>,
+  V,
+>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  ff: Option<T6>,
+  fg: Option<T7>,
+  fh: Option<T8>,
+  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7, i: T8) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
+    fg._tag === "Some" && fh._tag === "Some"
+  ) {
+    return some(
+      f(
+        fa.value,
+        fb.value,
+        fc.value,
+        fd.value,
+        fe.value,
+        ff.value,
+        fg.value,
+        fh.value,
+      ),
+    )
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA9<
+  T1,
+  T2,
+  T3,
+  T4,
+  T5,
+  T6,
+  T7,
+  T8,
+  T9,
+  U extends NonNullable<V>,
+  V,
+>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  ff: Option<T6>,
+  fg: Option<T7>,
+  fh: Option<T8>,
+  fi: Option<T9>,
+  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7, i: T8, j: T9) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
+    fg._tag === "Some" && fh._tag === "Some" && fi._tag === "Some"
+  ) {
+    return some(
+      f(
+        fa.value,
+        fb.value,
+        fc.value,
+        fd.value,
+        fe.value,
+        ff.value,
+        fg.value,
+        fh.value,
+        fi.value,
+      ),
+    )
+  }
+  return none
+}
+
+/**
+ * @see {@link mapA2}
+ * @ignore
+ */
+export function mapA10<
+  T1,
+  T2,
+  T3,
+  T4,
+  T5,
+  T6,
+  T7,
+  T8,
+  T9,
+  T10,
+  U extends NonNullable<V>,
+  V,
+>(
+  fa: Option<T1>,
+  fb: Option<T2>,
+  fc: Option<T3>,
+  fd: Option<T4>,
+  fe: Option<T5>,
+  ff: Option<T6>,
+  fg: Option<T7>,
+  fh: Option<T8>,
+  fi: Option<T9>,
+  fj: Option<T10>,
+  f: (
+    a: T1,
+    b: T2,
+    c: T3,
+    d: T4,
+    e: T5,
+    g: T6,
+    h: T7,
+    i: T8,
+    j: T9,
+    k: T10,
+  ) => U,
+): Option<U> {
+  if (
+    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
+    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
+    fg._tag === "Some" && fh._tag === "Some" && fi._tag === "Some" &&
+    fj._tag === "Some"
+  ) {
+    return some(
+      f(
+        fa.value,
+        fb.value,
+        fc.value,
+        fd.value,
+        fe.value,
+        ff.value,
+        fg.value,
+        fh.value,
+        fi.value,
+        fj.value,
+      ),
+    )
+  }
+  return none
+}
 
 /**
  * @ignore
