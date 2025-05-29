@@ -27,4 +27,4 @@ export const lookup: {
  *
  * @module
  */
-export const Object = { ...globalThis.Object, lookup }
+export const Object = globalThis.Object.assign(globalThis.Object, lookup)
