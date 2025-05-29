@@ -148,7 +148,7 @@ export function tryCatch<L, R>(
  * import { Either } from "@jvlk/fp-tsm"
  *
  * const isPositive = Either.fromPredicate(
- *   (n: number) => n >= 0,
+ *   (n: number): n is number => n >= 0,
  *   () => "Number must be positive"
  * )
  *
@@ -156,12 +156,15 @@ export function tryCatch<L, R>(
  * expect(isPositive(1)).toEqual(Either.right(1))
  * ```
  */
-export function fromPredicate<L, R>(
-  predicate: (r: R) => boolean,
-  onFalse: (r: R) => L,
-): (r: R) => Either<L, R> {
-  return (r) => predicate(r) ? right(r) : left(onFalse(r))
-}
+export const fromPredicate: {
+  <L, R>(
+    predicate: (a: any) => a is R,
+    failure: () => L,
+  ): (a: any) => Either<L, R>
+  <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L): Either<L, R>
+} = dual(3, <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L) => {
+  return predicate(a) ? right(a) : left(failure())
+})
 
 // working with Eithers
 /**
