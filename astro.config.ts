@@ -9,7 +9,10 @@ export default defineConfig({
       title: "fp-tsm",
       sidebar: [
         { slug: "getting-started" },
-        { label: "Data Types", items: ["data-types/option"] },
+        {
+          label: "Data Types",
+          items: ["data-types/option", "data-types/either"],
+        },
         {
           label: "functions",
           items: ["functions/utility", "functions/array", "functions/record"],

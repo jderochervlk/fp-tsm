@@ -1,6 +1,5 @@
-import { pipe } from "./index.ts"
 import { dual } from "./internal.ts"
-
+import type { Either } from "./Either.ts"
 /**
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
  * An `Option<A>` can either be `Some<A>`, containing a value of type `A`, or `None`, representing the absence of a value.
@@ -87,7 +86,7 @@ type None = {
  * expect(Option.of(1)).toEqual({ _tag: "Some", value: 1 })
  * ```
  */
-export function of<T>(value: T | null | undefined): Option<T> {
+export function of<T>(value: T | null | undefined): Option<NonNullable<T>> {
   if (value == null) {
     return { _tag: "None" }
   }
@@ -260,7 +259,7 @@ export const map: {
  * // Use flatMap to extract the street value
  * const street = pipe(
  *   user.address,
- *   Option.flatMap((address) => address.street)
+ *   Option.flatMap(({ street }) => street)
  * )
  *
  * expect(street).toEqual(Option.some("123 Main St"))
@@ -399,19 +398,6 @@ export const ap: <A extends NonNullable<T>, T>(
   (fa) => (fab) =>
     isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value))
 
-/**
- * @private
- * @ignore
- * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
- */
-export const orElse = getOrElse
-
-/**
- * @ignore
- * @deprecated Use `getOrElse` and return an `Option`. This exists for `fp-ts` compatibility and will be removed in the next major version.
- */
-export const alt = getOrElse
-
 // Typeguards
 
 /**
@@ -449,9 +435,26 @@ export function isNone<T>(self: Option<T>): self is None {
 }
 
 // Conversion
-
-// TODO: fromEither
 // TODO: fromResult
+
+/**
+ * Converts an `Either` into an `Option`, mapping the `Right` value to `Some` and the `Left` value to `None`.
+ *
+ * @category Conversion
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, Either } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.fromEither(Either.right(1))).toEqual(Option.some(1))
+ * expect(Option.fromEither(Either.left("error"))).toEqual(Option.none)
+ * ```
+ */
+export function fromEither<R>(
+  self: Either<unknown, R>,
+): Option<NonNullable<R>> {
+  return self._tag === "Right" ? of(self.right) : none
+}
 
 /**
  * Converts an `Option` to a nullable value. If the `Option` is `Some`, it returns the contained value; if it is `None`, it returns `null`.
@@ -940,21 +943,3 @@ export function mapA10<
   }
   return none
 }
-
-/**
- * @ignore
- * @deprecated Use `of` instead. This function will be removed in the next major version. This currently exists for fp-ts compatibility.
- */
-export const fromNullable = of
-
-/**
- * @ignore
- * @deprecated This only exists for fp-ts compatibility and will be removed in the next major version. Please switch to `flatMap`.
- */
-export const chain = flatMap
-
-/**
- * @ignore
- * @deprecated Use `match` instead. This exists for `fp-ts` compatibility and will be removed in the next major version.
- */
-export const fold = match

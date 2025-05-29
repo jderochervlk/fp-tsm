@@ -1,5 +1,6 @@
 export { Array } from "./Array.ts"
 export * as Option from "./Option.ts"
 export * as Record from "./Record.ts"
+export * as Either from "./Either.ts"
 export * from "./utility.ts"
 export type { AnyArray, NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
