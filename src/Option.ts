@@ -323,15 +323,15 @@ export const filter: {
  * import { expect } from "jsr:@std/expect"
  * import { Option, pipe } from "@jvlk/fp-tsm"
  *
- * expect(Option.match(Option.some(42), val => `The value is ${val}.`, () => "There is no value.")).toEqual("The value is 42.")
- * expect(Option.match(Option.none, val => `The value is ${val}.`, () => "There is no value.")).toEqual("There is no value.")
+ * expect(Option.match(Option.some(42), () => "There is no value.", val => `The value is ${val}.`)).toEqual("The value is 42.")
+ * expect(Option.match(Option.none, () => "There is no value.", val => `The value is ${val}.`)).toEqual("There is no value.")
  *
  * expect(
  *  pipe(
  *    Option.some(42),
  *    Option.match(
- *      (val) => `The value is ${val}.`,
  *      () => "There is no value.",
+ *      (val) => `The value is ${val}.`
  *    )
  *  )
  * ).toEqual("The value is 42.")
@@ -340,17 +340,17 @@ export const filter: {
  *  pipe(
  *    Option.none,
  *    Option.match(
- *      (val) => `The value is ${val}.`,
  *      () => "There is no value.",
+ *      (val) => `The value is ${val}.`
  *    )
  *  )
  * ).toEqual("There is no value.")
  * ```
  */
 export const match: {
-  <A, B>(some: (a: A) => B, none: () => B): (self: Option<A>) => B
-  <A, B>(self: Option<A>, some: (a: A) => B, none: () => B): B
-} = dual(3, (self, some, none) => {
+  <A, B>(none: () => B, some: (a: A) => B): (self: Option<A>) => B
+  <A, B>(self: Option<A>, none: () => B, some: (a: A) => B): B
+} = dual(3, (self, none, some) => {
   if (self._tag === "Some") {
     return some(self.value)
   }
