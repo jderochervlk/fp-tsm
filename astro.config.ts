@@ -17,7 +17,7 @@ export default defineConfig({
           ],
         },
         {
-          label: "functions",
+          label: "Functions",
           items: ["functions/utility", "functions/array", "functions/record"],
         },
       ],

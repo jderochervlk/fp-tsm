@@ -129,23 +129,29 @@ export const none: Option<never> = { _tag: "None" }
 /**
  * You can create an `Option` based on a predicate, for example, to check if a value is positive.
  *
+ * The `fromPredicate` function must be a (type predicate function)[https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates], meaning it should return a boolean and narrow the type of the value.
+ *
  * @category Creating Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Option } from "@jvlk/fp-tsm"
  *
- * const isPositive = Option.fromPredicate((n: number) => n >= 0)
+ * const isPositive = Option.fromPredicate((n: number): n is number => n >= 0)
  *
  * expect(isPositive(-1)).toEqual(Option.none)
  * expect(isPositive(1)).toEqual(Option.some(1))
  * ```
  */
-export function fromPredicate<A>(
-  predicate: (a: A) => boolean,
-): (a: A) => Option<A> {
-  return (a) => (predicate(a) ? of(a) : none)
-}
+
+export const fromPredicate: {
+  <A>(
+    predicate: (a: any) => a is A,
+  ): (a: any) => Option<A>
+  <A>(a: any, predicate: (a: any) => a is A): Option<A>
+} = dual(2, <A>(a: A, predicate: (a: any) => a is A) => {
+  return predicate(a) ? of(a) : none
+})
 
 /**
  * `tryCatch` is a utility function that allows you to execute a function that may throw an error and return an `Option`.
@@ -206,9 +212,9 @@ export function tryCatch<A>(
  */
 export const map: {
   <A, B>(
-    f: (a: A) => B,
-  ): (self: Option<A>) => Option<B>
-  <A, B>(self: Option<A>, f: (a: A) => B): Option<B>
+    f: (a: A) => NonNullable<B>,
+  ): (self: Option<A>) => Option<NonNullable<B>>
+  <A, B>(self: Option<A>, f: (a: A) => NonNullable<B>): Option<NonNullable<B>>
 } = dual(
   2,
   <A, B extends NonNullable<C>, C>(
@@ -275,6 +281,35 @@ export const flatMap: {
   <A, B>(self: Option<A>, f: (a: A) => Option<B>): Option<B> =>
     self._tag === "Some" ? f(self.value) : none,
 )
+
+/**
+ * `forEach` applies a side effect to the value inside an `Option` if it is `Some` and returns the original `Option`.
+ *
+ * @category Working with Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * let counter = 0
+ * const incrementCounter = () => counter++
+ *
+ * expect(Option.forEach(Option.some(42), () => incrementCounter())).toEqual(Option.some(42))
+ * expect(counter).toEqual(1)
+ *
+ * expect(Option.forEach(Option.none, () => incrementCounter())).toEqual(Option.none)
+ * expect(counter).toEqual(1)
+ * ```
+ */
+export const forEach: {
+  <A>(f: (a: A) => void): (self: Option<A>) => Option<A>
+  <A>(self: Option<A>, f: (a: A) => void): Option<A>
+} = dual(2, <A>(self: Option<A>, f: (a: A) => void): Option<A> => {
+  if (self._tag === "Some") {
+    f(self.value)
+  }
+  return self
+})
 
 /**
  * Applies a filter function to an `Option`, returning the `Option` itself if the value satisfies the predicate, or `None` if it does not.

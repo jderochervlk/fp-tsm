@@ -105,6 +105,8 @@ export const left = <L, R>(l: L): Either<L, R> => ({ _tag: "Left", left: l })
 /**
  * `tryCatch` is a utility function that allows you to execute a function that may throw an `unknown` error and return an `Either`.
  *
+ * It can take an optional second argument, `catchFn`, which is a function that transforms the `unknown` error into something else.
+ *
  * @category Creating Eithers
  * @example
  * ```ts
@@ -115,15 +117,24 @@ export const left = <L, R>(l: L): Either<L, R> => ({ _tag: "Left", left: l })
  *
  * expect(Either.tryCatch(() => { throw new Error("Error") }))
  *   .toEqual(Either.left(Error("Error")))
+ *
+ * expect(Either.tryCatch(() => { throw new Error("something went wrong") }, (e) => `Caught: ${e}`)).toEqual(Either.left("Caught: Error: something went wrong"))
  * ```
  */
-export function tryCatch<R>(
+
+export function tryCatch<L, R>(
   fn: () => R,
-): Either<unknown, R> {
+  catchFn: (e: unknown) => L,
+): Either<L, R>
+export function tryCatch<R>(fn: () => R): Either<unknown, R>
+export function tryCatch<L, R>(
+  fn: () => R,
+  catchFn?: (e: unknown) => L,
+) {
   try {
     return right(fn())
   } catch (e) {
-    return left(e)
+    return catchFn ? left(catchFn(e)) : left(e)
   }
 }
 
