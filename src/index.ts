@@ -1,5 +1,4 @@
 export { Array } from "./Array.ts"
-export { Object } from "./Object.ts"
 export * as Option from "./Option.ts"
 export * from "./utility.ts"
 export type { AnyArray, NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
