@@ -11,7 +11,11 @@ export default defineConfig({
         { slug: "getting-started" },
         {
           label: "Data Types",
-          items: ["data-types/option", "data-types/either"],
+          items: [
+            "data-types/option",
+            "data-types/result",
+            "data-types/either",
+          ],
         },
         {
           label: "functions",
