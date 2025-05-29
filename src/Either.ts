@@ -1,5 +1,5 @@
 import { dual } from "./internal.ts"
-import { Option } from "./Option.ts"
+import type { Option } from "./Option.ts"
 
 /**
  * The `Either` type represents values that can be one of two types: a `Left` containing an error value, or a `Right` containing a success value.

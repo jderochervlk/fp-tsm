@@ -1,6 +1,6 @@
 import { dual } from "./internal.ts"
 import type { Either } from "./Either.ts"
-import type { Result } from "./Result.ts"
+
 /**
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
  * An `Option<A>` can either be `Some<A>`, containing a value of type `A`, or `None`, representing the absence of a value.
@@ -436,23 +436,6 @@ export function isNone<T>(self: Option<T>): self is None {
 }
 
 // Conversion
-/**
- * Converts a Result to an Option, mapping Ok to Some and Error to None.
- *
- * @category Conversion
- * @example
- * ```ts
- * import { expect } from "jsr:@std/expect"
- * import { Option, Result } from "@jvlk/fp-tsm"
- *
- * expect(Option.fromResult(Result.ok(1))).toEqual(Option.some(1))
- * expect(Option.fromResult(new Error("error"))).toEqual(Option.none)
- * ```
- */
-export function fromResult<T>(self: Result<T>): Option<NonNullable<T>> {
-  return self instanceof Error ? none : of(self.val)
-}
-
 /**
  * Converts an `Either` into an `Option`, mapping the `Right` value to `Some` and the `Left` value to `None`.
  *

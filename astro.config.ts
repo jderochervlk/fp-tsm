@@ -13,7 +13,6 @@ export default defineConfig({
           label: "Data Types",
           items: [
             "data-types/option",
-            "data-types/result",
             "data-types/either",
           ],
         },
