@@ -513,9 +513,17 @@ export function isLeft<L, R>(self: Either<L, R>): self is Left<L> {
  * expect(Either.fromOption(Option.none, () => "error")).toEqual(Either.left("error"))
  * ```
  */
-export function fromOption<L, R>(
+export const fromOption: {
+  <L, R>(
+    self: Option<R>,
+    onNone: () => L,
+  ): Either<L, R>
+  <L, R>(
+    onNone: () => L,
+  ): (self: Option<R>) => Either<L, R>
+} = dual(2, <L, R>(
   self: Option<R>,
   onNone: () => L,
-): Either<L, R> {
+): Either<L, R> => {
   return self._tag === "Some" ? right(self.value) : left(onNone())
-}
+})

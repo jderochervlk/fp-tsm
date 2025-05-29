@@ -428,6 +428,47 @@ export const getOrElse: {
   (self, fallback) => self._tag === "Some" ? self.value : fallback(),
 )
 
+/**
+ * Provides an alternative `Option` value if the current `Option` is `None`.
+ * If the current `Option` is `Some`, it returns the current value.
+ * If it's `None`, it returns the result of evaluating the provided function.
+ *
+ * @category Working with Options
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.alt(Option.some(1), () => Option.some(2))).toEqual(Option.some(1))
+ * expect(Option.alt(Option.none, () => Option.some(2))).toEqual(Option.some(2))
+ *
+ * // Using pipe
+ * expect(
+ *   pipe(
+ *     Option.some(1),
+ *     Option.alt(() => Option.some(2))
+ *   )
+ * ).toEqual(Option.some(1))
+ *
+ * expect(
+ *   pipe(
+ *     Option.none,
+ *     Option.alt(() => Option.some(2))
+ *   )
+ * ).toEqual(Option.some(2))
+ * ```
+ */
+export const alt: {
+  <A>(
+    fn: () => Option<A>,
+  ): <A>(self: Option<A>) => Option<A>
+  <A>(self: Option<A>, fn: () => Option<A>): Option<A>
+} = dual(
+  2,
+  <A>(self: Option<A>, fn: () => Option<A>) =>
+    self._tag === "Some" ? self : fn(),
+)
+
 export const ap: <A extends NonNullable<T>, T>(
   fa: Option<A>,
 ) => <B extends NonNullable<U>, U>(fab: Option<(a: T) => B>) => Option<B> =
