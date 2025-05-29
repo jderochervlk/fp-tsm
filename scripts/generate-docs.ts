@@ -73,7 +73,7 @@ title: ${module}
 await generate("Option", "Data Types")
 await generate("utility", "Functions")
 await generate("Array", "Functions")
-await generate("Object", "Functions")
+await generate("Record", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
 const readme = `

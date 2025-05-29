@@ -12,7 +12,7 @@ export default defineConfig({
         { label: "Data Types", items: ["data-types/option"] },
         {
           label: "functions",
-          items: ["functions/utility", "functions/array"],
+          items: ["functions/utility", "functions/array", "functions/record"],
         },
       ],
       customCss: [

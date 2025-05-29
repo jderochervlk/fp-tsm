@@ -26,7 +26,7 @@ export type ReadonlyNonEmptyArray<T> = readonly [T, ...T[]]
  * @category Types
  */
 
-export type AnyArray<Type = unknown> =
+export type AnyArray<Type> =
   | Array<Type>
   | ReadonlyArray<Type>
   | ReadonlyNonEmptyArray<Type>
@@ -37,7 +37,7 @@ export type AnyArray<Type = unknown> =
  * @module
  */
 export const Array: ArrayConstructor & {
-  map: <A extends AnyArray<T>, T = unknown, U = unknown>(
+  map: <A extends AnyArray<T>, T, U>(
     fn: (x: ValueOf<A>, index?: number) => U,
   ) => (a: A) => ArrayType<A, U>
   at: <T>(index: number) => (array: Array<T>) => Option.Option<T>
@@ -78,13 +78,13 @@ type Primitive =
   | null
 
 type AnyFunction<
-  Args extends unknown[] = unknown[],
-  ReturnType = unknown,
+  Args extends any[] = any[],
+  ReturnType = any,
 > = (
   ...args: Args
 ) => ReturnType
 type ValueOf<Type> = Type extends Primitive ? Type
-  : Type extends AnyArray ? Type[number]
+  : Type extends AnyArray<Type> ? Type[number]
   : Type extends AnyFunction ? ReturnType<Type>
   : Type[keyof Type]
 
