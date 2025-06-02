@@ -61,12 +61,29 @@ export function map<A extends AnyArray<T>, T = unknown, U = unknown>(
 export function map<
   A extends AnyArray<T>,
   T = unknown,
-  U = unknown,
 >(fn: any) {
   return (x: A) => x.map(fn)
 }
 
-// utility types
+/**
+ * Point-free way to find the first element in an array that satisfies a predicate.
+ * @category Functions
+ * @example
+ * ```ts
+ * import { Array } from "@jvlk/fp-tsm"
+ *
+ * const isEven = (n: number) => n % 2 === 0
+ * const numbers = [1, 2, 3, 4]
+ *
+ * const result = Array.findFirst(isEven)(numbers)
+ * // result: Option.some(2)
+ * ```
+ */
+export function findFirst<A>(
+  predicate: (a: A) => boolean,
+): (as: Array<A>) => Option.Option<A> {
+  return (as) => Option.of(as.find(predicate))
+}
 
 type Primitive =
   | string

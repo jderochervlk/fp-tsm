@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { dual } from "./internal.ts"
 import type { Either } from "./Either.ts"
 
@@ -5,47 +6,86 @@ import type { Either } from "./Either.ts"
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
  * An `Option<A>` can either be `Some<A>`, containing a value of type `A`, or `None`, representing the absence of a value.
  *
- * It can be useful to distinguish values between each other: you can represent `Some(None)` with options, whereas `undefined` or `null` replace the value they intend to make optional.
+ * Passing around an `Option<string>` is more descriptive than passing around a `string | null | undefined`, as it clearly indicates that the value may or may not be present.
  *
- * @example Functions with null parameters can quickly become hard to manage and compose. The presences of `null` or `undefined` will quickly spread across your codebase and add complexity due to the need to check for them constantly.
+ * @example We might have a function that takes in an optional argument that could also be undefined and we want to do something different if it's not provided versus when it is provided but not defined.
  * ```ts
- * import { expect } from "jsr:@std/expect"
- *
- * const add = (a: number | null | undefined, b: number | null | undefined): number | null => {
- *   if (!a || !b) {
- *     return null
+ * function greet(name?: string) {
+ *   // We have no way of knowing if the name is provided or not!
+ *   if(!name)  {
+ *     return "Hello, stranger!
+ *   } else {
+ *     return `Hello, ${name}!`
  *   }
- *   return a + b
  * }
- *
- * const increment = (a: number | null | undefined): number | null => {
- *  if (a == null) {
- *    return null
- *  } else return a + 1
- * }
- *
- * expect(increment(add(1, 2))).toEqual(4)
- * expect(increment(add(undefined, 2))).toEqual(null)
- * expect(increment(add(null, 2))).toEqual(null)
  * ```
  *
- * @example Using `Option` allows you to avoid the need to check for `null` or `undefined` in your code. You can use the `Option` type to represent optional values and use pattern matching to handle them.
+ * @example `null` is often used for this case, so now the type for name will be `string | null | undefined`, which is not very descriptive.
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option, pipe } from "@jvlk/fp-tsm"
  *
- * const add = (a: Option.Option<number>, b: Option.Option<number>): Option.Option<number> =>
- *   Option.mapA2(a, b, (a, b) => a + b)
+ * function greet(name?: string | null) {
+ *  // name can be undefined, null, or a string, even though we only defined it as string | null
  *
- * const increment = (a: Option.Option<number>): Option.Option<number> =>
- *  pipe(
- *   a,
- *   Option.map(a => a + 1),
- *  )
+ *  // don't forget to not mix up === and ==!
+ *  if (name === null) {
+ *    // passing null means that we have a name, it's just null.
+ *    return `Hello, anonymous!`
+ *  } else if (name === undefined) {
+ *    return `Hello, stranger!`
+ *  }
+ *  return `Hello, ${name}!`
+ * }
  *
- * expect(increment(add(Option.of(1), Option.of(2)))).toEqual(Option.some(4))
- * expect(increment(add(Option.of<number>(undefined), Option.of(2)))).toEqual(Option.none)
- * expect(increment(add(Option.of<number>(null), Option.of(2)))).toEqual(Option.none)
+ * expect(greet()).toEqual("Hello, stranger!")
+ * expect(greet(null)).toEqual("Hello, anonymous!")
+ * expect(greet("John")).toEqual("Hello, John!")
+ * ```
+ *
+ * @example Using `Option` makes it clear that the value may not be present, and we can handle both cases in a more type-safe way.
+ * ```ts
+ * import { Option } from "@jvlk/fp-tsm"
+ *
+ * // We can use default values for our functions arguments
+ * function greet(name: Option.Option<string> = Option.of("stranger")) {
+ *   return pipe(
+ *     name,
+ *     Option.map((n) => `Hello, ${n}!`),
+ *     Option.getOrElse(() => "Hello, anonymous!"),
+ *   )
+ * }
+ *
+ * expect(greet()).toEqual("Hello, stranger!")
+ * expect(greet(Option.none)).toEqual("Hello, anonymous!")
+ * expect(greet(Option.of("John"))).toEqual("Hello, John!")
+ * ```
+ * An `Option` can be great to represent keys that are present on an Object vs ones that are not.
+ * This allows you to treat `undefined` as something that truely doesn't exist, rather than just being a value that is not set or is empty.
+ *
+ * @example An object with `undefined` values.
+ * ```ts
+ * const obj: Record<string, string | undefined> = {
+ *    name: "John",
+ *    age: undefined,
+ *    city: "New York",
+ * }
+ *
+ * expect(obj["name"]).toEqual("John")
+ * expect(obj["age"]).toEqual(undefined) // this is defined, but has no value
+ * expect(obj["height"]).toEqual(undefined) // this key doesn't exist
+ * ```
+ *
+ * @example An object with `Option` values.
+ * ```ts
+ * const obj: Record<string, Option.Option<string>> = {
+ *    name: Option.some("John"),
+ *    age: Option.none,
+ *    city: Option.some("New York"),
+ * }
+ *
+ * expect(obj["name"]).toEqual(Option.some("John"))
+ * expect(obj["age"]).toEqual(Option.none) // this is defined, but has no value
+ * expect(obj["height"]).toEqual(undefined) // this key doesn't exist
  * ```
  *
  * @module
@@ -124,12 +164,15 @@ export function some<A>(a: NonNullable<A>): Option<A> {
  * expect(Option.none).toEqual({ _tag: "None" })
  * ```
  */
-export const none: Option<never> = { _tag: "None" }
+
+export const none: None = {
+  _tag: "None",
+}
 
 /**
  * You can create an `Option` based on a predicate, for example, to check if a value is positive.
  *
- * The `fromPredicate` function must be a (type predicate function)[https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates], meaning it should return a boolean and narrow the type of the value.
+ * The `fromPredicate` function can be a (type predicate function)[https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates], meaning it can the type of the value.
  *
  * @category Creating Options
  * @example
@@ -149,6 +192,10 @@ export const fromPredicate: {
     predicate: (a: any) => a is A,
   ): (a: any) => Option<A>
   <A>(a: any, predicate: (a: any) => a is A): Option<A>
+  <A>(
+    predicate: (a: any) => boolean,
+  ): (a: A) => Option<A>
+  <A>(a: A, predicate: (a: any) => boolean): Option<A>
 } = dual(2, <A>(a: A, predicate: (a: any) => a is A) => {
   return predicate(a) ? of(a) : none
 })
@@ -572,46 +619,40 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
 // Multiple options
 
 /**
- * Do notation allows you to write code in a more declarative style, similar to the “do notation” in other programming languages.
- * Don't worry if you're not familiar with it, it's actually quite simple.
+ * Do notation allows you to yield `Option` values and combine them in a sequential manner without having to manually check for `None` at each step.
  *
- * If you have multiple `Option`s and you want to work with them in a sequential manner, you can use `bind` to create a new `Option` that contains the results of the computations without having to manually check for `None` at each step.
+ * The `yield*` operator is used to work with multiple `Option` values in a generator function. Each value must be yielded with `Option.bind()`.
  *
  * @category Working with multiple Options
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Option, pipe } from "@jvlk/fp-tsm"
+ * import { Option } from "@jvlk/fp-tsm"
  *
  * const age = Option.some(30)
  * const name = Option.some("John")
  * const city = Option.some("New York")
  *
- * // using Do notation
- * const data =
- *  pipe(
- *    Option.Do,
- *    Option.bind("age", () => age),
- *    Option.bind("name", () => name),
- *    Option.bind("city", () => city),
- *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
- *  )
+ * const data = Option.Do(function* () {
+ *   const personAge = yield* Option.bind(age)
+ *   const personName = yield* Option.bind(name)
+ *   const personCity = yield* Option.bind(city)
+ *   return `Hello ${personName}! You are ${personAge} years old and live in ${personCity}.`
+ * })
  *
  * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
  *
- * // without Do notation
- * const data2 =
- *  pipe(
- *    age,
- *    Option.map(age => ({ age })),
- *    Option.flatMap(({ age }) => Option.isSome(name) ? Option.some({ age, name: name.value }) : Option.none),
- *    Option.flatMap(({ age, name }) => Option.isSome(city) ? Option.some({ age, name, city: city.value }) : Option.none),
- *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
- * )
+ * // If any Option is None, the entire result is None
+ * const data2 = Option.Do(function* () {
+ *   const personAge = yield* Option.bind(Option.none)
+ *   const personName = yield* Option.bind(name)
+ *   return `Hello ${personName}! You are ${personAge} years old.`
+ * })
  *
- * expect(data2).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
+ * expect(data2).toEqual(Option.none)
  * ```
- * @example using `bindTo` which is a shorthand for starting a pipe with `Option.Do` and `Option.bind`.
+ *
+ * @example Without Do notation, the same code would be much more verbose.
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Option, pipe } from "@jvlk/fp-tsm"
@@ -620,53 +661,43 @@ export function toUndefined<T>(self: Option<T>): T | undefined {
  * const name = Option.some("John")
  * const city = Option.some("New York")
  *
- * // using Do notation with bindTo
- * const data =
- *  pipe(
- *    Option.bindTo("age", age),
- *    Option.bind("name", () => name),
- *    Option.bind("city", () => city),
- *    Option.map(({ age, name, city }) => `Hello ${name}! You are ${age} years old and live in ${city}.`)
- *  )
- *
- * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
- * ```
- *
- * @example using `bindTo` with partial application
- * ```ts
- * import { expect } from "jsr:@std/expect"
- * import { Option, pipe } from "@jvlk/fp-tsm"
- *
- * const age = Option.some(30)
- * const name = Option.some("John")
- * const city = Option.some("New York")
- *
- * const data = pipe(
+ * const result = pipe(
  *   age,
- *   Option.bindTo("age"),
- *   Option.bind("name", () => name),
- *   Option.bind("city", () => city),
- *   Option.map(({ age, name, city }) =>
- *     `Hello ${name}! You are ${age} years old and live in ${city}.`
+ *   Option.flatMap(personAge =>
+ *     pipe(
+ *       name,
+ *       Option.flatMap(personName =>
+ *         pipe(
+ *           city,
+ *           Option.map(personCity =>
+ *             `Hello ${personName}! You are ${personAge} years old and live in ${personCity}.`
+ *           )
+ *         )
+ *       )
+ *     )
  *   )
  * )
  *
- * expect(data).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
+ * expect(result).toEqual(Option.some("Hello John! You are 30 years old and live in New York."))
  * ```
- *
- * If Typescript had proper Do syntax and the `<-` (known as the kleisli arrow in Haskell) these functions would look like this:
- *
- * ```ts ignore
- * const data = Do {
- *    let age <- Option.some(30)
- *    let name <- Option.some("John")
- *    let city <- Option.some("New York")
- *    `Hello ${name}! You are ${age} years old and live in ${city}.`
- * }
- * ```
- * There is a (TC39 proposal)[https://github.com/tc39/proposal-do-expressions] for this syntax, but it's in the very early stages and probably won't have the `<-` operator.
  */
-export const Do: Option<object> = of({})
+
+export function Do<A, U = any>(
+  generator: () => Generator<Option<unknown>, A, U>,
+): Option<A> {
+  const iterator = generator()
+  let result = iterator.next()
+
+  while (!result.done) {
+    if (result.value._tag === "None") {
+      return result.value
+    }
+    result = iterator.next(
+      result.value.value as U,
+    )
+  }
+  return of(result.value)
+}
 
 /**
  * Binds the value of an `Option` to a new key in an object, using a function that transforms the value.
@@ -675,346 +706,9 @@ export const Do: Option<object> = of({})
  * @ignore
  * See {@link Do} for an example of how to use this.
  */
-export function bind<N extends string, A extends object, B>(
-  name: Exclude<N, keyof A>,
-  f: (a: A) => Option<B>,
-): (
-  prev: Option<A>,
-) => Option<{ [K in N | keyof A]: K extends keyof A ? A[K] : B }> {
-  return (
-    prev,
-  ): Option<{ [K in N | keyof A]: K extends keyof A ? A[K] : B }> => {
-    if (prev._tag === "Some") {
-      const value = f(prev.value)
-      if (value._tag === "Some") {
-        return some(
-          { ...prev.value, [name]: value.value } as {
-            [K in N | keyof A]: K extends keyof A ? A[K] : B
-          },
-        )
-      }
-    }
-    return none
+export function* bind<A>(self: Option<A>): Generator<Option<A>, A, A> {
+  if (self._tag === "None") {
+    return yield self
   }
-}
-
-/**
- * A shorthand for starting a pipe with `Option.Do` and `Option.bind`
- * Useful for when you want to work with multiple `Option`s and only do something if they are all `Some`.
- *
- * @ignore
- * See {@link Do} for an example of how to use this.
- */
-export function bindTo<N extends string, T>(
-  name: N,
-): (self: Option<T>) => Option<{ [K in N]: T }>
-export function bindTo<N extends string, T>(
-  name: N,
-  self: Option<T>,
-): Option<{ [K in N]: T }>
-export function bindTo<N extends string, T>(name: N, self?: Option<T>) {
-  if (!self) {
-    return (self: Option<T>) =>
-      self._tag === "Some" ? some({ [name]: self.value }) : none
-  }
-  return self._tag === "Some" ? some({ [name]: self.value }) : none
-}
-
-/**
- * Maps two `Option`s to a new `Option` using a function that takes both values.
- *
- * The `A2` naming convention comes from functional programming, where `A2` indicates that the function takes two arguments, or has an arity of 2.
- *
- * There are `mapA(N)` functions for up to 10 arguments.
- *
- * @category Working with multiple Options
- * @example
- * ```ts
- * import { expect } from "jsr:@std/expect"
- * import { Option, pipe } from "@jvlk/fp-tsm"
- *
- * const age = Option.some(30)
- * const name = Option.some("John")
- *
- * const message = Option.mapA2(age, name, (age, name) => `Hello ${name}! You are ${age} years old.`)
- *
- * expect(message).toEqual(Option.some("Hello John! You are 30 years old."))
- * ```
- */
-export function mapA2<T1, T2, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  f: (a: T1, b: T2) => U,
-): Option<U> {
-  if (fa._tag === "Some" && fb._tag === "Some") {
-    return some(f(fa.value, fb.value))
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA3<T1, T2, T3, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  f: (a: T1, b: T2, c: T3) => U,
-): Option<U> {
-  if (fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some") {
-    return some(f(fa.value, fb.value, fc.value))
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA4<T1, T2, T3, T4, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  f: (a: T1, b: T2, c: T3, d: T4) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some"
-  ) {
-    return some(f(fa.value, fb.value, fc.value, fd.value))
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA5<T1, T2, T3, T4, T5, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  f: (a: T1, b: T2, c: T3, d: T4, e: T5) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some"
-  ) {
-    return some(f(fa.value, fb.value, fc.value, fd.value, fe.value))
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA6<T1, T2, T3, T4, T5, T6, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  ff: Option<T6>,
-  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some"
-  ) {
-    return some(f(fa.value, fb.value, fc.value, fd.value, fe.value, ff.value))
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA7<T1, T2, T3, T4, T5, T6, T7, U extends NonNullable<V>, V>(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  ff: Option<T6>,
-  fg: Option<T7>,
-  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
-    fg._tag === "Some"
-  ) {
-    return some(
-      f(fa.value, fb.value, fc.value, fd.value, fe.value, ff.value, fg.value),
-    )
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA8<
-  T1,
-  T2,
-  T3,
-  T4,
-  T5,
-  T6,
-  T7,
-  T8,
-  U extends NonNullable<V>,
-  V,
->(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  ff: Option<T6>,
-  fg: Option<T7>,
-  fh: Option<T8>,
-  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7, i: T8) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
-    fg._tag === "Some" && fh._tag === "Some"
-  ) {
-    return some(
-      f(
-        fa.value,
-        fb.value,
-        fc.value,
-        fd.value,
-        fe.value,
-        ff.value,
-        fg.value,
-        fh.value,
-      ),
-    )
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA9<
-  T1,
-  T2,
-  T3,
-  T4,
-  T5,
-  T6,
-  T7,
-  T8,
-  T9,
-  U extends NonNullable<V>,
-  V,
->(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  ff: Option<T6>,
-  fg: Option<T7>,
-  fh: Option<T8>,
-  fi: Option<T9>,
-  f: (a: T1, b: T2, c: T3, d: T4, e: T5, g: T6, h: T7, i: T8, j: T9) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
-    fg._tag === "Some" && fh._tag === "Some" && fi._tag === "Some"
-  ) {
-    return some(
-      f(
-        fa.value,
-        fb.value,
-        fc.value,
-        fd.value,
-        fe.value,
-        ff.value,
-        fg.value,
-        fh.value,
-        fi.value,
-      ),
-    )
-  }
-  return none
-}
-
-/**
- * @see {@link mapA2}
- * @ignore
- */
-export function mapA10<
-  T1,
-  T2,
-  T3,
-  T4,
-  T5,
-  T6,
-  T7,
-  T8,
-  T9,
-  T10,
-  U extends NonNullable<V>,
-  V,
->(
-  fa: Option<T1>,
-  fb: Option<T2>,
-  fc: Option<T3>,
-  fd: Option<T4>,
-  fe: Option<T5>,
-  ff: Option<T6>,
-  fg: Option<T7>,
-  fh: Option<T8>,
-  fi: Option<T9>,
-  fj: Option<T10>,
-  f: (
-    a: T1,
-    b: T2,
-    c: T3,
-    d: T4,
-    e: T5,
-    g: T6,
-    h: T7,
-    i: T8,
-    j: T9,
-    k: T10,
-  ) => U,
-): Option<U> {
-  if (
-    fa._tag === "Some" && fb._tag === "Some" && fc._tag === "Some" &&
-    fd._tag === "Some" && fe._tag === "Some" && ff._tag === "Some" &&
-    fg._tag === "Some" && fh._tag === "Some" && fi._tag === "Some" &&
-    fj._tag === "Some"
-  ) {
-    return some(
-      f(
-        fa.value,
-        fb.value,
-        fc.value,
-        fd.value,
-        fe.value,
-        ff.value,
-        fg.value,
-        fh.value,
-        fi.value,
-        fj.value,
-      ),
-    )
-  }
-  return none
+  return self.value
 }

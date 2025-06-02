@@ -36,6 +36,7 @@
     "jsr:@std/io@0.225": "0.225.2",
     "jsr:@std/path@0.223": "0.223.0",
     "jsr:@std/path@^1.0.8": "1.0.9",
+    "jsr:@std/testing@*": "1.0.13",
     "npm:@astrojs/starlight@~0.34.3": "0.34.3_astro@5.8.0__vite@6.3.5___picomatch@4.0.2__zod@3.25.23",
     "npm:astro-expressive-code@~0.41.2": "0.41.2_astro@5.8.0__vite@6.3.5___picomatch@4.0.2__zod@3.25.23",
     "npm:astro@5.8.0": "5.8.0_vite@6.3.5__picomatch@4.0.2_zod@3.25.23",
@@ -213,6 +214,12 @@
     },
     "@std/path@1.0.9": {
       "integrity": "260a49f11edd3db93dd38350bf9cd1b4d1366afa98e81b86167b4e3dd750129e"
+    },
+    "@std/testing@1.0.13": {
+      "integrity": "74418be16f627dfe996937ab0ffbdbda9c1f35534b78724658d981492f121e71",
+      "dependencies": [
+        "jsr:@std/assert@^1.0.13"
+      ]
     }
   },
   "npm": {

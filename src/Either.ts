@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { dual } from "./internal.ts"
 import type { Option } from "./Option.ts"
 
@@ -527,3 +528,100 @@ export const fromOption: {
 ): Either<L, R> => {
   return self._tag === "Some" ? right(self.value) : left(onNone())
 })
+
+// Multiple Eithers
+
+/**
+ * Do notation allows you to yield `Either` values and combine them in a sequential manner without having to manually check for `Left` at each step.
+ *
+ * The `yield*` operator is used to work with multiple `Either` values in a generator function. Each value must be yielded with `Either.bind()`.
+ *
+ * @category Working with multiple Eithers
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Either } from "@jvlk/fp-tsm"
+ *
+ * const age = Either.right<string, number>(30)
+ * const name = Either.right<string, string>("John")
+ * const city = Either.right<string, string>("New York")
+ *
+ * const data = Either.Do(function* () {
+ *   const personAge = yield* Either.bind(age)
+ *   const personName = yield* Either.bind(name)
+ *   const personCity = yield* Either.bind(city)
+ *   return `Hello ${personName}! You are ${personAge} years old and live in ${personCity}.`
+ * })
+ *
+ * expect(data).toEqual(Either.right("Hello John! You are 30 years old and live in New York."))
+ *
+ * // If any Either is Left, the entire result is Left
+ * const data2 = Either.Do(function* () {
+ *   const personAge = yield* Either.bind(Either.left("Error"))
+ *   const personName = yield* Either.bind(name)
+ *   return `Hello ${personName}! You are ${personAge} years old.`
+ * })
+ *
+ * expect(data2).toEqual(Either.left("Error"))
+ * ```
+ *
+ * @example Without Do notation, the same code would be much more verbose.
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Either, pipe } from "@jvlk/fp-tsm"
+ *
+ * const age = Either.right<string, number>(30)
+ * const name = Either.right<string, string>("John")
+ * const city = Either.right<string, string>("New York")
+ *
+ * const result = pipe(
+ *   age,
+ *   Either.flatMap(personAge =>
+ *     pipe(
+ *       name,
+ *       Either.flatMap(personName =>
+ *         pipe(
+ *           city,
+ *           Either.map(personCity =>
+ *             `Hello ${personName}! You are ${personAge} years old and live in ${personCity}.`
+ *           )
+ *         )
+ *       )
+ *     )
+ *   )
+ * )
+ *
+ * expect(result).toEqual(Either.right("Hello John! You are 30 years old and live in New York."))
+ * ```
+ */
+
+export function Do<L, A, U = any>(
+  generator: () => Generator<Either<L, unknown>, A, U>,
+): Either<L, A> {
+  const iterator = generator()
+  let result = iterator.next()
+
+  while (!result.done) {
+    if (result.value._tag === "Left") {
+      return result.value
+    }
+    result = iterator.next(
+      result.value.right as U,
+    )
+  }
+  return right(result.value)
+}
+
+/**
+ * Binds the value of an `Either` to a new key in an object, using a function that transforms the value.
+ * Useful for when you want to work with multiple `Either`s and only do something if they are all `Right`.
+ *
+ * @ignore
+ * See {@link Do} for an example of how to use this.
+ */
+export function* bind<L, R>(self: Either<L, R>): Generator<Either<L, R>, R, R> {
+  if (self._tag === "Left") {
+    return yield self
+  }
+  return self.right
+}
