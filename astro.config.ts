@@ -15,6 +15,7 @@ export default defineConfig({
           items: [
             "data-types/option",
             "data-types/either",
+            "data-types/future",
           ],
         },
         {

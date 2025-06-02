@@ -72,6 +72,7 @@ title: ${module}
 
 await generate("Option", "Data Types")
 await generate("Either", "Data Types")
+await generate("Future", "Data Types")
 await generate("utility", "Functions")
 await generate("Array", "Functions")
 await generate("Record", "Functions")

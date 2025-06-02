@@ -55,16 +55,18 @@ export type Either<L, R> = Left<L> | Right<R>
 
 /**
  * The `Left` type represents the failure case of an `Either`, containing a value of type `L`.
+ * @ignore
  */
-type Left<L> = {
+export type Left<L> = {
   readonly _tag: "Left"
   readonly left: L
 }
 
 /**
  * The `Right` type represents the success case of an `Either`, containing a value of type `R`.
+ * @ignore
  */
-type Right<R> = {
+export type Right<R> = {
   readonly _tag: "Right"
   readonly right: R
 }
@@ -81,11 +83,11 @@ type Right<R> = {
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // when creating an Either using `left` or `right` you should provide the type parameters
- * expect(Either.right<string, number>(1)).toEqual({ _tag: "Right", right: 1 })
- * expect(Either.right<string, string>("hello")).toEqual({ _tag: "Right", right: "hello" })
+ * expect(Either.right(1)).toEqual({ _tag: "Right", right: 1 })
+ * expect(Either.right("hello")).toEqual({ _tag: "Right", right: "hello" })
  * ```
  */
-export const right = <L, R>(r: R): Either<L, R> => ({ _tag: "Right", right: r })
+export const right = <R>(r: R): Right<R> => ({ _tag: "Right", right: r })
 
 /**
  * Constructs a `Left`. Represents a failure value in an Either.
@@ -97,11 +99,11 @@ export const right = <L, R>(r: R): Either<L, R> => ({ _tag: "Right", right: r })
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // when creating an Either using `left` or `right` you should provide the type parameters
- * expect(Either.left<string, string>("error")).toEqual({ _tag: "Left", left: "error" })
- * expect(Either.left<number, number>(404)).toEqual({ _tag: "Left", left: 404 })
+ * expect(Either.left("error")).toEqual({ _tag: "Left", left: "error" })
+ * expect(Either.left(404)).toEqual({ _tag: "Left", left: 404 })
  * ```
  */
-export const left = <L, R>(l: L): Either<L, R> => ({ _tag: "Left", left: l })
+export const left = <L>(l: L): Left<L> => ({ _tag: "Left", left: l })
 
 /**
  * `tryCatch` is a utility function that allows you to execute a function that may throw an `unknown` error and return an `Either`.
@@ -180,7 +182,7 @@ export const fromPredicate: {
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // Transform the value inside Right
- * expect(Either.map(Either.right<string, number>(1), (n: number) => n + 1)).toEqual(Either.right(2))
+ * expect(Either.map(Either.right(1), (n: number) => n + 1)).toEqual(Either.right(2))
  * ```
  *
  * @example Mapping over Left
@@ -189,7 +191,7 @@ export const fromPredicate: {
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // Mapping over Left results in the same Left
- * expect(Either.map(Either.left<string, number>("error"), (n: number) => n + 1)).toEqual(Either.left("error"))
+ * expect(Either.map(Either.left("error"), (n: number) => n + 1)).toEqual(Either.left("error"))
  * ```
  */
 export const map: {
@@ -218,7 +220,7 @@ export const map: {
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // Transform the error value inside Left
- * expect(Either.mapLeft(Either.left<string, number>("error"), (s: string) => s.toUpperCase()))
+ * expect(Either.mapLeft(Either.left("error"), (s: string) => s.toUpperCase()))
  *   .toEqual(Either.left("ERROR"))
  * ```
  *
@@ -228,7 +230,7 @@ export const map: {
  * import { Either } from "@jvlk/fp-tsm"
  *
  * // Mapping Left over Right results in the same Right
- * expect(Either.mapLeft(Either.right<string, number>(1), (s: string) => s.toUpperCase()))
+ * expect(Either.mapLeft(Either.right(1), (s: string) => s.toUpperCase()))
  *   .toEqual(Either.right(1))
  * ```
  */
@@ -256,19 +258,19 @@ export const mapLeft: {
  * import { expect } from "jsr:@std/expect"
  * import { Either } from "@jvlk/fp-tsm"
  *
- * expect(Either.bimap(Either.right<string, number>(1),
+ * expect(Either.bimap(Either.right(1),
  *   (e: string) => e.toUpperCase(),
  *   (n: number) => n + 1
  * )).toEqual(Either.right(2))
  *
- * expect(Either.bimap(Either.left<string, number>("error"),
+ * expect(Either.bimap(Either.left("error"),
  *   (e: string) => e.toUpperCase(),
  *   (n: number) => n + 1
  * )).toEqual(Either.left("ERROR"))
  *
  * expect(
  *  pipe(
- *    Either.right<string, number>(1),
+ *    Either.right(1),
  *    Either.bimap(
  *      (e: string) => e.toUpperCase(),
  *      (n: number) => n + 1
@@ -338,16 +340,19 @@ export const bimap: {
  * @category Working with Eithers
  */
 export const flatMap: {
-  <L, RA, RB>(
-    f: (a: RA) => Either<L, RB>,
-  ): (self: Either<L, RA>) => Either<L, RB>
-  <L, RA, RB>(self: Either<L, RA>, f: (a: RA) => Either<L, RB>): Either<L, RB>
+  <LA, LB, RA, RB>(
+    f: (a: RA) => Either<LB, RB>,
+  ): (self: Either<LA, RA>) => Either<LA | LB, RB>
+  <LA, LB, RA, RB>(
+    self: Either<LA, RA>,
+    f: (a: RA) => Either<LB, RB>,
+  ): Either<LA | LB, RB>
 } = dual(
   2,
-  <L, RA, RB>(
-    self: Either<L, RA>,
-    f: (a: RA) => Either<L, RB>,
-  ): Either<L, RB> => self._tag === "Right" ? f(self.right) : left(self.left),
+  <LA, LB, RA, RB>(
+    self: Either<LA, RA>,
+    f: (a: RA) => Either<LB | LA, RB>,
+  ): Either<LA | LB, RB> => self._tag === "Right" ? f(self.right) : self,
 )
 
 /**
@@ -542,9 +547,9 @@ export const fromOption: {
  * import { expect } from "jsr:@std/expect"
  * import { Either } from "@jvlk/fp-tsm"
  *
- * const age = Either.right<string, number>(30)
- * const name = Either.right<string, string>("John")
- * const city = Either.right<string, string>("New York")
+ * const age = Either.right(30)
+ * const name = Either.right("John")
+ * const city = Either.right("New York")
  *
  * const data = Either.Do(function* () {
  *   const personAge = yield* Either.bind(age)
@@ -570,9 +575,9 @@ export const fromOption: {
  * import { expect } from "jsr:@std/expect"
  * import { Either, pipe } from "@jvlk/fp-tsm"
  *
- * const age = Either.right<string, number>(30)
- * const name = Either.right<string, string>("John")
- * const city = Either.right<string, string>("New York")
+ * const age = Either.right(30)
+ * const name = Either.right("John")
+ * const city = Either.right("New York")
  *
  * const result = pipe(
  *   age,
