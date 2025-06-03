@@ -34,7 +34,8 @@
     "astro-expressive-code": "npm:astro-expressive-code@^0.41.2",
     "es-module-lexer": "npm:es-module-lexer@^1.7.0",
     "generate-jsdoc-example-tests": "npm:generate-jsdoc-example-tests@^0.2.4",
-    "postcss": "npm:postcss@^8.5.3"
+    "postcss": "npm:postcss@^8.5.3",
+    "zod": "npm:zod@^3.25.49"
   },
   "fmt": {
     "semiColons": false
