@@ -13,7 +13,7 @@ import type { Either } from "./Either.ts"
  * function greet(name?: string) {
  *   // We have no way of knowing if the name is provided or not!
  *   if(!name)  {
- *     return "Hello, stranger!
+ *     return "Hello, stranger!"
  *   } else {
  *     return `Hello, ${name}!`
  *   }
@@ -44,7 +44,8 @@ import type { Either } from "./Either.ts"
  *
  * @example Using `Option` makes it clear that the value may not be present, and we can handle both cases in a more type-safe way.
  * ```ts
- * import { Option } from "@jvlk/fp-tsm"
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, pipe } from "@jvlk/fp-tsm"
  *
  * // We can use default values for our functions arguments
  * function greet(name: Option.Option<string> = Option.of("stranger")) {
@@ -64,6 +65,8 @@ import type { Either } from "./Either.ts"
  *
  * @example An object with `undefined` values.
  * ```ts
+ * import { expect } from "jsr:@std/expect"
+ *
  * const obj: Record<string, string | undefined> = {
  *    name: "John",
  *    age: undefined,
@@ -77,6 +80,9 @@ import type { Either } from "./Either.ts"
  *
  * @example An object with `Option` values.
  * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option } from "@jvlk/fp-tsm"
+ *
  * const obj: Record<string, Option.Option<string>> = {
  *    name: Option.some("John"),
  *    age: Option.none,

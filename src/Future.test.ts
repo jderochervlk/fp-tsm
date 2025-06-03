@@ -1,6 +1,6 @@
 import { expect } from "@std/expect/expect"
 import { assertSpyCalls, spy } from "jsr:@std/testing/mock"
-import { z } from "npm:zod@4.0.0-beta.20250505T195954"
+// import { z } from "npm:zod@4.0.0-beta.20250505T195954"
 import * as Either from "./Either.ts"
 import * as Future from "./Future.ts"
 import { pipe } from "./utility.ts"
@@ -30,21 +30,23 @@ Deno.test("Future is are lazy and multiple maps can be applied", async () => {
   expect(result).toEqual(Either.right(43))
 })
 
-Deno.test("Fetching and promises", async () => {
-  const data = z.array(z.string())
-  const result = pipe(
-    Future.fetch("https://baconipsum.com/api/?type=meat-and-filler"),
-    Future.flatMap((res) => Future.fromPromise(res.json())),
-    Future.flatMap((res) => {
-      const parsed = data.safeParse(res)
-      return parsed.success
-        ? Future.right(parsed.data)
-        : Future.left(parsed.error)
-    }),
-  )
+// this does network requests, so it's commented out to avoid running it in CI
 
-  expect(Either.isRight(await result())).toBeTruthy()
-})
+// Deno.test("Fetching and promises", async () => {
+//   const data = z.array(z.string())
+//   const result = pipe(
+//     Future.fetch("https://baconipsum.com/api/?type=meat-and-filler"),
+//     Future.flatMap((res) => Future.fromPromise(res.json())),
+//     Future.flatMap((res) => {
+//       const parsed = data.safeParse(res)
+//       return parsed.success
+//         ? Future.right(parsed.data)
+//         : Future.left(parsed.error)
+//     }),
+//   )
+
+//   expect(Either.isRight(await result())).toBeTruthy()
+// })
 
 Deno.test("Future.fromPromise", async () => {
   const data = Future.fromPromise(Promise.resolve(42))

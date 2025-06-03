@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 /**
  * This is copied from `effect`
  */
@@ -20,7 +21,7 @@ export const dual: {
   if (typeof arity === "function") {
     return function () {
       if (arity(arguments)) {
-        // @ts-expect-error
+        // @ts-expect-error -- I should come back to this
         return body.apply(this, arguments)
       }
       return ((self: any) => body(self, ...arguments)) as any
@@ -75,7 +76,7 @@ export const dual: {
     default:
       return function () {
         if (arguments.length >= arity) {
-          // @ts-expect-error
+          // @ts-expect-error -- I should come back to this
           return body.apply(this, arguments)
         }
         const args = arguments

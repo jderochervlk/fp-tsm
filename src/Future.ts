@@ -184,10 +184,14 @@ export const flatMap: {
  * await mappedSuccess() // Either.right(42)
  * ```
  */
-export const mapLeft =
-  <L1, L2, R>(f: (a: L1) => L2) =>
-  (future: Future<L1, R>): Future<L2, R> =>
-  () => future().then(Either.mapLeft(f))
+export const mapLeft: {
+  <L1, L2, R>(f: (a: L1) => L2): (future: Future<L1, R>) => Future<L2, R>
+  <L1, L2, R>(future: Future<L1, R>, f: (a: L1) => L2): Future<L2, R>
+} = dual(
+  2,
+  <L1, L2, R>(future: Future<L1, R>, f: (a: L1) => L2): Future<L2, R> => () =>
+    future().then(Either.mapLeft(f)),
+)
 
 /**
  * Maps over the Left value of a Future using the provided function and flattens the result.

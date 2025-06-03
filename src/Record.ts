@@ -7,7 +7,7 @@ import * as Option from "./Option.ts"
  * @category Functions
  * @example Data first style
  * ```ts
- * import { Record, Option } from "@jvlk/fp-tsm";
+ * import { Record, Option } from "@jvlk/fp-tsm"
  * import { expect } from "jsr:@std/expect"
  *
  * type T = { a: number | undefined; b: number | null; c?: number }
@@ -25,7 +25,7 @@ import * as Option from "./Option.ts"
  *
  * @example Pipe style
  * ```ts
- * import { Record, Option, pipe } from "@jvlk/fp-tsm";
+ * import { Record, Option, pipe } from "@jvlk/fp-tsm"
  * import { expect } from "jsr:@std/expect"
  *
  * type T = { a: number | undefined; b: number | null; c?: number }

@@ -256,7 +256,7 @@ export const mapLeft: {
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
- * import { Either } from "@jvlk/fp-tsm"
+ * import { Either, pipe } from "@jvlk/fp-tsm"
  *
  * expect(Either.bimap(Either.right(1),
  *   (e: string) => e.toUpperCase(),
