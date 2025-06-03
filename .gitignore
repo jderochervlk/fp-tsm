@@ -8,5 +8,6 @@ docs.json
 
 # These are doc files that are manually written
 !src/content/style.css
-!src/content/docs/getting-started.mdx
 !src/content/docs/overview.md
+!src/content/docs/getting-started
+!src/content/docs/index.md
