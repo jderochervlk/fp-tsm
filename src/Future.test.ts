@@ -4,6 +4,9 @@ import { assertSpyCalls, spy } from "jsr:@std/testing/mock"
 import * as Either from "./Either.ts"
 import * as Future from "./Future.ts"
 import { pipe } from "./utility.ts"
+import * as Option from "./Option.ts"
+import { z } from "npm:zod"
+import { ZodError } from "zod"
 
 Deno.test("Future is are lazy and multiple maps can be applied", async () => {
   const logSpy = spy()
@@ -100,3 +103,32 @@ Deno.test("bimap", async () => {
 
   expect(await mappedError()).toEqual(Either.left(Error("error")))
 })
+
+const userSchema = z.object({
+  email: z.string().email(),
+  settings: z.object({
+    theme: z.string().optional(),
+  }).optional(),
+})
+
+const getUserData = (
+  id: string,
+): Future.Future<Error | ZodError, string> =>
+  pipe(
+    Future.fetch(`/api/users/${id}`),
+    Future.mapLeft((error) => Error(`Network error: ${error}`)),
+    Future.flatMap((res) => Future.fromPromise(res.json())),
+    Future.mapLeft((error) => Error(`Failed to get user data: ${error}`)),
+    Future.flatMap((data) => {
+      const parsed = userSchema.safeParse(data)
+      return parsed.success
+        ? Future.right(parsed.data)
+        : Future.left(parsed.error)
+    }),
+    Future.map((user) =>
+      pipe(
+        Option.of(user?.settings?.theme),
+        Option.getOrElse(() => "default-theme"),
+      )
+    ),
+  )

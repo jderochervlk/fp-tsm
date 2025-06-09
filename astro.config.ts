@@ -8,7 +8,6 @@ export default defineConfig({
     starlight({
       title: "fp-tsm",
       sidebar: [
-        { slug: "overview" },
         { label: "Getting Started", items: ["getting-started/installation"] },
         {
           label: "Data Types",
