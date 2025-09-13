@@ -45,7 +45,7 @@ async function getUserData(id: string): Promise<string> {
     return settings.theme
   } catch (error) {
     console.error("Failed to get user data:", error)
-    return "default-theme"
+    return null
   }
 }
 ```

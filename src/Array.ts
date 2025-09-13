@@ -101,7 +101,7 @@ export function at<T>(index: number): (array: Array<T>) => Option.Option<T> {
 }
 
 /**
- * Point-free way to use `Array.prototype.map` that is also more performant.
+ * Point-free way to use `Array.prototype.map`.
  * @category Functions
  * @example
  * ```ts
@@ -126,13 +126,7 @@ export function map<
   T = unknown,
   U = unknown,
 >(fn: (X: T) => U) {
-  return (x: A) => {
-    const draft: Array<U> = []
-    for (const i in x) {
-      draft[i] = fn(x[i])
-    }
-    return draft
-  }
+  return (x: A) => x.map(fn)
 }
 
 /**
