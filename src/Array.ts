@@ -220,19 +220,20 @@ export const filter: {
 // @todo filterMap
 // @todo filterMapWithIndex
 // @todo filterWithIndex
+// @todo partition
+// @todo partitionMap
+// @todo partitionMapWithIndex
+// @todo partitionWithIndex
+// @todo separate
 
-/**
- * TODO: description
- */
-export const at: {
-  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>>
-  <T>(idxs: Array<number>): (array: Array<T>) => Array<Option.Option<T>>
-} = dual(
-  2,
-  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>> =>
-    _at(array, idxs).map(Option.of),
-)
+// @folding Folding Arrays
+// @todo reduce
+// @todo reduceRight
+// @todo reduceWithIndex
+// @todo reduceRightWithIndex
 
+// @mapping Mapping Arrays
+// @todo flap
 /**
  * TODO: description
  */
@@ -245,11 +246,53 @@ export const map: {
     fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
   ): (arr: A) => ArrayType<A, U>
 } = dual(2, (arr, fn) => arr.map(fn))
+// @todo mapWithIndex
+
+// @refinements Refining Arrays
+// @todo isEmpty
+// @todo isNonEmpty
+
+// @sequencing Sequencing Arrays
+// @todo flatMap
+// @todo flatten
+
+// @traversing Traversing Arrays
+// @todo traverse
+// @todo sequence
+
+// @utils Array Utilities
+/**
+ * Retrieves elements from an array at the specified indices.
+ * Each element will be an `Option`, which will be `None` if something isn't found at that index.
+ * This function supports negative indices, which count from the end of the array.
+ */
+export const at: {
+  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>>
+  <T>(idxs: Array<number>): (array: Array<T>) => Array<Option.Option<T>>
+} = dual(
+  2,
+  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>> =>
+    _at(array, idxs).map(Option.of),
+)
+// @todo chop
+// @todo chunksOf
+// @todo comprehension
+// @todo concat
+// @todo copy
+// @todo deleteAt
+// @todo dropLeft
+// @todo dropLeftWhile
+// @todo dropRight
+// @todo duplicate
+// @todo every
+// @todo exists
+// @todo extend
 
 /**
- * Point-free way to find the first element in an array that satisfies a predicate. Returns an `Option` type.
- * @category Functions
- * @example
+ * Find the first element which satisfies a predicate (or a refinement) function. It returns an `Option` containing the element or `None` if not found.
+ *
+ * @category Array Utilities
+ * @example Point free
  * ```ts
  * import { Array, Option, pipe } from "@jvlk/fp-tsm"
  * import { expect } from "@std/expect/expect"
@@ -264,12 +307,70 @@ export const map: {
  *
  * expect(result).toEqual(Option.some(2))
  * ```
+ *
+ * @example Data first
+ * ```ts
+ * import { Option, pipe } from "@jvlk/fp-tsm"
+ * import { findFirst } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const isEven = (n: number) => n % 2 === 0
+ * const numbers = [1, 2, 3, 4]
+ *
+ * const result = findFirst(numbers, isEven)
+ *
+ * expect(result).toEqual(Option.some(2))
+ *
+ * ```
  */
-export function findFirst<A>(
+export const findFirst: {
+  <A>(array: AnyArray<A>, predicate: (a: A) => boolean): Option.Option<A>
+  <A>(predicate: (a: A) => boolean): (array: AnyArray<A>) => Option.Option<A>
+} = dual(2, <A>(
+  array: AnyArray<A>,
   predicate: (a: A) => boolean,
-): (as: Array<A>) => Option.Option<A> {
-  return (as) => Option.of(as.find(predicate))
-}
+): Option.Option<A> => {
+  return Option.of(array.find(predicate))
+})
+
+// @todo findLast
+// @todo findFirstMap
+// @todo findIndex
+// @todo findLastIndex
+// @todo findLastMap
+// @todo head
+// @todo init
+// @todo insertAt
+// @todo intersection ?
+// @todo isOutOfBound
+// @todo last
+// @todo lefts
+// @todo lookup
+// @todo modifyAt
+// @todo prepend
+// @todo prependAll
+// @todo reverse
+// @todo rights
+// @todo rotate
+// @todo scanLeft
+// @todo scanRight
+// @todo size (aka length)
+// @todo some
+// @todo sort
+// @todo sortBy
+// @todo spanLeft
+// @todo splitAt
+// @todo tail
+// @todo takeLeft
+// @todo takeLeftWhile
+// @todo takeRight
+// @todo unfold
+// @todo union
+// @todo uniq
+// @todo unzip
+// @todo updateAt
+// @todo zip
+// @todo zipWith
 
 // @internal-types
 
