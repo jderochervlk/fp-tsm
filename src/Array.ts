@@ -259,7 +259,43 @@ export const filter: {
 ): AnyArray<A> => {
   return array.filter(predicate)
 })
-// @todo filterMap
+
+/**
+ * Maps an array with an iterating function that returns an `Option` and it keeps only the `Some` values discarding the `None`s.
+ *
+ * @category Filtering Arrays
+ * @example point free
+ * ```ts
+ * import { pipe, Option, Array } from '@jvlk/fp-tsm'
+ *
+ * const f = (s: string) => (s.length === 1 ? Option.some(s.toUpperCase()) : Option.none)
+ * expect(pipe(['a', 'no', 'neither', 'b'], Array.filterMap(f))).toEqual(['A', 'B'])
+ * ```
+ * @example data first
+ * ```ts
+ * import { pipe, Option, Array } from '@jvlk/fp-tsm'
+ *
+ * const f = (s: string) => (s.length === 1 ? Option.some(s.toUpperCase()) : Option.none)
+ * expect(Array.filterMap(['a', 'no', 'neither', 'b'], f)).toEqual(['A', 'B'])
+ * ```
+ */
+export const filterMap = dual(
+  2,
+  <T extends AnyArray<A>, A, B>(
+    array: T,
+    fn: (a: A) => Option.Option<B>,
+  ): ArrayType<T, B> => {
+    const out = []
+    for (let i = 0; i < array.length; i++) {
+      const optionB = fn(array[i])
+      if (optionB._tag === "Some") {
+        out.push(optionB.value)
+      }
+    }
+    return out as ArrayType<T, B>
+  },
+)
+
 // @todo filterMapWithIndex
 // @todo filterWithIndex
 // @todo partition
