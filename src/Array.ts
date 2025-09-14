@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { at as _at } from "npm:es-toolkit/array"
+import { at as _at } from "es-toolkit/array"
 import { Option } from "./index.ts"
 import { dual } from "./internal.ts"
 

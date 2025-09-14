@@ -26,6 +26,8 @@
     "tests:generate": "gen-jet src/ --test-function-name 'Deno.test'"
   },
   "imports": {
+    "@std/async": "jsr:@std/async@^1.0.14",
+    "@std/testing": "jsr:@std/testing@^1.0.15",
     "@astrojs/starlight": "npm:@astrojs/starlight@^0.34.3",
     "@bearz/exec": "jsr:@bearz/exec@^0.1.1",
     "@deno/doc": "jsr:@deno/doc@^0.",
@@ -34,6 +36,7 @@
     "astro": "npm:astro@^5.8.0",
     "astro-expressive-code": "npm:astro-expressive-code@^0.41.2",
     "es-module-lexer": "npm:es-module-lexer@^1.7.0",
+    "es-toolkit": "npm:es-toolkit@^1.39.10",
     "generate-jsdoc-example-tests": "npm:generate-jsdoc-example-tests@^0.2.4",
     "postcss": "npm:postcss@^8.5.3",
     "zod": "npm:zod@^3.25.49"

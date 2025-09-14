@@ -1,5 +1,5 @@
 import { exec } from "@bearz/exec"
-import { debounce } from "jsr:@std/async/debounce"
+import { debounce } from "@std/async/debounce"
 
 const watcher = Deno.watchFs("./src")
 
