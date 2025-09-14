@@ -1,4 +1,5 @@
 export * from "./Array.ts"
+export * as Array from "./Array.ts"
 export type { AnyArray, NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
 export * as Either from "./Either.ts"
 export * as Future from "./Future.ts"

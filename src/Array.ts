@@ -41,7 +41,7 @@ export type ReadonlyNonEmptyArray<T> = readonly [T, ...T[]]
  * @category Types
  * @example
  * ```ts
- * import type { AnyArray, ReadonlyNonEmptyArray, NonEmptyArray } from "@jvlk/fp-tsm"
+ * import type { AnyArray, ReadonlyNonEmptyArray, NonEmptyArray } from "@jvlk/fp-tsm/Array"
  * import { expect } from "@std/expect/expect"
  *
  * const firstItem = <T>(arr: AnyArray<T>): T => arr[0]
@@ -63,6 +63,37 @@ export type AnyArray<Type> =
   | ReadonlyArray<Type>
   | ReadonlyNonEmptyArray<Type>
   | NonEmptyArray<Type>
+
+// @contructors Making Arrays
+
+/**
+ * Return a `Array` of length `n` with element `i` initialized with `f(i)`.
+ *
+ * @category Creating Arrays
+ * @example makeBy
+ * ```ts
+ * import { makeBy } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const double = (i: number): number => i * 2
+ * expect(makeBy(5, double)).toEqual([0, 2, 4, 6, 8])
+ * expect(makeBy(-3, double)).toEqual([])
+ * expect(makeBy(4.32164, double)).toEqual([0, 2, 4, 6])
+ * ```
+ */
+
+export const makeBy = <A>(n: number, f: (i: number) => A): Array<A> => {
+  const j = Math.max(0, Math.floor(n))
+  if (j <= 0) return []
+  const out: A[] = []
+  for (let i = 0; i < j; i++) {
+    out.push(f(i))
+  }
+  return out as any
+}
+
+// @todo of
+// @todo replicate
 
 /**
  * TODO: description
@@ -93,9 +124,11 @@ export const map: {
  * Point-free way to use `Array.prototype.filter`. Works as a valid type guard.
  *
  * @category Functions
- * @example
- * ```ts
- * import { Array, pipe } from "@jvlk/fp-tsm"
+ *
+ * TODO fix example
+ *
+ * import { pipe } from "@jvlk/fp-tsm"
+ * import { filter, map } from "@jvlk/fp-tsm/Array"
  * import { expect } from "@std/expect/expect"
  *
  * const numbers = [1, 2, 3, 4]
@@ -103,7 +136,7 @@ export const map: {
  *
  * const result = pipe(
  *   numbers,
- *   Array.filter(isEven)
+ *   filter(isEven)
  * )
  * expect(result).toEqual([2, 4])
  *
@@ -114,20 +147,17 @@ export const map: {
  *
  * const onlyNumbers = pipe(
  *   items,
- *   Array.filter(isNumber),
- *   Array.map(add)
+ *   filter(isNumber),
+ *   map(add)
  * )
  *
  * expect(onlyNumbers).toEqual([2, 3, 4])
- * ```
  */
 export function filter<A>(
   predicate: (a: A) => boolean,
 ): (as: Array<A>) => Array<A> {
   return (as) => as.filter(predicate)
 }
-
-Object.assign(Array, { filter })
 
 /**
  * Point-free way to find the first element in an array that satisfies a predicate. Returns an `Option` type.
@@ -154,9 +184,7 @@ export function findFirst<A>(
   return (as) => Option.of(as.find(predicate))
 }
 
-//
-// internal types
-//
+// @internal-types
 
 type Primitive =
   | string
