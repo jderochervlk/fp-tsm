@@ -43,6 +43,7 @@
     "npm:astro@5.8.0": "5.8.0_vite@6.3.5__picomatch@4.0.2_zod@3.25.23_@types+node@22.12.0",
     "npm:astro@^5.8.0": "5.8.0_vite@6.3.5__picomatch@4.0.2_zod@3.25.23_@types+node@22.12.0",
     "npm:es-module-lexer@^1.7.0": "1.7.0",
+    "npm:es-toolkit@*": "1.39.10",
     "npm:generate-jsdoc-example-tests@0.2.4": "0.2.4",
     "npm:generate-jsdoc-example-tests@~0.2.4": "0.2.4",
     "npm:postcss@^8.5.3": "8.5.3",
@@ -1431,6 +1432,9 @@
     },
     "es-module-lexer@1.7.0": {
       "integrity": "sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA=="
+    },
+    "es-toolkit@1.39.10": {
+      "integrity": "sha512-E0iGnTtbDhkeczB0T+mxmoVlT4YNweEKBLq7oaU4p11mecdsZpNWOglI4895Vh4usbQ+LsJiuLuI2L0Vdmfm2w=="
     },
     "esast-util-from-estree@2.0.0": {
       "integrity": "sha512-4CyanoAudUSBAn5K13H4JhsMH6L9ZP7XbLVe/dKybkxMO7eDyLsT8UHl9TRNrU2Gr9nz+FovfSIjuXWJ81uVwQ==",

@@ -1,5 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
+import { at as _at } from "npm:es-toolkit/array"
 import { Option } from "./index.ts"
+import { dual } from "./internal.ts"
 
 /**
  * Represents a non-empty array type.
@@ -63,71 +65,29 @@ export type AnyArray<Type> =
   | NonEmptyArray<Type>
 
 /**
- * The `Array` module provides point-free functions to work with arrays and some utility types for non empty arrays.
- * @module
+ * TODO: description
  */
-export const Array: ArrayConstructor & {
-  map: <A extends AnyArray<T>, T, U>(
+export const at: {
+  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>>
+  <T>(idxs: Array<number>): (array: Array<T>) => Array<Option.Option<T>>
+} = dual(
+  2,
+  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>> =>
+    _at(array, idxs).map(Option.of),
+)
+
+/**
+ * TODO: description
+ */
+export const map: {
+  <A extends AnyArray<T>, T, U>(
+    arr: A,
     fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
-  ) => (a: A) => ArrayType<A, U>
-  at: <T>(index: number) => (array: Array<T>) => Option.Option<T>
-  findFirst<A>(
-    predicate: (a: A) => boolean,
-  ): (as: Array<A>) => Option.Option<A>
-  filter: {
-    <A extends AnyArray<T>, T, U>(
-      predicate: (a: T | U) => a is U,
-    ): (as: A) => ArrayType<A, U>
-    <A extends AnyArray<T>, T>(
-      predicate: (a: A extends AnyArray<infer Y> ? Y : never) => boolean,
-    ): (as: A) => A
-  }
-} = Object.assign({}, globalThis.Array, { map, at, findFirst, filter })
-
-/**
- * Point-free way to get a value from an array by index. Returns an `Option` type.
- * @category Functions
- * @example
- * ```ts
- * import { Array, Option, pipe } from "@jvlk/fp-tsm"
- * import { expect } from "@std/expect/expect"
- *
- * expect(pipe([1, 2, 3], Array.at(0))).toEqual(Option.some(1))
- * expect(pipe([1, 2, 3], Array.at(3))).toEqual(Option.none)
- * ```
- */
-export function at<T>(index: number): (array: Array<T>) => Option.Option<T> {
-  return (array: AnyArray<T>) => Option.of(array[index])
-}
-
-/**
- * Point-free way to use `Array.prototype.map`.
- * @category Functions
- * @example
- * ```ts
- * import { Array, pipe } from "@jvlk/fp-tsm"
- * import { expect } from "@std/expect/expect"
- *
- * const numbers: ReadonlyArray<number> = [1, 2, 3]
- * const double = (n: number) => n * 2
- *
- * const result = pipe(
- *  numbers,
- *  Array.map(double)
- * )
- * expect(result).toEqual([2, 4, 6])
- * ```
- */
-export function map<A extends AnyArray<T>, T, U>(
-  fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
-): <Z>(a: A) => ArrayType<A, Z>
-export function map<
-  A extends AnyArray<T>,
-  T = unknown,
-  U = unknown,
->(fn: (X: T) => U) {
-  return (x: A) => x.map(fn)
-}
+  ): ArrayType<A, U>
+  <A extends AnyArray<T>, T, U>(
+    fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
+  ): (arr: A) => ArrayType<A, U>
+} = dual(2, (arr, fn) => arr.map(fn))
 
 /**
  * Point-free way to use `Array.prototype.filter`. Works as a valid type guard.
@@ -193,6 +153,10 @@ export function findFirst<A>(
 ): (as: Array<A>) => Option.Option<A> {
   return (as) => Option.of(as.find(predicate))
 }
+
+//
+// internal types
+//
 
 type Primitive =
   | string

@@ -1,6 +1,6 @@
 import { expect } from "@std/expect/expect"
-import { Array } from "./Array.ts"
 import type { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
+import * as Array from "./Array.ts"
 import { flow, pipe } from "./utility.ts"
 
 Deno.test("map", () => {
@@ -48,8 +48,8 @@ Deno.test("map", () => {
 
 Deno.test("at", () => {
   expect(
-    pipe([1, 2, 3], Array.at(0)),
-  ).toEqual({ _tag: "Some", value: 1 })
+    pipe([1, 2, 3], Array.at([0])),
+  ).toEqual([{ _tag: "Some", value: 1 }])
 })
 
 Deno.test("array flow", () => {
