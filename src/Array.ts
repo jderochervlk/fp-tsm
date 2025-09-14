@@ -124,6 +124,7 @@ export const of = <A>(...elements: A[]): Array<A> => {
  * expect(replicate(3, 'a')).toEqual(['a', 'a', 'a'])
  * expect(replicate(0, 42)).toEqual([])
  * expect(replicate(-2, true)).toEqual([])
+ * ```
  */
 export const replicate = <A>(n: number, a: A): Array<A> => {
   const j = Math.max(0, Math.floor(n))
@@ -138,11 +139,13 @@ export const replicate = <A>(n: number, a: A): Array<A> => {
 // @filtering Filtering Arrays
 
 // @todo compact
+
 /**
  * Given an iterating function that is a `Predicate` or a `Refinement`,
  * `filter` creates a new `Array` containing the elements of the original `Array` for which the iterating function is `true`.
  *
  * @category Filtering Arrays
+ *
  * @example
  * ```ts
  * import { pipe } from "@jvlk/fp-tsm"
@@ -197,12 +200,12 @@ export const replicate = <A>(n: number, a: A): Array<A> => {
  * ```
  */
 export const filter: {
-  <A, B>(
+  <T extends AnyArray<A>, A, B>(
     predicate: (x: unknown) => x is B,
-  ): (array: AnyArray<A>) => AnyArray<B>
-  <A>(
+  ): (array: T) => ArrayType<T, B>
+  <T extends AnyArray<A>, A>(
     predicate: (a: A) => boolean,
-  ): (array: AnyArray<A>) => AnyArray<A>
+  ): (array: AnyArray<A>) => ArrayType<A, ValueOf<T>>
   <A, B>(
     array: AnyArray<A>,
     predicate: (x: unknown) => x is B,
@@ -235,7 +238,7 @@ export const filter: {
 // @mapping Mapping Arrays
 // @todo flap
 /**
- * TODO: description
+ * @category Mapping Arrays
  */
 export const map: {
   <A extends AnyArray<T>, T, U>(
@@ -265,10 +268,17 @@ export const map: {
  * Retrieves elements from an array at the specified indices.
  * Each element will be an `Option`, which will be `None` if something isn't found at that index.
  * This function supports negative indices, which count from the end of the array.
+ *
+ * @category Array Utilities
  */
 export const at: {
-  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>>
-  <T>(idxs: Array<number>): (array: Array<T>) => Array<Option.Option<T>>
+  <A extends AnyArray<T>, T>(
+    array: A,
+    idxs: Array<number>,
+  ): ArrayType<A, Option.Option<T>>
+  <A extends AnyArray<T>, T>(
+    idxs: Array<number>,
+  ): (array: A) => ArrayType<A, Option.Option<T>>
 } = dual(
   2,
   <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>> =>

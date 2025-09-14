@@ -5,14 +5,14 @@ const watcher = Deno.watchFs("./src")
 
 const log = debounce((event: Deno.FsEvent) => {
   console.log("[%s] %s", event.kind, event.paths[0])
-}, 200)
+}, 2000)
 
 const run = debounce(async () => {
   await exec("deno task docs:json", { stdout: "piped" })
   await exec("deno task docs:md")
   await exec("deno check --doc-only")
   await exec("deno task tests:generate")
-}, 200)
+}, 2000)
 
 for await (const event of watcher) {
   if (

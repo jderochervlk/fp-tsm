@@ -1,4 +1,4 @@
-import type { DocNode } from "jsr:@deno/doc@0.174.0"
+import type { DocNode } from "@deno/doc"
 
 type jsonDoc = { nodes: DocNode[] }
 
