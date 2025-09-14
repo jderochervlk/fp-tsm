@@ -138,7 +138,21 @@ export const replicate = <A>(n: number, a: A): Array<A> => {
 
 // @filtering Filtering Arrays
 
-// @todo compact
+export const compact = <T>(
+  array: AnyArray<Option.Option<T>>,
+): ArrayType<
+  typeof array extends ReadonlyArray<Option.Option<T>>
+    ? ReadonlyArray<Option.Option<T>>
+    : Array<Option.Option<T>>,
+  T
+> => {
+  const onlySomes = map(array, (o) => (o._tag === "Some" ? o.value : null))
+  return filter(onlySomes, isNotNull)
+}
+
+function isNotNull<T>(value: T | null): value is T {
+  return value !== null
+}
 
 /**
  * Given an iterating function that is a `Predicate` or a `Refinement`,
@@ -200,20 +214,45 @@ export const replicate = <A>(n: number, a: A): Array<A> => {
  * ```
  */
 export const filter: {
-  <T extends AnyArray<A>, A, B>(
-    predicate: (x: unknown) => x is B,
-  ): (array: T) => ArrayType<T, B>
-  <T extends AnyArray<A>, A>(
-    predicate: (a: A) => boolean,
-  ): (array: AnyArray<A>) => ArrayType<A, ValueOf<T>>
-  <A, B>(
-    array: AnyArray<A>,
-    predicate: (x: unknown) => x is B,
-  ): AnyArray<B>
+  // point free type guard
+  <A, B extends A>(
+    predicate: (x: A) => x is B,
+  ): (array: AnyArray<A>) => ArrayType<
+    typeof array extends ReadonlyArray<A> ? ReadonlyArray<A>
+      : Array<A>,
+    B
+  >
+
+  // point free boolean
   <A>(
-    array: AnyArray<A>,
     predicate: (a: A) => boolean,
-  ): AnyArray<A>
+  ): (
+    array: AnyArray<A>,
+  ) => ArrayType<
+    typeof array extends ReadonlyArray<A> ? ReadonlyArray<A>
+      : Array<A>,
+    A
+  >
+
+  // data first type guard
+  <A, B extends A>(
+    array: AnyArray<A>,
+    predicate: (x: A) => x is B,
+  ): ArrayType<
+    typeof array extends ReadonlyArray<A> ? ReadonlyArray<A>
+      : Array<A>,
+    B
+  >
+
+  // data first boolean
+  <T extends AnyArray<A>, A>(
+    array: T,
+    predicate: (a: A) => boolean,
+  ): ArrayType<
+    typeof array extends ReadonlyArray<A> ? ReadonlyArray<A>
+      : Array<A>,
+    A
+  >
 } = dual(2, <A>(
   array: AnyArray<A>,
   predicate: (a: A) => boolean,

@@ -1,6 +1,7 @@
+import { Option } from "@jvlk/fp-tsm"
 import { expect } from "@std/expect/expect"
 import type { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
-import * as Array from "./Array.ts"
+import * as A from "./Array.ts"
 import { flow, pipe } from "./utility.ts"
 
 Deno.test("map", () => {
@@ -11,7 +12,7 @@ Deno.test("map", () => {
 
   const x1 = pipe(
     a1,
-    Array.map((t) => {
+    A.map((t) => {
       return t + 1
     }),
   )
@@ -20,7 +21,7 @@ Deno.test("map", () => {
 
   const x2 = pipe(
     a2,
-    Array.map((t) => {
+    A.map((t) => {
       return t + 1
     }),
   )
@@ -29,7 +30,7 @@ Deno.test("map", () => {
 
   const x3 = pipe(
     a3,
-    Array.map((t) => {
+    A.map((t) => {
       return t + 1
     }),
   )
@@ -38,7 +39,7 @@ Deno.test("map", () => {
 
   const x4 = pipe(
     a4,
-    Array.map((t) => {
+    A.map((t) => {
       return t + 1
     }),
   )
@@ -48,7 +49,7 @@ Deno.test("map", () => {
 
 Deno.test("at", () => {
   expect(
-    pipe([1, 2, 3], Array.at([0])),
+    pipe([1, 2, 3], A.at([0])),
   ).toEqual([{ _tag: "Some", value: 1 }])
 })
 
@@ -99,4 +100,31 @@ Deno.test("array flow", () => {
     "3",
     "4",
   ])
+})
+
+Deno.test("Filtering cound product an empty array - data first", () => {
+  const arr: ReadonlyNonEmptyArray<number> = [1, 2, 3, 4, 5]
+
+  const result = A.filter(arr, (n) => n > 5)
+
+  expect(result).toEqual([])
+})
+
+Deno.test("Filtering cound product an empty array - point free", () => {
+  const arr: ReadonlyNonEmptyArray<number> = [1, 2, 3, 4, 5]
+
+  const result = pipe(arr, A.filter((n) => n > 5))
+
+  expect(result).toEqual([])
+})
+
+Deno.test("compact", () => {
+  const arr: ReadonlyNonEmptyArray<Option.Option<number>> = [
+    Option.some(1),
+    Option.none,
+  ]
+
+  const res = A.compact(arr)
+
+  expect(res).toEqual([1])
 })
