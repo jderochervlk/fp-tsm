@@ -92,8 +92,134 @@ export const makeBy = <A>(n: number, f: (i: number) => A): Array<A> => {
   return out as any
 }
 
-// @todo of
-// @todo replicate
+/**
+ * Creates an `Array` from the values passed to it.
+ *
+ * @category Creating Arrays
+ * @example of
+ * ```ts
+ * import { of } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(of(1, 2, 3)).toEqual([1, 2, 3])
+ * expect(of('a', 'b', 'c')).toEqual(['a', 'b', 'c'])
+ * expect(of()).toEqual([])
+ * ```
+ */
+export const of = <A>(...elements: A[]): Array<A> => {
+  return elements
+}
+
+/**
+ * Create an `Array` containing a value repeated the specified number of times.
+ *
+ * Note. `n` is normalized to a non negative integer.
+ *
+ * @category Creating Arrays
+ * @example replicate
+ * ```ts
+ * import { replicate } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(replicate(3, 'a')).toEqual(['a', 'a', 'a'])
+ * expect(replicate(0, 42)).toEqual([])
+ * expect(replicate(-2, true)).toEqual([])
+ */
+export const replicate = <A>(n: number, a: A): Array<A> => {
+  const j = Math.max(0, Math.floor(n))
+  if (j <= 0) return []
+  const out: A[] = []
+  for (let i = 0; i < j; i++) {
+    out.push(a)
+  }
+  return out as any
+}
+
+// @filtering Filtering Arrays
+
+// @todo compact
+/**
+ * Given an iterating function that is a `Predicate` or a `Refinement`,
+ * `filter` creates a new `Array` containing the elements of the original `Array` for which the iterating function is `true`.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { pipe } from "@jvlk/fp-tsm"
+ * import { filter, map } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const numbers = [1, 2, 3, 4]
+ * const isEven = (n: number) => n % 2 === 0
+ *
+ * const result = pipe(
+ *   numbers,
+ *   filter(isEven)
+ * )
+ * expect(result).toEqual([2, 4])
+ * ```
+ *
+ * @example type guard
+ * ```ts
+ * import { pipe } from "@jvlk/fp-tsm"
+ * import { filter, map } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const items = [1, "a", 2, "b", 3]
+ * const isNumber = (x: unknown): x is number => typeof x === "number"
+ * const add = (x: number) => x + 1
+ *
+ * const onlyNumbers = pipe(
+ *   items,
+ *   filter(isNumber),
+ *   map(add)
+ * )
+ *
+ * expect(onlyNumbers).toEqual([2, 3, 4])
+ * ```
+ *
+ * @example data first
+ * ```ts
+ * import { filter, map } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const items = [1, "a", 2, "b", 3]
+ * const isNumber = (x: unknown): x is number => typeof x === "number"
+ * const isEven = (n: number) => n % 2 === 0
+ *
+ * const onlyNumbers = filter(items, isNumber)
+ *
+ * expect(onlyNumbers).toEqual([1, 2, 3])
+ *
+ * const onlyEven = filter(onlyNumbers, isEven)
+ *
+ * expect(onlyEven).toEqual([2])
+ * ```
+ */
+export const filter: {
+  <A, B>(
+    predicate: (x: unknown) => x is B,
+  ): (array: AnyArray<A>) => AnyArray<B>
+  <A>(
+    predicate: (a: A) => boolean,
+  ): (array: AnyArray<A>) => AnyArray<A>
+  <A, B>(
+    array: AnyArray<A>,
+    predicate: (x: unknown) => x is B,
+  ): AnyArray<B>
+  <A>(
+    array: AnyArray<A>,
+    predicate: (a: A) => boolean,
+  ): AnyArray<A>
+} = dual(2, <A>(
+  array: AnyArray<A>,
+  predicate: (a: A) => boolean,
+): AnyArray<A> => {
+  return array.filter(predicate)
+})
+// @todo filterMap
+// @todo filterMapWithIndex
+// @todo filterWithIndex
 
 /**
  * TODO: description
@@ -119,45 +245,6 @@ export const map: {
     fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
   ): (arr: A) => ArrayType<A, U>
 } = dual(2, (arr, fn) => arr.map(fn))
-
-/**
- * Point-free way to use `Array.prototype.filter`. Works as a valid type guard.
- *
- * @category Functions
- *
- * TODO fix example
- *
- * import { pipe } from "@jvlk/fp-tsm"
- * import { filter, map } from "@jvlk/fp-tsm/Array"
- * import { expect } from "@std/expect/expect"
- *
- * const numbers = [1, 2, 3, 4]
- * const isEven = (n: number) => n % 2 === 0
- *
- * const result = pipe(
- *   numbers,
- *   filter(isEven)
- * )
- * expect(result).toEqual([2, 4])
- *
- * // Type guard example
- * const items = [1, "a", 2, "b", 3]
- * const isNumber = (x: unknown): x is number => typeof x === "number"
- * const add = (x: number) => x + 1
- *
- * const onlyNumbers = pipe(
- *   items,
- *   filter(isNumber),
- *   map(add)
- * )
- *
- * expect(onlyNumbers).toEqual([2, 3, 4])
- */
-export function filter<A>(
-  predicate: (a: A) => boolean,
-): (as: Array<A>) => Array<A> {
-  return (as) => as.filter(predicate)
-}
 
 /**
  * Point-free way to find the first element in an array that satisfies a predicate. Returns an `Option` type.
