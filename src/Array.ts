@@ -278,7 +278,10 @@ export const filter: {
  * expect(Array.filterMap(['a', 'no', 'neither', 'b'], f)).toEqual(['A', 'B'])
  * ```
  */
-export const filterMap = dual(
+export const filterMap: <T extends AnyArray<A>, A, B>(
+  array: T,
+  fn: (a: A) => Option.Option<B>,
+) => ArrayType<T, B> = dual(
   2,
   <T extends AnyArray<A>, A, B>(
     array: T,
@@ -308,7 +311,10 @@ export const filterMap = dual(
  * expect(Array.filterMapWithIndex(['a', 'bb', 'ccc'], f)).toEqual(['A', 'BB', 'CCC'])
  * ```
  */
-export const filterMapWithIndex = dual(
+export const filterMapWithIndex: <T extends AnyArray<A>, A, B>(
+  array: T,
+  fn: (a: A, i: number) => Option.Option<B>,
+) => ArrayType<T, B> = dual(
   2,
   <T extends AnyArray<A>, A, B>(
     array: T,
@@ -401,7 +407,10 @@ export const partition = <A>(
  * expect(Array.partitionMap([1, 2, 3, 4], f)).toEqual([[1, 3], [2, 4]])
  * ```
  */
-export const partitionMap = dual(
+export const partitionMap: <T extends AnyArray<A>, A, L, R>(
+  array: T,
+  fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
   2,
   <T extends AnyArray<A>, A, L, R>(
     array: T,
@@ -431,7 +440,13 @@ export const partitionMap = dual(
  * expect(Array.partitionMapWithIndex([1, 2, 3, 4], f)).toEqual([[2, 4], [1, 3]])
  * ```
  */
-export const partitionMapWithIndex = dual(
+export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
+  array: T,
+  fn: (
+    a: A,
+    i: number,
+  ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
   2,
   <T extends AnyArray<A>, A, L, R>(
     array: T,
@@ -768,7 +783,10 @@ export const flatten = <A>(
  * expect(Array.traverse(["a", "bb"], parse)).toEqual(Option.some([1, 2]))
  * ```
  */
-export const traverse = dual(
+export const traverse: <A, B>(
+  arr: AnyArray<A>,
+  fn: (a: A) => Option.Option<B>,
+) => Option.Option<ArrayType<typeof arr, B>> = dual(
   2,
   <A, B>(
     arr: AnyArray<A>,
@@ -847,7 +865,10 @@ export const at: {
  * expect(Array.chop([1,2,3,4,5], chunk2)).toEqual([[1,2],[3,4],[5]])
  * ```
  */
-export const chop = dual(
+export const chop: <A, B>(
+  arr: AnyArray<A>,
+  f: (as: Array<A>) => [B, Array<A>],
+) => ArrayType<typeof arr, B> = dual(
   2,
   <A, B>(
     arr: AnyArray<A>,
