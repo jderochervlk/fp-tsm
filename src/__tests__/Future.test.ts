@@ -2,10 +2,10 @@ import { expect } from "@std/expect/expect"
 import { assertSpyCalls, spy } from "@std/testing/mock"
 import type { ZodError } from "zod"
 import { z } from "zod"
-import * as Either from "./Either.ts"
-import * as Future from "./Future.ts"
-import * as Option from "./Option.ts"
-import { pipe } from "./utility.ts"
+import * as Either from "../Either.ts"
+import * as Future from "../Future.ts"
+import * as Option from "../Option.ts"
+import { pipe } from "../utility.ts"
 
 Deno.test("Future is are lazy and multiple maps can be applied", async () => {
   const logSpy = spy()

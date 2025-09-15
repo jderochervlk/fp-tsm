@@ -1,8 +1,8 @@
 import { Option } from "@jvlk/fp-tsm"
+import type { NonEmptyArray, ReadonlyNonEmptyArray } from "@jvlk/fp-tsm/Array"
+import * as A from "@jvlk/fp-tsm/Array"
 import { expect } from "@std/expect/expect"
-import type { NonEmptyArray, ReadonlyNonEmptyArray } from "./Array.ts"
-import * as A from "./Array.ts"
-import { flow, pipe } from "./utility.ts"
+import { flow, pipe } from "../utility.ts"
 
 Deno.test("map", () => {
   const a1: ReadonlyArray<number> = [1, 2, 3]

@@ -1,6 +1,6 @@
 import { expect } from "@std/expect/expect"
-import * as Either from "./Either.ts"
-import { pipe } from "./utility.ts"
+import * as Either from "../Either.ts"
+import { pipe } from "../utility.ts"
 
 Deno.test("flatMap types should work", () => {
   const t = Either.right(42)

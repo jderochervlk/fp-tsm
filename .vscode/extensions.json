@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "bierner.jsdoc-markdown-highlighting",
-    "denoland.vscode-deno"
+    "denoland.vscode-deno",
+    "astro-build.astro-vscode"
   ]
 }

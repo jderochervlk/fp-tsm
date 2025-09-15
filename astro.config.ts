@@ -1,5 +1,5 @@
-import { defineConfig } from "astro/config"
 import starlight from "@astrojs/starlight"
+import { defineConfig } from "astro/config"
 
 export default defineConfig({
   site: "https://jderochervlk.github.io",
@@ -19,12 +19,29 @@ export default defineConfig({
         },
         {
           label: "Functions",
-          items: ["functions/utility", "functions/array", "functions/record"],
+          items: ["functions/utility", "functions/record"],
+        },
+        {
+          label: "Arrays",
+          items: [
+            "arrays/types",
+            "arrays/creating",
+            "arrays/mapping",
+            "arrays/filtering",
+            "arrays/folding",
+            "arrays/refining",
+            "arrays/sequencing",
+            "arrays/traversing",
+            "arrays/utils",
+          ],
         },
       ],
       customCss: [
         "./src/content/style.css",
       ],
+      components: {
+        TableOfContents: "./components/TableOfContents.astro",
+      },
     }),
   ],
 })

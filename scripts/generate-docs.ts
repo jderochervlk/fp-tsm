@@ -1,4 +1,5 @@
 import type { DocNode } from "@deno/doc"
+import { kebabCase, upperFirst } from "es-toolkit/string"
 
 type jsonDoc = { nodes: DocNode[] }
 
@@ -6,17 +7,45 @@ const colorsDoc = await Deno.readTextFile("./docs.json")
 
 const docs = JSON.parse(colorsDoc) as jsonDoc
 
-async function generate(module: string, category: string): Promise<void> {
+async function generate(
+  module: string,
+  category: string,
+  subcategories: Array<string> = [],
+): Promise<void> {
   const categories: Array<string> = []
 
   const nodes: Map<string, DocNode> = new Map()
 
+  const markdownTitle = kebabCase(module).split("-").map(upperFirst)
+
+  const sidebarLabel = markdownTitle.length === 2
+    ? markdownTitle[1]
+    : markdownTitle[0]
+
   let markdown = `
 ---
-title: ${module}
----
-
+title: ${
+    markdownTitle.includes("Types")
+      ? markdownTitle.map((text, index) =>
+        // remove the trailing "s" if it's the last word
+        index === 0 ? text.slice(0, text.length - 1) : text
+      ).join(" ")
+      : markdownTitle.reverse().join(" ")
+  }
+sidebar:
+  label: ${sidebarLabel}
+---\n
 `
+
+  if (subcategories.length > 0) {
+    for (const subcategory of subcategories) {
+      await generate(
+        `${module}${subcategory.split(" ").reverse().join("")}`,
+        module,
+      )
+    }
+    return
+  }
 
   docs.nodes.filter((node) =>
     node.location.filename.includes(module) && node.jsDoc
@@ -64,8 +93,10 @@ title: ${module}
     recursive: true,
   })
 
+  const markdownFileName = kebabCase(module).split("-")[1]
+
   await Deno.writeTextFile(
-    `./src/content/docs/${category}/${module}.md`,
+    `./src/content/docs/${category}/${markdownFileName ?? module}.md`,
     markdown,
   )
 }
@@ -74,7 +105,17 @@ await generate("Option", "Data Types")
 await generate("Either", "Data Types")
 await generate("Future", "Data Types")
 await generate("utility", "Functions")
-await generate("Array", "Functions")
+await generate("Arrays", "", [
+  "Types",
+  "Creating",
+  "Mapping",
+  "Filtering",
+  "Folding",
+  "Refining",
+  "Sequencing",
+  "Traversing",
+  "Utils",
+])
 await generate("Record", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
