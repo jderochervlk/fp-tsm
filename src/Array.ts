@@ -266,6 +266,7 @@ export const filter: {
  * @example point free
  * ```ts
  * import { pipe, Option, Array } from '@jvlk/fp-tsm'
+ * import { expect } from "@std/expect/expect"
  *
  * const f = (s: string) => (s.length === 1 ? Option.some(s.toUpperCase()) : Option.none)
  * expect(pipe(['a', 'no', 'neither', 'b'], arr => Array.filterMap(arr, f))).toEqual(['A', 'B'])
@@ -273,6 +274,7 @@ export const filter: {
  * @example data first
  * ```ts
  * import { pipe, Option, Array } from '@jvlk/fp-tsm'
+ * import { expect } from "@std/expect/expect"
  *
  * const f = (s: string) => (s.length === 1 ? Option.some(s.toUpperCase()) : Option.none)
  * expect(Array.filterMap(['a', 'no', 'neither', 'b'], f)).toEqual(['A', 'B'])
@@ -650,6 +652,7 @@ export const flap = <A, B>(
  * @example
  * ```ts
  * import { Array, pipe } from '@jvlk/fp-tsm'
+ * import { expect } from "@std/expect/expect"
  *
  * const f = (n: number) => n * 2
  * expect(pipe([1, 2, 3], map(f))).toEqual([2, 4, 6])
@@ -672,6 +675,7 @@ export const map: {
  * @example
  * ```ts
  * import { Array, pipe } from '@jvlk/fp-tsm'
+ * import { expect } from "@std/expect/expect"
  *
  * const arr = [10, 20, 30]
  * const addIndex = (value: number, index: number) => value + index
@@ -729,6 +733,7 @@ export const isNotEmpty = <A>(array: AnyArray<A>): boolean => array.length > 0
  * @example
  * ```ts
  * import { Array, pipe } from '@jvlk/fp-tsm'
+ * import { expect } from "@std/expect/expect"
  *
  * const arr = [1, 2, 3]
  * const duplicate = (n: number) => [n, n]
