@@ -159,7 +159,6 @@ function isNotNull<T>(value: T | null): value is T {
  * `filter` creates a new `Array` containing the elements of the original `Array` for which the iterating function is `true`.
  *
  * @category Filtering Arrays
- *
  * @example
  * ```ts
  * import { pipe } from "@jvlk/fp-tsm"
@@ -313,7 +312,17 @@ export const filterMap = dual(
 // @mapping Mapping Arrays
 // @todo flap
 /**
+ * `map` applies the base function to each element of the array and collects the results in a new array.
+ *
  * @category Mapping Arrays
+ *
+ * @example
+ * ```ts
+ * import { Array, pipe } from '@jvlk/fp-tsm/Array'
+ *
+ * const f = (n: number) => n * 2
+ * expext(pipe([1, 2, 3], map(f))).toEqual([2, 4, 6])
+ * ```
  */
 export const map: {
   <A extends AnyArray<T>, T, U>(
@@ -324,19 +333,165 @@ export const map: {
     fn: (x: A extends AnyArray<infer Y> ? Y : never) => U,
   ): (arr: A) => ArrayType<A, U>
 } = dual(2, (arr, fn) => arr.map(fn))
-// @todo mapWithIndex
+
+/**
+ * Same as `map`, but the iterating function takes both the index and the value of the element.
+ * @category Mapping Arrays
+ *
+ * @example
+ * ```ts
+ * import { Array, pipe } from '@jvlk/fp-tsm'
+ *
+ * const arr = [10, 20, 30]
+ * const addIndex = (value: number, index: number) => value + index
+ * expect(pipe(arr, Array.mapWithIndex(addIndex))).toEqual([10, 21, 32])
+ * ```
+ */
+export const mapWithIndex: {
+  <A extends AnyArray<T>, T, U>(
+    arr: A,
+    fn: (x: A extends AnyArray<infer Y> ? Y : never, index: number) => U,
+  ): ArrayType<A, U>
+  <A extends AnyArray<T>, T, U>(
+    fn: (x: A extends AnyArray<infer Y> ? Y : never, index: number) => U,
+  ): (arr: A) => ArrayType<A, U>
+} = dual(2, (arr, fn) => arr.map(fn))
 
 // @refinements Refining Arrays
-// @todo isEmpty
-// @todo isNonEmpty
+/**
+ * Checks if an array is empty.
+ *
+ * @category Refining Arrays
+ * @example
+ * ```ts
+ * import { isEmpty } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(isEmpty([])).toBe(true)
+ * expect(isEmpty([1, 2, 3])).toBe(false)
+ * expect(isEmpty([undefined])).toBe(false)
+ * ```
+ */
+export const isEmpty = <A>(array: AnyArray<A>): boolean => array.length === 0
+
+/**
+ * Checks if an array is not empty.
+ *
+ * @category Refining Arrays
+ * @example
+ * ```ts
+ * import { isNotEmpty } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(isNotEmpty([])).toBe(false)
+ * expect(isNotEmpty([1, 2, 3])).toBe(true)
+ * expect(isNotEmpty([undefined])).toBe(true)
+ * ```
+ */
+export const isNotEmpty = <A>(array: AnyArray<A>): boolean => array.length > 0
 
 // @sequencing Sequencing Arrays
-// @todo flatMap
-// @todo flatten
+/**
+ * Applies a function to each element of the array and flattens the result by one level.
+ *
+ * @category Sequencing Arrays
+ * @example
+ * ```ts
+ * import { Array, pipe } from '@jvlk/fp-tsm'
+ *
+ * const arr = [1, 2, 3]
+ * const duplicate = (n: number) => [n, n]
+ * expect(pipe(arr, Array.flatMap(duplicate))).toEqual([1, 1, 2, 2, 3, 3])
+ * ```
+ */
+export const flatMap: {
+  <A extends AnyArray<T>, T, U>(
+    arr: A,
+    fn: (x: T) => AnyArray<U>,
+  ): ArrayType<A, U>
+  <A extends AnyArray<T>, T, U>(
+    fn: (x: T) => AnyArray<U>,
+  ): (arr: A) => ArrayType<A, U>
+} = dual(2, (arr, fn) => arr.flatMap(fn))
+
+/**
+ * Flattens an array of arrays into a single array.
+ *
+ * @category Sequencing Arrays
+ * @example
+ * ```ts
+ * import { flatten } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(flatten([[1, 2], [3], [], [4, 5]])).toEqual([1, 2, 3, 4, 5])
+ * ```
+ */
+export const flatten = <A>(
+  arr: AnyArray<AnyArray<A>>,
+): ArrayType<typeof arr, A> => {
+  const out: A[] = []
+  for (const inner of arr) {
+    out.push(...inner)
+  }
+  return out as ArrayType<typeof arr, A>
+}
 
 // @traversing Traversing Arrays
-// @todo traverse
-// @todo sequence
+/**
+ * Traverse an array with an effectful function, collecting the results in an array.
+ * The function should return an Option for each element.
+ *
+ * @category Traversing Arrays
+ * @example
+ * ```ts
+ * import { Array, Option } from "@jvlk/fp-tsm"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const parse = (s: string) => s.length > 0 ? Option.some(s.length) : Option.none
+ * expect(Array.traverse(["a", "bb", ""], parse)).toEqual(Option.none)
+ * expect(Array.traverse(["a", "bb"], parse)).toEqual(Option.some([1, 2]))
+ * ```
+ */
+export const traverse = dual(
+  2,
+  <A, B>(
+    arr: AnyArray<A>,
+    fn: (a: A) => Option.Option<B>,
+  ): Option.Option<ArrayType<typeof arr, B>> => {
+    const out: B[] = []
+    for (let i = 0; i < arr.length; i++) {
+      const ob = fn(arr[i])
+      if (ob._tag === "None") return Option.none
+      out.push(ob.value)
+    }
+    return Option.some(out as ArrayType<typeof arr, B>)
+  },
+)
+/**
+ * Converts an array of Options into an Option of an array.
+ * Returns `Option.none` if any element is `Option.none`, otherwise returns `Option.some` of the array of values.
+ *
+ * @category Traversing Arrays
+ * @example
+ * ```ts
+ * import { Array, Option } from "@jvlk/fp-tsm"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(Array.sequence([Option.some(1), Option.some(2)])).toEqual(Option.some([1, 2]))
+ * expect(Array.sequence([Option.some(1), Option.none])).toEqual(Option.none)
+ * ```
+ */
+export const sequence = <A>(
+  arr: AnyArray<Option.Option<A>>,
+): Option.Option<ArrayType<typeof arr, A>> => {
+  const out: A[] = []
+  for (let i = 0; i < arr.length; i++) {
+    const oa = arr[i]
+    if (oa._tag === "None") return Option.none
+    out.push(oa.value)
+  }
+  return Option.some(out as ArrayType<typeof arr, A>)
+}
 
 // @utils Array Utilities
 /**
