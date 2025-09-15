@@ -18,9 +18,22 @@ async function generate(
 
   const markdownTitle = kebabCase(module).split("-").map(upperFirst)
 
+  const sidebarLabel = markdownTitle.length === 2
+    ? markdownTitle[1]
+    : markdownTitle[0]
+
   let markdown = `
 ---
-title: ${markdownTitle.length === 2 ? markdownTitle[1] : markdownTitle[0]}
+title: ${
+    markdownTitle.includes("Types")
+      ? markdownTitle.map((text, index) =>
+        // remove the trailing "s" if it's the last word
+        index === 0 ? text.slice(0, text.length - 1) : text
+      ).join(" ")
+      : markdownTitle.reverse().join(" ")
+  }
+sidebar:
+  label: ${sidebarLabel}
 ---\n
 `
 
@@ -80,10 +93,10 @@ title: ${markdownTitle.length === 2 ? markdownTitle[1] : markdownTitle[0]}
     recursive: true,
   })
 
-  let markdownFileName = kebabCase(module)
+  const markdownFileName = kebabCase(module).split("-")[1]
 
   await Deno.writeTextFile(
-    `./src/content/docs/${category}/${markdownFileName}.md`,
+    `./src/content/docs/${category}/${markdownFileName ?? module}.md`,
     markdown,
   )
 }
