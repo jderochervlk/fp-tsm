@@ -1,0 +1,14 @@
+---
+import Default from '@astrojs/starlight/components/TableOfContents.astro';
+
+const toc = Astro.locals.starlightRoute.toc
+
+Astro.locals.starlightRoute.toc = {
+    ...toc,
+    // If we are on the glossary page, remove the first toc entry which is the overview link.
+    items: toc?.items.length === 1 ? toc?.items[0].children?.map(child => ({...child, depth: child.depth - 1})) : toc?.items.slice(1),
+}
+---
+
+<!-- Render the default component with the potentially modified toc. -->
+<Default {...Astro.locals}><slot /></Default>

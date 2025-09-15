@@ -1,9 +1,8 @@
-import type { AnyArray } from "./ArrayTypes.ts"
+import type { AnyArray } from "./ArraysTypes.ts"
 
 /**
  * Reduces the array from left to right using the provided function and initial value.
  *
- * @category Folding Arrays
  * @example
  * ```ts
  * import { reduce } from "@jvlk/fp-tsm/Array"
@@ -28,7 +27,6 @@ export const reduce = <A, B>(
 /**
  * Reduces the array from right to left using the provided function and initial value.
  *
- * @category Folding Arrays
  * @example
  * ```ts
  * import { reduceRight } from "@jvlk/fp-tsm/Array"
@@ -53,7 +51,6 @@ export const reduceRight = <A, B>(
 /**
  * Reduces the array from left to right using the provided function and initial value, passing the index to the function.
  *
- * @category Folding Arrays
  * @example
  * ```ts
  * import { reduceWithIndex } from "@jvlk/fp-tsm/Array"
@@ -78,7 +75,6 @@ export const reduceWithIndex = <A, B>(
 /**
  * Reduces the array from right to left using the provided function and initial value, passing the index to the function.
  *
- * @category Folding Arrays
  * @example
  * ```ts
  * import { reduceRightWithIndex } from "@jvlk/fp-tsm/Array"

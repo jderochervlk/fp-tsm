@@ -2,13 +2,12 @@
 
 import * as Option from "../Option.ts"
 import { dual } from "../internal.ts"
-import type { AnyArray, ArrayType } from "./ArrayTypes.ts"
+import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 
 /**
  * Traverse an array with an effectful function, collecting the results in an array.
  * The function should return an Option for each element.
  *
- * @category Traversing Arrays
  * @example
  * ```ts
  * import { Array, Option } from "@jvlk/fp-tsm"
@@ -41,7 +40,6 @@ export const traverse: <A, B>(
  * Converts an array of Options into an Option of an array.
  * Returns `Option.none` if any element is `Option.none`, otherwise returns `Option.some` of the array of values.
  *
- * @category Traversing Arrays
  * @example
  * ```ts
  * import { Array, Option } from "@jvlk/fp-tsm"

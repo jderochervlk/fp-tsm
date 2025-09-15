@@ -2,7 +2,6 @@
 /**
  * Return a `Array` of length `n` with element `i` initialized with `f(i)`.
  *
- * @category Creating Arrays
  * @example makeBy
  * ```ts
  * import { makeBy } from "@jvlk/fp-tsm/Array"
@@ -29,7 +28,6 @@ export const makeBy = <A>(n: number, f: (i: number) => A): Array<A> => {
 /**
  * Creates an `Array` from the values passed to it.
  *
- * @category Creating Arrays
  * @example of
  * ```ts
  * import { of } from "@jvlk/fp-tsm/Array"
@@ -49,7 +47,6 @@ export const of = <A>(...elements: A[]): Array<A> => {
  *
  * Note. `n` is normalized to a non negative integer.
  *
- * @category Creating Arrays
  * @example replicate
  * ```ts
  * import { replicate } from "@jvlk/fp-tsm/Array"

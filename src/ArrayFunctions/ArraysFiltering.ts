@@ -2,8 +2,8 @@
 
 import { dual } from "../internal.ts"
 import type * as Option from "../Option.ts"
-import { map } from "./ArrayMapping.ts"
-import type { AnyArray, ArrayType } from "./ArrayTypes.ts"
+import { map } from "./ArraysMapping.ts"
+import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 export const compact = <T>(
   array: AnyArray<Option.Option<T>>,
 ): ArrayType<
@@ -24,7 +24,6 @@ function isNotNull<T>(value: T | null): value is T {
  * Given an iterating function that is a `Predicate` or a `Refinement`,
  * `filter` creates a new `Array` containing the elements of the original `Array` for which the iterating function is `true`.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { pipe } from "@jvlk/fp-tsm"
@@ -128,7 +127,6 @@ export const filter: {
 /**
  * Maps an array with an iterating function that returns an `Option` and it keeps only the `Some` values discarding the `None`s.
  *
- * @category Filtering Arrays
  * @example point free
  * ```ts
  * import { pipe, Option, Array } from '@jvlk/fp-tsm'
@@ -169,7 +167,6 @@ export const filterMap: <T extends AnyArray<A>, A, B>(
 /**
  * Maps an array with an iterating function that returns an `Option`, keeping only the `Some` values, and passes the index to the function.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array, Option } from '@jvlk/fp-tsm'
@@ -202,7 +199,6 @@ export const filterMapWithIndex: <T extends AnyArray<A>, A, B>(
 /**
  * Filters an array using a predicate that receives both the value and its index.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array } from '@jvlk/fp-tsm'
@@ -238,7 +234,6 @@ export const filterWithIndex: {
 /**
  * Splits an array into two arrays: one with elements satisfying the predicate, and one with the rest.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array } from '@jvlk/fp-tsm'
@@ -265,7 +260,6 @@ export const partition = <A>(
 /**
  * Maps each element to an Either, then partitions the results into lefts and rights.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array, Either } from '@jvlk/fp-tsm'
@@ -298,7 +292,6 @@ export const partitionMap: <T extends AnyArray<A>, A, L, R>(
 /**
  * Maps each element and its index to an Either, then partitions the results into lefts and rights.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array, Either } from '@jvlk/fp-tsm'
@@ -337,7 +330,6 @@ export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
 /**
  * Splits an array into two arrays using a predicate that receives both value and index.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array } from '@jvlk/fp-tsm'
@@ -364,7 +356,6 @@ export const partitionWithIndex = <A>(
 /**
  * Separates an array of Either into two arrays: lefts and rights.
  *
- * @category Filtering Arrays
  * @example
  * ```ts
  * import { Array, Either } from '@jvlk/fp-tsm'

@@ -2,7 +2,7 @@
 
 /**
  * Represents a non-empty array type.
- * @category Types
+ *
  * @example
  * ```ts
  * import type { NonEmptyArray } from "@jvlk/fp-tsm"
@@ -17,7 +17,7 @@ export type NonEmptyArray<T> = [T, ...T[]]
 
 /**
  * Represents a non-empty readonly array type.
- * @category Types
+ *
  * @example
  * ```ts
  * import type { NonEmptyArray } from "@jvlk/fp-tsm"
@@ -35,7 +35,7 @@ export type ReadonlyNonEmptyArray<T> = readonly [T, ...T[]]
 
 /**
  * A utilty type to represent any array type, including mutable and immutable arrays, as well as non-empty arrays.
- * @category Types
+ *
  * @example
  * ```ts
  * import type { AnyArray, ReadonlyNonEmptyArray, NonEmptyArray } from "@jvlk/fp-tsm/Array"

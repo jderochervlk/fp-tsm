@@ -1,13 +1,12 @@
 // @mapping Mapping Arrays
 
 import { dual } from "../internal.ts"
-import type { AnyArray, ArrayType } from "./ArrayTypes.ts"
+import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 
 /**
  * Applies a function to each element of the array, where the function itself is an array of functions.
  * This is sometimes called "ap" or "flap" in functional programming.
  *
- * @category Mapping Arrays
  * @example
  * ```ts
  * import { flap } from "@jvlk/fp-tsm/Array"
@@ -27,11 +26,10 @@ export const flap = <A, B>(
 /**
  * `map` applies the base function to each element of the array and collects the results in a new array.
  *
- * @category Mapping Arrays
- *
  * @example
  * ```ts
- * import { Array, pipe } from '@jvlk/fp-tsm'
+ * import { map } from "@jvlk/fp-tsm/Array"
+ * import { pipe } from '@jvlk/fp-tsm'
  * import { expect } from "@std/expect/expect"
  *
  * const f = (n: number) => n * 2
@@ -50,7 +48,6 @@ export const map: {
 
 /**
  * Same as `map`, but the iterating function takes both the index and the value of the element.
- * @category Mapping Arrays
  *
  * @example
  * ```ts

@@ -1,12 +1,11 @@
 // @sequencing Sequencing Arrays
 
 import { dual } from "../internal.ts"
-import type { AnyArray, ArrayType } from "./ArrayTypes.ts"
+import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 
 /**
  * Applies a function to each element of the array and flattens the result by one level.
  *
- * @category Sequencing Arrays
  * @example
  * ```ts
  * import { Array, pipe } from '@jvlk/fp-tsm'
@@ -30,7 +29,6 @@ export const flatMap: {
 /**
  * Flattens an array of arrays into a single array.
  *
- * @category Sequencing Arrays
  * @example
  * ```ts
  * import { flatten } from "@jvlk/fp-tsm/Array"

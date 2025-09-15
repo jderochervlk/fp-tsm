@@ -4,14 +4,12 @@
 import { at as _at } from "es-toolkit/array"
 import { dual } from "../internal.ts"
 import * as Option from "../Option.ts"
-import type { AnyArray, ArrayType } from "./ArrayTypes.ts"
+import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 
 /**
  * Retrieves elements from an array at the specified indices.
  * Each element will be an `Option`, which will be `None` if something isn't found at that index.
  * This function supports negative indices, which count from the end of the array.
- *
- * @category Array Utilities
  */
 export const at: {
   <A extends AnyArray<T>, T>(
@@ -30,7 +28,6 @@ export const at: {
  * Recursively processes an array by consuming a prefix and producing a value and the rest of the array.
  * Useful for "chopping" up the input array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { Array } from "@jvlk/fp-tsm"
@@ -65,7 +62,6 @@ export const chop: <A, B>(
 /**
  * Splits an array into chunks of a specified size.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { Array } from "@jvlk/fp-tsm"
@@ -92,7 +88,6 @@ export const chunksOf: {
  * Generates an array by comprehending over multiple input arrays.
  * Similar to a nested for-loop or list comprehension in other languages.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { comprehension } from "@jvlk/fp-tsm/Array"
@@ -128,7 +123,6 @@ export function comprehension<T extends any[], R>(
 /**
  * Concatenates two arrays.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { concat } from "@jvlk/fp-tsm/Array"
@@ -148,7 +142,6 @@ export const concat: {
 /**
  * Returns a shallow copy of the given array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { copy } from "@jvlk/fp-tsm/Array"
@@ -167,7 +160,6 @@ export const copy = <A>(array: AnyArray<A>): ArrayType<typeof array, A> => {
  * Removes the element at the specified index from the array.
  * Returns a new array with the element removed. If the index is out of bounds, returns the original array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { deleteAt } from "@jvlk/fp-tsm/Array"
@@ -201,7 +193,6 @@ export const deleteAt: {
  * If `n` is less than or equal to 0, returns a copy of the array.
  * If `n` is greater than the array length, returns an empty array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { dropLeft } from "@jvlk/fp-tsm/Array"
@@ -224,7 +215,6 @@ export const dropLeft: {
  * Drops elements from the beginning of the array while the predicate returns true.
  * Stops dropping when the predicate returns false for the first time.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { dropLeftWhile } from "@jvlk/fp-tsm/Array"
@@ -261,7 +251,6 @@ export const dropLeftWhile: {
  * If `n` is less than or equal to 0, returns a copy of the array.
  * If `n` is greater than the array length, returns an empty array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { dropRight } from "@jvlk/fp-tsm/Array"
@@ -286,7 +275,6 @@ export const dropRight: {
  * Returns a new array with the element at the specified index duplicated.
  * If the index is out of bounds, returns a copy of the original array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { duplicate } from "@jvlk/fp-tsm/Array"
@@ -317,7 +305,6 @@ export const duplicate: {
 /**
  * Checks if every element in the array satisfies the predicate.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { every } from "@jvlk/fp-tsm/Array"
@@ -337,7 +324,6 @@ export const every: {
 /**
  * Checks if at least one element in the array satisfies the predicate.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { exists } from "@jvlk/fp-tsm/Array"
@@ -359,7 +345,6 @@ export const exists: {
  * Returns an array where each element is the result of applying a function to each window of the input array.
  * The function receives a slice of the array starting at each index.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { extend } from "@jvlk/fp-tsm/Array"
@@ -392,7 +377,6 @@ export const extend: {
 /**
  * Find the first element which satisfies a predicate (or a refinement) function. It returns an `Option` containing the element or `None` if not found.
  *
- * @category Array Utilities
  * @example Point free
  * ```ts
  * import { Array, Option, pipe } from "@jvlk/fp-tsm"
@@ -437,7 +421,6 @@ export const findFirst: {
 /**
  * Find the last element which satisfies a predicate (or a refinement) function. It returns an `Option` containing the element or `None` if not found.
  *
- * @category Array Utilities
  * @example Point free
  * ```ts
  * import { Array, Option, pipe } from "@jvlk/fp-tsm"
@@ -487,7 +470,6 @@ export const findLast: {
  * Find the first element for which the mapping function returns a Some, and return its value.
  * Returns Option.none if no such element is found.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { Array, Option } from "@jvlk/fp-tsm"
@@ -518,7 +500,6 @@ export const findFirstMap: {
  * Returns the index of the first element in the array that satisfies the predicate.
  * If no element matches, returns -1.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { findIndex } from "@jvlk/fp-tsm/Array"
@@ -543,7 +524,6 @@ export const findIndex: {
  * Returns the index of the last element in the array that satisfies the predicate.
  * If no element matches, returns -1.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { findLastIndex } from "@jvlk/fp-tsm/Array"
@@ -568,7 +548,6 @@ export const findLastIndex: {
  * Find the last element for which the mapping function returns a Some, and return its value.
  * Returns Option.none if no such element is found.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { Array, Option } from "@jvlk/fp-tsm"
@@ -598,7 +577,6 @@ export const findLastMap: {
 /**
  * Returns the first element of the array as an Option.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { head } from "@jvlk/fp-tsm/Array"
@@ -615,7 +593,6 @@ export const head = <A>(array: AnyArray<A>): Option.Option<A> =>
 /**
  * Returns all elements of the array except the last one.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { init } from "@jvlk/fp-tsm/Array"
@@ -633,7 +610,6 @@ export const init = <A>(array: AnyArray<A>): ArrayType<typeof array, A> =>
  * Inserts an element at the specified index.
  * Returns a new array with the element inserted, or the original array if index is out of bounds.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { insertAt } from "@jvlk/fp-tsm/Array"
@@ -675,7 +651,6 @@ export const insertAt: {
 /**
  * Checks if the index is out of bounds for the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { isOutOfBound } from "@jvlk/fp-tsm/Array"
@@ -692,7 +667,6 @@ export const isOutOfBound = <A>(array: AnyArray<A>, index: number): boolean =>
 /**
  * Returns the last element of the array as an Option.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { last } from "@jvlk/fp-tsm/Array"
@@ -709,7 +683,6 @@ export const last = <A>(array: AnyArray<A>): Option.Option<A> =>
 /**
  * Returns all left values from an array of Either.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { lefts } from "@jvlk/fp-tsm/Array"
@@ -729,7 +702,6 @@ export const lefts = <L, R>(
 /**
  * Looks up the element at the specified index, returning an Option.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { lookup } from "@jvlk/fp-tsm/Array"
@@ -750,7 +722,6 @@ export const lookup = <A>(
  * Modifies the element at the specified index using a function.
  * Returns a new array with the element modified, or the original array if index is out of bounds.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { modifyAt } from "@jvlk/fp-tsm/Array"
@@ -794,7 +765,6 @@ export const modifyAt: {
 /**
  * Prepends an element to the beginning of the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { prepend } from "@jvlk/fp-tsm/Array"
@@ -813,7 +783,6 @@ export const prepend: {
 /**
  * Prepends all elements of one array to another.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { prependAll } from "@jvlk/fp-tsm/Array"
@@ -835,7 +804,6 @@ export const prependAll: {
 /**
  * Returns a new array with the elements in reverse order.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { reverse } from "@jvlk/fp-tsm/Array"
@@ -851,7 +819,6 @@ export const reverse = <A>(array: AnyArray<A>): ArrayType<typeof array, A> =>
 /**
  * Returns all right values from an array of Either.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { rights } from "@jvlk/fp-tsm/Array"
@@ -872,7 +839,6 @@ export const rights = <L, R>(
  * Rotates the array by n positions.
  * Positive n rotates left, negative n rotates right.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { rotate } from "@jvlk/fp-tsm/Array"
@@ -896,7 +862,6 @@ export const rotate = <A>(
 /**
  * Produces an array of accumulated values from left to right.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { scanLeft } from "@jvlk/fp-tsm/Array"
@@ -922,7 +887,6 @@ export const scanLeft = <A, B>(
 /**
  * Produces an array of accumulated values from right to left.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { scanRight } from "@jvlk/fp-tsm/Array"
@@ -948,7 +912,6 @@ export const scanRight = <A, B>(
 /**
  * Returns the length of the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { size } from "@jvlk/fp-tsm/Array"
@@ -963,7 +926,6 @@ export const size = <A>(array: AnyArray<A>): number => array.length
 /**
  * Checks if at least one element in the array satisfies the predicate.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { some } from "@jvlk/fp-tsm/Array"
@@ -983,7 +945,6 @@ export const some: {
 /**
  * Returns a sorted copy of the array using the provided compare function.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { sort } from "@jvlk/fp-tsm/Array"
@@ -1001,7 +962,6 @@ export const sort = <A>(
 /**
  * Sorts the array by one or more key functions.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { sortBy } from "@jvlk/fp-tsm/Array"
@@ -1029,7 +989,6 @@ export const sortBy = <A>(
 /**
  * Splits the array into two arrays: the first containing elements satisfying the predicate, the second containing the rest.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { spanLeft } from "@jvlk/fp-tsm/Array"
@@ -1053,7 +1012,6 @@ export const spanLeft = <A>(
 /**
  * Splits the array at the specified index.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { splitAt } from "@jvlk/fp-tsm/Array"
@@ -1075,7 +1033,6 @@ export const splitAt = <A>(
 /**
  * Returns all elements of the array except the first one.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { tail } from "@jvlk/fp-tsm/Array"
@@ -1092,7 +1049,6 @@ export const tail = <A>(array: AnyArray<A>): ArrayType<typeof array, A> =>
 /**
  * Takes the first n elements from the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { takeLeft } from "@jvlk/fp-tsm/Array"
@@ -1116,7 +1072,6 @@ export const takeLeft: {
 /**
  * Takes elements from the beginning of the array while the predicate returns true.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { takeLeftWhile } from "@jvlk/fp-tsm/Array"
@@ -1150,7 +1105,6 @@ export const takeLeftWhile: {
 /**
  * Takes the last n elements from the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { takeRight } from "@jvlk/fp-tsm/Array"
@@ -1175,7 +1129,6 @@ export const takeRight: {
 /**
  * Builds an array by repeatedly applying a function to a seed value.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { unfold } from "@jvlk/fp-tsm/Array"
@@ -1203,7 +1156,6 @@ export const unfold = <A, B>(
 /**
  * Returns the union of two arrays, removing duplicates.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { union } from "@jvlk/fp-tsm/Array"
@@ -1224,7 +1176,6 @@ export const union = <A>(
 /**
  * Removes duplicate elements from the array.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { uniq } from "@jvlk/fp-tsm/Array"
@@ -1240,7 +1191,6 @@ export const uniq = <A>(array: AnyArray<A>): ArrayType<typeof array, A> => {
 /**
  * Unzips an array of tuples into a tuple of arrays.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { unzip } from "@jvlk/fp-tsm/Array"
@@ -1265,7 +1215,6 @@ export const unzip = <A, B>(
  * Updates the element at the specified index.
  * Returns a new array with the element updated, or the original array if index is out of bounds.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { updateAt } from "@jvlk/fp-tsm/Array"
@@ -1305,7 +1254,6 @@ export const updateAt: {
 /**
  * Zips two arrays into an array of tuples.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { zip } from "@jvlk/fp-tsm/Array"
@@ -1326,7 +1274,6 @@ export const zip = <A, B>(a: AnyArray<A>, b: AnyArray<B>): Array<[A, B]> => {
 /**
  * Zips two arrays using a function.
  *
- * @category Array Utilities
  * @example
  * ```ts
  * import { zipWith } from "@jvlk/fp-tsm/Array"

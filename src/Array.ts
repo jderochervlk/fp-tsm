@@ -1,13 +1,13 @@
-export * from "./ArrayFunctions/ArrayCreating.ts"
-export * from "./ArrayFunctions/ArrayFiltering.ts"
-export * from "./ArrayFunctions/ArrayFolding.ts"
-export * from "./ArrayFunctions/ArrayMapping.ts"
-export * from "./ArrayFunctions/ArrayRefining.ts"
-export * from "./ArrayFunctions/ArraySequencing.ts"
-export * from "./ArrayFunctions/ArrayTraversing.ts"
+export * from "./ArrayFunctions/ArraysCreating.ts"
+export * from "./ArrayFunctions/ArraysFiltering.ts"
+export * from "./ArrayFunctions/ArraysFolding.ts"
+export * from "./ArrayFunctions/ArraysMapping.ts"
+export * from "./ArrayFunctions/ArraysRefining.ts"
+export * from "./ArrayFunctions/ArraysSequencing.ts"
+export * from "./ArrayFunctions/ArraysTraversing.ts"
 export type {
   AnyArray,
   NonEmptyArray,
   ReadonlyNonEmptyArray,
-} from "./ArrayFunctions/ArrayTypes.ts"
-export * from "./ArrayFunctions/ArrayUtils.ts"
+} from "./ArrayFunctions/ArraysTypes.ts"
+export * from "./ArrayFunctions/ArraysUtils.ts"

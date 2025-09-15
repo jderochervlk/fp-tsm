@@ -1,11 +1,10 @@
 // @refinements Refining Arrays
 
-import type { AnyArray } from "./ArrayTypes.ts"
+import type { AnyArray } from "./ArraysTypes.ts"
 
 /**
  * Checks if an array is empty.
  *
- * @category Refining Arrays
  * @example
  * ```ts
  * import { isEmpty } from "@jvlk/fp-tsm/Array"
@@ -21,7 +20,6 @@ export const isEmpty = <A>(array: AnyArray<A>): boolean => array.length === 0
 /**
  * Checks if an array is not empty.
  *
- * @category Refining Arrays
  * @example
  * ```ts
  * import { isNotEmpty } from "@jvlk/fp-tsm/Array"
