@@ -1,12 +1,11 @@
 import { expect } from "@std/expect/expect"
-import { assertSpyCalls, spy } from "jsr:@std/testing/mock"
-// import { z } from "npm:zod@4.0.0-beta.20250505T195954"
+import { assertSpyCalls, spy } from "@std/testing/mock"
+import type { ZodError } from "zod"
+import { z } from "zod"
 import * as Either from "./Either.ts"
 import * as Future from "./Future.ts"
-import { pipe } from "./utility.ts"
 import * as Option from "./Option.ts"
-import { z } from "npm:zod"
-import { ZodError } from "zod"
+import { pipe } from "./utility.ts"
 
 Deno.test("Future is are lazy and multiple maps can be applied", async () => {
   const logSpy = spy()
@@ -111,7 +110,7 @@ const userSchema = z.object({
   }).optional(),
 })
 
-const getUserData = (
+const _getUserData = (
   id: string,
 ): Future.Future<Error | ZodError, string> =>
   pipe(

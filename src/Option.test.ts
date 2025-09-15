@@ -1,6 +1,6 @@
 import { expect } from "@std/expect/expect"
+import { assertSpyCalls, spy } from "@std/testing/mock"
 import { Option, pipe, Record } from "./index.ts"
-import { assertSpyCalls, spy } from "jsr:@std/testing/mock"
 
 Deno.test("generic that in a union of null can be used with of, map, and flatMap", () => {
   type A = { a?: string | null } | null
