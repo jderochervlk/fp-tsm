@@ -295,22 +295,338 @@ export const filterMap = dual(
   },
 )
 
-// @todo filterMapWithIndex
-// @todo filterWithIndex
-// @todo partition
-// @todo partitionMap
-// @todo partitionMapWithIndex
-// @todo partitionWithIndex
-// @todo separate
+/**
+ * Maps an array with an iterating function that returns an `Option`, keeping only the `Some` values, and passes the index to the function.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array, Option } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const f = (s: string, i: number) => s.length === i + 1 ? Option.some(s.toUpperCase()) : Option.none
+ * expect(Array.filterMapWithIndex(['a', 'bb', 'ccc'], f)).toEqual(['A', 'BB', 'CCC'])
+ * ```
+ */
+export const filterMapWithIndex = dual(
+  2,
+  <T extends AnyArray<A>, A, B>(
+    array: T,
+    fn: (a: A, i: number) => Option.Option<B>,
+  ): ArrayType<T, B> => {
+    const out: B[] = []
+    for (let i = 0; i < array.length; i++) {
+      const optionB = fn(array[i], i)
+      if (optionB._tag === "Some") {
+        out.push(optionB.value)
+      }
+    }
+    return out as ArrayType<T, B>
+  },
+)
+
+/**
+ * Filters an array using a predicate that receives both the value and its index.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const arr = [10, 20, 30, 40]
+ * const evenIndex = (value: number, index: number) => index % 2 === 0
+ * expect(Array.filterWithIndex(arr, evenIndex)).toEqual([10, 30])
+ * ```
+ */
+export const filterWithIndex: {
+  <A>(
+    array: AnyArray<A>,
+    predicate: (a: A, i: number) => boolean,
+  ): ArrayType<typeof array, A>
+  <A>(
+    predicate: (a: A, i: number) => boolean,
+  ): (array: AnyArray<A>) => ArrayType<typeof array, A>
+} = dual(
+  2,
+  <A>(
+    array: AnyArray<A>,
+    predicate: (a: A, i: number) => boolean,
+  ): ArrayType<typeof array, A> => {
+    const out: A[] = []
+    for (let i = 0; i < array.length; i++) {
+      if (predicate(array[i], i)) out.push(array[i])
+    }
+    return out as ArrayType<typeof array, A>
+  },
+)
+
+/**
+ * Splits an array into two arrays: one with elements satisfying the predicate, and one with the rest.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const arr = [1, 2, 3, 4]
+ * const isEven = (n: number) => n % 2 === 0
+ * expect(Array.partition(arr, isEven)).toEqual([[2, 4], [1, 3]])
+ * ```
+ */
+export const partition = <A>(
+  array: AnyArray<A>,
+  predicate: (a: A) => boolean,
+): [ArrayType<typeof array, A>, ArrayType<typeof array, A>] => {
+  const yes: A[] = []
+  const no: A[] = []
+  for (const x of array) {
+    if (predicate(x)) yes.push(x)
+    else no.push(x)
+  }
+  return [yes as ArrayType<typeof array, A>, no as ArrayType<typeof array, A>]
+}
+
+/**
+ * Maps each element to an Either, then partitions the results into lefts and rights.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const f = (n: number) => n % 2 === 0 ? Either.right(n) : Either.left(n)
+ * expect(Array.partitionMap([1, 2, 3, 4], f)).toEqual([[1, 3], [2, 4]])
+ * ```
+ */
+export const partitionMap = dual(
+  2,
+  <T extends AnyArray<A>, A, L, R>(
+    array: T,
+    fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+  ): [ArrayType<T, L>, ArrayType<T, R>] => {
+    const lefts: L[] = []
+    const rights: R[] = []
+    for (let i = 0; i < array.length; i++) {
+      const e = fn(array[i])
+      if (e._tag === "Left") lefts.push(e.left)
+      else rights.push(e.right)
+    }
+    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+  },
+)
+
+/**
+ * Maps each element and its index to an Either, then partitions the results into lefts and rights.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const f = (n: number, i: number) => i % 2 === 0 ? Either.right(n) : Either.left(n)
+ * expect(Array.partitionMapWithIndex([1, 2, 3, 4], f)).toEqual([[2, 4], [1, 3]])
+ * ```
+ */
+export const partitionMapWithIndex = dual(
+  2,
+  <T extends AnyArray<A>, A, L, R>(
+    array: T,
+    fn: (
+      a: A,
+      i: number,
+    ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+  ): [ArrayType<T, L>, ArrayType<T, R>] => {
+    const lefts: L[] = []
+    const rights: R[] = []
+    for (let i = 0; i < array.length; i++) {
+      const e = fn(array[i], i)
+      if (e._tag === "Left") lefts.push(e.left)
+      else rights.push(e.right)
+    }
+    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+  },
+)
+
+/**
+ * Splits an array into two arrays using a predicate that receives both value and index.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const arr = [10, 20, 30, 40]
+ * const evenIndex = (value: number, index: number) => index % 2 === 0
+ * expect(Array.partitionWithIndex(arr, evenIndex)).toEqual([[10, 30], [20, 40]])
+ * ```
+ */
+export const partitionWithIndex = <A>(
+  array: AnyArray<A>,
+  predicate: (a: A, i: number) => boolean,
+): [ArrayType<typeof array, A>, ArrayType<typeof array, A>] => {
+  const yes: A[] = []
+  const no: A[] = []
+  for (let i = 0; i < array.length; i++) {
+    if (predicate(array[i], i)) yes.push(array[i])
+    else no.push(array[i])
+  }
+  return [yes as ArrayType<typeof array, A>, no as ArrayType<typeof array, A>]
+}
+
+/**
+ * Separates an array of Either into two arrays: lefts and rights.
+ *
+ * @category Filtering Arrays
+ * @example
+ * ```ts
+ * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { expect } from '@std/expect/expect'
+ *
+ * const arr = [Either.left(1), Either.right("a"), Either.left(2), Either.right("b")]
+ * expect(Array.separate(arr)).toEqual([[1, 2], ["a", "b"]])
+ * ```
+ */
+export const separate = <L, R>(
+  array: AnyArray<{ _tag: "Left" | "Right"; left?: L; right?: R }>,
+): [Array<L>, Array<R>] => {
+  const lefts: L[] = []
+  const rights: R[] = []
+  for (const e of array) {
+    if (e._tag === "Left") lefts.push(e.left as L)
+    else rights.push(e.right as R)
+  }
+  return [lefts, rights]
+}
 
 // @folding Folding Arrays
-// @todo reduce
-// @todo reduceRight
-// @todo reduceWithIndex
-// @todo reduceRightWithIndex
+
+/**
+ * Reduces the array from left to right using the provided function and initial value.
+ *
+ * @category Folding Arrays
+ * @example
+ * ```ts
+ * import { reduce } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(reduce([1, 2, 3], 0, (acc, x) => acc + x)).toBe(6)
+ * expect(reduce([], 10, (acc, x) => acc + x)).toBe(10)
+ * ```
+ */
+export const reduce = <A, B>(
+  array: AnyArray<A>,
+  initial: B,
+  f: (acc: B, a: A) => B,
+): B => {
+  let acc = initial
+  for (let i = 0; i < array.length; i++) {
+    acc = f(acc, array[i])
+  }
+  return acc
+}
+
+/**
+ * Reduces the array from right to left using the provided function and initial value.
+ *
+ * @category Folding Arrays
+ * @example
+ * ```ts
+ * import { reduceRight } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(reduceRight([1, 2, 3], 0, (x, acc) => acc + x)).toBe(6)
+ * expect(reduceRight([], 10, (x, acc) => acc + x)).toBe(10)
+ * ```
+ */
+export const reduceRight = <A, B>(
+  array: AnyArray<A>,
+  initial: B,
+  f: (a: A, acc: B) => B,
+): B => {
+  let acc = initial
+  for (let i = array.length - 1; i >= 0; i--) {
+    acc = f(array[i], acc)
+  }
+  return acc
+}
+
+/**
+ * Reduces the array from left to right using the provided function and initial value, passing the index to the function.
+ *
+ * @category Folding Arrays
+ * @example
+ * ```ts
+ * import { reduceWithIndex } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(reduceWithIndex([1, 2, 3], 0, (i, acc, x) => acc + x * i)).toBe(8)
+ * // 0*1 + 1*2 + 2*3 = 0 + 2 + 6 = 8
+ * ```
+ */
+export const reduceWithIndex = <A, B>(
+  array: AnyArray<A>,
+  initial: B,
+  f: (index: number, acc: B, a: A) => B,
+): B => {
+  let acc = initial
+  for (let i = 0; i < array.length; i++) {
+    acc = f(i, acc, array[i])
+  }
+  return acc
+}
+
+/**
+ * Reduces the array from right to left using the provided function and initial value, passing the index to the function.
+ *
+ * @category Folding Arrays
+ * @example
+ * ```ts
+ * import { reduceRightWithIndex } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(reduceRightWithIndex([1, 2, 3], 0, (i, x, acc) => acc + x * i)).toBe(8)
+ * // 2*3 + 1*2 + 0*1 = 6 + 2 + 0 = 8
+ * ```
+ */
+export const reduceRightWithIndex = <A, B>(
+  array: AnyArray<A>,
+  initial: B,
+  f: (index: number, a: A, acc: B) => B,
+): B => {
+  let acc = initial
+  for (let i = array.length - 1; i >= 0; i--) {
+    acc = f(i, array[i], acc)
+  }
+  return acc
+}
 
 // @mapping Mapping Arrays
-// @todo flap
+/**
+ * Applies a function to each element of the array, where the function itself is an array of functions.
+ * This is sometimes called "ap" or "flap" in functional programming.
+ *
+ * @category Mapping Arrays
+ * @example
+ * ```ts
+ * import { flap } from "@jvlk/fp-tsm/Array"
+ * import { expect } from "@std/expect/expect"
+ *
+ * const fns = [(x: number) => x + 1, (x: number) => x * 2]
+ * expect(flap(fns, 3)).toEqual([4, 6])
+ * expect(flap([], 3)).toEqual([])
+ * ```
+ */
+export const flap = <A, B>(
+  fns: AnyArray<(a: A) => B>,
+  value: A,
+): ArrayType<typeof fns, B> => {
+  return fns.map((fn) => fn(value)) as ArrayType<typeof fns, B>
+}
 /**
  * `map` applies the base function to each element of the array and collects the results in a new array.
  *
