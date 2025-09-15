@@ -649,10 +649,10 @@ export const flap = <A, B>(
  *
  * @example
  * ```ts
- * import { Array, pipe } from '@jvlk/fp-tsm/Array'
+ * import { Array, pipe } from '@jvlk/fp-tsm'
  *
  * const f = (n: number) => n * 2
- * expext(pipe([1, 2, 3], map(f))).toEqual([2, 4, 6])
+ * expect(pipe([1, 2, 3], map(f))).toEqual([2, 4, 6])
  * ```
  */
 export const map: {
