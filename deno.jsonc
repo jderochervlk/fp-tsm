@@ -6,6 +6,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./Option": "./src/Option.ts",
+    "./Either": "./src/Either.ts",
     "./utility": "./src/utility.ts",
     "./function": "./src/utility.ts",
     "./Array": "./src/Array.ts"
