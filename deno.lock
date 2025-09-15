@@ -56,6 +56,7 @@
     "npm:generate-jsdoc-example-tests@0.2.4": "0.2.4",
     "npm:generate-jsdoc-example-tests@~0.2.4": "0.2.4",
     "npm:postcss@^8.5.3": "8.5.6",
+    "npm:zod@*": "3.25.49",
     "npm:zod@4.0.0-beta.20250505T195954": "4.0.0-beta.20250505T195954",
     "npm:zod@^3.25.49": "3.25.49"
   },

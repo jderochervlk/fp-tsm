@@ -5,7 +5,7 @@
  *
  * @example
  * ```ts
- * import type { NonEmptyArray } from "@jvlk/fp-tsm"
+ * import type { NonEmptyArray } from "@jvlk/fp-tsm/Array"
  *
  * const arr: NonEmptyArray<number> = [1, 2, 3] // valid
  *
@@ -20,7 +20,7 @@ export type NonEmptyArray<T> = [T, ...T[]]
  *
  * @example
  * ```ts
- * import type { NonEmptyArray } from "@jvlk/fp-tsm"
+ * import type { NonEmptyArray } from "@jvlk/fp-tsm/Array"
  *
  * const arr: ReadonlyNonEmptyArray<number> = [1, 2, 3] // valid
  *
