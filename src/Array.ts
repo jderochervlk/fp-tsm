@@ -268,7 +268,7 @@ export const filter: {
  * import { pipe, Option, Array } from '@jvlk/fp-tsm'
  *
  * const f = (s: string) => (s.length === 1 ? Option.some(s.toUpperCase()) : Option.none)
- * expect(pipe(['a', 'no', 'neither', 'b'], Array.filterMap(f))).toEqual(['A', 'B'])
+ * expect(pipe(['a', 'no', 'neither', 'b'], arr => Array.filterMap(arr, f))).toEqual(['A', 'B'])
  * ```
  * @example data first
  * ```ts
