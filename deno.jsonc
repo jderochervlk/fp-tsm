@@ -1,6 +1,6 @@
 {
   "name": "@jvlk/fp-tsm",
-  "version": "4.0.0-alpha.27",
+  "version": "4.0.0-alpha.28",
   "license": "MIT",
   "nodeModulesDir": "auto",
   "exports": {
@@ -10,6 +10,19 @@
     "./utility": "./src/utility.ts",
     "./function": "./src/utility.ts",
     "./Array": "./src/Array.ts"
+  },
+  "publish": {
+    "include": [
+      "src",
+      "README.md",
+      "LICENSE",
+      "CHANGELOG.md",
+      "deno.jsonc"
+    ],
+    "exclude": [
+      "src/__tests__",
+      "src/content"
+    ]
   },
   "tasks": {
     "dev:docs:generate": "deno task docs:watch",
