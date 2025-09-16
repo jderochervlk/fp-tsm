@@ -1,7 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 // @utils Array Utilities
 
-import { at as _at } from "es-toolkit/array"
 import { dual } from "../internal.ts"
 import * as Option from "../Option.ts"
 import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
@@ -21,8 +20,19 @@ export const at: {
   ): (array: A) => ArrayType<A, Option.Option<T>>
 } = dual(
   2,
-  <T>(array: Array<T>, idxs: Array<number>): Array<Option.Option<T>> =>
-    _at(array, idxs).map(Option.of),
+  <T>(arr: Array<T>, indices: Array<number>): Array<Option.Option<T>> => {
+    const result = new Array(indices.length)
+    const length = arr.length
+    for (let i = 0; i < indices.length; i++) {
+      let index = indices[i]
+      index = Number.isInteger(index) ? index : Math.trunc(index) || 0
+      if (index < 0) {
+        index += length
+      }
+      result[i] = arr[index]
+    }
+    return result.map(Option.of)
+  },
 )
 /**
  * Recursively processes an array by consuming a prefix and producing a value and the rest of the array.
