@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config"
 
 export default defineConfig({
   site: "https://jderochervlk.github.io",
-  base: "/fp-tsm/",
+  base: "/",
   integrations: [
     starlight({
       title: "fp-tsm",
