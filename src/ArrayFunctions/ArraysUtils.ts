@@ -31,7 +31,7 @@ export const at: {
       }
       result[i] = arr[index]
     }
-    return result
+    return result.map(Option.of)
   },
 )
 /**
