@@ -11,7 +11,8 @@
     "./function": "./src/utility.ts",
     "./Array": "./src/Array.ts",
     "./Json": "./src/Json.ts",
-    "./string": "./src/string.ts"
+    "./string": "./src/string.ts",
+    "./number": "./src/number.ts"
   },
   "publish": {
     "include": [
