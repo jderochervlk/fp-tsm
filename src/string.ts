@@ -6,7 +6,7 @@ import { dual } from "./internal.ts"
  * Checks if a value is a string.
  *
  * @category Refinements
- * @example
+ * @example isString
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { isString } from "@jvlk/fp-tsm/string"
@@ -77,8 +77,8 @@ export function size(s: string): number {
  * import { includes } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(includes("world", "hello world")).toEqual(true)
- * expect(includes("foo", "hello world")).toEqual(false)
+ * expect(includes("hello world", "world")).toEqual(true)
+ * expect(includes("hello world", "foo")).toEqual(false)
  * expect(pipe("hello world", includes("world"))).toEqual(true)
  * ```
  */
@@ -97,8 +97,8 @@ export const includes: {
  * import { startsWith } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(startsWith("hello", "hello world")).toEqual(true)
- * expect(startsWith("world", "hello world")).toEqual(false)
+ * expect(startsWith("hello world", "hello")).toEqual(true)
+ * expect(startsWith("hello world", "world")).toEqual(false)
  * expect(pipe("hello world", startsWith("hello"))).toEqual(true)
  * ```
  */
@@ -117,8 +117,8 @@ export const startsWith: {
  * import { endsWith } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(endsWith("world", "hello world")).toEqual(true)
- * expect(endsWith("hello", "hello world")).toEqual(false)
+ * expect(endsWith("hello world", "world")).toEqual(true)
+ * expect(endsWith("hello world", "hello")).toEqual(false)
  * expect(pipe("hello world", endsWith("world"))).toEqual(true)
  * ```
  */
@@ -137,7 +137,7 @@ export const endsWith: {
  * import { replace } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(replace("foo", "bar", "foo baz")).toEqual("bar baz")
+ * expect(replace("foo baz", "foo", "bar")).toEqual("bar baz")
  * expect(pipe("foo baz", replace("foo", "bar"))).toEqual("bar baz")
  * ```
  */
@@ -160,7 +160,7 @@ export const replace: {
  * import { slice } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(slice(1, 3, "hello")).toEqual("el")
+ * expect(slice("hello", 1, 3)).toEqual("el")
  * expect(pipe("hello", slice(1, 3))).toEqual("el")
  * ```
  */
@@ -182,7 +182,7 @@ export const slice: {
  * import { split } from "@jvlk/fp-tsm/string"
  * import { pipe } from "@jvlk/fp-tsm"
  *
- * expect(split(",", "a,b,c")).toEqual(["a", "b", "c"])
+ * expect(split("a,b,c", ",")).toEqual(["a", "b", "c"])
  * expect(pipe("a,b,c", split(","))).toEqual(["a", "b", "c"])
  * ```
  */
