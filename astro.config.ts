@@ -19,7 +19,13 @@ export default defineConfig({
         },
         {
           label: "Functions",
-          items: ["functions/utility", "functions/record", "functions/json"],
+          items: [
+            "functions/json",
+            "functions/number",
+            "functions/record",
+            "functions/string",
+            "functions/utility",
+          ],
         },
         {
           label: "Arrays",
