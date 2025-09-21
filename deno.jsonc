@@ -10,7 +10,8 @@
     "./utility": "./src/utility.ts",
     "./function": "./src/utility.ts",
     "./Array": "./src/Array.ts",
-    "./Json": "./src/Json.ts"
+    "./Json": "./src/Json.ts",
+    "./string": "./src/string.ts"
   },
   "publish": {
     "include": [
