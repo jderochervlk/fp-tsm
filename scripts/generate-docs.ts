@@ -117,6 +117,7 @@ await generate("Arrays", "", [
   "Utils",
 ])
 await generate("Record", "Functions")
+await generate("Json", "Functions")
 
 // Copy the README.md file to src/content/docs/index.md
 const readme = `

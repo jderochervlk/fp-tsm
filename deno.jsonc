@@ -9,7 +9,8 @@
     "./Either": "./src/Either.ts",
     "./utility": "./src/utility.ts",
     "./function": "./src/utility.ts",
-    "./Array": "./src/Array.ts"
+    "./Array": "./src/Array.ts",
+    "./Json": "./src/Json.ts"
   },
   "publish": {
     "include": [
