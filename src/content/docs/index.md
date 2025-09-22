@@ -9,6 +9,17 @@ and [`Future`](/data-types/future) data types along with a suite of utility
 functions to work these and other data structures in a safe and point-free
 style.
 
+This is continuation of [`fp-ts`](https://gcanti.github.io/fp-ts/) and a super
+lightweight alternative to [`effect`](https://gcanti.github.io/fp-ts/).
+
+You should use this library if you want just some very basic FP concepts in your
+app, you need to migrate from `fp-ts` to use an ESM only version while
+maintaining type compatibiltiy, or if you feel like Effect is too much for what
+you need.
+
+I highly suggest you check out Effect, but if that seems like too much I hope
+you find this fork helpful.
+
 ## Why?
 
 Traditional JavaScript code often requires many null checks, try/catch blocks,
@@ -93,7 +104,7 @@ This version is:
 - More declarative and easier to follow
 - Handles errors gracefully without try/catch blocks
 - Manages null checks through `Option`
-- Processes async operations with `Task` which shows the types for possible
+- Processes async operations with `Future` which shows the types for possible
   errors
 
 ## fp-ts
