@@ -1,3 +1,7 @@
 :root {
   --sl-text-h4: 1.1rem;
 }
+
+@view-transition {
+  navigation: auto
+}
