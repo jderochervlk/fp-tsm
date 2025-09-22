@@ -7,6 +7,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "fp-tsm",
+      social: [{
+        icon: "github",
+        label: "GitHub",
+        href: "https://github.com/jderochervlk/fp-tsm",
+      }, {
+        icon: "blueSky",
+        label: "BlueSky",
+        href: "https://bsky.app/profile/vlkpack.com",
+      }],
       sidebar: [
         { label: "Getting Started", items: ["getting-started/installation"] },
         {
@@ -20,25 +29,26 @@ export default defineConfig({
         {
           label: "Functions",
           items: [
+            {
+              label: "Array",
+              collapsed: true,
+              items: [
+                "arrays/types",
+                "arrays/creating",
+                "arrays/mapping",
+                "arrays/filtering",
+                "arrays/folding",
+                "arrays/refining",
+                "arrays/sequencing",
+                "arrays/traversing",
+                "arrays/utils",
+              ],
+            },
             "functions/json",
             "functions/number",
             "functions/record",
             "functions/string",
             "functions/utility",
-          ],
-        },
-        {
-          label: "Arrays",
-          items: [
-            "arrays/types",
-            "arrays/creating",
-            "arrays/mapping",
-            "arrays/filtering",
-            "arrays/folding",
-            "arrays/refining",
-            "arrays/sequencing",
-            "arrays/traversing",
-            "arrays/utils",
           ],
         },
       ],
