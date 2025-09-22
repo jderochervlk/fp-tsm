@@ -89,7 +89,7 @@ This version is:
 - More declarative and easier to follow
 - Handles errors gracefully without try/catch blocks
 - Manages null checks through `Option`
-- Processes async operations with `Task` which shows the types for possible
+- Processes async operations with `Future` which shows the types for possible
   errors
 
 ## fp-ts
