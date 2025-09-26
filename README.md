@@ -1,9 +1,9 @@
 # Introduction
 
-`fp-tsm` adds the [`Option`](data-types/option), [`Either`](data-types/either)
-and [`Future`](/data-types/future) data types along with a suite of utility
-functions to work these and other data structures in a safe and point-free
-style.
+[`fp-tsm`](https://fp-tsm.jvlk.dev/) adds the [`Option`](data-types/option),
+[`Either`](data-types/either) and [`Future`](/data-types/future) data types
+along with a suite of utility functions to work these and other data structures
+in a safe and point-free style.
 
 This is continuation of [`fp-ts`](https://gcanti.github.io/fp-ts/) and a super
 lightweight alternative to [`effect`](https://gcanti.github.io/fp-ts/).
