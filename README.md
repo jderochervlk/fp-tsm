@@ -16,6 +16,12 @@ you need.
 I highly suggest you check out Effect, but if that seems like too much I hope
 you find this fork helpful.
 
+### Note
+
+V4 is considered stable and ready to use, but don't expect to fully be able to
+drop `fp-ts` if you are migrating. There might be functions missing, either
+intentionally or I just didn't get to it yet.
+
 ## Why?
 
 Traditional JavaScript code often requires many null checks, try/catch blocks,
