@@ -7,8 +7,7 @@ import type { AnyArray, ArrayType } from "./ArraysTypes.ts"
 export const compact = <T>(
   array: AnyArray<Option.Option<T>>,
 ): ArrayType<
-  typeof array extends ReadonlyArray<Option.Option<T>>
-    ? ReadonlyArray<Option.Option<T>>
+  typeof array extends ReadonlyArray<Option.Option<T>> ? ReadonlyArray<Option.Option<T>>
     : Array<Option.Option<T>>,
   T
 > => {

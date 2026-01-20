@@ -204,8 +204,7 @@ export const map: {
   <L, RA, RB>(
     self: Either<L, RA>,
     f: (a: RA) => RB,
-  ): Either<L, RB> =>
-    self._tag === "Right" ? right(f(self.right)) : left(self.left),
+  ): Either<L, RB> => self._tag === "Right" ? right(f(self.right)) : left(self.left),
 )
 
 /**
@@ -244,8 +243,7 @@ export const mapLeft: {
   <LA, LB, R>(
     self: Either<LA, R>,
     f: (a: LA) => LB,
-  ): Either<LB, R> =>
-    self._tag === "Left" ? left(f(self.left)) : right(self.right),
+  ): Either<LB, R> => self._tag === "Left" ? left(f(self.left)) : right(self.right),
 )
 
 /**
@@ -295,8 +293,7 @@ export const bimap: {
     self: Either<LA, RA>,
     f: (l: LA) => LB,
     g: (r: RA) => RB,
-  ): Either<LB, RB> =>
-    self._tag === "Left" ? left(f(self.left)) : right(g(self.right)),
+  ): Either<LB, RB> => self._tag === "Left" ? left(f(self.left)) : right(g(self.right)),
 )
 
 /**

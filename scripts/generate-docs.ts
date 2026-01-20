@@ -18,9 +18,7 @@ async function generate(
 
   const markdownTitle = kebabCase(module).split("-").map(upperFirst)
 
-  const sidebarLabel = markdownTitle.length === 2
-    ? markdownTitle[1]
-    : markdownTitle[0]
+  const sidebarLabel = markdownTitle.length === 2 ? markdownTitle[1] : markdownTitle[0]
 
   let markdown = `
 ---
@@ -47,15 +45,15 @@ sidebar:
     return
   }
 
-  docs.nodes.filter((node) =>
-    node.location.filename.includes(module) && node.jsDoc
-  ).forEach((node) => {
-    if (node.name !== "") {
-      nodes.set(node.name, node)
-    } else {
-      nodes.set(module, node)
-    }
-  })
+  docs.nodes.filter((node) => node.location.filename.includes(module) && node.jsDoc).forEach(
+    (node) => {
+      if (node.name !== "") {
+        nodes.set(node.name, node)
+      } else {
+        nodes.set(module, node)
+      }
+    },
+  )
 
   for (const node of nodes.values()) {
     if (node.name === module) {

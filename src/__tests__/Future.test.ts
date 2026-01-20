@@ -120,9 +120,7 @@ const _getUserData = (
     Future.mapLeft((error) => Error(`Failed to get user data: ${error}`)),
     Future.flatMap((data) => {
       const parsed = userSchema.safeParse(data)
-      return parsed.success
-        ? Future.right(parsed.data)
-        : Future.left(parsed.error)
+      return parsed.success ? Future.right(parsed.data) : Future.left(parsed.error)
     }),
     Future.map((user) =>
       pipe(
