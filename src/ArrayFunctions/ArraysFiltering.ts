@@ -257,72 +257,72 @@ export const partition = <A>(
 }
 
 /**
- * Maps each element to an Either, then partitions the results into lefts and rights.
+ * Maps each element to a `Result`, then partitions the results into `ok` and `error`.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number) => n % 2 === 0 ? Either.right(n) : Either.left(n)
+ * const f = (n: number) => n % 2 === 0 ? Result.ok(n) : Result.error(n)
  * expect(Array.partitionMap([1, 2, 3, 4], f)).toEqual([[1, 3], [2, 4]])
  * ```
  */
-export const partitionMap: <T extends AnyArray<A>, A, L, R>(
+export const partitionMap: <T extends AnyArray<A>, A, ERROR, OK>(
   array: T,
-  fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
-) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
+  fn: (a: A) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+) => [ArrayType<T, ERROR>, ArrayType<T, OK>] = dual(
   2,
-  <T extends AnyArray<A>, A, L, R>(
+  <T extends AnyArray<A>, A, ERROR, OK>(
     array: T,
-    fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
-  ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const lefts: L[] = []
-    const rights: R[] = []
+    fn: (a: A) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+  ): [ArrayType<T, ERROR>, ArrayType<T, OK>] => {
+    const errs: ERROR[] = []
+    const oks: OK[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i])
-      if (e._tag === "Left") lefts.push(e.left)
-      else rights.push(e.right)
+      if (e._tag === "Error") errs.push(e.error)
+      else oks.push(e.ok)
     }
-    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+    return [errs as ArrayType<T, ERROR>, oks as ArrayType<T, OK>]
   },
 )
 
 /**
- * Maps each element and its index to an Either, then partitions the results into lefts and rights.
+ * Maps each element and its index to a `Result`, then partitions the results into `error` and `ok`.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number, i: number) => i % 2 === 0 ? Either.right(n) : Either.left(n)
+ * const f = (n: number, i: number) => i % 2 === 0 ? Result.ok(n) : Result.error(n)
  * expect(Array.partitionMapWithIndex([1, 2, 3, 4], f)).toEqual([[2, 4], [1, 3]])
  * ```
  */
-export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
+export const partitionMapWithIndex: <T extends AnyArray<A>, A, ERROR, OK>(
   array: T,
   fn: (
     a: A,
     i: number,
-  ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
-) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
+  ) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+) => [ArrayType<T, ERROR>, ArrayType<T, OK>] = dual(
   2,
-  <T extends AnyArray<A>, A, L, R>(
+  <T extends AnyArray<A>, A, ERROR, OK>(
     array: T,
     fn: (
       a: A,
       i: number,
-    ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
-  ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const lefts: L[] = []
-    const rights: R[] = []
+    ) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+  ): [ArrayType<T, ERROR>, ArrayType<T, OK>] => {
+    const errs: ERROR[] = []
+    const oks: OK[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i], i)
-      if (e._tag === "Left") lefts.push(e.left)
-      else rights.push(e.right)
+      if (e._tag === "Error") errs.push(e.error)
+      else oks.push(e.ok)
     }
-    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+    return [errs as ArrayType<T, ERROR>, oks as ArrayType<T, OK>]
   },
 )
 
@@ -353,25 +353,25 @@ export const partitionWithIndex = <A>(
 }
 
 /**
- * Separates an array of Either into two arrays: lefts and rights.
+ * Separates an array of `Result` into two arrays: errors and oks.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const arr = [Either.left(1), Either.right("a"), Either.left(2), Either.right("b")]
- * expect(Array.separate(arr)).toEqual([[1, 2], ["a", "b"]])
+ * const arr = [Result.error(1), Result.ok("a"), Result.error(2), Result.ok("b")]
+ * expect(Array.separate(arr)).toEqual([["a", "b"], [1, 2]])
  * ```
  */
-export const separate = <L, R>(
-  array: AnyArray<{ _tag: "Left" | "Right"; left?: L; right?: R }>,
-): [Array<L>, Array<R>] => {
-  const lefts: L[] = []
-  const rights: R[] = []
+export const separate = <OK, ERROR>(
+  array: AnyArray<{ _tag: "Error" | "Ok"; error?: ERROR; ok?: OK }>,
+): [Array<OK>, Array<ERROR>] => {
+  const errs: ERROR[] = []
+  const oks: OK[] = []
   for (const e of array) {
-    if (e._tag === "Left") lefts.push(e.left as L)
-    else rights.push(e.right as R)
+    if (e._tag === "Error") errs.push(e.error as ERROR)
+    else oks.push(e.ok as OK)
   }
-  return [lefts, rights]
+  return [oks, errs]
 }

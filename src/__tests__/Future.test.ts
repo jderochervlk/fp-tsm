@@ -1,8 +1,8 @@
+import { Result } from "@jvlk/fp-tsm"
 import { expect } from "@std/expect/expect"
 import { assertSpyCalls, spy } from "@std/testing/mock"
 import type { ZodError } from "zod"
 import { z } from "zod"
-import * as Either from "../Either.ts"
 import * as Future from "../Future.ts"
 import * as Option from "../Option.ts"
 import { pipe } from "../utility.ts"
@@ -29,7 +29,7 @@ Deno.test("Future is are lazy and multiple maps can be applied", async () => {
   assertSpyCalls(logSpy, 0)
 
   const result = await data()
-  expect(result).toEqual(Either.right(43))
+  expect(result).toEqual(Result.ok(43))
 })
 
 // this does network requests, so it's commented out to avoid running it in CI
@@ -42,8 +42,8 @@ Deno.test("Future is are lazy and multiple maps can be applied", async () => {
 //     Future.flatMap((res) => {
 //       const parsed = data.safeParse(res)
 //       return parsed.success
-//         ? Future.right(parsed.data)
-//         : Future.left(parsed.error)
+//         ? Future.ok(parsed.data)
+//         : Future.error(parsed.error)
 //     }),
 //   )
 
@@ -53,54 +53,54 @@ Deno.test("Future is are lazy and multiple maps can be applied", async () => {
 Deno.test("Future.fromPromise", async () => {
   const data = Future.fromPromise(Promise.resolve(42))
 
-  expect(await data()).toEqual(Either.right(42))
+  expect(await data()).toEqual(Result.ok(42))
 
   expect(await Future.fromPromise(Promise.reject("Error"))()).toEqual(
-    Either.left("Error"),
+    Result.error("Error"),
   )
 })
 
-Deno.test("Future.right and map", async () => {
-  expect(await Future.map(Future.right(42), (x) => x + 1)()).toEqual(
-    Either.right(43),
+Deno.test("Future.ok and map", async () => {
+  expect(await Future.map(Future.ok(42), (x) => x + 1)()).toEqual(
+    Result.ok(43),
   )
 })
 
 Deno.test("flatMapLeft", async () => {
-  const future = Future.left("error")
+  const future = Future.error("error")
   const mapped = Future.flatMapLeft(
     future,
-    (e: string) => Future.left(new Error(e)),
+    (e: string) => Future.error(new Error(e)),
   ) // Future<Error, never>
-  await mapped() // Either.left(Error("error"))
+  await mapped() // Result.error(Error("error"))
 
-  const success = Future.right(42)
+  const success = Future.ok(42)
   const mappedSuccess = Future.flatMapLeft(
     success,
-    (e: string) => Future.left(new Error(e)),
+    (e: string) => Future.error(new Error(e)),
   ) // Future<Error, number>
 
-  expect(await mappedSuccess()).toEqual(Either.right(42)) // Either.right(42)
+  expect(await mappedSuccess()).toEqual(Result.ok(42)) // Result.ok(42)
 })
 
 Deno.test("bimap", async () => {
-  const future = Future.right(42)
+  const future = Future.ok(42)
   const mapped = Future.bimap(
     future,
     (e: string) => new Error(e),
     (n: number) => n * 2,
   )
 
-  expect(await mapped()).toEqual(Either.right(84))
+  expect(await mapped()).toEqual(Result.ok(84))
 
-  const error = Future.left("error")
+  const error = Future.error("error")
   const mappedError = Future.bimap(
     error,
     (e: string) => new Error(e),
     (n: number) => n * 2,
   )
 
-  expect(await mappedError()).toEqual(Either.left(Error("error")))
+  expect(await mappedError()).toEqual(Result.error(Error("error")))
 })
 
 const userSchema = z.object({
@@ -112,15 +112,15 @@ const userSchema = z.object({
 
 const _getUserData = (
   id: string,
-): Future.Future<Error | ZodError, string> =>
+): Future.Future<string, Error | ZodError> =>
   pipe(
     Future.fetch(`/api/users/${id}`),
-    Future.mapLeft((error) => Error(`Network error: ${error}`)),
+    Future.mapErr((error) => Error(`Network error: ${error}`)),
     Future.flatMap((res) => Future.fromPromise(res.json())),
-    Future.mapLeft((error) => Error(`Failed to get user data: ${error}`)),
+    Future.mapErr((error) => Error(`Failed to get user data: ${error}`)),
     Future.flatMap((data) => {
       const parsed = userSchema.safeParse(data)
-      return parsed.success ? Future.right(parsed.data) : Future.left(parsed.error)
+      return parsed.success ? Future.ok(parsed.data) : Future.error(parsed.error)
     }),
     Future.map((user) =>
       pipe(

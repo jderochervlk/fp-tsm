@@ -22,7 +22,7 @@ export default defineConfig({
           label: "Data Types",
           items: [
             "data-types/option",
-            "data-types/either",
+            "data-types/result",
             "data-types/future",
           ],
         },
@@ -49,6 +49,12 @@ export default defineConfig({
             "functions/record",
             "functions/string",
             "functions/utility",
+          ],
+        },
+        {
+          label: "fp-ts Compatibility",
+          items: [
+            "data-types/either",
           ],
         },
       ],

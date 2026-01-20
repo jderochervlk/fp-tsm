@@ -385,6 +385,25 @@ export const extend: {
 )
 
 /**
+ * Returns all `error` values from an array of `Result`.
+ *
+ * @example
+ * ```ts
+ * import { errors } from "@jvlk/fp-tsm/Array"
+ * import { Result } from "@jvlk/fp-tsm"
+ * import { expect } from "@std/expect/expect"
+ *
+ * expect(errors([Result.error(Error("error!")), Result.ok("a"), Result.error(Error("Something broke"))])).toEqual([Error("error!"), Error("Something broke")])
+ * ```
+ */
+export const errors = <OK, ERROR>(
+  array: AnyArray<{ _tag: "Error" | "Ok"; error?: ERROR; ok?: OK }>,
+): Array<ERROR> =>
+  array.filter((e): e is { _tag: "Error"; error: ERROR } => e._tag === "Error").map(
+    (e) => e.error as ERROR,
+  )
+
+/**
  * Find the first element which satisfies a predicate (or a refinement) function. It returns an `Option` containing the element or `None` if not found.
  *
  * @example Point free
