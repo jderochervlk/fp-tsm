@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
-import { dual } from "./internal.ts"
 import type { Either } from "./Either.ts"
-import { Result } from "./Result.ts"
+import { dual } from "./internal.ts"
+import type { Result } from "./Result.ts"
 
 /**
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
