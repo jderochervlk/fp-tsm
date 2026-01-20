@@ -7,10 +7,10 @@ Deno.test("parse", () => {
     ok: { a: 1 },
   })
 
-  expect(Json.parse("a")._tag).toBe("Err")
+  expect(Json.parse("a")._tag).toBe("Error")
   expect(Json.parse("a")).toMatchObject({
-    _tag: "Err",
-    err: expect.any(SyntaxError),
+    _tag: "Error",
+    error: expect.any(SyntaxError),
   })
 })
 
@@ -23,9 +23,9 @@ Deno.test("stringify", () => {
   const circularObj: Record<string, unknown> = {}
   circularObj.self = circularObj
 
-  expect(Json.stringify(circularObj)._tag).toBe("Err")
+  expect(Json.stringify(circularObj)._tag).toBe("Error")
   expect(Json.stringify(circularObj)).toMatchObject({
-    _tag: "Err",
-    err: expect.any(TypeError),
+    _tag: "Error",
+    error: expect.any(TypeError),
   })
 })

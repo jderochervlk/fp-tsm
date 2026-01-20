@@ -9,20 +9,20 @@ import * as Result from "./Result.ts"
  * import { expect } from "@std/expect/expect"
  *
  * expect(parse('{"a":1}')).toMatchObject({ _tag: "Ok", ok: { a: 1 } })
- * expect(parse('a')._tag).toBe("Err")
- * expect(parse('a')).toMatchObject({ _tag: "Err", err: expect.any(SyntaxError) })
+ * expect(parse('a')._tag).toBe("Error")
+ * expect(parse('a')).toMatchObject({ _tag: "Error", error: expect.any(SyntaxError) })
  * ```
  */
-export const parse = (s: string): Result.Result<SyntaxError, unknown> => {
+export const parse = (s: string): Result.Result<unknown, SyntaxError> => {
   try {
     const result = JSON.parse(s)
     return Result.ok(result)
   } catch (err) {
     if (err instanceof SyntaxError) {
-      return Result.err(err)
+      return Result.error(err)
     }
   }
-  return Result.err(new SyntaxError("Unknown error"))
+  return Result.error(new SyntaxError("Unknown error"))
 }
 
 /**
@@ -37,18 +37,18 @@ export const parse = (s: string): Result.Result<SyntaxError, unknown> => {
  *
  * const circularObj: Record<string, unknown> = {}
  * circularObj.self = circularObj
- * expect(stringify(circularObj)._tag).toBe("Err")
- * expect(stringify(circularObj)).toMatchObject({ _tag: "Err", err: expect.any(TypeError) })
+ * expect(stringify(circularObj)._tag).toBe("Error")
+ * expect(stringify(circularObj)).toMatchObject({ _tag: "Error", error: expect.any(TypeError) })
  * ```
  */
-export const stringify = (data: unknown): Result.Result<TypeError, string> => {
+export const stringify = (data: unknown): Result.Result<string, TypeError> => {
   try {
     const result = JSON.stringify(data)
     return Result.ok(result)
   } catch (err) {
     if (err instanceof TypeError) {
-      return Result.err(err)
+      return Result.error(err)
     }
   }
-  return Result.err(new TypeError("Unknown error"))
+  return Result.error(new TypeError("Unknown error"))
 }

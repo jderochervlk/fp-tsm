@@ -24,7 +24,7 @@ import type { Option } from "./Option.ts"
  *
  * const toCaps = (str: string): Result<string, InvalidStringError> => {
  *   if(typeof str !== "string") {
- *      return Result.err(InvalidStringError("This is not a string!"))
+ *      return Result.error(InvalidStringError("This is not a string!"))
  *   } else {
  *     return Result.ok(str.toUpperCase())
  *   }
@@ -57,39 +57,39 @@ import type { Option } from "./Option.ts"
  * import { expect } from "jsr:@std/expect"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
- * const divide = (a: number, b: number): Result.Result<string, number> =>
- *   b === 0 ? Result.err("Division by zero") : Result.ok(a / b)
+ * const divide = (a: number, b: number): Result.Result<number, string> =>
+ *   b === 0 ? Result.error("Division by zero") : Result.ok(a / b)
  *
- * const increment = (a: Result.Result<string, number>): Result.Result<string, number> =>
+ * const increment = (a: Result.Result<number, string>): Result.Result<number, string> =>
  *   pipe(
  *     a,
  *     Result.map(x => x + 1)
  *   )
  *
  * expect(increment(divide(6, 2))).toEqual(Result.ok(4))
- * expect(increment(divide(6, 0))).toEqual(Result.err("Division by zero"))
+ * expect(increment(divide(6, 0))).toEqual(Result.error("Division by zero"))
  * ```
  *
  * @module
  */
-export type Result<L, R> = Err<L> | Ok<R>
+export type Result<OK, ERROR = unknown> = Ok<OK> | Err<ERROR>
 
 /**
- * The `Err` type represents the failure case of a `Result`, containing a value of type `L`.
+ * The `Err` type represents the failure case of a `Result`, containing a value of type `ERROR`.
  * @ignore
  */
-export type Err<L> = {
-  readonly _tag: "Err"
-  readonly err: L
+export type Err<ERROR = unknown> = {
+  readonly _tag: "Error"
+  readonly error: ERROR
 }
 
 /**
- * The `Ok` type represents the success case of a `Result`, containing a value of type `R`.
+ * The `Ok` type represents the success case of a `Result`, containing a value of type `OK`.
  * @ignore
  */
-export type Ok<R> = {
+export type Ok<OK> = {
   readonly _tag: "Ok"
-  readonly ok: R
+  readonly ok: OK
 }
 
 // Generators
@@ -108,7 +108,7 @@ export type Ok<R> = {
  * expect(Result.ok("hello")).toEqual({ _tag: "Ok", ok: "hello" })
  * ```
  */
-export const ok = <R>(r: R): Ok<R> => ({ _tag: "Ok", ok: r })
+export const ok = <OK>(r: OK): Ok<OK> => ({ _tag: "Ok", ok: r })
 
 /**
  * Constructs a `Err`. Represents a failure value in a Result.
@@ -120,11 +120,11 @@ export const ok = <R>(r: R): Ok<R> => ({ _tag: "Ok", ok: r })
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // when creating a Result using `Err` or `Ok` you should provide the type parameters
- * expect(Result.err("error")).toEqual({ _tag: "Err", err: "error" })
- * expect(Result.err(404)).toEqual({ _tag: "Err", err: 404 })
+ * expect(Result.error("error")).toEqual({ _tag: "Error", error: "error" })
+ * expect(Result.error(404)).toEqual({ _tag: "Error", error: 404 })
  * ```
  */
-export const err = <L>(l: L): Err<L> => ({ _tag: "Err", err: l })
+export const error = <ERROR>(l: ERROR): Err<ERROR> => ({ _tag: "Error", error: l })
 
 /**
  * `tryCatch` is a utility function that allows you to execute a function that may throw an `unknown` error and return a `Result`.
@@ -140,25 +140,25 @@ export const err = <L>(l: L): Err<L> => ({ _tag: "Err", err: l })
  * expect(Result.tryCatch(() => 1)).toEqual(Result.ok(1))
  *
  * expect(Result.tryCatch(() => { throw new Error("Error") }))
- *   .toEqual(Result.err(Error("Error")))
+ *   .toEqual(Result.error(Error("Error")))
  *
- * expect(Result.tryCatch(() => { throw new Error("something went wrong") }, (e) => `Caught: ${e}`)).toEqual(Result.err("Caught: Error: something went wrong"))
+ * expect(Result.tryCatch(() => { throw new Error("something went wrong") }, (e) => `Caught: ${e}`)).toEqual(Result.error("Caught: Error: something went wrong"))
  * ```
  */
 
-export function tryCatch<L, R>(
-  fn: () => R,
-  catchFn: (e: unknown) => L,
-): Result<L, R>
-export function tryCatch<R>(fn: () => R): Result<unknown, R>
-export function tryCatch<L, R>(
-  fn: () => R,
-  catchFn?: (e: unknown) => L,
+export function tryCatch<OK, ERROR>(
+  fn: () => OK,
+  catchFn: (e: unknown) => ERROR,
+): Result<OK, ERROR>
+export function tryCatch<OK>(fn: () => OK): Result<unknown, OK>
+export function tryCatch<OK, ERROR>(
+  fn: () => OK,
+  catchFn?: (e: unknown) => ERROR,
 ) {
   try {
     return ok(fn())
   } catch (e) {
-    return catchFn ? err(catchFn(e)) : err(e)
+    return catchFn ? error(catchFn(e)) : error(e)
   }
 }
 
@@ -176,18 +176,18 @@ export function tryCatch<L, R>(
  *   () => "Number must be positive"
  * )
  *
- * expect(isPositive(-1)).toEqual(Result.err("Number must be positive"))
+ * expect(isPositive(-1)).toEqual(Result.error("Number must be positive"))
  * expect(isPositive(1)).toEqual(Result.ok(1))
  * ```
  */
 export const fromPredicate: {
-  <L, R>(
-    predicate: (a: any) => a is R,
-    failure: () => L,
-  ): (a: any) => Result<L, R>
-  <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L): Result<L, R>
-} = dual(3, <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L) => {
-  return predicate(a) ? ok(a) : err(failure())
+  <OK, ERROR>(
+    predicate: (a: any) => a is OK,
+    failure: () => ERROR,
+  ): (a: any) => Result<OK, ERROR>
+  <OK, ERROR>(a: any, predicate: (a: any) => a is OK, failure: () => ERROR): Result<OK, ERROR>
+} = dual(3, <OK, ERROR>(a: any, predicate: (a: any) => a is OK, failure: () => ERROR) => {
+  return predicate(a) ? ok(a) : error(failure())
 })
 
 // working with Results
@@ -212,25 +212,25 @@ export const fromPredicate: {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Mapping over Err results in the same Err
- * expect(Result.map(Result.err("error"), (n: number) => n + 1)).toEqual(Result.err("error"))
+ * expect(Result.map(Result.error("error"), (n: number) => n + 1)).toEqual(Result.error("error"))
  * ```
  */
 export const map: {
-  <L, RA, RB>(
-    f: (a: RA) => RB,
-  ): (self: Result<L, RA>) => Result<L, RB>
-  <L, RA, RB>(self: Result<L, RA>, f: (a: RA) => RB): Result<L, RB>
+  <OK1, OK2, ERROR>(
+    f: (a: OK1) => OK2,
+  ): (self: Result<OK1, ERROR>) => Result<OK2, ERROR>
+  <OK1, OK2, ERROR>(self: Result<OK1, ERROR>, f: (a: OK1) => OK2): Result<OK2, ERROR>
 } = dual(
   2,
-  <L, RA, RB>(
-    self: Result<L, RA>,
-    f: (a: RA) => RB,
-  ): Result<L, RB> => self._tag === "Ok" ? ok(f(self.ok)) : err(self.err),
+  <OK1, OK2, ERROR>(
+    self: Result<OK1, ERROR>,
+    f: (a: OK1) => OK2,
+  ): Result<OK2, ERROR> => self._tag === "Ok" ? ok(f(self.ok)) : error(self.error),
 )
 
 /**
  * The `Result.mapErr` function lets you transform the error value inside a `Result` without manually unwrapping and re-wrapping it.
- * If the `Result` holds a err value (`Err`), the transformation function is applied.
+ * If the `Result` holds a error value (`Err`), the transformation function is applied.
  * If the `Result` is `Ok`, the function is ignored, and the `Ok` value remains unchanged.
  *
  * @category Working with Results
@@ -240,8 +240,8 @@ export const map: {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Transform the error value inside Err
- * expect(Result.mapErr(Result.err("error"), (s: string) => s.toUpperCase()))
- *   .toEqual(Result.err("ERROR"))
+ * expect(Result.mapErr(Result.error("error"), (s: string) => s.toUpperCase()))
+ *   .toEqual(Result.error("ERROR"))
  * ```
  *
  * @example Mapping Err over Ok
@@ -255,16 +255,16 @@ export const map: {
  * ```
  */
 export const mapErr: {
-  <LA, LB, R>(
-    f: (a: LA) => LB,
-  ): (self: Result<LA, R>) => Result<LB, R>
-  <LA, LB, R>(self: Result<LA, R>, f: (a: LA) => LB): Result<LB, R>
+  <OK, ERROR1, ERROR2>(
+    f: (a: ERROR1) => ERROR2,
+  ): (self: Result<OK, ERROR1>) => Result<OK, ERROR2>
+  <OK, ERROR1, ERROR2>(self: Result<OK, ERROR1>, f: (a: ERROR1) => ERROR2): Result<OK, ERROR2>
 } = dual(
   2,
-  <LA, LB, R>(
-    self: Result<LA, R>,
-    f: (a: LA) => LB,
-  ): Result<LB, R> => self._tag === "Err" ? err(f(self.err)) : ok(self.ok),
+  <OK, ERROR1, ERROR2>(
+    self: Result<OK, ERROR1>,
+    f: (a: ERROR1) => ERROR2,
+  ): Result<OK, ERROR2> => self._tag === "Error" ? error(f(self.error)) : ok(self.ok),
 )
 
 /**
@@ -282,10 +282,10 @@ export const mapErr: {
  *   (n: number) => n + 1
  * )).toEqual(Result.ok(2))
  *
- * expect(Result.bimap(Result.err("error"),
+ * expect(Result.bimap(Result.error("error"),
  *   (e: string) => e.toUpperCase(),
  *   (n: number) => n + 1
- * )).toEqual(Result.err("ERROR"))
+ * )).toEqual(Result.error("ERROR"))
  *
  * expect(
  *  pipe(
@@ -299,22 +299,22 @@ export const mapErr: {
  * ```
  */
 export const bimap: {
-  <LA, LB, RA, RB>(
-    f: (l: LA) => LB,
-    g: (r: RA) => RB,
-  ): (self: Result<LA, RA>) => Result<LB, RB>
-  <LA, LB, RA, RB>(
-    self: Result<LA, RA>,
-    f: (l: LA) => LB,
-    g: (r: RA) => RB,
-  ): Result<LB, RB>
+  <OK1, OK2, ERROR1, ERROR2>(
+    f: (l: ERROR1) => ERROR2,
+    g: (r: OK1) => OK2,
+  ): (self: Result<OK1, ERROR1>) => Result<OK2, ERROR2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    self: Result<OK1, ERROR1>,
+    f: (l: ERROR1) => ERROR2,
+    g: (r: OK1) => OK2,
+  ): Result<OK2, ERROR2>
 } = dual(
   3,
-  <LA, LB, RA, RB>(
-    self: Result<LA, RA>,
-    f: (l: LA) => LB,
-    g: (r: RA) => RB,
-  ): Result<LB, RB> => self._tag === "Err" ? err(f(self.err)) : ok(g(self.ok)),
+  <OK1, OK2, ERROR1, ERROR2>(
+    self: Result<OK1, ERROR1>,
+    f: (l: ERROR1) => ERROR2,
+    g: (r: OK1) => OK2,
+  ): Result<OK2, ERROR2> => self._tag === "Error" ? error(f(self.error)) : ok(g(self.ok)),
 )
 
 /**
@@ -346,7 +346,7 @@ export const bimap: {
  * }
  *
  * const validateAddress = (address: string): Result.Result<Error, string> =>
- *   address.length > 0 ? Result.ok(address) : Result.err("Invalid address")
+ *   address.length > 0 ? Result.ok(address) : Result.error("Invalid address")
  *
  * const result = pipe(
  *   user.address,
@@ -358,26 +358,26 @@ export const bimap: {
  * @category Working with Results
  */
 export const flatMap: {
-  <LA, LB, RA, RB>(
-    f: (a: RA) => Result<LB, RB>,
-  ): (self: Result<LA, RA>) => Result<LA | LB, RB>
-  <LA, LB, RA, RB>(
-    self: Result<LA, RA>,
-    f: (a: RA) => Result<LB, RB>,
-  ): Result<LA | LB, RB>
+  <OK1, OK2, ERROR1, ERROR2>(
+    f: (a: OK1) => Result<OK2, ERROR2>,
+  ): (self: Result<OK1, ERROR1>) => Result<OK2, ERROR1 | ERROR2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    self: Result<OK1, ERROR1>,
+    f: (a: OK1) => Result<OK2, ERROR2>,
+  ): Result<OK2, ERROR1 | ERROR2>
 } = dual(
   2,
-  <LA, LB, RA, RB>(
-    self: Result<LA, RA>,
-    f: (a: RA) => Result<LB | LA, RB>,
-  ): Result<LA | LB, RB> => self._tag === "Ok" ? f(self.ok) : self,
+  <OK1, OK2, ERROR1, ERROR2>(
+    self: Result<OK1, ERROR1>,
+    f: (a: OK1) => Result<OK2, ERROR2 | ERROR1>,
+  ): Result<OK2, ERROR1 | ERROR2> => self._tag === "Ok" ? f(self.ok) : self,
 )
 
 /**
  * Applies a function to the value of a `Err` and flattens the resulting
  * `Result`. If the input is `Ok`, it remains `Ok`.
  *
- * This function is the err-sided equivalent of `flatMap`. It allows you to chain
+ * This function is the error-sided equivalent of `flatMap`. It allows you to chain
  * computations on the `Err` value while preserving any `Ok` value unchanged.
  *
  * @example
@@ -385,24 +385,27 @@ export const flatMap: {
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
  * const result = pipe(
- *   Result.err("error"),
- *   Result.flatMapErr(error => Result.err(error.toUpperCase()))
+ *   Result.error("error"),
+ *   Result.flatMapErr(error => Result.error(error.toUpperCase()))
  * )
- * // Result: Result.err("ERROR")
+ * // Result: Result.error("ERROR")
  * ```
  * @category Working with Results
  */
 export const flatMapErr: {
-  <LA, LB, R>(
-    f: (a: LA) => Result<LB, R>,
-  ): (self: Result<LA, R>) => Result<LB, R>
-  <LA, LB, R>(self: Result<LA, R>, f: (a: LA) => Result<LB, R>): Result<LB, R>
+  <OK, ERROR1, ERROR2>(
+    f: (a: ERROR1) => Result<OK, ERROR2>,
+  ): (self: Result<OK, ERROR1>) => Result<OK, ERROR2>
+  <OK, ERROR1, ERROR2>(
+    self: Result<OK, ERROR1>,
+    f: (a: ERROR1) => Result<OK, ERROR2>,
+  ): Result<OK, ERROR2>
 } = dual(
   2,
-  <LA, LB, R>(
-    self: Result<LA, R>,
-    f: (a: LA) => Result<LB, R>,
-  ): Result<LB, R> => self._tag === "Err" ? f(self.err) : ok(self.ok),
+  <OK, ERROR1, ERROR2>(
+    self: Result<OK, ERROR1>,
+    f: (a: ERROR1) => Result<OK, ERROR2>,
+  ): Result<OK, ERROR2> => self._tag === "Error" ? f(self.error) : ok(self.ok),
 )
 
 /**
@@ -416,7 +419,7 @@ export const flatMapErr: {
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
  * expect(Result.match(Result.ok(42), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("The value is 42.")
- * expect(Result.match(Result.err("error"), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("Error: error")
+ * expect(Result.match(Result.error("error"), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("Error: error")
  *
  * expect(
  *  pipe(
@@ -430,7 +433,7 @@ export const flatMapErr: {
  *
  * expect(
  *  pipe(
- *    Result.err("error"),
+ *    Result.error("error"),
  *    Result.match(
  *      e => `Error: ${e}`,
  *      val => `The value is ${val}.`
@@ -440,16 +443,16 @@ export const flatMapErr: {
  * ```
  */
 export const match: {
-  <L, R, B>(
-    onErr: (l: L) => B,
-    onOk: (r: R) => B,
-  ): (self: Result<L, R>) => B
-  <L, R, B>(self: Result<L, R>, onErr: (l: L) => B, onOk: (r: R) => B): B
+  <ERROR, OK, B>(
+    onErr: (l: ERROR) => B,
+    onOk: (r: OK) => B,
+  ): (self: Result<OK, ERROR>) => B
+  <ERROR, OK, B>(self: Result<OK, ERROR>, onErr: (l: ERROR) => B, onOk: (r: OK) => B): B
 } = dual(3, (self, onErr, onOk) => {
   if (self._tag === "Ok") {
     return onOk(self.ok)
   }
-  return onErr(self.err)
+  return onErr(self.error)
 })
 
 /**
@@ -462,7 +465,7 @@ export const match: {
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
  * expect(Result.getOrElse(Result.ok(1), () => 0)).toEqual(1)
- * expect(Result.getOrElse(Result.err("error"), () => 0)).toEqual(0)
+ * expect(Result.getOrElse(Result.error("error"), () => 0)).toEqual(0)
  *
  * expect(
  *  pipe(
@@ -473,7 +476,7 @@ export const match: {
  *
  * expect(
  *  pipe(
- *    Result.err("error"),
+ *    Result.error("error"),
  *    Result.getOrElse(() => 10),
  *  )
  * ).toEqual(10)
@@ -481,17 +484,17 @@ export const match: {
  * ```
  */
 export const getOrElse: {
-  <L, R, B>(onErr: (l: L) => B): (self: Result<L, R>) => R | B
-  <L, R, B>(self: Result<L, R>, onErr: (l: L) => B): R | B
-} = dual(2, <L, R, B>(
-  self: Result<L, R>,
-  onErr: (l: L) => B,
-): R | B => self._tag === "Ok" ? self.ok : onErr(self.err))
+  <OK, ERROR>(onErr: (l: ERROR) => OK): (self: Result<OK, ERROR>) => OK
+  <OK, ERROR>(self: Result<OK, ERROR>, onErr: (l: ERROR) => OK): OK
+} = dual(2, <OK, ERROR>(
+  self: Result<OK, ERROR>,
+  onErr: (l: ERROR) => OK,
+): OK => self._tag === "Ok" ? self.ok : onErr(self.error))
 
 // Typeguards
 
 /**
- * Checks if a `Result` is a `Ok` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Ok<R>` when this function returns `true`.
+ * Checks if a `Result` is a `Ok` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Ok<OK>` when this function returns `true`.
  *
  * @category Type Guards
  * @example
@@ -500,15 +503,15 @@ export const getOrElse: {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * expect(Result.isOk(Result.ok(1))).toEqual(true)
- * expect(Result.isOk(Result.err("error"))).toEqual(false)
+ * expect(Result.isOk(Result.error("error"))).toEqual(false)
  * ```
  */
-export function isOk<L, R>(self: Result<L, R>): self is Ok<R> {
+export function isOk<OK, ERROR>(self: Result<OK, ERROR>): self is Ok<OK> {
   return self._tag === "Ok"
 }
 
 /**
- * Checks if a `Result` is a `Err` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Err<L>` when this function returns `true`.
+ * Checks if a `Result` is a `Err` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Err<ERROR>` when this function returns `true`.
  *
  * @category Type Guards
  * @example
@@ -517,11 +520,11 @@ export function isOk<L, R>(self: Result<L, R>): self is Ok<R> {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * expect(Result.isErr(Result.ok(1))).toEqual(false)
- * expect(Result.isErr(Result.err("error"))).toEqual(true)
+ * expect(Result.isErr(Result.error("error"))).toEqual(true)
  * ```
  */
-export function isErr<L, R>(self: Result<L, R>): self is Err<L> {
-  return self._tag === "Err"
+export function isErr<OK, ERROR>(self: Result<OK, ERROR>): self is Err<ERROR> {
+  return self._tag === "Error"
 }
 
 /**
@@ -534,22 +537,22 @@ export function isErr<L, R>(self: Result<L, R>): self is Err<L> {
  * import { Result, Option } from "@jvlk/fp-tsm"
  *
  * expect(Result.fromOption(Option.some(1), () => "error")).toEqual(Result.ok(1))
- * expect(Result.fromOption(Option.none, () => "error")).toEqual(Result.err("error"))
+ * expect(Result.fromOption(Option.none, () => "error")).toEqual(Result.error("error"))
  * ```
  */
 export const fromOption: {
-  <L, R>(
-    self: Option<R>,
-    onNone: () => L,
-  ): Result<L, R>
-  <L, R>(
-    onNone: () => L,
-  ): (self: Option<R>) => Result<L, R>
-} = dual(2, <L, R>(
-  self: Option<R>,
-  onNone: () => L,
-): Result<L, R> => {
-  return self._tag === "Some" ? ok(self.value) : err(onNone())
+  <OK, ERROR>(
+    self: Option<OK>,
+    onNone: () => ERROR,
+  ): Result<OK, ERROR>
+  <OK, ERROR>(
+    onNone: () => ERROR,
+  ): (self: Option<OK>) => Result<OK, ERROR>
+} = dual(2, <OK, ERROR>(
+  self: Option<OK>,
+  onNone: () => ERROR,
+): Result<OK, ERROR> => {
+  return self._tag === "Some" ? ok(self.value) : error(onNone())
 })
 
 // Multiple Results
@@ -580,12 +583,12 @@ export const fromOption: {
  *
  * // If any Result is Err, the entire result is Err
  * const data2 = Result.Do(function* () {
- *   const personAge = yield* Result.bind(Result.err("Error"))
+ *   const personAge = yield* Result.bind(Result.error("Error"))
  *   const personName = yield* Result.bind(name)
  *   return `Hello ${personName}! You are ${personAge} years old.`
  * })
  *
- * expect(data2).toEqual(Result.err("Error"))
+ * expect(data2).toEqual(Result.error("Error"))
  * ```
  *
  * @example Without Do notation, the same code would be much more verbose.
@@ -618,14 +621,14 @@ export const fromOption: {
  * ```
  */
 
-export function Do<L, A, U = any>(
-  generator: () => Generator<Result<L, unknown>, A, U>,
-): Result<L, A> {
+export function Do<A, ERROR, U = any>(
+  generator: () => Generator<Result<unknown, ERROR>, A, U>,
+): Result<A, ERROR> {
   const iterator = generator()
   let result = iterator.next()
 
   while (!result.done) {
-    if (result.value._tag === "Err") {
+    if (result.value._tag === "Error") {
       return result.value
     }
     result = iterator.next(
@@ -636,14 +639,14 @@ export function Do<L, A, U = any>(
 }
 
 /**
- * Binds the value of a `Result` to a new key in an object, using a function that transforms the value.
+ * Binds the value of a `Result` to a new key in an OK2ject, using a function that transforms the value.
  * Useful for when you want to work with multiple `Result`s and only do something if they are all `Ok`.
  *
  * @ignore
  * See {@link Do} for an example of how to use this.
  */
-export function* bind<L, R>(self: Result<L, R>): Generator<Result<L, R>, R, R> {
-  if (self._tag === "Err") {
+export function* bind<OK, ERROR>(self: Result<OK, ERROR>): Generator<Result<OK, ERROR>, OK, OK> {
+  if (self._tag === "Error") {
     return yield self
   }
   return self.ok

@@ -44,7 +44,7 @@ Deno.test("Future is are lazy and multiple maps can be applied", async () => {
 //       const parsed = data.safeParse(res)
 //       return parsed.success
 //         ? Future.ok(parsed.data)
-//         : Future.err(parsed.error)
+//         : Future.error(parsed.error)
 //     }),
 //   )
 
@@ -57,7 +57,7 @@ Deno.test("Future.fromPromise", async () => {
   expect(await data()).toEqual(Result.ok(42))
 
   expect(await Future.fromPromise(Promise.reject("Error"))()).toEqual(
-    Result.err("Error"),
+    Result.error("Error"),
   )
 })
 
@@ -68,17 +68,17 @@ Deno.test("Future.ok and map", async () => {
 })
 
 Deno.test("flatMapLeft", async () => {
-  const future = Future.err("error")
+  const future = Future.error("error")
   const mapped = Future.flatMapLeft(
     future,
-    (e: string) => Future.err(new Error(e)),
+    (e: string) => Future.error(new Error(e)),
   ) // Future<Error, never>
-  await mapped() // Result.err(Error("error"))
+  await mapped() // Result.error(Error("error"))
 
   const success = Future.ok(42)
   const mappedSuccess = Future.flatMapLeft(
     success,
-    (e: string) => Future.err(new Error(e)),
+    (e: string) => Future.error(new Error(e)),
   ) // Future<Error, number>
 
   expect(await mappedSuccess()).toEqual(Result.ok(42)) // Result.ok(42)
@@ -94,14 +94,14 @@ Deno.test("bimap", async () => {
 
   expect(await mapped()).toEqual(Result.ok(84))
 
-  const error = Future.err("error")
+  const error = Future.error("error")
   const mappedError = Future.bimap(
     error,
     (e: string) => new Error(e),
     (n: number) => n * 2,
   )
 
-  expect(await mappedError()).toEqual(Result.err(Error("error")))
+  expect(await mappedError()).toEqual(Result.error(Error("error")))
 })
 
 const userSchema = z.object({
@@ -113,7 +113,7 @@ const userSchema = z.object({
 
 const _getUserData = (
   id: string,
-): Future.Future<Error | ZodError, string> =>
+): Future.Future<string, Error | ZodError> =>
   pipe(
     Future.fetch(`/api/users/${id}`),
     Future.mapErr((error) => Error(`Network error: ${error}`)),
@@ -121,7 +121,7 @@ const _getUserData = (
     Future.mapErr((error) => Error(`Failed to get user data: ${error}`)),
     Future.flatMap((data) => {
       const parsed = userSchema.safeParse(data)
-      return parsed.success ? Future.ok(parsed.data) : Future.err(parsed.error)
+      return parsed.success ? Future.ok(parsed.data) : Future.error(parsed.error)
     }),
     Future.map((user) =>
       pipe(

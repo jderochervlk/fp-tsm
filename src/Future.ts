@@ -11,7 +11,7 @@ import { dual } from "./internal.ts"
  * import { Future, pipe } from "@jvlk/fp-tsm"
  * import { z } from "npm:zod"
  *
- * const data = z.array(z.string())
+ * const data = z.arOK1y(z.string())
  * const result = pipe(
  *   // fetch the data and depending on the .ok property of the response, return a Ok or Err
  *   Future.fetch("https://baconipsum.com/api/?type=meat-and-filler"),
@@ -22,7 +22,7 @@ import { dual } from "./internal.ts"
  *     const parsed = data.safeParse(res)
  *     return parsed.success
  *       ? Future.ok(parsed.data)
- *       : Future.err(parsed.error)
+ *       : Future.error(parsed.error)
  *   })
  * )
  *
@@ -35,19 +35,19 @@ import { dual } from "./internal.ts"
  *
  * @module
  */
-export type Future<L, R> = () => Promise<
-  Result.Result<L, R>
+export type Future<OK, ERROR> = () => Promise<
+  Result.Result<OK, ERROR>
 >
 
 /**
  * @ignore
  */
-export type Ok<R> = () => Promise<Result.Ok<R>>
+export type Ok<OK> = () => Promise<Result.Ok<OK>>
 
 /**
  * @ignore
  */
-export type Err<L> = () => Promise<Result.Err<L>>
+export type Err<ERROR> = () => Promise<Result.Err<ERROR>>
 
 /**
  * Create a `Future` from an `Promise` by using `.then` and `.catch`.
@@ -58,15 +58,15 @@ export type Err<L> = () => Promise<Result.Err<L>>
  *
  * const data = Future.fromPromise(Promise.resolve(42)) // Result.ok(42)
  *
- * const error = Future.fromPromise(Promise.reject("Error")) // Result.err("Error")
+ * const error = Future.fromPromise(Promise.reject("Error")) // Result.error("Error")
  * ```
  */
-export const fromPromise = <L, R>(
-  value: Promise<R>,
-): Future<L, R> =>
+export const fromPromise = <OK, ERROR>(
+  value: Promise<OK>,
+): Future<OK, ERROR> =>
 () =>
-  value.then((r: R) => Result.ok<R>(r))
-    .catch((l: L) => Result.err<L>(l))
+  value.then((r: OK) => Result.ok<OK>(r))
+    .catch((l: ERROR) => Result.error<ERROR>(l))
 
 /**
  * Create a Future that resolves to a Ok value.
@@ -79,7 +79,7 @@ export const fromPromise = <L, R>(
  * const data = Future.ok(42) // Result.ok(42)
  * ```
  */
-export const ok = <R>(value: R): Ok<R> => () => Promise.resolve(Result.ok(value))
+export const ok = <OK>(value: OK): Ok<OK> => () => Promise.resolve(Result.ok(value))
 
 /**
  * Create a Future that resolves to a Err value.
@@ -89,10 +89,11 @@ export const ok = <R>(value: R): Ok<R> => () => Promise.resolve(Result.ok(value)
  * ```ts
  * import { Future } from "@jvlk/fp-tsm"
  *
- * const error = Future.err("Error") // Result.err("Error")
+ * const error = Future.error("Error") // Result.error("Error")
  * ```
  */
-export const err = <L>(value: L): Err<L> => () => Promise.resolve(Result.err<L>(value))
+export const error = <ERROR>(value: ERROR): Err<ERROR> => () =>
+  Promise.resolve(Result.error<ERROR>(value))
 
 /**
  * Maps over the Ok value of a Future using the provided function.
@@ -107,24 +108,25 @@ export const err = <L>(value: L): Err<L> => () => Promise.resolve(Result.err<L>(
  * const doubled = Future.map(future, (n: number) => n * 2)// Future<never, number>
  * await doubled() // Result.ok(84)
  *
- * const error = Future.err("error")
+ * const error = Future.error("error")
  * const doubledError = Future.map(error, (n: number) => n * 2) // Future<string, number>
- * await doubledError() // Result.err("error")
+ * await doubledError() // Result.error("error")
  * ```
  */
 export const map: {
-  <L, R1, R2>(f: (a: R1) => R2): (future: Future<L, R1>) => Future<L, R2>
-  <L, R1, R2>(future: Future<L, R1>, f: (a: R1) => R2): Future<L, R2>
+  <OK1, OK2, ERROR>(f: (a: OK1) => OK2): (future: Future<OK1, ERROR>) => Future<OK2, ERROR>
+  <OK1, OK2, ERROR>(future: Future<OK1, ERROR>, f: (a: OK1) => OK2): Future<OK2, ERROR>
 } = dual(
   2,
-  <L, R1, R2>(future: Future<L, R1>, f: (a: R1) => R2): Future<L, R2> => async () => {
+  <OK1, OK2, ERROR>(future: Future<OK1, ERROR>, f: (a: OK1) => OK2): Future<OK2, ERROR> =>
+  async () => {
     const x = await future()
     return Result.map(x, f)
   },
 )
 
 /**
- * Maps over the Ok value of a Future using the provided function and flattens the result.
+ * Maps over the Ok value of a Future using the provided function and fERROR1ttens the result.
  * If the Future contains a Err value, it will be returned unchanged.
  *
  * @category Working with Futures
@@ -136,28 +138,28 @@ export const map: {
  * const doubled = Future.flatMap(future, (n: number) => Future.ok(n * 2))// Future<never, number>
  * await doubled() // Result.ok(84)
  *
- * const error = Future.err("error")
+ * const error = Future.error("error")
  * const doubledError = Future.flatMap(error, (n: number) => Future.ok(n * 2)) // Future<string, number>
- * await doubledError() // Result.err("error")
+ * await doubledError() // Result.error("error")
  * ```
  */
 export const flatMap: {
-  <LA, LB, RA, RB>(
-    f: (a: RA) => Future<LB, RB>,
-  ): (future: Future<LA, RA>) => Future<LA | LB, RB>
-  <LA, LB, RA, RB>(
-    future: Future<LA, RA>,
-    f: (a: RA) => Future<LB, RB>,
-  ): Future<LA | LB, RB>
+  <OK1, OK2, ERROR1, ERROR2>(
+    f: (a: OK1) => Future<OK2, ERROR2>,
+  ): (future: Future<OK1, ERROR1>) => Future<OK2, ERROR1 | ERROR2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    f: (a: OK1) => Future<OK2, ERROR2>,
+  ): Future<ERROR1 | ERROR2, OK2>
 } = dual(
   2,
-  <LA, LB, RA, RB>(
-    future: Future<LA, RA>,
-    f: (a: RA) => Future<LB, RB>,
-  ): Future<LA | LB, RB> =>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    f: (a: OK1) => Future<OK2, ERROR2>,
+  ): Future<OK2, ERROR1 | ERROR2> =>
   async () => {
     const value = await future()
-    return value._tag === "Ok" ? await f(value.ok)() : Result.err(value.err)
+    return value._tag === "Ok" ? await f(value.ok)() : Result.error(value.error)
   },
 )
 
@@ -170,9 +172,9 @@ export const flatMap: {
  * ```ts
  * import { Future } from "@jvlk/fp-tsm"
  *
- * const future = Future.err("error")
+ * const future = Future.error("error")
  * const mapped = Future.mapErr(future, (e: string) => new Error(e)) // Future<Error, never>
- * await mapped() // Result.err(Error("error"))
+ * await mapped() // Result.error(Error("error"))
  *
  * const success = Future.ok(42)
  * const mappedSuccess = Future.mapErr(success, (e: string) => new Error(e)) // Future<Error, number>
@@ -180,16 +182,16 @@ export const flatMap: {
  * ```
  */
 export const mapErr: {
-  <L1, L2, R>(f: (a: L1) => L2): (future: Future<L1, R>) => Future<L2, R>
-  <L1, L2, R>(future: Future<L1, R>, f: (a: L1) => L2): Future<L2, R>
+  <OK, ERROR1, ERROR2>(f: (a: ERROR1) => ERROR2): (future: Future<OK, ERROR1>) => Future<OK, ERROR2>
+  <OK, ERROR1, ERROR2>(future: Future<OK, ERROR1>, f: (a: ERROR1) => ERROR2): Future<OK, ERROR2>
 } = dual(
   2,
-  <L1, L2, R>(future: Future<L1, R>, f: (a: L1) => L2): Future<L2, R> => () =>
-    future().then(Result.mapErr(f)),
+  <OK, ERROR1, ERROR2>(future: Future<OK, ERROR1>, f: (a: ERROR1) => ERROR2): Future<OK, ERROR2> =>
+  () => future().then(Result.mapErr(f)),
 )
 
 /**
- * Maps over the Err value of a Future using the provided function and flattens the result.
+ * Maps over the Err value of a Future using the provided function and fERROR1ttens the result.
  * If the Future contains a Ok value, it will be returned unchanged.
  *
  * @category Working with Futures
@@ -197,32 +199,32 @@ export const mapErr: {
  * ```ts
  * import { Future } from "@jvlk/fp-tsm"
  *
- * const future = Future.err("error")
- * const mapped = Future.flatMapErr(future, (e: string) => Future.err(new Error(e))) // Future<Error, never>
- * await mapped() // Result.err(Error("error"))
+ * const future = Future.error("error")
+ * const mapped = Future.flatMapErr(future, (e: string) => Future.error(new Error(e))) // Future<Error, never>
+ * await mapped() // Result.error(Error("error"))
  *
  * const success = Future.ok(42)
- * const mappedSuccess = Future.flatMapErr(success, (e: string) => Future.err(new Error(e))) // Future<Error, number>
+ * const mappedSuccess = Future.flatMapErr(success, (e: string) => Future.error(new Error(e))) // Future<Error, number>
  * await mappedSuccess() // Result.ok(42)
  * ```
  */
 export const flatMapLeft: {
-  <LA, LB, RA, RB>(
-    f: (a: LA) => Future<LB, RB>,
-  ): (future: Future<LA, RA>) => Future<LB, RA | RB>
-  <LA, LB, RA, RB>(
-    future: Future<LA, RA>,
-    f: (a: LA) => Future<LB, RB>,
-  ): Future<LB, RA | RB>
+  <OK1, OK2, ERROR1, ERROR2>(
+    f: (a: ERROR1) => Future<OK2, ERROR2>,
+  ): (future: Future<OK1, ERROR1>) => Future<OK1 | OK2, ERROR2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    f: (a: ERROR1) => Future<OK2, ERROR2>,
+  ): Future<OK1 | OK2, ERROR2>
 } = dual(
   2,
-  <LA, LB, RA, RB>(
-    future: Future<LA, RA>,
-    f: (a: LA) => Future<LB, RB>,
-  ): Future<LB, RA | RB> =>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    f: (a: ERROR1) => Future<OK2, ERROR2>,
+  ): Future<OK1 | OK2, ERROR2> =>
   async () => {
     const value = await future()
-    return value._tag === "Err" ? await f(value.err)() : Result.ok(value.ok)
+    return value._tag === "Error" ? await f(value.error)() : Result.ok(value.ok)
   },
 )
 
@@ -242,32 +244,32 @@ export const flatMapLeft: {
  * )
  * await mapped() // Result.ok(84)
  *
- * const error = Future.err("error")
+ * const error = Future.error("error")
  * const mappedError = Future.bimap(
  *   error,
  *   (e: string) => new Error(e),
  *   (n: number) => n * 2
  * )
- * await mappedError() // Result.err(Error("error"))
+ * await mappedError() // Result.error(Error("error"))
  * ```
  */
 export const bimap: {
-  <L1, L2, R1, R2>(
-    fl: (l: L1) => L2,
-    fr: (r: R1) => R2,
-  ): (future: Future<L1, R1>) => Future<L2, R2>
-  <L1, L2, R1, R2>(
-    future: Future<L1, R1>,
-    fl: (l: L1) => L2,
-    fr: (r: R1) => R2,
-  ): Future<L2, R2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    fl: (l: ERROR1) => ERROR2,
+    fr: (r: OK1) => OK2,
+  ): (future: Future<OK1, ERROR1>) => Future<OK2, ERROR2>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    fl: (l: ERROR1) => ERROR2,
+    fr: (r: OK1) => OK2,
+  ): Future<OK2, ERROR2>
 } = dual(
   3,
-  <L1, L2, R1, R2>(
-    future: Future<L1, R1>,
-    fl: (l: L1) => L2,
-    fr: (r: R1) => R2,
-  ): Future<L2, R2> =>
+  <OK1, OK2, ERROR1, ERROR2>(
+    future: Future<OK1, ERROR1>,
+    fl: (l: ERROR1) => ERROR2,
+    fr: (r: OK1) => OK2,
+  ): Future<OK2, ERROR2> =>
   async () => {
     const value = await future()
     return Result.bimap(value, fl, fr)
@@ -275,7 +277,7 @@ export const bimap: {
 )
 
 /**
- * A wrapper for `fetch` that returns a `Future<Response | TypeError, Response>` and checks `Response.ok` to determine if the response is a success or failure.
+ * A wOK1pper for `fetch` that returns a `Future<Response | TypeError, Response>` and checks `Response.ok` to determine if the response is a success or failure.
  *
  * If there is an issue with the `fetch` call itself (like a bad URL), it will return a `TypeError` in the `Err` of the `Result`.
  *
@@ -291,18 +293,18 @@ export const fetch = (
   url: string,
   init?: RequestInit,
 ): Future<
+  Response,
   | Response
-  | TypeError,
-  Response
+  | TypeError
 > =>
 async () => {
   try {
     return await globalThis.fetch(url, init).then((res) =>
-      res.ok ? Result.ok(res) : Result.err(res)
+      res.ok ? Result.ok(res) : Result.error(res)
     )
   } catch (error) {
     return error instanceof TypeError
-      ? Result.err(error)
-      : Result.err(TypeError(JSON.stringify(error))) // This should never happen, but it's here just in case
+      ? Result.error(error)
+      : Result.error(TypeError(JSON.stringify(error))) // This should never happen, but it's here just in case
   }
 }

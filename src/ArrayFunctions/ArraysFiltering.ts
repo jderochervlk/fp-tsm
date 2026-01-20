@@ -257,72 +257,72 @@ export const partition = <A>(
 }
 
 /**
- * Maps each element to a `Result`, then partitions the results into `ok` and `err`.
+ * Maps each element to a `Result`, then partitions the results into `ok` and `error`.
  *
  * @example
  * ```ts
  * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number) => n % 2 === 0 ? Result.ok(n) : Result.err(n)
+ * const f = (n: number) => n % 2 === 0 ? Result.ok(n) : Result.error(n)
  * expect(Array.partitionMap([1, 2, 3, 4], f)).toEqual([[1, 3], [2, 4]])
  * ```
  */
-export const partitionMap: <T extends AnyArray<A>, A, L, R>(
+export const partitionMap: <T extends AnyArray<A>, A, ERROR, OK>(
   array: T,
-  fn: (a: A) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
-) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
+  fn: (a: A) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+) => [ArrayType<T, ERROR>, ArrayType<T, OK>] = dual(
   2,
-  <T extends AnyArray<A>, A, L, R>(
+  <T extends AnyArray<A>, A, ERROR, OK>(
     array: T,
-    fn: (a: A) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
-  ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const errs: L[] = []
-    const oks: R[] = []
+    fn: (a: A) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+  ): [ArrayType<T, ERROR>, ArrayType<T, OK>] => {
+    const errs: ERROR[] = []
+    const oks: OK[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i])
-      if (e._tag === "Err") errs.push(e.err)
+      if (e._tag === "Error") errs.push(e.error)
       else oks.push(e.ok)
     }
-    return [errs as ArrayType<T, L>, oks as ArrayType<T, R>]
+    return [errs as ArrayType<T, ERROR>, oks as ArrayType<T, OK>]
   },
 )
 
 /**
- * Maps each element and its index to a `Result`, then partitions the results into `err` and `ok`.
+ * Maps each element and its index to a `Result`, then partitions the results into `error` and `ok`.
  *
  * @example
  * ```ts
  * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number, i: number) => i % 2 === 0 ? Result.ok(n) : Result.err(n)
+ * const f = (n: number, i: number) => i % 2 === 0 ? Result.ok(n) : Result.error(n)
  * expect(Array.partitionMapWithIndex([1, 2, 3, 4], f)).toEqual([[2, 4], [1, 3]])
  * ```
  */
-export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
+export const partitionMapWithIndex: <T extends AnyArray<A>, A, ERROR, OK>(
   array: T,
   fn: (
     a: A,
     i: number,
-  ) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
-) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
+  ) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+) => [ArrayType<T, ERROR>, ArrayType<T, OK>] = dual(
   2,
-  <T extends AnyArray<A>, A, L, R>(
+  <T extends AnyArray<A>, A, ERROR, OK>(
     array: T,
     fn: (
       a: A,
       i: number,
-    ) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
-  ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const errs: L[] = []
-    const oks: R[] = []
+    ) => { _tag: "Error"; error: ERROR } | { _tag: "Ok"; ok: OK },
+  ): [ArrayType<T, ERROR>, ArrayType<T, OK>] => {
+    const errs: ERROR[] = []
+    const oks: OK[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i], i)
-      if (e._tag === "Err") errs.push(e.err)
+      if (e._tag === "Error") errs.push(e.error)
       else oks.push(e.ok)
     }
-    return [errs as ArrayType<T, L>, oks as ArrayType<T, R>]
+    return [errs as ArrayType<T, ERROR>, oks as ArrayType<T, OK>]
   },
 )
 
@@ -360,18 +360,18 @@ export const partitionWithIndex = <A>(
  * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const arr = [Result.err(1), Result.ok("a"), Result.err(2), Result.ok("b")]
- * expect(Array.separate(arr)).toEqual([[1, 2], ["a", "b"]])
+ * const arr = [Result.error(1), Result.ok("a"), Result.error(2), Result.ok("b")]
+ * expect(Array.separate(arr)).toEqual([["a", "b"], [1, 2]])
  * ```
  */
-export const separate = <L, R>(
-  array: AnyArray<{ _tag: "Err" | "Ok"; err?: L; ok?: R }>,
-): [Array<L>, Array<R>] => {
-  const errs: L[] = []
-  const oks: R[] = []
+export const separate = <OK, ERROR>(
+  array: AnyArray<{ _tag: "Error" | "Ok"; error?: ERROR; ok?: OK }>,
+): [Array<OK>, Array<ERROR>] => {
+  const errs: ERROR[] = []
+  const oks: OK[] = []
   for (const e of array) {
-    if (e._tag === "Err") errs.push(e.err as L)
-    else oks.push(e.ok as R)
+    if (e._tag === "Error") errs.push(e.error as ERROR)
+    else oks.push(e.ok as OK)
   }
-  return [errs, oks]
+  return [oks, errs]
 }

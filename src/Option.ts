@@ -574,11 +574,11 @@ export function isNone<T>(self: Option<T>): self is None {
  * import { Option, Result } from "@jvlk/fp-tsm"
  *
  * expect(Option.fromResult(Result.ok(1))).toEqual(Option.some(1))
- * expect(Option.fromResult(Result.err("error"))).toEqual(Option.none)
+ * expect(Option.fromResult(Result.error("error"))).toEqual(Option.none)
  * ```
  */
 export function fromResult<R>(
-  self: Result<unknown, R>,
+  self: Result<R, unknown>,
 ): Option<NonNullable<R>> {
   return self._tag === "Ok" ? of(self.ok) : none
 }

@@ -385,7 +385,7 @@ export const extend: {
 )
 
 /**
- * Returns all `err` values from an array of `Result`.
+ * Returns all `error` values from an array of `Result`.
  *
  * @example
  * ```ts
@@ -393,14 +393,14 @@ export const extend: {
  * import { Result } from "@jvlk/fp-tsm"
  * import { expect } from "@std/expect/expect"
  *
- * expect(errors([Result.err(Error("error!")), Result.ok("a"), Result.err(Error("Something broke"))])).toEqual([Error("error!"), Error("Something broke")])
+ * expect(errors([Result.error(Error("error!")), Result.ok("a"), Result.error(Error("Something broke"))])).toEqual([Error("error!"), Error("Something broke")])
  * ```
  */
-export const errors = <L, R>(
-  array: AnyArray<{ _tag: "Err" | "Ok"; err?: L; ok?: R }>,
-): Array<L> =>
-  array.filter((e): e is { _tag: "Err"; err: L } => e._tag === "Err").map(
-    (e) => e.err as L,
+export const errors = <OK, ERROR>(
+  array: AnyArray<{ _tag: "Error" | "Ok"; error?: ERROR; ok?: OK }>,
+): Array<ERROR> =>
+  array.filter((e): e is { _tag: "Error"; error: ERROR } => e._tag === "Error").map(
+    (e) => e.error as ERROR,
   )
 
 /**
