@@ -1,6 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { dual } from "./internal.ts"
 import type { Either } from "./Either.ts"
+import { Result } from "./Result.ts"
 
 /**
  * The `Option` type represents optional values and is a replacement for using `null` or `undefined`.
@@ -563,6 +564,25 @@ export function isNone<T>(self: Option<T>): self is None {
 }
 
 // Conversion
+/**
+ * Converts a `Result` into an `Option`, mapping the `Ok` value to `Some` and the `Err` value to `None`.
+ *
+ * @category Conversion
+ * @example
+ * ```ts
+ * import { expect } from "jsr:@std/expect"
+ * import { Option, Result } from "@jvlk/fp-tsm"
+ *
+ * expect(Option.fromResult(Result.ok(1))).toEqual(Option.some(1))
+ * expect(Option.fromResult(Result.err("error"))).toEqual(Option.none)
+ * ```
+ */
+export function fromResult<R>(
+  self: Result<unknown, R>,
+): Option<NonNullable<R>> {
+  return self._tag === "Ok" ? of(self.ok) : none
+}
+
 /**
  * Converts an `Either` into an `Option`, mapping the `Right` value to `Some` and the `Left` value to `None`.
  *

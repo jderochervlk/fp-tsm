@@ -118,6 +118,15 @@ but it does diverge from that library in a few significant ways.
 - `fp-tsm` has robust documentation and presents things to developers in a way that they can learn
   about these concepts if they are not familiar with them.
 
+## Special Thanks
+
+This projet builds on the success and foundation of many other libraries.
+
+- Effect
+- fp-ts
+- Boxed
+- ReScript
+
 ## License
 
 The MIT License (MIT)

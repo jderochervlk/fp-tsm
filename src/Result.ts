@@ -3,12 +3,33 @@ import { dual } from "./internal.ts"
 import type { Option } from "./Option.ts"
 
 /**
- * The `Result` type represents values that can be one of two types: a `Err` containing an error value, or a `Ok` containing a success value.
+ * `Result` can replace exception flows.
  *
- * It is commonly used for error handling and expressing computations that may fail. Instead of throwing exceptions, functions can return an `Result`
- * that explicitly represents both success and failure cases.
+ * Instead of throwing exceptions, functions can return a `Result` that explicitly represents both success and failure cases.
  *
  * Throwing exceptions complicates control flow and hides exceptions from the type system, making it harder to reason about error handling in your code.
+ *
+ * @example Which of these is a more helpful type?
+ * ```ts
+ * import { Result } from '@jvlk/fp-tsm'
+ *
+ * // This is the correct type :(
+ * const toCaps = (str: string): string => {
+ *   if(typeof str !== "string") {
+ *      throw new Error("This is not a string!")
+ *   } else {
+ *     return str.toUpperCase()
+ *   }
+ * }
+ *
+ * const toCaps = (str: string): Result<string, InvalidStringError> => {
+ *   if(typeof str !== "string") {
+ *      return Result.err(InvalidStringError("This is not a string!"))
+ *   } else {
+ *     return Result.ok(str.toUpperCase())
+ *   }
+ * }
+ * ```
  *
  * @example Functions that can fail with exceptions can become hard to compose and manage. Exception handling adds complexity and makes control flow harder to follow.
  * ```ts
@@ -37,7 +58,7 @@ import type { Option } from "./Option.ts"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
  * const divide = (a: number, b: number): Result.Result<string, number> =>
- *   b === 0 ? Result.left("Division by zero") : Result.right(a / b)
+ *   b === 0 ? Result.err("Division by zero") : Result.ok(a / b)
  *
  * const increment = (a: Result.Result<string, number>): Result.Result<string, number> =>
  *   pipe(
@@ -45,8 +66,8 @@ import type { Option } from "./Option.ts"
  *     Result.map(x => x + 1)
  *   )
  *
- * expect(increment(divide(6, 2))).toEqual(Result.right(4))
- * expect(increment(divide(6, 0))).toEqual(Result.left("Division by zero"))
+ * expect(increment(divide(6, 2))).toEqual(Result.ok(4))
+ * expect(increment(divide(6, 0))).toEqual(Result.err("Division by zero"))
  * ```
  *
  * @module
@@ -54,74 +75,74 @@ import type { Option } from "./Option.ts"
 export type Result<L, R> = Err<L> | Ok<R>
 
 /**
- * The `Err` type represents the failure case of an `Result`, containing a value of type `L`.
+ * The `Err` type represents the failure case of a `Result`, containing a value of type `L`.
  * @ignore
  */
 export type Err<L> = {
   readonly _tag: "Err"
-  readonly left: L
+  readonly err: L
 }
 
 /**
- * The `Ok` type represents the success case of an `Result`, containing a value of type `R`.
+ * The `Ok` type represents the success case of a `Result`, containing a value of type `R`.
  * @ignore
  */
 export type Ok<R> = {
   readonly _tag: "Ok"
-  readonly right: R
+  readonly ok: R
 }
 
 // Generators
 
 /**
- * Constructs a `Ok`. Represents a successful value in an Result.
+ * Constructs a `Ok`. Represents a successful value in a Result.
  *
- * @category Creating Eithers
+ * @category Creating Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * // when creating an Result using `left` or `right` you should provide the type parameters
- * expect(Result.right(1)).toEqual({ _tag: "Ok", right: 1 })
- * expect(Result.right("hello")).toEqual({ _tag: "Ok", right: "hello" })
+ * // when creating a Result using `Err` or `Ok` you should provide the type parameters
+ * expect(Result.ok(1)).toEqual({ _tag: "Ok", ok: 1 })
+ * expect(Result.ok("hello")).toEqual({ _tag: "Ok", ok: "hello" })
  * ```
  */
-export const right = <R>(r: R): Ok<R> => ({ _tag: "Ok", right: r })
+export const ok = <R>(r: R): Ok<R> => ({ _tag: "Ok", ok: r })
 
 /**
- * Constructs a `Err`. Represents a failure value in an Result.
+ * Constructs a `Err`. Represents a failure value in a Result.
  *
- * @category Creating Eithers
+ * @category Creating Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * // when creating an Result using `left` or `right` you should provide the type parameters
- * expect(Result.left("error")).toEqual({ _tag: "Err", left: "error" })
- * expect(Result.left(404)).toEqual({ _tag: "Err", left: 404 })
+ * // when creating a Result using `Err` or `Ok` you should provide the type parameters
+ * expect(Result.err("error")).toEqual({ _tag: "Err", err: "error" })
+ * expect(Result.err(404)).toEqual({ _tag: "Err", err: 404 })
  * ```
  */
-export const left = <L>(l: L): Err<L> => ({ _tag: "Err", left: l })
+export const err = <L>(l: L): Err<L> => ({ _tag: "Err", err: l })
 
 /**
- * `tryCatch` is a utility function that allows you to execute a function that may throw an `unknown` error and return an `Result`.
+ * `tryCatch` is a utility function that allows you to execute a function that may throw an `unknown` error and return a `Result`.
  *
  * It can take an optional second argument, `catchFn`, which is a function that transforms the `unknown` error into something else.
  *
- * @category Creating Eithers
+ * @category Creating Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * expect(Result.tryCatch(() => 1)).toEqual(Result.right(1))
+ * expect(Result.tryCatch(() => 1)).toEqual(Result.ok(1))
  *
  * expect(Result.tryCatch(() => { throw new Error("Error") }))
- *   .toEqual(Result.left(Error("Error")))
+ *   .toEqual(Result.err(Error("Error")))
  *
- * expect(Result.tryCatch(() => { throw new Error("something went wrong") }, (e) => `Caught: ${e}`)).toEqual(Result.left("Caught: Error: something went wrong"))
+ * expect(Result.tryCatch(() => { throw new Error("something went wrong") }, (e) => `Caught: ${e}`)).toEqual(Result.err("Caught: Error: something went wrong"))
  * ```
  */
 
@@ -135,16 +156,16 @@ export function tryCatch<L, R>(
   catchFn?: (e: unknown) => L,
 ) {
   try {
-    return right(fn())
+    return ok(fn())
   } catch (e) {
-    return catchFn ? left(catchFn(e)) : left(e)
+    return catchFn ? err(catchFn(e)) : err(e)
   }
 }
 
 /**
- * You can create an `Result` based on a predicate, for example, to check if a value is positive.
+ * You can create a `Result` based on a predicate, for example, to check if a value is positive.
  *
- * @category Creating Eithers
+ * @category Creating Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
@@ -155,8 +176,8 @@ export function tryCatch<L, R>(
  *   () => "Number must be positive"
  * )
  *
- * expect(isPositive(-1)).toEqual(Result.left("Number must be positive"))
- * expect(isPositive(1)).toEqual(Result.right(1))
+ * expect(isPositive(-1)).toEqual(Result.err("Number must be positive"))
+ * expect(isPositive(1)).toEqual(Result.ok(1))
  * ```
  */
 export const fromPredicate: {
@@ -166,23 +187,23 @@ export const fromPredicate: {
   ): (a: any) => Result<L, R>
   <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L): Result<L, R>
 } = dual(3, <L, R>(a: any, predicate: (a: any) => a is R, failure: () => L) => {
-  return predicate(a) ? right(a) : left(failure())
+  return predicate(a) ? ok(a) : err(failure())
 })
 
-// working with Eithers
+// working with Results
 /**
- * The `Result.map` function lets you transform the value inside an `Result` without manually unwrapping and re-wrapping it.
- * If the `Result` holds a right value (`Ok`), the transformation function is applied.
+ * The `Result.map` function lets you transform the value inside a `Result` without manually unwrapping and re-wrapping it.
+ * If the `Result` holds a ok value (`Ok`), the transformation function is applied.
  * If the `Result` is `Err`, the function is ignored, and the `Err` value remains unchanged.
  *
- * @category Working with Eithers
+ * @category Working with Results
  * @example Mapping a Value in Ok
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Transform the value inside Ok
- * expect(Result.map(Result.right(1), (n: number) => n + 1)).toEqual(Result.right(2))
+ * expect(Result.map(Result.ok(1), (n: number) => n + 1)).toEqual(Result.ok(2))
  * ```
  *
  * @example Mapping over Err
@@ -191,7 +212,7 @@ export const fromPredicate: {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Mapping over Err results in the same Err
- * expect(Result.map(Result.left("error"), (n: number) => n + 1)).toEqual(Result.left("error"))
+ * expect(Result.map(Result.err("error"), (n: number) => n + 1)).toEqual(Result.err("error"))
  * ```
  */
 export const map: {
@@ -204,23 +225,23 @@ export const map: {
   <L, RA, RB>(
     self: Result<L, RA>,
     f: (a: RA) => RB,
-  ): Result<L, RB> => self._tag === "Ok" ? right(f(self.right)) : left(self.left),
+  ): Result<L, RB> => self._tag === "Ok" ? ok(f(self.ok)) : err(self.err),
 )
 
 /**
- * The `Result.mapLeft` function lets you transform the error value inside an `Result` without manually unwrapping and re-wrapping it.
- * If the `Result` holds a left value (`Err`), the transformation function is applied.
+ * The `Result.mapErr` function lets you transform the error value inside a `Result` without manually unwrapping and re-wrapping it.
+ * If the `Result` holds a err value (`Err`), the transformation function is applied.
  * If the `Result` is `Ok`, the function is ignored, and the `Ok` value remains unchanged.
  *
- * @category Working with Eithers
+ * @category Working with Results
  * @example Mapping an Error Value in Err
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Transform the error value inside Err
- * expect(Result.mapLeft(Result.left("error"), (s: string) => s.toUpperCase()))
- *   .toEqual(Result.left("ERROR"))
+ * expect(Result.mapErr(Result.err("error"), (s: string) => s.toUpperCase()))
+ *   .toEqual(Result.err("ERROR"))
  * ```
  *
  * @example Mapping Err over Ok
@@ -229,11 +250,11 @@ export const map: {
  * import { Result } from "@jvlk/fp-tsm"
  *
  * // Mapping Err over Ok results in the same Ok
- * expect(Result.mapLeft(Result.right(1), (s: string) => s.toUpperCase()))
- *   .toEqual(Result.right(1))
+ * expect(Result.mapErr(Result.ok(1), (s: string) => s.toUpperCase()))
+ *   .toEqual(Result.ok(1))
  * ```
  */
-export const mapLeft: {
+export const mapErr: {
   <LA, LB, R>(
     f: (a: LA) => LB,
   ): (self: Result<LA, R>) => Result<LB, R>
@@ -243,38 +264,38 @@ export const mapLeft: {
   <LA, LB, R>(
     self: Result<LA, R>,
     f: (a: LA) => LB,
-  ): Result<LB, R> => self._tag === "Err" ? left(f(self.left)) : right(self.right),
+  ): Result<LB, R> => self._tag === "Err" ? err(f(self.err)) : ok(self.ok),
 )
 
 /**
- * Maps over both parts of an Result simultaneously using two functions.
+ * Maps over both parts of a Result simultaneously using two functions.
  * If the Result is Err, applies the first function; if Ok, applies the second function.
  *
- * @category Working with Eithers
+ * @category Working with Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
- * expect(Result.bimap(Result.right(1),
+ * expect(Result.bimap(Result.ok(1),
  *   (e: string) => e.toUpperCase(),
  *   (n: number) => n + 1
- * )).toEqual(Result.right(2))
+ * )).toEqual(Result.ok(2))
  *
- * expect(Result.bimap(Result.left("error"),
+ * expect(Result.bimap(Result.err("error"),
  *   (e: string) => e.toUpperCase(),
  *   (n: number) => n + 1
- * )).toEqual(Result.left("ERROR"))
+ * )).toEqual(Result.err("ERROR"))
  *
  * expect(
  *  pipe(
- *    Result.right(1),
+ *    Result.ok(1),
  *    Result.bimap(
  *      (e: string) => e.toUpperCase(),
  *      (n: number) => n + 1
  *    )
  *  )
- * ).toEqual(Result.right(2))
+ * ).toEqual(Result.ok(2))
  * ```
  */
 export const bimap: {
@@ -293,7 +314,7 @@ export const bimap: {
     self: Result<LA, RA>,
     f: (l: LA) => LB,
     g: (r: RA) => RB,
-  ): Result<LB, RB> => self._tag === "Err" ? left(f(self.left)) : right(g(self.right)),
+  ): Result<LB, RB> => self._tag === "Err" ? err(f(self.err)) : ok(g(self.ok)),
 )
 
 /**
@@ -321,20 +342,20 @@ export const bimap: {
  *
  * const user: User = {
  *   id: 1,
- *   address: Result.right("123 Main St")
+ *   address: Result.ok("123 Main St")
  * }
  *
  * const validateAddress = (address: string): Result.Result<Error, string> =>
- *   address.length > 0 ? Result.right(address) : Result.left("Invalid address")
+ *   address.length > 0 ? Result.ok(address) : Result.err("Invalid address")
  *
  * const result = pipe(
  *   user.address,
  *   Result.flatMap(validateAddress)
  * )
  *
- * expect(result).toEqual(Result.right("123 Main St"))
+ * expect(result).toEqual(Result.ok("123 Main St"))
  * ```
- * @category Working with Eithers
+ * @category Working with Results
  */
 export const flatMap: {
   <LA, LB, RA, RB>(
@@ -349,14 +370,14 @@ export const flatMap: {
   <LA, LB, RA, RB>(
     self: Result<LA, RA>,
     f: (a: RA) => Result<LB | LA, RB>,
-  ): Result<LA | LB, RB> => self._tag === "Ok" ? f(self.right) : self,
+  ): Result<LA | LB, RB> => self._tag === "Ok" ? f(self.ok) : self,
 )
 
 /**
  * Applies a function to the value of a `Err` and flattens the resulting
  * `Result`. If the input is `Ok`, it remains `Ok`.
  *
- * This function is the left-sided equivalent of `flatMap`. It allows you to chain
+ * This function is the err-sided equivalent of `flatMap`. It allows you to chain
  * computations on the `Err` value while preserving any `Ok` value unchanged.
  *
  * @example
@@ -364,14 +385,14 @@ export const flatMap: {
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
  * const result = pipe(
- *   Result.left("error"),
- *   Result.flatMapLeft(error => Result.left(error.toUpperCase()))
+ *   Result.err("error"),
+ *   Result.flatMapErr(error => Result.err(error.toUpperCase()))
  * )
- * // Result: Result.left("ERROR")
+ * // Result: Result.err("ERROR")
  * ```
- * @category Working with Eithers
+ * @category Working with Results
  */
-export const flatMapLeft: {
+export const flatMapErr: {
   <LA, LB, R>(
     f: (a: LA) => Result<LB, R>,
   ): (self: Result<LA, R>) => Result<LB, R>
@@ -381,25 +402,25 @@ export const flatMapLeft: {
   <LA, LB, R>(
     self: Result<LA, R>,
     f: (a: LA) => Result<LB, R>,
-  ): Result<LB, R> => self._tag === "Err" ? f(self.left) : right(self.right),
+  ): Result<LB, R> => self._tag === "Err" ? f(self.err) : ok(self.ok),
 )
 
 /**
- * Matches an `Result` against two functions: one for the `Err` case and one for the `Ok` case.
+ * Matches a `Result` against two functions: one for the `Err` case and one for the `Ok` case.
  * This is useful for handling both cases in a single expression without needing to check the `_tag` manually.
  *
- * @category Working with Eithers
+ * @category Working with Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
- * expect(Result.match(Result.right(42), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("The value is 42.")
- * expect(Result.match(Result.left("error"), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("Error: error")
+ * expect(Result.match(Result.ok(42), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("The value is 42.")
+ * expect(Result.match(Result.err("error"), e => `Error: ${e}`, val => `The value is ${val}.`)).toEqual("Error: error")
  *
  * expect(
  *  pipe(
- *    Result.right(42),
+ *    Result.ok(42),
  *    Result.match(
  *      e => `Error: ${e}`,
  *      val => `The value is ${val}.`
@@ -409,7 +430,7 @@ export const flatMapLeft: {
  *
  * expect(
  *  pipe(
- *    Result.left("error"),
+ *    Result.err("error"),
  *    Result.match(
  *      e => `Error: ${e}`,
  *      val => `The value is ${val}.`
@@ -420,39 +441,39 @@ export const flatMapLeft: {
  */
 export const match: {
   <L, R, B>(
-    onLeft: (l: L) => B,
-    onRight: (r: R) => B,
+    onErr: (l: L) => B,
+    onOk: (r: R) => B,
   ): (self: Result<L, R>) => B
-  <L, R, B>(self: Result<L, R>, onLeft: (l: L) => B, onRight: (r: R) => B): B
-} = dual(3, (self, onLeft, onRight) => {
+  <L, R, B>(self: Result<L, R>, onErr: (l: L) => B, onOk: (r: R) => B): B
+} = dual(3, (self, onErr, onOk) => {
   if (self._tag === "Ok") {
-    return onRight(self.right)
+    return onOk(self.ok)
   }
-  return onLeft(self.left)
+  return onErr(self.err)
 })
 
 /**
- * Returns the value inside a `Ok`, or the result of `onLeft` if the `Result` is a `Err`.
+ * Returns the value inside a `Ok`, or the result of `onErr` if the `Result` is a `Err`.
  *
- * @category Working with Eithers
+ * @category Working with Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
- * expect(Result.getOrElse(Result.right(1), () => 0)).toEqual(1)
- * expect(Result.getOrElse(Result.left("error"), () => 0)).toEqual(0)
+ * expect(Result.getOrElse(Result.ok(1), () => 0)).toEqual(1)
+ * expect(Result.getOrElse(Result.err("error"), () => 0)).toEqual(0)
  *
  * expect(
  *  pipe(
- *    Result.right(42),
+ *    Result.ok(42),
  *    Result.getOrElse(() => 10),
  *  )
  * ).toEqual(42)
  *
  * expect(
  *  pipe(
- *    Result.left("error"),
+ *    Result.err("error"),
  *    Result.getOrElse(() => 10),
  *  )
  * ).toEqual(10)
@@ -460,17 +481,17 @@ export const match: {
  * ```
  */
 export const getOrElse: {
-  <L, R, B>(onLeft: (l: L) => B): (self: Result<L, R>) => R | B
-  <L, R, B>(self: Result<L, R>, onLeft: (l: L) => B): R | B
+  <L, R, B>(onErr: (l: L) => B): (self: Result<L, R>) => R | B
+  <L, R, B>(self: Result<L, R>, onErr: (l: L) => B): R | B
 } = dual(2, <L, R, B>(
   self: Result<L, R>,
-  onLeft: (l: L) => B,
-): R | B => self._tag === "Ok" ? self.right : onLeft(self.left))
+  onErr: (l: L) => B,
+): R | B => self._tag === "Ok" ? self.ok : onErr(self.err))
 
 // Typeguards
 
 /**
- * Checks if an `Result` is a `Ok` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Ok<R>` when this function returns `true`.
+ * Checks if a `Result` is a `Ok` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Ok<R>` when this function returns `true`.
  *
  * @category Type Guards
  * @example
@@ -478,16 +499,16 @@ export const getOrElse: {
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * expect(Result.isRight(Result.right(1))).toEqual(true)
- * expect(Result.isRight(Result.left("error"))).toEqual(false)
+ * expect(Result.isOk(Result.ok(1))).toEqual(true)
+ * expect(Result.isOk(Result.err("error"))).toEqual(false)
  * ```
  */
-export function isRight<L, R>(self: Result<L, R>): self is Ok<R> {
+export function isOk<L, R>(self: Result<L, R>): self is Ok<R> {
   return self._tag === "Ok"
 }
 
 /**
- * Checks if an `Result` is a `Err` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Err<L>` when this function returns `true`.
+ * Checks if a `Result` is a `Err` value. This works as a valid type guard, allowing TypeScript to narrow the type of the `Result` to `Err<L>` when this function returns `true`.
  *
  * @category Type Guards
  * @example
@@ -495,16 +516,16 @@ export function isRight<L, R>(self: Result<L, R>): self is Ok<R> {
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * expect(Result.isLeft(Result.right(1))).toEqual(false)
- * expect(Result.isLeft(Result.left("error"))).toEqual(true)
+ * expect(Result.isErr(Result.ok(1))).toEqual(false)
+ * expect(Result.isErr(Result.err("error"))).toEqual(true)
  * ```
  */
-export function isLeft<L, R>(self: Result<L, R>): self is Err<L> {
+export function isErr<L, R>(self: Result<L, R>): self is Err<L> {
   return self._tag === "Err"
 }
 
 /**
- * Converts an `Option` to an `Result`. If the `Option` is `Some`, it returns `Ok` with the contained value; if it is `None`, it returns `Err` with the provided error value.
+ * Converts an `Option` to a `Result`. If the `Option` is `Some`, it returns `Ok` with the contained value; if it is `None`, it returns `Err` with the provided error value.
  *
  * @category Conversion
  * @example
@@ -512,8 +533,8 @@ export function isLeft<L, R>(self: Result<L, R>): self is Err<L> {
  * import { expect } from "jsr:@std/expect"
  * import { Result, Option } from "@jvlk/fp-tsm"
  *
- * expect(Result.fromOption(Option.some(1), () => "error")).toEqual(Result.right(1))
- * expect(Result.fromOption(Option.none, () => "error")).toEqual(Result.left("error"))
+ * expect(Result.fromOption(Option.some(1), () => "error")).toEqual(Result.ok(1))
+ * expect(Result.fromOption(Option.none, () => "error")).toEqual(Result.err("error"))
  * ```
  */
 export const fromOption: {
@@ -528,25 +549,25 @@ export const fromOption: {
   self: Option<R>,
   onNone: () => L,
 ): Result<L, R> => {
-  return self._tag === "Some" ? right(self.value) : left(onNone())
+  return self._tag === "Some" ? ok(self.value) : err(onNone())
 })
 
-// Multiple Eithers
+// Multiple Results
 
 /**
  * Do notation allows you to yield `Result` values and combine them in a sequential manner without having to manually check for `Err` at each step.
  *
  * The `yield*` operator is used to work with multiple `Result` values in a generator function. Each value must be yielded with `Result.bind()`.
  *
- * @category Working with multiple Eithers
+ * @category Working with multiple Results
  * @example
  * ```ts
  * import { expect } from "jsr:@std/expect"
  * import { Result } from "@jvlk/fp-tsm"
  *
- * const age = Result.right(30)
- * const name = Result.right("John")
- * const city = Result.right("New York")
+ * const age = Result.ok(30)
+ * const name = Result.ok("John")
+ * const city = Result.ok("New York")
  *
  * const data = Result.Do(function* () {
  *   const personAge = yield* Result.bind(age)
@@ -555,16 +576,16 @@ export const fromOption: {
  *   return `Hello ${personName}! You are ${personAge} years old and live in ${personCity}.`
  * })
  *
- * expect(data).toEqual(Result.right("Hello John! You are 30 years old and live in New York."))
+ * expect(data).toEqual(Result.ok("Hello John! You are 30 years old and live in New York."))
  *
  * // If any Result is Err, the entire result is Err
  * const data2 = Result.Do(function* () {
- *   const personAge = yield* Result.bind(Result.left("Error"))
+ *   const personAge = yield* Result.bind(Result.err("Error"))
  *   const personName = yield* Result.bind(name)
  *   return `Hello ${personName}! You are ${personAge} years old.`
  * })
  *
- * expect(data2).toEqual(Result.left("Error"))
+ * expect(data2).toEqual(Result.err("Error"))
  * ```
  *
  * @example Without Do notation, the same code would be much more verbose.
@@ -572,9 +593,9 @@ export const fromOption: {
  * import { expect } from "jsr:@std/expect"
  * import { Result, pipe } from "@jvlk/fp-tsm"
  *
- * const age = Result.right(30)
- * const name = Result.right("John")
- * const city = Result.right("New York")
+ * const age = Result.ok(30)
+ * const name = Result.ok("John")
+ * const city = Result.ok("New York")
  *
  * const result = pipe(
  *   age,
@@ -593,7 +614,7 @@ export const fromOption: {
  *   )
  * )
  *
- * expect(result).toEqual(Result.right("Hello John! You are 30 years old and live in New York."))
+ * expect(result).toEqual(Result.ok("Hello John! You are 30 years old and live in New York."))
  * ```
  */
 
@@ -608,14 +629,14 @@ export function Do<L, A, U = any>(
       return result.value
     }
     result = iterator.next(
-      result.value.right as U,
+      result.value.ok as U,
     )
   }
-  return right(result.value)
+  return ok(result.value)
 }
 
 /**
- * Binds the value of an `Result` to a new key in an object, using a function that transforms the value.
+ * Binds the value of a `Result` to a new key in an object, using a function that transforms the value.
  * Useful for when you want to work with multiple `Result`s and only do something if they are all `Ok`.
  *
  * @ignore
@@ -625,5 +646,5 @@ export function* bind<L, R>(self: Result<L, R>): Generator<Result<L, R>, R, R> {
   if (self._tag === "Err") {
     return yield self
   }
-  return self.right
+  return self.ok
 }

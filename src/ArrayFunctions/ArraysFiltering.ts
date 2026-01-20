@@ -257,46 +257,46 @@ export const partition = <A>(
 }
 
 /**
- * Maps each element to an Either, then partitions the results into lefts and rights.
+ * Maps each element to a `Result`, then partitions the results into `ok` and `err`.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number) => n % 2 === 0 ? Either.right(n) : Either.left(n)
+ * const f = (n: number) => n % 2 === 0 ? Result.ok(n) : Result.err(n)
  * expect(Array.partitionMap([1, 2, 3, 4], f)).toEqual([[1, 3], [2, 4]])
  * ```
  */
 export const partitionMap: <T extends AnyArray<A>, A, L, R>(
   array: T,
-  fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+  fn: (a: A) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
 ) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
   2,
   <T extends AnyArray<A>, A, L, R>(
     array: T,
-    fn: (a: A) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+    fn: (a: A) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
   ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const lefts: L[] = []
-    const rights: R[] = []
+    const errs: L[] = []
+    const oks: R[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i])
-      if (e._tag === "Left") lefts.push(e.left)
-      else rights.push(e.right)
+      if (e._tag === "Err") errs.push(e.err)
+      else oks.push(e.ok)
     }
-    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+    return [errs as ArrayType<T, L>, oks as ArrayType<T, R>]
   },
 )
 
 /**
- * Maps each element and its index to an Either, then partitions the results into lefts and rights.
+ * Maps each element and its index to a `Result`, then partitions the results into `err` and `ok`.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const f = (n: number, i: number) => i % 2 === 0 ? Either.right(n) : Either.left(n)
+ * const f = (n: number, i: number) => i % 2 === 0 ? Result.ok(n) : Result.err(n)
  * expect(Array.partitionMapWithIndex([1, 2, 3, 4], f)).toEqual([[2, 4], [1, 3]])
  * ```
  */
@@ -305,7 +305,7 @@ export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
   fn: (
     a: A,
     i: number,
-  ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+  ) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
 ) => [ArrayType<T, L>, ArrayType<T, R>] = dual(
   2,
   <T extends AnyArray<A>, A, L, R>(
@@ -313,16 +313,16 @@ export const partitionMapWithIndex: <T extends AnyArray<A>, A, L, R>(
     fn: (
       a: A,
       i: number,
-    ) => { _tag: "Left"; left: L } | { _tag: "Right"; right: R },
+    ) => { _tag: "Err"; err: L } | { _tag: "Ok"; ok: R },
   ): [ArrayType<T, L>, ArrayType<T, R>] => {
-    const lefts: L[] = []
-    const rights: R[] = []
+    const errs: L[] = []
+    const oks: R[] = []
     for (let i = 0; i < array.length; i++) {
       const e = fn(array[i], i)
-      if (e._tag === "Left") lefts.push(e.left)
-      else rights.push(e.right)
+      if (e._tag === "Err") errs.push(e.err)
+      else oks.push(e.ok)
     }
-    return [lefts as ArrayType<T, L>, rights as ArrayType<T, R>]
+    return [errs as ArrayType<T, L>, oks as ArrayType<T, R>]
   },
 )
 
@@ -353,25 +353,25 @@ export const partitionWithIndex = <A>(
 }
 
 /**
- * Separates an array of Either into two arrays: lefts and rights.
+ * Separates an array of `Result` into two arrays: errors and oks.
  *
  * @example
  * ```ts
- * import { Array, Either } from '@jvlk/fp-tsm'
+ * import { Array, Result } from '@jvlk/fp-tsm'
  * import { expect } from '@std/expect/expect'
  *
- * const arr = [Either.left(1), Either.right("a"), Either.left(2), Either.right("b")]
+ * const arr = [Result.err(1), Result.ok("a"), Result.err(2), Result.ok("b")]
  * expect(Array.separate(arr)).toEqual([[1, 2], ["a", "b"]])
  * ```
  */
 export const separate = <L, R>(
-  array: AnyArray<{ _tag: "Left" | "Right"; left?: L; right?: R }>,
+  array: AnyArray<{ _tag: "Err" | "Ok"; err?: L; ok?: R }>,
 ): [Array<L>, Array<R>] => {
-  const lefts: L[] = []
-  const rights: R[] = []
+  const errs: L[] = []
+  const oks: R[] = []
   for (const e of array) {
-    if (e._tag === "Left") lefts.push(e.left as L)
-    else rights.push(e.right as R)
+    if (e._tag === "Err") errs.push(e.err as L)
+    else oks.push(e.ok as R)
   }
-  return [lefts, rights]
+  return [errs, oks]
 }

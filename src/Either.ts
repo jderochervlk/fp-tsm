@@ -5,6 +5,8 @@ import type { Option } from "./Option.ts"
 /**
  * The `Either` type represents values that can be one of two types: a `Left` containing an error value, or a `Right` containing a success value.
  *
+ * This is almost identical to the `Result` type. You should prefer to use `Result`, but `Either` exists for compatibility with `fp-ts`.
+ *
  * It is commonly used for error handling and expressing computations that may fail. Instead of throwing exceptions, functions can return an `Either`
  * that explicitly represents both success and failure cases.
  *
