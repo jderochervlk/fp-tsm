@@ -277,16 +277,19 @@ export const bimap: {
 )
 
 /**
- * A wOK1pper for `fetch` that returns a `Future<Response | TypeError, Response>` and checks `Response.ok` to determine if the response is a success or failure.
+ * A wrapper for `fetch` that returns a `Future<Response, Response | TypeError>` and checks `Response.ok` to determine if the response is a success or failure.
  *
- * If there is an issue with the `fetch` call itself (like a bad URL), it will return a `TypeError` in the `Err` of the `Result`.
+ * If there is an issue with the `fetch` call itself (like a bad URL), it will return a `TypeError` in the `Error` of the `Result`.
  *
  * @category Utility Functions
  * @example
  * ```ts
  * import { Future } from "@jvlk/fp-tsm"
  *
- * const result = Future.fetch("https://baconipsum.com/api/?type=meat-and-filler")
+ * const result = pipe(
+ *  Future.fetch("https://baconipsum.com/api/?type=meat-and-filler"),
+ *  Future.flatMap((res) => Future.fromPromise(res.json()))
+ * )
  * ```
  */
 export const fetch = (
