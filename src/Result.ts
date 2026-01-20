@@ -216,13 +216,16 @@ export const fromPredicate: {
  * ```
  */
 export const map: {
-  <OK1, OK2, ERROR>(
+  <OK1, OK2 = OK1, ERROR = unknown>(
     f: (a: OK1) => OK2,
   ): (self: Result<OK1, ERROR>) => Result<OK2, ERROR>
-  <OK1, OK2, ERROR>(self: Result<OK1, ERROR>, f: (a: OK1) => OK2): Result<OK2, ERROR>
+  <OK1, OK2 = OK1, ERROR = unknown>(
+    self: Result<OK1, ERROR>,
+    f: (a: OK1) => OK2,
+  ): Result<OK2, ERROR>
 } = dual(
   2,
-  <OK1, OK2, ERROR>(
+  <OK1, OK2 = OK1, ERROR = unknown>(
     self: Result<OK1, ERROR>,
     f: (a: OK1) => OK2,
   ): Result<OK2, ERROR> => self._tag === "Ok" ? ok(f(self.ok)) : error(self.error),
@@ -255,13 +258,16 @@ export const map: {
  * ```
  */
 export const mapErr: {
-  <OK, ERROR1, ERROR2>(
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
     f: (a: ERROR1) => ERROR2,
   ): (self: Result<OK, ERROR1>) => Result<OK, ERROR2>
-  <OK, ERROR1, ERROR2>(self: Result<OK, ERROR1>, f: (a: ERROR1) => ERROR2): Result<OK, ERROR2>
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
+    self: Result<OK, ERROR1>,
+    f: (a: ERROR1) => ERROR2,
+  ): Result<OK, ERROR2>
 } = dual(
   2,
-  <OK, ERROR1, ERROR2>(
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK, ERROR1>,
     f: (a: ERROR1) => ERROR2,
   ): Result<OK, ERROR2> => self._tag === "Error" ? error(f(self.error)) : ok(self.ok),
@@ -299,18 +305,18 @@ export const mapErr: {
  * ```
  */
 export const bimap: {
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     f: (l: ERROR1) => ERROR2,
     g: (r: OK1) => OK2,
   ): (self: Result<OK1, ERROR1>) => Result<OK2, ERROR2>
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK1, ERROR1>,
     f: (l: ERROR1) => ERROR2,
     g: (r: OK1) => OK2,
   ): Result<OK2, ERROR2>
 } = dual(
   3,
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK1, ERROR1>,
     f: (l: ERROR1) => ERROR2,
     g: (r: OK1) => OK2,
@@ -358,16 +364,16 @@ export const bimap: {
  * @category Working with Results
  */
 export const flatMap: {
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     f: (a: OK1) => Result<OK2, ERROR2>,
   ): (self: Result<OK1, ERROR1>) => Result<OK2, ERROR1 | ERROR2>
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK1, ERROR1>,
     f: (a: OK1) => Result<OK2, ERROR2>,
   ): Result<OK2, ERROR1 | ERROR2>
 } = dual(
   2,
-  <OK1, OK2, ERROR1, ERROR2>(
+  <OK1, OK2 = OK1, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK1, ERROR1>,
     f: (a: OK1) => Result<OK2, ERROR2 | ERROR1>,
   ): Result<OK2, ERROR1 | ERROR2> => self._tag === "Ok" ? f(self.ok) : self,
@@ -393,16 +399,16 @@ export const flatMap: {
  * @category Working with Results
  */
 export const flatMapErr: {
-  <OK, ERROR1, ERROR2>(
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
     f: (a: ERROR1) => Result<OK, ERROR2>,
   ): (self: Result<OK, ERROR1>) => Result<OK, ERROR2>
-  <OK, ERROR1, ERROR2>(
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK, ERROR1>,
     f: (a: ERROR1) => Result<OK, ERROR2>,
   ): Result<OK, ERROR2>
 } = dual(
   2,
-  <OK, ERROR1, ERROR2>(
+  <OK, ERROR1 = unknown, ERROR2 = ERROR1>(
     self: Result<OK, ERROR1>,
     f: (a: ERROR1) => Result<OK, ERROR2>,
   ): Result<OK, ERROR2> => self._tag === "Error" ? f(self.error) : ok(self.ok),
@@ -443,11 +449,11 @@ export const flatMapErr: {
  * ```
  */
 export const match: {
-  <ERROR, OK, B>(
-    onErr: (l: ERROR) => B,
-    onOk: (r: OK) => B,
-  ): (self: Result<OK, ERROR>) => B
-  <ERROR, OK, B>(self: Result<OK, ERROR>, onErr: (l: ERROR) => B, onOk: (r: OK) => B): B
+  <OK, T, ERROR = unknown>(
+    onErr: (l: ERROR) => T,
+    onOk: (r: OK) => T,
+  ): (self: Result<OK, ERROR>) => T
+  <OK, T, ERROR = unknown>(self: Result<OK, ERROR>, onErr: (l: ERROR) => T, onOk: (r: OK) => T): T
 } = dual(3, (self, onErr, onOk) => {
   if (self._tag === "Ok") {
     return onOk(self.ok)
@@ -541,14 +547,14 @@ export function isErr<OK, ERROR>(self: Result<OK, ERROR>): self is Err<ERROR> {
  * ```
  */
 export const fromOption: {
-  <OK, ERROR>(
+  <OK, ERROR = unknown>(
     self: Option<OK>,
     onNone: () => ERROR,
   ): Result<OK, ERROR>
-  <OK, ERROR>(
+  <OK, ERROR = unknown>(
     onNone: () => ERROR,
   ): (self: Option<OK>) => Result<OK, ERROR>
-} = dual(2, <OK, ERROR>(
+} = dual(2, <OK, ERROR = unknown>(
   self: Option<OK>,
   onNone: () => ERROR,
 ): Result<OK, ERROR> => {
@@ -621,7 +627,7 @@ export const fromOption: {
  * ```
  */
 
-export function Do<A, ERROR, U = any>(
+export function Do<A, ERROR = unknown, U = any>(
   generator: () => Generator<Result<unknown, ERROR>, A, U>,
 ): Result<A, ERROR> {
   const iterator = generator()
@@ -645,7 +651,9 @@ export function Do<A, ERROR, U = any>(
  * @ignore
  * See {@link Do} for an example of how to use this.
  */
-export function* bind<OK, ERROR>(self: Result<OK, ERROR>): Generator<Result<OK, ERROR>, OK, OK> {
+export function* bind<OK, ERROR = unknown>(
+  self: Result<OK, ERROR>,
+): Generator<Result<OK, ERROR>, OK, OK> {
   if (self._tag === "Error") {
     return yield self
   }

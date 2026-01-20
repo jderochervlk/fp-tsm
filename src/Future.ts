@@ -35,7 +35,7 @@ import { dual } from "./internal.ts"
  *
  * @module
  */
-export type Future<OK, ERROR> = () => Promise<
+export type Future<OK, ERROR = unknown> = () => Promise<
   Result.Result<OK, ERROR>
 >
 
