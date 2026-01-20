@@ -518,15 +518,13 @@ export const alt: {
   <A>(self: Option<A>, fn: () => Option<A>): Option<A>
 } = dual(
   2,
-  <A>(self: Option<A>, fn: () => Option<A>) =>
-    self._tag === "Some" ? self : fn(),
+  <A>(self: Option<A>, fn: () => Option<A>) => self._tag === "Some" ? self : fn(),
 )
 
 export const ap: <A extends NonNullable<T>, T>(
   fa: Option<A>,
-) => <B extends NonNullable<U>, U>(fab: Option<(a: T) => B>) => Option<B> =
-  (fa) => (fab) =>
-    isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value))
+) => <B extends NonNullable<U>, U>(fab: Option<(a: T) => B>) => Option<B> = (fa) => (fab) =>
+  isNone(fab) ? none : isNone(fa) ? none : some(fab.value(fa.value))
 
 // Typeguards
 

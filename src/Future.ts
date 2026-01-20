@@ -79,8 +79,7 @@ export const fromPromise = <L, R>(
  * const data = Future.right(42) // Either.right(42)
  * ```
  */
-export const right = <R>(value: R): Right<R> => () =>
-  Promise.resolve(Either.right(value))
+export const right = <R>(value: R): Right<R> => () => Promise.resolve(Either.right(value))
 
 /**
  * Create a Future that resolves to a Left value.
@@ -93,8 +92,7 @@ export const right = <R>(value: R): Right<R> => () =>
  * const error = Future.left("Error") // Either.left("Error")
  * ```
  */
-export const left = <L>(value: L): Left<L> => () =>
-  Promise.resolve(Either.left<L>(value))
+export const left = <L>(value: L): Left<L> => () => Promise.resolve(Either.left<L>(value))
 
 /**
  * Maps over the Right value of a Future using the provided function.
@@ -119,8 +117,7 @@ export const map: {
   <L, R1, R2>(future: Future<L, R1>, f: (a: R1) => R2): Future<L, R2>
 } = dual(
   2,
-  <L, R1, R2>(future: Future<L, R1>, f: (a: R1) => R2): Future<L, R2> =>
-  async () => {
+  <L, R1, R2>(future: Future<L, R1>, f: (a: R1) => R2): Future<L, R2> => async () => {
     const x = await future()
     return Either.map(x, f)
   },
@@ -160,9 +157,7 @@ export const flatMap: {
   ): Future<LA | LB, RB> =>
   async () => {
     const value = await future()
-    return value._tag === "Right"
-      ? await f(value.right)()
-      : Either.left(value.left)
+    return value._tag === "Right" ? await f(value.right)() : Either.left(value.left)
   },
 )
 
@@ -227,9 +222,7 @@ export const flatMapLeft: {
   ): Future<LB, RA | RB> =>
   async () => {
     const value = await future()
-    return value._tag === "Left"
-      ? await f(value.left)()
-      : Either.right(value.right)
+    return value._tag === "Left" ? await f(value.left)() : Either.right(value.right)
   },
 )
 

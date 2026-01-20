@@ -12,5 +12,4 @@
  * expect(isNumber("123")).toEqual(false)
  * ```
  */
-export const isNumber = (n: unknown): n is number =>
-  typeof n === "number" && !isNaN(n)
+export const isNumber = (n: unknown): n is number => typeof n === "number" && !isNaN(n)

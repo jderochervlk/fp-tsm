@@ -82,8 +82,7 @@ export type ValueOf<Type> = Type extends Primitive ? Type
   : Type extends AnyFunction ? ReturnType<Type>
   : Type[keyof Type]
 
-export type ArrayType<T, U> = T extends NonEmptyArray<infer A>
-  ? NonEmptyArray<U>
+export type ArrayType<T, U> = T extends NonEmptyArray<infer A> ? NonEmptyArray<U>
   : T extends ReadonlyNonEmptyArray<infer A> ? ReadonlyNonEmptyArray<U>
   : T extends Array<infer A> ? Array<U>
   : T extends ReadonlyArray<infer A> ? ReadonlyArray<U>

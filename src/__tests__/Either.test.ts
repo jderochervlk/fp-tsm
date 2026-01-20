@@ -9,9 +9,7 @@ Deno.test("flatMap types should work", () => {
       t,
       (x) => x > 10 ? Either.right(x + 1) : Either.left("Too small"),
     ),
-    Either.flatMap((x) =>
-      x > 8 ? Either.right(x + 1) : Either.left(Error("Too small again"))
-    ),
+    Either.flatMap((x) => x > 8 ? Either.right(x + 1) : Either.left(Error("Too small again"))),
   )
 
   expect(result).toEqual(Either.right(44))

@@ -1,26 +1,23 @@
 # Introduction
 
-`fp-tsm` adds the [`Option`](data-types/option), [`Either`](data-types/either)
-and [`Future`](/data-types/future) data types along with a suite of utility
-functions to work these and other data structures in a safe and point-free
-style.
+`fp-tsm` adds the [`Option`](data-types/option), [`Either`](data-types/either) and
+[`Future`](/data-types/future) data types along with a suite of utility functions to work these and
+other data structures in a safe and point-free style.
 
-This is continuation of [`fp-ts`](https://gcanti.github.io/fp-ts/) and a super
-lightweight alternative to [`effect`](https://gcanti.github.io/fp-ts/).
+This is continuation of [`fp-ts`](https://gcanti.github.io/fp-ts/) and a super lightweight
+alternative to [`effect`](https://gcanti.github.io/fp-ts/).
 
-You should use this library if you want just some very basic FP concepts in your
-app, you need to migrate from `fp-ts` to use an ESM only version while
-maintaining type compatibiltiy, or if you feel like Effect is too much for what
-you need.
+You should use this library if you want just some very basic FP concepts in your app, you need to
+migrate from `fp-ts` to use an ESM only version while maintaining type compatibiltiy, or if you feel
+like Effect is too much for what you need.
 
-I highly suggest you check out Effect, but if that seems like too much I hope
-you find this fork helpful.
+I highly suggest you check out Effect, but if that seems like too much I hope you find this fork
+helpful.
 
 ## Why?
 
-Traditional JavaScript code often requires many null checks, try/catch blocks,
-and Promise error handling which can become difficult to read and maintain. For
-example:
+Traditional JavaScript code often requires many null checks, try/catch blocks, and Promise error
+handling which can become difficult to read and maintain. For example:
 
 ```typescript
 const userSchema = z.object({
@@ -57,10 +54,9 @@ async function getUserData(id: string): Promise<string> {
 }
 ```
 
-This code is error-prone and requires careful attention to null checks and error
-handling. `fp-tsm` provides tools to handle these cases more elegantly. Also
-notice how the return type is just a `Promise<string>`. We really don't if this
-can fail, and what types of errors could happen.
+This code is error-prone and requires careful attention to null checks and error handling. `fp-tsm`
+provides tools to handle these cases more elegantly. Also notice how the return type is just a
+`Promise<string>`. We really don't if this can fail, and what types of errors could happen.
 
 Here's how the same code could be written using `fp-tsm`:
 
@@ -82,9 +78,7 @@ const getUserData = (
     Future.mapLeft((error) => Error(`Failed to get user data: ${error}`)),
     Future.flatMap((data) => {
       const parsed = userSchema.safeParse(data)
-      return parsed.success
-        ? Future.right(parsed.data)
-        : Future.left(parsed.error)
+      return parsed.success ? Future.right(parsed.data) : Future.left(parsed.error)
     }),
     Future.map((user) =>
       pipe(
@@ -100,27 +94,23 @@ This version is:
 - More declarative and easier to follow
 - Handles errors gracefully without try/catch blocks
 - Manages null checks through `Option`
-- Processes async operations with `Future` which shows the types for possible
-  errors
+- Processes async operations with `Future` which shows the types for possible errors
 
 ## fp-ts
 
-`@jvlk/fp-tsm` is a fork of [`fp-ts`](https://gcanti.github.io/fp-ts/) that
-supports ESM and removes more of the complex functional concepts. It's intended
-to take the best features from languages like Rust and ReScript and make them
-easy to use for TypeScript developers.
+`@jvlk/fp-tsm` is a fork of [`fp-ts`](https://gcanti.github.io/fp-ts/) that supports ESM and removes
+more of the complex functional concepts. It's intended to take the best features from languages like
+Rust and ReScript and make them easy to use for TypeScript developers.
 
-This is intended to be somewhat of a continuation of `fp-ts` and allow easy
-upgrades from `fp-ts`, but it does diverge from that library in a few
-significant ways.
+This is intended to be somewhat of a continuation of `fp-ts` and allow easy upgrades from `fp-ts`,
+but it does diverge from that library in a few significant ways.
 
-- `fp-tsm` isn't as complex as `fp-ts`. It doesn't use things like `Monoid` or
-  `Applicative` and just exports the data types and functions that developers
-  will use.
+- `fp-tsm` isn't as complex as `fp-ts`. It doesn't use things like `Monoid` or `Applicative` and
+  just exports the data types and functions that developers will use.
 - `fp-tsm` uses simpler types internally.
 - `fp-tsm` is `esm` only.
-- `fp-tsm` has robust documentation and presents things to developers in a way
-  that they can learn about these concepts if they are not familiar with them.
+- `fp-tsm` has robust documentation and presents things to developers in a way that they can learn
+  about these concepts if they are not familiar with them.
 
 ## License
 

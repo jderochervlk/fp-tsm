@@ -725,8 +725,7 @@ export const lefts = <L, R>(
 export const lookup = <A>(
   array: AnyArray<A>,
   index: number,
-): Option.Option<A> =>
-  index >= 0 && index < array.length ? Option.of(array[index]) : Option.none
+): Option.Option<A> => index >= 0 && index < array.length ? Option.of(array[index]) : Option.none
 
 /**
  * Modifies the element at the specified index using a function.
@@ -966,8 +965,7 @@ export const some: {
 export const sort = <A>(
   array: AnyArray<A>,
   compareFn: (a: A, b: A) => number,
-): ArrayType<typeof array, A> =>
-  array.slice().sort(compareFn) as ArrayType<typeof array, A>
+): ArrayType<typeof array, A> => array.slice().sort(compareFn) as ArrayType<typeof array, A>
 
 /**
  * Sorts the array by one or more key functions.
