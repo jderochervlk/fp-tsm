@@ -106,6 +106,11 @@ This version is:
 - Manages null checks through `Option`
 - Processes async operations with `Future` which shows the types for possible errors
 
+## Note
+
+Version 4 of this library is under active development and things might break between minor and patch
+releases.
+
 ## fp-ts
 
 `@jvlk/fp-tsm` is a fork of [`fp-ts`](https://gcanti.github.io/fp-ts/) that supports ESM and removes
